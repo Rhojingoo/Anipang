@@ -5,7 +5,6 @@ bool EngineWindow::WindowLive = true;
 HINSTANCE EngineWindow::hInstance;
 
 
-
 LRESULT CALLBACK EngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
@@ -19,13 +18,18 @@ LRESULT CALLBACK EngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, L
 	break;
 	case WM_DESTROY:
 		WindowLive = false;
-		// PostQuitMessage(123213);
 		break;
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 	return 0;
 }
+
+void EngineWindow::Init(HINSTANCE _hInst)
+{
+	hInstance = _hInst;
+}
+
 
 EngineWindow::EngineWindow()
 {
@@ -35,12 +39,7 @@ EngineWindow::~EngineWindow()
 {
 }
 
-void EngineWindow::Init(HINSTANCE _hInst)
-{
-}
-
-
-void EngineWindow::Open(std::string_view _Title)
+void EngineWindow::Open(std::string_view _Title /*= "Title"*/)
 {
 	// 간혹가다가 앞쪽이이나 뒤쪽에 W가 붙거나 A가 붙어있는 함수들을 보게 될겁니다.
 	// A가 붙어있으면 멀티바이트 함수
@@ -69,9 +68,6 @@ void EngineWindow::Open(std::string_view _Title)
 	// _Title.c_str(); => 자연스럽게 내부에서 
 	// const char* Test = &_Title[0]
 	// return Test;
-	// 
-	// const char*;
-	// 
 
 	hWnd = CreateWindowA("DefaultWindow", _Title.data(), WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
@@ -89,8 +85,7 @@ void EngineWindow::Open(std::string_view _Title)
 
 }
 
-
-unsigned __int64 EngineWindow::WindowMessageLoop()
+unsigned __int64 EngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)())
 {
 	MSG msg = {};
 
@@ -103,7 +98,19 @@ unsigned __int64 EngineWindow::WindowMessageLoop()
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+
+		if (nullptr != _Update)
+		{
+			_Update();
+		}
+	}
+
+	if (nullptr != _End)
+	{
+		_End();
 	}
 
 	return msg.wParam;
 }
+
+

@@ -8,15 +8,20 @@ public :
 	EngineWindow();
 	~EngineWindow();
 
-	EngineWindow(const EngineWindow& _Other) = delete;
-	EngineWindow(EngineWindow& _Other) noexcept = delete;
-	EngineWindow& operator =(const 	EngineWindow& _Other) = delete;
-	EngineWindow& operator =(EngineWindow& _Other)noexcept = delete;
+	EngineWindow(const EngineWindow& _Other)					= delete;
+	EngineWindow(EngineWindow& _Other) noexcept					= delete;
+	EngineWindow& operator =(const 	EngineWindow& _Other)		= delete;
+	EngineWindow& operator =(EngineWindow& _Other)noexcept		= delete;
 
 	void Open(std::string_view _Title = "Title");
 
 	static void Init(HINSTANCE _hInst);
-	static unsigned __int64 WindowMessageLoop();
+	static unsigned __int64 WindowMessageLoop(void(*_Update)(), void(*_End)());
+
+	HDC GetWindowDC()
+	{
+		return hDC;
+	}
 
 protected:
 

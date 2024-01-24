@@ -1,15 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Jewel.h" />
-    <ClInclude Include="BackGround.h" />
-    <ClInclude Include="Effect.h" />
-    <ClInclude Include="ContentsCore.h" />
+    <ClInclude Include="AnipangCore.h" />
+    <ClInclude Include="PlayLevel.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreLevel.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Jewel.h">
+      <Filter>PlayOBJ</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Jewel.cpp" />
-    <ClCompile Include="BackGround.cpp" />
-    <ClCompile Include="Effect.cpp" />
-    <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="AnipangCore.cpp" />
+    <ClCompile Include="PlayLevel.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreLevel.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Jewel.cpp">
+      <Filter>PlayOBJ</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{d63a53b7-c48e-4588-a145-1f3f8ec7d325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TitleOBJ">
+      <UniqueIdentifier>{b1148e2d-e2c1-46a9-b341-105d497c94c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayOBJ">
+      <UniqueIdentifier>{78f6310a-740d-4374-b9c6-d1a18258d3f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScoreOBJ">
+      <UniqueIdentifier>{7bfe1ff5-61d0-4080-b3e0-e7ae2c708e0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

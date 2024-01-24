@@ -1,16 +1,16 @@
 #pragma once
 #include <EngineCore\Level.h>
 
-class ScoreLevel : public ULevel
+class UScoreLevel : public ULevel
 {
 public : 
-	ScoreLevel();
-	~ScoreLevel();
+	UScoreLevel();
+	~UScoreLevel();
 
-	ScoreLevel(const ScoreLevel& _Other)				 = delete;
-	ScoreLevel(ScoreLevel& _Other) noexcept				 = delete;
-	ScoreLevel& operator =(const ScoreLevel& _Other)	 = delete;
-	ScoreLevel& operator =(ScoreLevel& _Other) noexcept	 = delete;
+	UScoreLevel(const UScoreLevel& _Other)				 = delete;
+	UScoreLevel(UScoreLevel& _Other) noexcept				 = delete;
+	UScoreLevel& operator =(const UScoreLevel& _Other)	 = delete;
+	UScoreLevel& operator =(UScoreLevel& _Other) noexcept	 = delete;
 
 protected:
 

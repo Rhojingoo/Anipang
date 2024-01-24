@@ -1,16 +1,16 @@
 #pragma once
 #include <EngineCore\Level.h>
 
-class PlayLevel : public ULevel
+class UPlayLevel : public ULevel
 {
 public : 
-	PlayLevel();
-	~PlayLevel();
+	UPlayLevel();
+	~UPlayLevel();
 
-	PlayLevel(const PlayLevel& _Other)					 = delete;
-	PlayLevel(PlayLevel& _Other) noexcept				 = delete;
-	PlayLevel& operator =(const PlayLevel& _Other)		 = delete;
-	PlayLevel& operator =(PlayLevel& _Other) noexcept	 = delete;
+	UPlayLevel(const UPlayLevel& _Other)					 = delete;
+	UPlayLevel(UPlayLevel& _Other) noexcept				 = delete;
+	UPlayLevel& operator =(const UPlayLevel& _Other)		 = delete;
+	UPlayLevel& operator =(UPlayLevel& _Other) noexcept	 = delete;
 
 protected:
 

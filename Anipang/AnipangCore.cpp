@@ -1,5 +1,7 @@
 #include "AnipangCore.h"
 #include "TitleLevel.h"
+#include "ScoreLevel.h"
+#include "PlayLevel.h"
 
 AnipangCore::AnipangCore()
 {
@@ -12,10 +14,10 @@ AnipangCore::~AnipangCore()
 void AnipangCore::BeginPlay()
 {
 	CreateLevel<UTitleLevel>("Title");
-	//CreateLevel<UPlayLevel>("PlayLevel");
+	CreateLevel<UScoreLevel>("Score");
+	CreateLevel<UPlayLevel>("Play");
 
 	ChangeLevel("Title");
-	int a = 0;
 }
 
 void AnipangCore::Tick(float _DeltaTime)

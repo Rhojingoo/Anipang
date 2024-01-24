@@ -1,9 +1,9 @@
 #include "ScoreLevel.h"
 
-ScoreLevel::ScoreLevel()
+UScoreLevel::UScoreLevel()
 {
 }
 
-ScoreLevel::~ScoreLevel()
+UScoreLevel::~UScoreLevel()
 {
 }

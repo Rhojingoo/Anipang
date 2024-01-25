@@ -2,7 +2,7 @@
 #include <EngineBase\FTransform.h>
 #include "TickObject.h"
 #include "NameObject.h"
-
+#include "Level.h"
 
 // 설명 : A가 붙은 오브젝트는 화면에 위치가 존재해야한다.
 class ULevel;
@@ -29,6 +29,11 @@ public :
 		Transform.SetPosition(_Value);
 	}
 
+	void AddActorLocation(FVector _Value)
+	{
+		Transform.AddPosition(_Value);
+	}
+
 	void SetActorScale(FVector _Value)
 	{
 		Transform.SetScale(_Value);
@@ -43,7 +48,6 @@ public :
 	{
 		return World;
 	}
-
 
 protected:
 

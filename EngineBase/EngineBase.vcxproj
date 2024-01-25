@@ -159,6 +159,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineTime.h" />
     <ClInclude Include="FTransform.h">
       <SubType>
       </SubType>
@@ -177,6 +178,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineTime.cpp" />
     <ClCompile Include="FTransform.cpp">
       <SubType>
       </SubType>

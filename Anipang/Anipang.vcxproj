@@ -166,7 +166,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Jewel.h">
+    <ClInclude Include="Animal.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -175,6 +175,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ScoreLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TestBullet.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -188,7 +192,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Jewel.cpp">
+    <ClCompile Include="Animal.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -197,6 +201,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ScoreLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TestBullet.cpp">
       <SubType>
       </SubType>
     </ClCompile>

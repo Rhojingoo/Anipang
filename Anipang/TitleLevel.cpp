@@ -1,5 +1,5 @@
 #include "TitleLevel.h"
-#include "Jewel.h"
+#include "Animal.h"
 
 UTitleLevel::UTitleLevel()
 {
@@ -11,7 +11,7 @@ UTitleLevel::~UTitleLevel()
 
 void UTitleLevel::BeginPlay()
 {
-	SpawnActor<Jewel>();
+	SpawnActor<AAnimal>();
 
 	// SpawnActor<Player>();
 

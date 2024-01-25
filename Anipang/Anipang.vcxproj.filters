@@ -11,7 +11,10 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Jewel.h">
+    <ClInclude Include="Animal.h">
+      <Filter>PlayOBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="TestBullet.h">
       <Filter>PlayOBJ</Filter>
     </ClInclude>
   </ItemGroup>
@@ -26,7 +29,10 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Jewel.cpp">
+    <ClCompile Include="Animal.cpp">
+      <Filter>PlayOBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="TestBullet.cpp">
       <Filter>PlayOBJ</Filter>
     </ClCompile>
   </ItemGroup>

@@ -29,16 +29,54 @@ void EngineCore::EngineStart(HINSTANCE _hInstance, EngineCore* _UserCore)
 
 void EngineCore::EngineTick()
 {
-	float DeltaTime = GEngine->MainTimer.TimeCheck();
-	EngineInput::KeyCheckTick(DeltaTime);
-	if (nullptr == GEngine->CurLevel)
+	GEngine->CoreTick();
+}
+
+void EngineCore::CoreTick()
+{
+	float DeltaTime = MainTimer.TimeCheck();
+	double dDeltaTime = MainTimer.GetDeltaTime();
+
+
+
+	if (1 <= Frame)
+	{
+		//               5.0f
+		CurFrameTime += DeltaTime;
+
+		//  0.00001        0.016666675
+		if (CurFrameTime <= FrameTime)
+		{
+			return;
+		}
+
+		//  0.0167         0.016666675
+		CurFrameTime -= FrameTime;
+		DeltaTime = FrameTime;
+	}
+
+	if (nullptr == CurLevel)
 	{
 		MsgBoxAssert("엔진을 시작할 레벨이 지정되지 않았습니다 치명적인 오류입니다");
 	}
 
+	EngineInput::KeyCheckTick(DeltaTime);
+
 	// 레벨이 먼저 틱을 돌리고
-	GEngine->CurLevel->Tick(DeltaTime);
-	GEngine->CurLevel->ActorTick(DeltaTime);
+	CurLevel->Tick(DeltaTime);
+
+	// 액터와 부가적인 오브젝트들의 틱도 돌리고
+	CurLevel->LevelTick(DeltaTime);
+
+	// 랜더러들의 랜더를 통해서 화면에 그림도 그린다 => 그리고
+	CurLevel->LevelRender(DeltaTime);
+
+	// 정리한다.(죽어야할 오브젝트들은 다 파괴한다)
+	CurLevel->LevelRelease(DeltaTime);
+
+
+	//HDC WindowDC = GEngine->MainWindow.GetWindowDC();
+	//Rectangle(WindowDC, -200, -200, 3000, 3000);
 }
 
 

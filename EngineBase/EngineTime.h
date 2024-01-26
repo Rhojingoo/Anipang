@@ -22,6 +22,11 @@ public:
 	// 지금까지 얼마 지났어?
 	float TimeCheck();
 
+	double GetDeltaTime()
+	{
+		return DeltaTime;
+	}
+
 protected:
 
 private:

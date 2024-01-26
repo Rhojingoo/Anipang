@@ -5,8 +5,13 @@
 
 //¾ÀÀ» ¸¸µé°÷
 class AActor;
+class EngineCore;
+class UImageRenderer;
 class ULevel : public UNameObject
 {
+	friend EngineCore;
+	friend UImageRenderer;
+
 public : 
 	ULevel();
 	~ULevel();
@@ -37,5 +42,10 @@ private:
 	std::map<int, std::list<AActor*>> AllActor;
 
 	void ActorInit(AActor* _NewActor);
+	void LevelTick(float _DeltaTime);
+	void LevelRender(float _DeltaTime);
+	void LevelRelease(float _DeltaTime);
+
+	std::map<int, std::list<UImageRenderer*>> Renderers;
 };
 

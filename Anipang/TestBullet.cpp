@@ -12,7 +12,18 @@ TestBullet::~TestBullet()
 
 void TestBullet::BeginPlay()
 {
+	{
+		UImageRenderer* Renderer = CreateImageRenderer(0);
+		Renderer->SetScale({ 10, 50 });
+	}
+
+	{
+		UImageRenderer* Renderer = CreateImageRenderer(0);
+		Renderer->SetScale({ 50, 10 });
+	}
+
 	SetActorScale({ 50, 50 });
+	Destroy(2.0f);
 }
 
 void TestBullet::Tick(float _DeltaTime)

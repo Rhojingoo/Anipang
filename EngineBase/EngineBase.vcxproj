@@ -160,7 +160,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="EngineTime.h" />
-    <ClInclude Include="FTransform.h">
+    <ClInclude Include="Transform.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -179,7 +179,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="EngineTime.cpp" />
-    <ClCompile Include="FTransform.cpp">
+    <ClCompile Include="Transform.cpp">
       <SubType>
       </SubType>
     </ClCompile>

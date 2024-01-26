@@ -10,7 +10,7 @@
     <ClInclude Include="EngineMath.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="FTransform.h">
+    <ClInclude Include="Transform.h">
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="EngineTime.h">
@@ -27,7 +27,7 @@
     <ClCompile Include="EngineMath.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="FTransform.cpp">
+    <ClCompile Include="Transform.cpp">
       <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="EngineTime.cpp">

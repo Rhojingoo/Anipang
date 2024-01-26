@@ -16,6 +16,17 @@ AAnimal::~AAnimal()
 
 void AAnimal::BeginPlay()
 {
+	{
+		BodyRenderer = CreateImageRenderer(0);
+		BodyRenderer->SetPosition({ 0, 30 });
+		BodyRenderer->SetScale({ 80, 80 });
+	}
+	{
+		HeadRenderer = CreateImageRenderer(0);
+		HeadRenderer->SetPosition({ 0, -25 });
+		HeadRenderer->SetScale({ 60, 60 });
+	}
+
 	SetActorLocation({ 100, 100 });
 	SetActorScale({ 100, 100 });
 }
@@ -48,9 +59,4 @@ void AAnimal::Tick(float _DeltaTime)
 		NewBullet->SetActorLocation(GetActorLocation());
 		NewBullet->SetDir(FVector::Right);
 	}
-
-
-	HDC WindowDC = GEngine->MainWindow.GetWindowDC();
-	FTransform Trans = GetTransform();
-	Rectangle(WindowDC, Trans.iLeft(), Trans.iTop(), Trans.iRight(), Trans.iBottom());
 }

@@ -2,7 +2,7 @@
 #include <string>
 #include <string_view>
 
-class EngineString
+class UEngineString
 {
 public : 
 	static std::string ToUpper(std::string_view View);
@@ -10,12 +10,12 @@ public :
 protected:
 
 private:
-	EngineString();
-	~EngineString();
+	UEngineString();
+	~UEngineString();
 
-	EngineString(const EngineString& _Other)					= delete;
-	EngineString(EngineString& _Other) noexcept					= delete;
-	EngineString& operator =(const 	EngineString& _Other)		= delete;
-	EngineString& operator =(EngineString& _Other)noexcept		= delete;
+	UEngineString(const UEngineString& _Other)					= delete;
+	UEngineString(UEngineString& _Other) noexcept					= delete;
+	UEngineString& operator =(const 	UEngineString& _Other)		= delete;
+	UEngineString& operator =(UEngineString& _Other)noexcept		= delete;
 };
 

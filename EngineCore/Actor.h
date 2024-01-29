@@ -54,10 +54,14 @@ public :
 
 	UImageRenderer* CreateImageRenderer(int Order = 0);
 
+	void Destroy(float _DestroyTime /*= 0.0f*/) override;
+	void DestroyUpdate(float _DeltaTime) override;
+
 protected:
 
 private:
 	std::list<UImageRenderer*> Renderers;
+
 
 	ULevel* World = nullptr;
 	FTransform Transform = FTransform();

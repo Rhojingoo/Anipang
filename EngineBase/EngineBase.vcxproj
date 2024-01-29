@@ -151,10 +151,13 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineDirectory.h" />
+    <ClInclude Include="EngineFile.h" />
     <ClInclude Include="EngineMath.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EnginePath.h" />
     <ClInclude Include="EngineString.h">
       <SubType>
       </SubType>
@@ -170,10 +173,13 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineDirectory.cpp" />
+    <ClCompile Include="EngineFile.cpp" />
     <ClCompile Include="EngineMath.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EnginePath.cpp" />
     <ClCompile Include="EngineString.cpp">
       <SubType>
       </SubType>

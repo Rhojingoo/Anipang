@@ -2,6 +2,7 @@
 #include "EngineCore.h"
 #include "Actor.h"
 #include "Level.h"
+#include <EngineCore\EngineResourcesManager.h>
 
 UImageRenderer::UImageRenderer() 
 {
@@ -30,7 +31,11 @@ void UImageRenderer::SetOrder(int _Order)
 
 void UImageRenderer::Render(float _DeltaTime)
 {
-	HDC WindowDC = GEngine->MainWindow.GetWindowDC();
+	if (nullptr == Image)
+	{
+		MsgBoxAssert("이미지가 존재하지 않는 랜더러 입니다");
+	}
+
 	FTransform ThisTrans = GetTransform();
 	FTransform OwnerTrans = GetOwner()->GetTransform();
 
@@ -38,7 +43,32 @@ void UImageRenderer::Render(float _DeltaTime)
 	// 부모의 위치를 더해줘야 한다.
 	ThisTrans.AddPosition(OwnerTrans.GetPosition());
 
-	Rectangle(WindowDC, ThisTrans.iLeft(), ThisTrans.iTop(), ThisTrans.iRight(), ThisTrans.iBottom());
+
+	GEngine->MainWindow.GetWindowImage()->BitCopy(Image, ThisTrans);
+
+}
+
+void UImageRenderer::SetImage(std::string_view _Name, bool _IsImageScale)
+{
+	Image = UEngineResourcesManager::GetInst().FindImg(_Name);
+
+	if (nullptr == Image)
+	{
+		// 예외를 출력하게 하는것도 중요하다.
+		MsgBoxAssert(std::string(_Name) + "이미지가 존재하지 않습니다.");
+		return;
+	}
+
+	if (true == _IsImageScale)
+	{
+		FVector Scale = Image->GetScale();
+		SetScale(Scale);
+	}
+}
+
+void UImageRenderer::SetImageToScale(std::string_view _Name)
+{
+	SetImage(_Name, true);
 }
 
 void UImageRenderer::BeginPlay()

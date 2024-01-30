@@ -42,6 +42,18 @@ bool UEnginePath::IsExists()
 	return std::filesystem::exists(Path);
 }
 
+std::string UEnginePath::GetFileName()
+{
+	std::filesystem::path Text = Path.filename();
+	return Text.string();
+}
+
+std::string UEnginePath::GetExtension()
+{
+	std::filesystem::path Text = Path.extension();
+	return Text.string();
+}
+
 void UEnginePath::MoveParent()
 {
 	Path = Path.parent_path();

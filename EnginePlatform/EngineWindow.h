@@ -2,26 +2,32 @@
 #include <Windows.h>
 #include <string>
 
-class EngineWindow
+class UWindowImage;
+class UEngineWindow
 {
 public : 
-	EngineWindow();
-	~EngineWindow();
+	UEngineWindow();
+	~UEngineWindow();
 
-	EngineWindow(const EngineWindow& _Other)					= delete;
-	EngineWindow(EngineWindow& _Other) noexcept					= delete;
-	EngineWindow& operator =(const 	EngineWindow& _Other)		= delete;
-	EngineWindow& operator =(EngineWindow& _Other)noexcept		= delete;
+	UEngineWindow(const UEngineWindow& _Other)					= delete;
+	UEngineWindow(UEngineWindow& _Other) noexcept					= delete;
+	UEngineWindow& operator =(const 	UEngineWindow& _Other)		= delete;
+	UEngineWindow& operator =(UEngineWindow& _Other)noexcept		= delete;
 
 	void Open(std::string_view _Title = "Title");
 
 	static void Init(HINSTANCE _hInst);
 	static unsigned __int64 WindowMessageLoop(void(*_Update)(), void(*_End)());
 
-	HDC GetWindowDC()
+	UWindowImage* GetWindowImage()
 	{
-		return hDC;
+		return WindowImage;
 	}
+
+	//HDC GetWindowDC()
+	//{
+	//	return hDC;
+	//}
 
 protected:
 
@@ -31,6 +37,7 @@ private:
 	static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 	HWND hWnd = nullptr;
-	HDC hDC = nullptr;
+	//HDC hDC = nullptr;
+	UWindowImage* WindowImage = nullptr;
 };
 

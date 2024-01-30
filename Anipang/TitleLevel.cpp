@@ -31,8 +31,14 @@ void UTitleLevel::BeginPlay()
 	std::list<UEngineFile> AllFileList = NewPath.AllFile({ ".png", ".bmp" }, true);
 
 	// CherryBomb_0.png
-	UEngineResourcesManager::GetInst().LoadImg("C:\\GM\\Win\\ContentsResources\\AAAA.png");
+	//UEngineResourcesManager::GetInst().LoadImg("C:\\GM\\Win\\ContentsResources\\AAAA.png");
 
+	for (UEngineFile& File : AllFileList)
+	{
+		std::string FullPath = File.GetFullPath();
+		// 싱글톤 잊지 말라고 일부러 GetInst를 사용하겠습니다.
+		UEngineResourcesManager::GetInst().LoadImg(FullPath);
+	}
 
 	SpawnActor<AAnimal>();
 

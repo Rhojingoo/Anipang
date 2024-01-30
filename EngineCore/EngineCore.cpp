@@ -24,7 +24,7 @@ void EngineCore::EngineStart(HINSTANCE _hInstance, EngineCore* _UserCore)
 	Ptr->MainTimer.TimeCheckStart();
 	Ptr->CoreInit(_hInstance);
 	Ptr->BeginPlay();
-	EngineWindow::WindowMessageLoop(EngineTick, EngineEnd);
+	UEngineWindow::WindowMessageLoop(EngineTick, EngineEnd);
 }
 
 void EngineCore::EngineTick()
@@ -104,7 +104,7 @@ void EngineCore::CoreInit(HINSTANCE _HINSTANCE)
 		return;
 	}
 
-	EngineWindow::Init(_HINSTANCE);
+	UEngineWindow::Init(_HINSTANCE);
 	MainWindow.Open("ANIPANG");
 
 	this->AllLevel;

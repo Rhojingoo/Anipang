@@ -10,9 +10,6 @@
     <ClInclude Include="Actor.h">
       <Filter>Object\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="NameObject.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="TickObject.h">
       <Filter>Object</Filter>
     </ClInclude>
@@ -24,9 +21,6 @@
     </ClInclude>
     <ClInclude Include="ImageRenderer.h">
       <Filter>Object\Component\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Image.h">
-      <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="EngineResourcesManager.h">
       <Filter>Resources</Filter>
@@ -42,9 +36,6 @@
     <ClCompile Include="Actor.cpp">
       <Filter>Object\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="NameObject.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="TickObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
@@ -56,9 +47,6 @@
     </ClCompile>
     <ClCompile Include="ImageRenderer.cpp">
       <Filter>Object\Component\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="EngineResourcesManager.cpp">
       <Filter>Resources</Filter>

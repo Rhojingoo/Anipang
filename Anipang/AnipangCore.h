@@ -7,10 +7,10 @@ public :
 	AnipangCore();
 	~AnipangCore();
 
-	AnipangCore(const AnipangCore& _Other)					 = delete;
-	AnipangCore(AnipangCore& _Other) noexcept				 = delete;
-	AnipangCore& operator =(const 	AnipangCore& _Other)	 = delete;
-	AnipangCore& operator =(AnipangCore& _Other)noexcept	 = delete;
+	AnipangCore(const AnipangCore& _Other)							 = delete;
+	AnipangCore(AnipangCore& _Other) noexcept						 = delete;
+	AnipangCore& operator =(const 	AnipangCore& _Other)			 = delete;
+	AnipangCore& operator =(AnipangCore& _Other)noexcept			 = delete;
 
 protected:
 	void BeginPlay()	override;

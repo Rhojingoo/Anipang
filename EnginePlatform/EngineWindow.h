@@ -24,10 +24,6 @@ public :
 		return WindowImage;
 	}
 
-	//HDC GetWindowDC()
-	//{
-	//	return hDC;
-	//}
 
 protected:
 
@@ -37,7 +33,6 @@ private:
 	static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 	HWND hWnd = nullptr;
-	//HDC hDC = nullptr;
 	UWindowImage* WindowImage = nullptr;
 };
 

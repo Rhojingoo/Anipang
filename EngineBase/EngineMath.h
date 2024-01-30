@@ -2,7 +2,6 @@
 
 struct float4
 {
-	// F구조체의 
 
 public:
 	static const float4 Zero;
@@ -11,8 +10,8 @@ public:
 	static const float4 Up;
 	static const float4 Down;
 
-	float X; // 2D
-	float Y; // 2D
+	float X; 
+	float Y; 
 	float Z;
 	float W;
 
@@ -160,15 +159,12 @@ public:
 
 using FVector = float4;
 
-// 설명 :
 class EngineMath
 {
 public:
-	// constrcuter destructer
 	EngineMath();
 	~EngineMath();
 
-	// delete Function
 	EngineMath(const EngineMath& _Other)					 = delete;
 	EngineMath(EngineMath&& _Other) noexcept				 = delete;
 	EngineMath& operator=(const EngineMath& _Other)			 = delete;

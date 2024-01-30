@@ -25,7 +25,7 @@ void AnipangCore::BeginPlay()
 
 void AnipangCore::Tick(float _DeltaTime)
 {
-	//플레이어가 움직일 수 있도로고 구현하면되는 곳
+
 }
 
 void AnipangCore::End()

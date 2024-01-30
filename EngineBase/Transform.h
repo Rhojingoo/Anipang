@@ -7,9 +7,9 @@ public :
 	FTransform();
 	~FTransform();
 
-	//FTransform(const FTransform& _Other)				 = delete;
+	//FTransform(const FTransform& _Other)					 = delete;
 	//FTransform(FTransform& _Other) noexcept				 = delete;
-	//FTransform& operator =(const FTransform& _Other)	 = delete;
+	//FTransform& operator =(const FTransform& _Other)		 = delete;
 	//FTransform& operator =(FTransform& _Other) noexcept	 = delete;
 
 public:

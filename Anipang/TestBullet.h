@@ -7,10 +7,10 @@ public :
 	TestBullet();
 	~TestBullet();
 
-	TestBullet(const TestBullet& _Other)				 = delete;
-	TestBullet(TestBullet& _Other) noexcept				 = delete;
-	TestBullet& operator =(const TestBullet& _Other)	 = delete;
-	TestBullet& operator =(TestBullet& _Other) noexcept	 = delete;
+	TestBullet(const TestBullet& _Other)								 = delete;
+	TestBullet(TestBullet& _Other) noexcept								 = delete;
+	TestBullet& operator =(const TestBullet& _Other)					 = delete;
+	TestBullet& operator =(TestBullet& _Other) noexcept					 = delete;
 
 
 	void SetDir(const FVector& _Dir)

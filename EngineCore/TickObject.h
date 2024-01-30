@@ -7,10 +7,10 @@ public:
 	UTickObject();
 	~UTickObject();
 
-	UTickObject(const UTickObject& _Other)					= delete;
-	UTickObject(UTickObject&& _Other) noexcept				= delete;
-	UTickObject& operator=(const UTickObject& _Other)		= delete;
-	UTickObject& operator=(UTickObject&& _Other) noexcept	= delete;
+	UTickObject(const UTickObject& _Other)								= delete;
+	UTickObject(UTickObject&& _Other) noexcept							= delete;
+	UTickObject& operator=(const UTickObject& _Other)					= delete;
+	UTickObject& operator=(UTickObject&& _Other) noexcept				= delete;
 
 	void ActiveOn()
 	{
@@ -29,7 +29,6 @@ public:
 
 	bool IsActive()
 	{
-		// 내가 켜져있고         죽지도 않았다면
 		return IsActiveValue && IsDestroyValue == false;
 	}
 

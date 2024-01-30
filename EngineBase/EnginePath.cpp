@@ -3,15 +3,8 @@
 #include <Windows.h>
 
 UEnginePath::UEnginePath() 
-	: Path(std::filesystem::current_path())
+	: Path(std::filesystem::current_path())	//프로젝트의 시작경로를 가져오므로 App의 경로를 받아옴
 {
-	// 과거의 방식
-	//char Arr[100];
-	//GetCurrentDirectoryA(100, Arr);
-	//StringPath = Arr;
-
-	// 내부에서는 윈도우의 함수를 사용하고 있다
-	// 내부에서 
 }
 
 UEnginePath::UEnginePath(std::filesystem::path _Path)
@@ -28,7 +21,9 @@ void UEnginePath::Move(std::string_view _Path)
 	std::filesystem::path NextPath = Path;
 	NextPath.append(_Path);
 
-	bool Check = std::filesystem::exists(NextPath);
+	bool Check = std::filesystem::exists(NextPath); 
+	//주어진 경로(NextPath)가 실제로 파일 시스템에 존재 여부를 검사
+
 	if (false == Check)
 	{
 		MsgBoxAssert(NextPath.string() + "라는 경로는 존재하지 않습니다");

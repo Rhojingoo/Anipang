@@ -3,7 +3,6 @@
 #include <map>
 #include <EngineBase\EngineDebug.h>
 
-// AllStateClass
 
 class EngineInput
 {
@@ -15,14 +14,14 @@ private:
 		friend EngineInput;
 
 	public:
-		bool Down = false; // 누른 순간
-		bool Press = false; // 계속 누르면
-		bool Up = false; // 떼어진 순간
-		bool Free = true; // 누리지 않으면
+		bool Down = false; 
+		bool Press = false; 
+		bool Up = false;
+		bool Free = true; 
 
 		float PressTime = 0.0f;
 
-		int Key = -1; // VK_LBUTTON
+		int Key = -1; 
 
 		void KeyCheck();
 
@@ -39,11 +38,9 @@ private:
 	};
 
 public:
-	// constrcuter destructer
 	EngineInput();
 	~EngineInput();
 
-	// delete Function
 	EngineInput(const EngineInput& _Other)						= delete;
 	EngineInput(EngineInput&& _Other) noexcept					= delete;
 	EngineInput& operator=(const EngineInput& _Other)			= delete;
@@ -91,7 +88,6 @@ public:
 
 	static void KeyCheckTick(float _DeltaTime);
 protected:
-	//              'A'  상태가 어때?
 	static std::map<int, EngineKey> AllKeys;
 
 	int Value;

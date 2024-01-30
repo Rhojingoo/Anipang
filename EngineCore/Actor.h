@@ -5,7 +5,6 @@
 #include "ImageRenderer.h"
 #include "Level.h"
 
-// 설명 : A가 붙은 오브젝트는 화면에 위치가 존재해야한다.
 class ULevel;
 class UActorComponent;
 class UImageRenderer;
@@ -54,7 +53,7 @@ public :
 
 	UImageRenderer* CreateImageRenderer(int Order = 0);
 
-	void Destroy(float _DestroyTime /*= 0.0f*/) override;
+	void Destroy(float _DestroyTime) override;
 	void DestroyUpdate(float _DeltaTime) override;
 
 protected:

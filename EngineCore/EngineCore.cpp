@@ -7,7 +7,7 @@ EngineCore* GEngine = nullptr;
 
 
 EngineCore::EngineCore()
-	:MainWindow()
+	:MainWindow(), MainTimer()
 {
 }
 
@@ -41,16 +41,11 @@ void EngineCore::CoreTick()
 
 	if (1 <= Frame)
 	{
-		//               5.0f
 		CurFrameTime += DeltaTime;
-
-		//  0.00001        0.016666675
 		if (CurFrameTime <= FrameTime)
 		{
 			return;
 		}
-
-		//  0.0167         0.016666675
 		CurFrameTime -= FrameTime;
 		DeltaTime = FrameTime;
 	}
@@ -61,22 +56,10 @@ void EngineCore::CoreTick()
 	}
 
 	EngineInput::KeyCheckTick(DeltaTime);
-
-	// 레벨이 먼저 틱을 돌리고
 	CurLevel->Tick(DeltaTime);
-
-	// 액터와 부가적인 오브젝트들의 틱도 돌리고
 	CurLevel->LevelTick(DeltaTime);
-
-	// 랜더러들의 랜더를 통해서 화면에 그림도 그린다 => 그리고
 	CurLevel->LevelRender(DeltaTime);
-
-	// 정리한다.(죽어야할 오브젝트들은 다 파괴한다)
 	CurLevel->LevelRelease(DeltaTime);
-
-
-	//HDC WindowDC = GEngine->MainWindow.GetWindowDC();
-	//Rectangle(WindowDC, -200, -200, 3000, 3000);
 }
 
 
@@ -132,8 +115,6 @@ void EngineCore::ChangeLevel(std::string_view _Name)
 	{
 		MsgBoxAssert(std::string(_Name) + "라는 존재하지 않는 레벨로 체인지 하려고 했습니다");
 	}
-
-	// 눈에 보여야할 레벨이죠?
 	CurLevel = AllLevel[UpperName];
 }
 

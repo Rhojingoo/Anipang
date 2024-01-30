@@ -13,31 +13,21 @@ UEngineDirectory::~UEngineDirectory()
 void UEngineDirectory::AllFileRecursive(
 	const std::string_view _Path, 
 	std::list<UEngineFile>& _Result, 
-	std::vector<std::string> _Ext /*= std::vector<std::string>()*/, 
-	bool _Recursive /*= false*/)
+	std::vector<std::string> _Ext, 
+	bool _Recursive )
 {
+	//해당결로를 순회할수 어떤 파일이 있는지 알수 있게 순회하는 directory_iterator
 	std::filesystem::directory_iterator DirIter = std::filesystem::directory_iterator(_Path);
 
 
-	// const Monster& NewMonster;
-	// NewMonster.Fight
-	// NewMonster.Damage
-	
-	// const std::filesystem::directory_entry& Entry
-	// Entry.
-
+	//filesystem::directory_entry는 directory_iterator를 통해 얻은 디렉토리의 항목들을 나타내는 데 사용
 	for (const std::filesystem::directory_entry& Entry : DirIter)
 	{
-		// Entry 디렉토리의 정보를 담고 있는 C++이 지원해주는 객체입니다.
-		// 객체는 우리가 고민할 필요가 없다.
-		// 객체라면 우리가 할껀 .찍어보는것 밖에 없다.
-
-		// 특정 경로 안에 있는 또다른 폴더
-		// 폴더라는 거네
 		std::filesystem::path Path = Entry.path();
 		std::filesystem::path Ext = Entry.path().extension();
 		std::string UpperExt = UEngineString::ToUpper(Ext.string());
 
+		// filesystem::directory_entry& Entry를 is_directory()로 폴더인지 확인 후 폴더라면 재 탐색		
 		if (true == Entry.is_directory())
 		{
 			if (true == _Recursive)
@@ -72,9 +62,8 @@ void UEngineDirectory::AllFileRecursive(
 }
 
 std::list<UEngineFile> UEngineDirectory::AllFile(
-	std::vector<std::string> _Ext /*= std::vector<std::string>()*/, 
-	bool _Rescursive /*= false*/
-)
+	std::vector<std::string> _Ext , 
+	bool _Rescursive)
 {
 	std::list<UEngineFile> Result;
 

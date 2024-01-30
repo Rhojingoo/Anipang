@@ -10,24 +10,11 @@ EngineTime::~EngineTime()
 {
 }
 
-//typedef union _LARGE_INTEGER {
-//    struct {
-//        DWORD LowPart;
-//        LONG HighPart;
-//    } DUMMYSTRUCTNAME;
-//    struct {
-//        DWORD LowPart;
-//        LONG HighPart;
-//    } u;
-//    LONGLONG QuadPart;
-//} LARGE_INTEGER;
-
 
 void EngineTime::TimeCheckStart()
 {
-	// 초당 샐수 있는 양인데.
-	QueryPerformanceFrequency(&Count);
-	QueryPerformanceCounter(&PrevTime);
+	QueryPerformanceFrequency(&Count);  // 1초간의 진동수
+	QueryPerformanceCounter(&PrevTime); // 현재까지의 진동수
 
 	dCount = static_cast<double>(Count.QuadPart);
 }

@@ -21,16 +21,15 @@ void AAnimal::BeginPlay()
 	{
 		BodyRenderer = CreateImageRenderer(0);
 		BodyRenderer->SetPosition({ 0, 30 });
-		BodyRenderer->SetImageToScale("CB2.bmp");
-		// BodyRenderer->SetScale({ 80, 80 });
+		BodyRenderer->SetImageToScale("cat.png");
 	}
 
 
-	{
-		HeadRenderer = CreateImageRenderer(0);
-		HeadRenderer->SetPosition({ 0, -25 });
-		HeadRenderer->SetImageToScale("CB2.bmp");
-	}
+	//{
+	//	HeadRenderer = CreateImageRenderer(0);
+	//	HeadRenderer->SetPosition({ 0, -25 });
+	//	HeadRenderer->SetImageToScale("CB2.bmp");
+	//}
 
 	SetActorLocation({ 100, 100 });
 	SetActorScale({ 100, 100 });

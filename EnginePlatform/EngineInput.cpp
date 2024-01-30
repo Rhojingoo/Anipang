@@ -13,14 +13,10 @@ EngineInput::~EngineInput()
 
 void EngineInput::EngineKey::KeyCheck()
 {
-	// 이 키가 눌렸다는 거죠?
-	// if (0 != GetAsyncKeyState('A'))
-	// A키가 눌렸다면
 	if (0 != GetAsyncKeyState(Key))
 	{
 		if (true == Free)
 		{
-			// 이전까지 이 키는 눌리고 있지 않았다
 			Down = true;
 			Press = true;
 			Up = false;
@@ -28,7 +24,6 @@ void EngineInput::EngineKey::KeyCheck()
 		}
 		else if (true == Down)
 		{
-			// 이전까지 이 키는 눌리고 있었다.
 			Down = false;
 			Press = true;
 			Up = false;
@@ -39,7 +34,6 @@ void EngineInput::EngineKey::KeyCheck()
 	{
 		if (true == Press)
 		{
-			// 이전까지 이 키는 눌리고 있었다.
 			Down = false;
 			Press = false;
 			Up = true;
@@ -47,7 +41,6 @@ void EngineInput::EngineKey::KeyCheck()
 		}
 		else if (true == Up)
 		{
-			// 이전까지 이 키는 안눌리고 있었고 앞으로도 안눌릴거다.
 			Down = false;
 			Press = false;
 			Up = false;

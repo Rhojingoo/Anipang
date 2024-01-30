@@ -14,7 +14,7 @@ void TestBullet::BeginPlay()
 {
 	{
 		UImageRenderer* Renderer = CreateImageRenderer(-10);
-		Renderer->SetImageToScale("CB.png");
+		Renderer->SetImageToScale("mouse.png");
 	}
 
 	SetActorScale({ 50, 50 });

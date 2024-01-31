@@ -19,11 +19,17 @@ public:
 	void SetImage(std::string_view _Name, bool _IsImageScale = false);
 	void SetImageToScale(std::string_view _Name);
 
+	void SetImageCuttingTransform(const FTransform& _Value)
+	{
+		ImageCuttingTransform = _Value;
+	}
+
 protected:
 	void BeginPlay() override;
 
 private:
 	UWindowImage* Image = nullptr;
+	FTransform ImageCuttingTransform;
 
 };
 

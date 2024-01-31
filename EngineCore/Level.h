@@ -5,11 +5,11 @@
 
 //씬을 만들곳
 class AActor;
-class EngineCore;
+class UEngineCore;
 class UImageRenderer;
 class ULevel : public UNameObject
 {
-	friend EngineCore;
+	friend UEngineCore;
 	friend UImageRenderer;
 
 public : 

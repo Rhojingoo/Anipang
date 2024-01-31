@@ -19,17 +19,10 @@ void AAnimal::BeginPlay()
 	AActor::BeginPlay();
 
 	{
-		BodyRenderer = CreateImageRenderer(0);
-		BodyRenderer->SetPosition({ 0, 30 });
-		BodyRenderer->SetImageToScale("cat.png");
+		Renderer = CreateImageRenderer(0);
+		Renderer->SetImageToScale("Cat00.png");
 	}
 
-
-	//{
-	//	HeadRenderer = CreateImageRenderer(0);
-	//	HeadRenderer->SetPosition({ 0, -25 });
-	//	HeadRenderer->SetImageToScale("CB2.bmp");
-	//}
 
 	SetActorLocation({ 100, 100 });
 	SetActorScale({ 100, 100 });
@@ -37,30 +30,34 @@ void AAnimal::BeginPlay()
 
 void AAnimal::Tick(float _DeltaTime)
 {
-	if (true == EngineInput::IsPress('A'))
+#pragma region 테스트 코드
+	if (true == UEngineInput::IsPress('A'))
 	{
 		AddActorLocation(FVector::Left * 500.0f * _DeltaTime);
 	}
 
-	if (true == EngineInput::IsPress('D'))
+	if (true == UEngineInput::IsPress('D'))
 	{
 		AddActorLocation(FVector::Right * 500.0f * _DeltaTime);
 	}
 
-	if (true == EngineInput::IsPress('W'))
+	if (true == UEngineInput::IsPress('W'))
 	{
 		AddActorLocation(FVector::Up * 500.0f * _DeltaTime);
 	}
 
-	if (true == EngineInput::IsPress('S'))
+	if (true == UEngineInput::IsPress('S'))
 	{
 		AddActorLocation(FVector::Down * 500.0f * _DeltaTime);
 	}
 
-	if (true == EngineInput::IsDown('Q'))
+	if (true == UEngineInput::IsDown('Q'))
 	{
-		TestBullet* NewBullet = GetWorld()->SpawnActor<TestBullet>();
+		ATestBullet* NewBullet = GetWorld()->SpawnActor<ATestBullet>();
 		NewBullet->SetActorLocation(GetActorLocation());
 		NewBullet->SetDir(FVector::Right);
 	}
+
+	AActor::Tick(_DeltaTime);
+#pragma endregion
 }

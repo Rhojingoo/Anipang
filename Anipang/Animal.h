@@ -19,7 +19,6 @@ protected:
 private:
 	float QSkillCool = 0.0f;
 
-	UImageRenderer* HeadRenderer;
-	UImageRenderer* BodyRenderer;
+	UImageRenderer* Renderer = nullptr;
 };
 

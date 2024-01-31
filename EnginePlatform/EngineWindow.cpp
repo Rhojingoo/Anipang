@@ -38,6 +38,12 @@ UEngineWindow::UEngineWindow()
 
 UEngineWindow::~UEngineWindow()
 {
+	if (nullptr != BackBufferImage)
+	{
+		delete BackBufferImage;
+		BackBufferImage = nullptr;
+	}
+
 	if (nullptr != WindowImage)
 	{
 		delete WindowImage;
@@ -113,5 +119,59 @@ unsigned __int64 UEngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)(
 
 	return msg.wParam;
 }
+
+void UEngineWindow::SetWindowPosition(const FVector& _Pos)
+{
+	//HWND hWnd, 당연히 크기를 바꾸고 싶은 윈도우의 handle
+	//HWND hWndInsertAfter, ??????
+	//int X, 왼쪽위점
+	//int Y, 오른쫌 위점
+	//int cx, 크기 x
+	//int cy, 크기 y
+	//UINT uFlags
+	// 크기와 위치가 혼합되어 있습니다.
+}
+
+void UEngineWindow::SetWindowScale(const FVector & _Scale)
+{
+	Scale = _Scale;
+
+
+	if (nullptr != BackBufferImage)
+	{
+		delete BackBufferImage;
+		BackBufferImage = nullptr;
+	}
+
+	BackBufferImage = new UWindowImage();
+	BackBufferImage->Create(WindowImage, Scale);
+
+	// 메뉴크기까지 포함 윈도우의 크기를 만들어줍니다.
+	// EX) 1000, 1000짜리 윈도우 만들어줘 => 1000 1100 이라는 수치를 내려줘
+	//     윈도우의 부가요소 크기까지 다 포함해서 내부크기가 1000 1000이 될수 있는 수치를 리턴해준다.
+
+	RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
+
+	AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
+
+	// SWP_NOMOVE 현재 위치를 유지합니다(X 및 Y 매개 변수 무시).
+	// 크기 조절기능 + 위치조절 다들어가 있다.
+	::SetWindowPos(hWnd, nullptr, 0, 0, _Scale.iX(), _Scale.iY(), SWP_NOZORDER | SWP_NOMOVE);
+}
+
+void UEngineWindow::ScreenClear()
+{
+	Rectangle(BackBufferImage->ImageDC, -1, -1, Scale.iX() + 1, Scale.iY() + 1);
+}
+
+void UEngineWindow::ScreenUpdate()
+{
+	FTransform CopyTrans;
+	CopyTrans.SetPosition({ Scale.ihX(), Scale.ihY() });
+	CopyTrans.SetScale({ Scale.iX(), Scale.iY() });
+
+	WindowImage->BitCopy(BackBufferImage, CopyTrans);
+}
+
 
 

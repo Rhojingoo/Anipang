@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <string>
+#include <EngineBase\EngineMath.h>
 
 class UWindowImage;
 class UEngineWindow
@@ -24,7 +25,16 @@ public :
 		return WindowImage;
 	}
 
+	UWindowImage* GetBackBufferImage()
+	{
+		return BackBufferImage;
+	}
 
+	void SetWindowPosition(const FVector& _Pos);
+	void SetWindowScale(const FVector& _Scale);
+
+	void ScreenClear();
+	void ScreenUpdate();
 protected:
 
 private:
@@ -34,5 +44,8 @@ private:
 
 	HWND hWnd = nullptr;
 	UWindowImage* WindowImage = nullptr;
+
+	UWindowImage* BackBufferImage = nullptr;
+	FVector Scale;
 };
 

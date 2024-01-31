@@ -42,8 +42,7 @@ void ULevel::LevelTick(float _DeltaTime)
 			if (false == Actor->IsActive())
 			{
 				continue;
-			}
-			Actor->DestroyUpdate(_DeltaTime);
+			}		
 			Actor->Tick(_DeltaTime);
 		}
 	}

@@ -1,16 +1,16 @@
 #pragma once
 #include <Windows.h>
 
-class EngineTime
+class UEngineTime
 {
 public:
-	EngineTime();
-	~EngineTime();
+	UEngineTime();
+	~UEngineTime();
 
-	EngineTime(const EngineTime& _Other)						= delete;
-	EngineTime(EngineTime&& _Other) noexcept					= delete;
-	EngineTime& operator=(const EngineTime& _Other)				= delete;
-	EngineTime& operator=(EngineTime&& _Other) noexcept			= delete;
+	UEngineTime(const UEngineTime& _Other)						= delete;
+	UEngineTime(UEngineTime&& _Other) noexcept					= delete;
+	UEngineTime& operator=(const UEngineTime& _Other)				= delete;
+	UEngineTime& operator=(UEngineTime&& _Other) noexcept			= delete;
 
 	void TimeCheckStart();
 

@@ -4,14 +4,14 @@
 #include <EngineBase\EngineDebug.h>
 
 
-class EngineInput
+class UEngineInput
 {
 	friend class InputInitCreator;
 
 private:
-	class EngineKey
+	class UEngineKey
 	{
-		friend EngineInput;
+		friend UEngineInput;
 
 	public:
 		bool Down = false; 
@@ -25,12 +25,12 @@ private:
 
 		void KeyCheck();
 
-		EngineKey()
+		UEngineKey()
 		{
 
 		}
 
-		EngineKey(int _Key)
+		UEngineKey(int _Key)
 			: Key(_Key)
 		{
 
@@ -38,13 +38,13 @@ private:
 	};
 
 public:
-	EngineInput();
-	~EngineInput();
+	UEngineInput();
+	~UEngineInput();
 
-	EngineInput(const EngineInput& _Other)						= delete;
-	EngineInput(EngineInput&& _Other) noexcept					= delete;
-	EngineInput& operator=(const EngineInput& _Other)			= delete;
-	EngineInput& operator=(EngineInput&& _Other) noexcept		= delete;
+	UEngineInput(const UEngineInput& _Other)						= delete;
+	UEngineInput(UEngineInput&& _Other) noexcept					= delete;
+	UEngineInput& operator=(const UEngineInput& _Other)			= delete;
+	UEngineInput& operator=(UEngineInput&& _Other) noexcept		= delete;
 
 	static bool IsDown(int _Key)
 	{
@@ -88,7 +88,7 @@ public:
 
 	static void KeyCheckTick(float _DeltaTime);
 protected:
-	static std::map<int, EngineKey> AllKeys;
+	static std::map<int, UEngineKey> AllKeys;
 
 	int Value;
 

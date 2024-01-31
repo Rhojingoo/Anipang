@@ -2,27 +2,34 @@
 #include <Windows.h>
 #include <EngineCore\EngineCore.h>
 
-TestBullet::TestBullet()
+ATestBullet::ATestBullet()
 {
 }
 
-TestBullet::~TestBullet()
+ATestBullet::~ATestBullet()
 {
 }
 
-void TestBullet::BeginPlay()
+void ATestBullet::BeginPlay()
 {
-	{
-		UImageRenderer* Renderer = CreateImageRenderer(-10);
-		Renderer->SetImageToScale("mouse.png");
-	}
+	#pragma region 테스트 코드
+		{
+			//UImageRenderer* Renderer = CreateImageRenderer(-10);
+			//Renderer->SetImageToScale("Mouse00.png");
+		}
 
-	SetActorScale({ 50, 50 });
-	Destroy(2.0f);
+		{
+			UImageRenderer* Renderer = CreateImageRenderer(-10);
+			Renderer->SetImageToScale("boom.png");
+		}
+		//SetActorScale({ 100, 100 });
+		Destroy(2.0f);
+	#pragma endregion
 }
 
-void TestBullet::Tick(float _DeltaTime)
+void ATestBullet::Tick(float _DeltaTime)
 {
 	AddActorLocation(Dir * Speed * _DeltaTime);	
+	AActor::Tick(_DeltaTime);
 }
 

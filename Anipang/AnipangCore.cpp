@@ -3,17 +3,19 @@
 #include "ScoreLevel.h"
 #include "PlayLevel.h"
 
-AnipangCore::AnipangCore()
-: EngineCore()
+UAnipangCore::UAnipangCore()
+: UEngineCore()
 {
 }
 
-AnipangCore::~AnipangCore()
+UAnipangCore::~UAnipangCore()
 {
 }
 
-void AnipangCore::BeginPlay()
+void UAnipangCore::BeginPlay()
 {
+	MainWindow.SetWindowScale({ 1280, 720 });	
+
 	SetFrame(60);
 
 	CreateLevel<UTitleLevel>("Title");
@@ -23,11 +25,11 @@ void AnipangCore::BeginPlay()
 	ChangeLevel("Title");
 }
 
-void AnipangCore::Tick(float _DeltaTime)
+void UAnipangCore::Tick(float _DeltaTime)
 {
 
 }
 
-void AnipangCore::End()
+void UAnipangCore::End()
 {
 }

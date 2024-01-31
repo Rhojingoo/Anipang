@@ -1,17 +1,17 @@
 #include "EngineTime.h"
 #include <Windows.h>
 
-EngineTime::EngineTime() 
+UEngineTime::UEngineTime() 
 {
 	TimeCheckStart();
 }
 
-EngineTime::~EngineTime() 
+UEngineTime::~UEngineTime() 
 {
 }
 
 
-void EngineTime::TimeCheckStart()
+void UEngineTime::TimeCheckStart()
 {
 	QueryPerformanceFrequency(&Count);  // 1초간의 진동수
 	QueryPerformanceCounter(&PrevTime); // 현재까지의 진동수
@@ -19,7 +19,7 @@ void EngineTime::TimeCheckStart()
 	dCount = static_cast<double>(Count.QuadPart);
 }
 
-float EngineTime::TimeCheck()
+float UEngineTime::TimeCheck()
 {
 	QueryPerformanceCounter(&CurTime);
 

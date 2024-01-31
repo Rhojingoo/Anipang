@@ -1,16 +1,16 @@
 #pragma once
 #include <EngineCore\Actor.h>
 
-class TestBullet : public AActor
+class ATestBullet : public AActor
 {
 public : 
-	TestBullet();
-	~TestBullet();
+	ATestBullet();
+	~ATestBullet();
 
-	TestBullet(const TestBullet& _Other)								 = delete;
-	TestBullet(TestBullet& _Other) noexcept								 = delete;
-	TestBullet& operator =(const TestBullet& _Other)					 = delete;
-	TestBullet& operator =(TestBullet& _Other) noexcept					 = delete;
+	ATestBullet(const ATestBullet& _Other)								 = delete;
+	ATestBullet(ATestBullet& _Other) noexcept								 = delete;
+	ATestBullet& operator =(const ATestBullet& _Other)					 = delete;
+	ATestBullet& operator =(ATestBullet& _Other) noexcept					 = delete;
 
 
 	void SetDir(const FVector& _Dir)

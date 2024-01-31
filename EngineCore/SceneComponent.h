@@ -27,12 +27,11 @@ public:
 	{
 		return Transform;
 	}
-
 protected:
 
 
 private:
 	FTransform Transform;
-
+	
 };
 

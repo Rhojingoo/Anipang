@@ -4,7 +4,7 @@
 #include <Anipang\AnipangCore.h>
 
 
-ENGINESTART(AnipangCore)
+ENGINESTART(UAnipangCore)
 
 //int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 //	_In_opt_ HINSTANCE hPrevInstance,

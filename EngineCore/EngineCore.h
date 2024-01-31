@@ -8,21 +8,21 @@
 #include <map>
 
 class ULevel;
-class EngineCore
+class UEngineCore
 {
 public : 
-	~EngineCore();
+	~UEngineCore();
 
-	EngineCore(const EngineCore& _Other)						= delete;
-	EngineCore(EngineCore& _Other) noexcept						= delete;
-	EngineCore& operator =(const 	EngineCore& _Other)			= delete;
-	EngineCore& operator =(EngineCore& _Other)noexcept			= delete;
+	UEngineCore(const UEngineCore& _Other)						= delete;
+	UEngineCore(UEngineCore& _Other) noexcept						= delete;
+	UEngineCore& operator =(const 	UEngineCore& _Other)			= delete;
+	UEngineCore& operator =(UEngineCore& _Other)noexcept			= delete;
 
 
 	UEngineWindow MainWindow;
-	EngineTime MainTimer;
+	UEngineTime MainTimer;
 
-	static void EngineStart(HINSTANCE _hInstance, EngineCore* _UserCore);
+	static void EngineStart(HINSTANCE _hInstance, UEngineCore* _UserCore);
 	void CoreInit(HINSTANCE _Init);
 
 	virtual void BeginPlay();
@@ -54,7 +54,7 @@ public :
 	}
 
 protected:
-	EngineCore();
+	UEngineCore();
 
 private:
 	int Frame = -1;
@@ -72,7 +72,7 @@ private:
 	void LevelInit(ULevel* _Level);
 };
 
-extern EngineCore* GEngine;
+extern UEngineCore* GEngine;
 
 #define ENGINESTART(USERCORE)							\
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,			\
@@ -82,5 +82,5 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,			\
 {														\
     LeakCheck;											\
 	USERCORE NewUserCore = USERCORE();					\
-	EngineCore::EngineStart(hInstance, &NewUserCore);	\
+	UEngineCore::EngineStart(hInstance, &NewUserCore);	\
 }

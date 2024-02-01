@@ -32,17 +32,17 @@ void UImageRenderer::Render(float _DeltaTime)
 		MsgBoxAssert("이미지가 존재하지 않는 랜더러 입니다");
 	}
 
-	FTransform ThisTrans = GetTransform();
-	FTransform OwnerTrans = GetOwner()->GetTransform();
-	ThisTrans.AddPosition(OwnerTrans.GetPosition());
+	FTransform RendererTrans = GetTransform();
+	FTransform ActorTrans = GetOwner()->GetTransform();
+	RendererTrans.AddPosition(ActorTrans.GetPosition());
 
 	// 이려면 윈도우 이미지에 그리면 화면의 갱신이 산발적으로 발생
-	//GEngine->MainWindow.GetWindowImage()->BitCopy(Image, ThisTrans);
+	//GEngine->MainWindow.GetWindowImage()->BitCopy(Image, RendererTrans);
 	
 	// bitblt
-	//GEngine->MainWindow.GetBackBufferImage()->BitCopy(Image, ThisTrans);
+	//GEngine->MainWindow.GetBackBufferImage()->BitCopy(Image, RendererTrans);
 
-	GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, ThisTrans, ImageCuttingTransform);
+	GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, RendererTrans, ImageCuttingTransform);
 }
 
 void UImageRenderer::SetImage(std::string_view _Name)

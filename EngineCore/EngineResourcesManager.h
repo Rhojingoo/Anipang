@@ -25,7 +25,11 @@ public:
 
 	UWindowImage* FindImg(std::string_view _Name);
 
+	UWindowImage* LoadFolder(std::string_view _Path);
 
+	UWindowImage* LoadFolder(std::string_view _Path, std::string_view _Name);
+
+	void CuttingImage(std::string_view _Name, int _X, int _Y);
 
 protected:
 

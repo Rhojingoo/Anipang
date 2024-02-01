@@ -7,6 +7,7 @@ class UEngineDirectory : public UEnginePath
 {
 public:
 	UEngineDirectory();
+	UEngineDirectory(const UEnginePath& _Path);
 	~UEngineDirectory();
 
 	//UEngineDirectory(const UEngineDirectory& _Other)							= delete;

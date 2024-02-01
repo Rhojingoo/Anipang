@@ -1,8 +1,7 @@
 #include "TitleLevel.h"
-#include "Animal.h"
-//#include <EngineCore\EngineResourcesManager.h>
-//#include <EngineBase\EngineDirectory.h>
-//#include <EngineBase\EngineFile.h>
+#include "Title_BackGround.h"
+#include "Animal_Block.h"
+#include "Title_BackGround.h"
 
 UTitleLevel::UTitleLevel()
 {
@@ -14,13 +13,8 @@ UTitleLevel::~UTitleLevel()
 
 void UTitleLevel::BeginPlay()
 {
-	//UEngineDirectory NewPath;
-
-	{
-		//ATestTitleLogo* Logo = SpawnActor<ATestTitleLogo>();
-	}
-
-	SpawnActor<AAnimal>();
+	ULevel::BeginPlay();	
+	SpawnActor<ATitle_BackGround>();
 }
 
 void UTitleLevel::Tick(float _DeltaTime)

@@ -166,14 +166,20 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Animal.h">
+    <ClInclude Include="Animal_Block.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Cat_Block.h" />
+    <ClInclude Include="Checkin_Block.h" />
+    <ClInclude Include="Dog_Block.h" />
+    <ClInclude Include="Mouse_Block.h" />
+    <ClInclude Include="Pig_Block.h" />
     <ClInclude Include="PlayLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Rabit_Block.h" />
     <ClInclude Include="ScoreLevel.h">
       <SubType>
       </SubType>
@@ -186,20 +192,27 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Title_BackGround.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnipangCore.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Animal.cpp">
+    <ClCompile Include="Animal_Block.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Cat_Block.cpp" />
+    <ClCompile Include="Checkin_Block.cpp" />
+    <ClCompile Include="Dog_Block.cpp" />
+    <ClCompile Include="Mouse_Block.cpp" />
+    <ClCompile Include="Pig_Block.cpp" />
     <ClCompile Include="PlayLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Rabit_Block.cpp" />
     <ClCompile Include="ScoreLevel.cpp">
       <SubType>
       </SubType>
@@ -212,6 +225,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Title_BackGround.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

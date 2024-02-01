@@ -17,18 +17,18 @@ UAnipangCore::~UAnipangCore()
 
 void UAnipangCore::BeginPlay()
 {
-	MainWindow.SetWindowScale({ 1280, 720 });	
+	MainWindow.SetWindowScale({ 480, 800 });	
 
 	SetFrame(60);
 
-	UEngineDirectory NewPath;
-	NewPath.MoveParent();
+	UEngineDirectory NewDir;
+	NewDir.MoveParent();
 
-	NewPath.Move("ContentsResources");
-	NewPath.Move("Texture");
+	NewDir.Move("ContentsResources");
+	NewDir.Move("Texture");
 
 	// resource Image의 전체적인 순회
-	std::list<UEngineFile> AllFileList = NewPath.AllFile({ ".png", ".bmp" }, true);
+	std::list<UEngineFile> AllFileList = NewDir.AllFile({ ".png", ".bmp" }, true);
 
 	for (UEngineFile& File : AllFileList)
 	{
@@ -36,6 +36,17 @@ void UAnipangCore::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadImg(FullPath);
 	}
 
+	UEngineResourcesManager::GetInst().CuttingImage("TestSpriteAni.png", 13, 8);
+	
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Cat"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Checkin"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Monkey"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Mouse"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Pig"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Rabbit"));
+
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Title_Level\\Intro_BG"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Title_Level\\Intro_OBJ"));
 
 	CreateLevel<UTitleLevel>("Title");
 	CreateLevel<UScoreLevel>("Score");

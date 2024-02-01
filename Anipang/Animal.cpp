@@ -20,12 +20,11 @@ void AAnimal::BeginPlay()
 
 	{
 		Renderer = CreateImageRenderer(0);
-		Renderer->SetImageToScale("Cat00.png");
+		Renderer->SetImage("Cat00.png");
+		SetActorLocation({ 50, 50 });
+		Renderer->SetTransform({ {50,50}, {50, 50} });
+		Renderer->SetImageCuttingTransform({ {0,0}, {80, 80} });
 	}
-
-
-	SetActorLocation({ 100, 100 });
-	SetActorScale({ 100, 100 });
 }
 
 void AAnimal::Tick(float _DeltaTime)
@@ -51,7 +50,8 @@ void AAnimal::Tick(float _DeltaTime)
 		AddActorLocation(FVector::Down * 500.0f * _DeltaTime);
 	}
 
-	if (true == UEngineInput::IsDown('Q'))
+
+	if (true == UEngineInput::IsDown(VK_LBUTTON))
 	{
 		ATestBullet* NewBullet = GetWorld()->SpawnActor<ATestBullet>();
 		NewBullet->SetActorLocation(GetActorLocation());

@@ -71,7 +71,6 @@ void UEngineWindow::Open(std::string_view _Title)
 
 	RegisterClassExA(&wcex);
 
-
 	hWnd = CreateWindowA("DefaultWindow", _Title.data(), WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 

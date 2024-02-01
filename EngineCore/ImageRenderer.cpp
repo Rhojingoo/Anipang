@@ -45,7 +45,7 @@ void UImageRenderer::Render(float _DeltaTime)
 	GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, ThisTrans, ImageCuttingTransform);
 }
 
-void UImageRenderer::SetImage(std::string_view _Name, bool _IsImageScale)
+void UImageRenderer::SetImage(std::string_view _Name)
 {
 	Image = UEngineResourcesManager::GetInst().FindImg(_Name);
 
@@ -54,21 +54,8 @@ void UImageRenderer::SetImage(std::string_view _Name, bool _IsImageScale)
 		MsgBoxAssert(std::string(_Name) + "이미지가 존재하지 않습니다.");
 		return;
 	}
-
-	if (true == _IsImageScale)
-	{
-		FVector Scale = Image->GetScale();
-		SetScale(Scale);
-
-		ImageCuttingTransform.SetPosition({ 0,0 });
-		ImageCuttingTransform.SetScale(Scale);
-	}
 }
 
-void UImageRenderer::SetImageToScale(std::string_view _Name)
-{
-	SetImage(_Name, true);
-}
 
 void UImageRenderer::BeginPlay()
 {

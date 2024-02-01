@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <map>
 #include <EngineBase\EngineDebug.h>
+#include <EngineBase\EngineMath.h>
 
 
 class UEngineInput

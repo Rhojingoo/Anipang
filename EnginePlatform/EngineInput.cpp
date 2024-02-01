@@ -53,7 +53,7 @@ void UEngineInput::UEngineKey::KeyCheck()
 
 void UEngineInput::InputInit()
 {
-	/*AllKeys[VK_LBUTTON] = UEngineKey(VK_LBUTTON);
+	AllKeys[VK_LBUTTON] = UEngineKey(VK_LBUTTON);
 	AllKeys[VK_RBUTTON] = UEngineKey(VK_RBUTTON);
 	AllKeys[VK_CANCEL] = UEngineKey(VK_CANCEL);
 	AllKeys[VK_MBUTTON] = UEngineKey(VK_MBUTTON);
@@ -144,7 +144,7 @@ void UEngineInput::InputInit()
 	AllKeys['-'] = UEngineKey(VK_OEM_MINUS);
 	AllKeys['+'] = UEngineKey(VK_OEM_PLUS);
 	AllKeys[VK_OEM_4] = UEngineKey(VK_OEM_4);
-	AllKeys[VK_OEM_6] = UEngineKey(VK_OEM_6);*/
+	AllKeys[VK_OEM_6] = UEngineKey(VK_OEM_6);
 
 	for (int i = 'A'; i <= 'Z'; i++)
 	{
@@ -166,6 +166,12 @@ void UEngineInput::KeyCheckTick(float _DeltaTime)
 
 		CurKey.KeyCheck();
 	}
+
+
+	POINT mousePos = {};
+	GetCursorPos(&mousePos);
+
+	FVector mousenomal = FVector::Zero;
 }
 
 class InputInitCreator

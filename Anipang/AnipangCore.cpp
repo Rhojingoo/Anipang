@@ -2,6 +2,9 @@
 #include "TitleLevel.h"
 #include "ScoreLevel.h"
 #include "PlayLevel.h"
+#include <EngineBase\EngineDirectory.h>
+#include <EngineBase\EngineFile.h>
+#include <EngineCore\EngineResourcesManager.h>
 
 UAnipangCore::UAnipangCore()
 : UEngineCore()
@@ -18,6 +21,22 @@ void UAnipangCore::BeginPlay()
 
 	SetFrame(60);
 
+	UEngineDirectory NewPath;
+	NewPath.MoveParent();
+
+	NewPath.Move("ContentsResources");
+	NewPath.Move("Texture");
+
+	// resource Image의 전체적인 순회
+	std::list<UEngineFile> AllFileList = NewPath.AllFile({ ".png", ".bmp" }, true);
+
+	for (UEngineFile& File : AllFileList)
+	{
+		std::string FullPath = File.GetFullPath();
+		UEngineResourcesManager::GetInst().LoadImg(FullPath);
+	}
+
+
 	CreateLevel<UTitleLevel>("Title");
 	CreateLevel<UScoreLevel>("Score");
 	CreateLevel<UPlayLevel>("Play");
@@ -27,9 +46,7 @@ void UAnipangCore::BeginPlay()
 
 void UAnipangCore::Tick(float _DeltaTime)
 {
-
+	UEngineCore::Tick(_DeltaTime);
 }
 
-void UAnipangCore::End()
-{
-}
+

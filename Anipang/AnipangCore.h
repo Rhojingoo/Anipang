@@ -7,7 +7,7 @@ public :
 	UAnipangCore();
 	~UAnipangCore();
 
-	UAnipangCore(const UAnipangCore& _Other)							 = delete;
+	UAnipangCore(const UAnipangCore& _Other)						 = delete;
 	UAnipangCore(UAnipangCore& _Other) noexcept						 = delete;
 	UAnipangCore& operator =(const 	UAnipangCore& _Other)			 = delete;
 	UAnipangCore& operator =(UAnipangCore& _Other)noexcept			 = delete;
@@ -15,7 +15,7 @@ public :
 protected:
 	void BeginPlay()	override;
 	void Tick(float _DeltaTime)	override;
-	void End()		override;
+
 
 private:
 };

@@ -16,8 +16,12 @@ public:
 
 	void SetOrder(int _Order) override;
 	void Render(float _DeltaTime);
-	void SetImage(std::string_view _Name, bool _IsImageScale = false);
-	void SetImageToScale(std::string_view _Name);
+	void SetImage(std::string_view _Name);
+
+	void SetTransform(const FTransform& _Value)
+	{
+		USceneComponent::SetTransform(_Value);
+	}
 
 	void SetImageCuttingTransform(const FTransform& _Value)
 	{

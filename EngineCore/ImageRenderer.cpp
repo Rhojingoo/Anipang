@@ -42,10 +42,8 @@ void UImageRenderer::Render(float _DeltaTime)
 	FTransform ActorTrans = GetOwner()->GetTransform();
 	RendererTrans.AddPosition(ActorTrans.GetPosition());
 
-	std::string Out = std::to_string(InfoIndex);
-
-	Out += "\n";
-	OutputDebugStringA(Out.c_str());
+	EWIndowImageType ImageType = Image->GetImageType();
+	//
 
 	// 이려면 윈도우 이미지에 그리면 화면의 갱신이 산발적으로 발생
 	//GEngine->MainWindow.GetWindowImage()->BitCopy(Image, RendererTrans);
@@ -53,7 +51,23 @@ void UImageRenderer::Render(float _DeltaTime)
 	// bitblt
 	//GEngine->MainWindow.GetBackBufferImage()->BitCopy(Image, RendererTrans);
 
-	GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, RendererTrans, InfoIndex);
+	//Transparentsblt
+	//GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, RendererTrans, InfoIndex);
+	//GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, RendererTrans, InfoIndex, TransColor);
+
+	switch (ImageType)
+	{
+	case EWIndowImageType::IMG_BMP:
+		GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, RendererTrans, InfoIndex, TransColor);
+		// bmp일때는 일반적으로 Transcopy로 투명처리를 한다.
+		break;
+	case EWIndowImageType::IMG_PNG:
+		GEngine->MainWindow.GetBackBufferImage()->AlphaCopy(Image, RendererTrans, InfoIndex, TransColor);
+		break;
+	default:
+		MsgBoxAssert("투명처리가 불가능한 이미지 입니다.");
+		break;
+	}
 }
 
 

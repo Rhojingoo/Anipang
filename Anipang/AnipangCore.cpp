@@ -17,6 +17,7 @@ UAnipangCore::~UAnipangCore()
 
 void UAnipangCore::BeginPlay()
 {
+	//MainWindow.SetWindowPosition({500, 100});
 	MainWindow.SetWindowScale({ 480, 800 });	
 
 	SetFrame(60);
@@ -44,6 +45,9 @@ void UAnipangCore::BeginPlay()
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Mouse"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Pig"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Rabbit"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Block_Effect"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Boomb_Effect"));
+	
 
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Title_Level\\Intro_BG"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Title_Level\\Intro_OBJ"));

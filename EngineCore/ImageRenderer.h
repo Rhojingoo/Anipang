@@ -65,6 +65,26 @@ public:
 
 	void AnimationReset();
 
+	void SetTransColor(Color8Bit _Color)
+	{
+		TransColor = _Color;
+	}
+
+	void SetAlpha(float _Alpha)
+	{
+		if (0.0f >= _Alpha)
+		{
+			_Alpha = 0.0f;
+		}
+
+		if (1.0f <= _Alpha)
+		{
+			_Alpha = 1.0f;
+		}
+
+		TransColor.A = static_cast<char>(_Alpha * 255.0f);
+	}
+
 protected:
 	void BeginPlay() override;
 
@@ -72,6 +92,7 @@ private:
 	int InfoIndex = 0;
 	UWindowImage* Image = nullptr;
 	FTransform ImageCuttingTransform;
+	Color8Bit TransColor;
 
 	std::map<std::string, UAnimationInfo> AnimationInfos;
 	UAnimationInfo* CurAnimation = nullptr;

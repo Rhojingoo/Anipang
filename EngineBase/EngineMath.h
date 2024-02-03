@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 struct float4
 {
@@ -68,6 +69,16 @@ public:
 	}
 
 public:
+	std::string ToString()
+	{
+		return "[X : " + std::to_string(X) + " Y : " + std::to_string(Y) + " Z : " + std::to_string(Z) + " W : " + std::to_string(W) + "]";
+	}
+
+	float4 Half2D()
+	{
+		return { hX(), hY() };
+	}
+
 	int iX() const
 	{
 		return static_cast<int>(X);
@@ -190,12 +201,12 @@ public:
 	static const Color8Bit White;
 
 
-	static const Color8Bit NABlack;
-	static const Color8Bit NARed;
-	static const Color8Bit NAGreen;
-	static const Color8Bit NABlue;
-	static const Color8Bit NAMagenta;
-	static const Color8Bit NAWhite;
+	//static const Color8Bit NABlack;
+	//static const Color8Bit NARed;
+	//static const Color8Bit NAGreen;
+	//static const Color8Bit NABlue;
+	//static const Color8Bit NAMagenta;
+	//static const Color8Bit NAWhite;
 
 
 	union
@@ -211,6 +222,12 @@ public:
 		unsigned char Arr1D[4] = { 0,0,0,255 };
 		unsigned int Color;
 	};
+
+
+	Color8Bit ZeroAlphaColor() const
+	{
+		return Color8Bit{ R,G,B,0 };
+	}
 };
 
 class UEngineMath
@@ -219,8 +236,8 @@ public:
 	UEngineMath();
 	~UEngineMath();
 
-	UEngineMath(const UEngineMath& _Other)					 = delete;
-	UEngineMath(UEngineMath&& _Other) noexcept				 = delete;
+	UEngineMath(const UEngineMath& _Other)						 = delete;
+	UEngineMath(UEngineMath&& _Other) noexcept					 = delete;
 	UEngineMath& operator=(const UEngineMath& _Other)			 = delete;
 	UEngineMath& operator=(UEngineMath&& _Other) noexcept		 = delete;
 

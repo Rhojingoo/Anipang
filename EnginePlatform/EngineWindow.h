@@ -10,7 +10,7 @@ public :
 	UEngineWindow();
 	~UEngineWindow();
 
-	UEngineWindow(const UEngineWindow& _Other)					= delete;
+	UEngineWindow(const UEngineWindow& _Other)						= delete;
 	UEngineWindow(UEngineWindow& _Other) noexcept					= delete;
 	UEngineWindow& operator =(const 	UEngineWindow& _Other)		= delete;
 	UEngineWindow& operator =(UEngineWindow& _Other)noexcept		= delete;
@@ -35,6 +35,13 @@ public :
 
 	void ScreenClear();
 	void ScreenUpdate();
+
+	FVector GetWindowScale()
+	{
+		return Scale;
+	}
+
+	FVector GetMousePosition();
 protected:
 
 private:
@@ -47,5 +54,6 @@ private:
 
 	UWindowImage* BackBufferImage = nullptr;
 	FVector Scale;
+	FVector Position;
 };
 

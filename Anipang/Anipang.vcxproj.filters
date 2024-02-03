@@ -38,6 +38,10 @@
     <ClInclude Include="Title_BackGround.h">
       <Filter>Title_Level\Title_Level_Actor</Filter>
     </ClInclude>
+    <ClInclude Include="Helper.h">
+      <Filter>Anipang_Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="ACursor_Pointe.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnipangCore.cpp" />
@@ -77,6 +81,10 @@
     <ClCompile Include="Title_BackGround.cpp">
       <Filter>Title_Level\Title_Level_Actor</Filter>
     </ClCompile>
+    <ClCompile Include="Helper.cpp">
+      <Filter>Anipang_Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="ACursor_Pointe.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Play_Level">
@@ -99,6 +107,9 @@
     </Filter>
     <Filter Include="Title_Level\Title_Level_Actor">
       <UniqueIdentifier>{6f5660cc-d6db-4d0d-a2a2-625f5585a12c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Anipang_Helper">
+      <UniqueIdentifier>{cb5abf74-7e84-41fd-9c3d-67e13dd6215f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

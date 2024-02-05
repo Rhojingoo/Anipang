@@ -58,6 +58,9 @@ void UAnipangCore::BeginPlay()
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Rabbit"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Block_Effect"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Boomb_Effect"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Fireball_Projectile"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("World_On_Fire_Projectile"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Phoenix Landing"));
 	
 
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Title_Level\\Intro_BG"));

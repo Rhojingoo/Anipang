@@ -21,12 +21,43 @@ void APlay_Frame::BeginPlay()
 	}
 
 	{
+		// 스프라이트 블럭이미지 확정
+		//UImageRenderer* Renderer2 = CreateImageRenderer(1);
+		//Renderer2->SetImage("Rabbit");
+		//Renderer2->SetTransform({ {100,200}, {75, 75} });
+		//Renderer2->SetImageCuttingTransform({ {0,0}, {133, 139} });
+		//Renderer2->CreateAnimation("Idle", "Rabbit", 0, 2, 1.1f, true);
+		//Renderer2->ChangeAnimation("Idle");
+	}
+
+
+	{
+		// 스프라이트 테스트이미지
+		//UImageRenderer* Renderer2 = CreateImageRenderer(1);
+		//Renderer2->SetImage("World_On_Fire_Projectile");
+		//Renderer2->SetTransform({ {100,200}, {75, 75} });
+		//Renderer2->SetImageCuttingTransform({ {0,0}, {110, 62} });
+		//Renderer2->CreateAnimation("Idle", "World_On_Fire_Projectile", 0, 23, 0.2f, true);
+		//Renderer2->ChangeAnimation("Idle");
+	}
+
+	{
+		// 스프라이트 테스트이미지
+		//UImageRenderer* Renderer2 = CreateImageRenderer(1);
+		//Renderer2->SetImage("Fireball_Projectile");
+		//Renderer2->SetTransform({ {100,200}, {75, 75} });
+		//Renderer2->SetImageCuttingTransform({ {0,0}, {46, 28} });
+		//Renderer2->CreateAnimation("Idle", "Fireball_Projectile", 0, 11, 0.2f, true);
+		//Renderer2->ChangeAnimation("Idle");
+	}
+
+	{
 		// 스프라이트 테스트이미지
 		UImageRenderer* Renderer2 = CreateImageRenderer(1);
-		Renderer2->SetImage("Rabbit");
-		Renderer2->SetTransform({ {100,200}, {133, 139} });
-		Renderer2->SetImageCuttingTransform({ {0,0}, {133, 139} });
-		Renderer2->CreateAnimation("Idle", "Rabbit", 0, 2, 1.1f, true);
+		Renderer2->SetImage("Phoenix Landing");
+		Renderer2->SetTransform({ {100,200}, {75, 200} });
+		Renderer2->SetImageCuttingTransform({ {0,0}, {70, 250} });
+		Renderer2->CreateAnimation("Idle", "Phoenix Landing", 0, 5, 0.2f, true);
 		Renderer2->ChangeAnimation("Idle");
 	}
 

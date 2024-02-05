@@ -2,6 +2,7 @@
 #include "TitleLevel.h"
 #include "ScoreLevel.h"
 #include "PlayLevel.h"
+#include "EndingLevel.h"
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
 #include <EngineCore\EngineResourcesManager.h>
@@ -55,6 +56,7 @@ void UAnipangCore::BeginPlay()
 	CreateLevel<UTitleLevel>("Title");
 	CreateLevel<UScoreLevel>("Score");
 	CreateLevel<UPlayLevel>("Play");
+	CreateLevel<UEndingLevel>("Ending");
 
 	ChangeLevel("Title");
 }

@@ -42,6 +42,12 @@
       <Filter>Anipang_Helper</Filter>
     </ClInclude>
     <ClInclude Include="ACursor_Pointe.h" />
+    <ClInclude Include="EndingLevel.h">
+      <Filter>Ending_Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Ending_BackGround.h">
+      <Filter>Ending_Level\Ending_Level_Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnipangCore.cpp" />
@@ -85,6 +91,12 @@
       <Filter>Anipang_Helper</Filter>
     </ClCompile>
     <ClCompile Include="ACursor_Pointe.cpp" />
+    <ClCompile Include="EndingLevel.cpp">
+      <Filter>Ending_Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Ending_BackGround.cpp">
+      <Filter>Ending_Level\Ending_Level_Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Play_Level">
@@ -110,6 +122,12 @@
     </Filter>
     <Filter Include="Anipang_Helper">
       <UniqueIdentifier>{cb5abf74-7e84-41fd-9c3d-67e13dd6215f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ending_Level">
+      <UniqueIdentifier>{b32ebf5c-4359-471f-8be4-440c63529f17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ending_Level\Ending_Level_Actor">
+      <UniqueIdentifier>{4eb29dce-6c2e-4501-a439-ffe11cce6ea1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

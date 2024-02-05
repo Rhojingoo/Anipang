@@ -85,6 +85,11 @@ public:
 		TransColor.A = static_cast<char>(_Alpha * 255.0f);
 	}
 
+	UWindowImage* GetImage()
+	{
+		return Image;
+	}
+
 protected:
 	void BeginPlay() override;
 

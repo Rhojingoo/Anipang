@@ -49,6 +49,22 @@ void UEngineCore::CoreTick()
 		DeltaTime = FrameTime;
 	}
 
+	if (nullptr != NextLevel)
+	{
+		// 최초에는 현재 레벨이 존재하지 않을 것이다.
+		// 바꿀 레벨이 있다는 이야기입니다.
+		if (nullptr != CurLevel)
+		{
+			// 레베링 끝났음을 알립니다.
+			CurLevel->LevelEnd(NextLevel);
+		}
+
+		NextLevel->LevelStart(CurLevel);
+		CurLevel = NextLevel;
+		NextLevel = nullptr;
+	}
+
+
 	if (nullptr == CurLevel)
 	{
 		MsgBoxAssert("엔진을 시작할 레벨이 지정되지 않았습니다 치명적인 오류입니다");

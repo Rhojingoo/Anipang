@@ -71,7 +71,8 @@ void UEngineWindow::Open(std::string_view _Title)
 	wcex.cbClsExtra = 0;
 	wcex.cbWndExtra = 0;
 	wcex.hInstance = hInstance;
-	wcex.hIcon = nullptr;
+	wcex.hIcon = nullptr;  // LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WINDOWSPROJECT1));
+	//wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_icon1));
 	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	wcex.lpszMenuName = nullptr;

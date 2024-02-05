@@ -17,11 +17,11 @@ void ACursor_Pointe::BeginPlay()
 	AActor::BeginPlay();
 	{
 		// 이미지 한장 랜더
-		Renderer = CreateImageRenderer(1);
-		Renderer->SetImage("boom.png");
+		Renderer = CreateImageRenderer(100);
+		Renderer->SetImage("Cursor.png");
 		SetActorLocation({ 50, 50 });
 		Renderer->SetTransform({ {0,0}, {50, 50} });
-		Renderer->SetImageCuttingTransform({ {0,0}, {80, 80} });
+		Renderer->SetImageCuttingTransform({ {0,0}, {213, 216} });
 	}
 }
 

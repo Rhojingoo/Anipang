@@ -19,7 +19,8 @@ UAnipangCore::~UAnipangCore()
 void UAnipangCore::BeginPlay()
 {
 	//MainWindow.SetWindowPosition({500, 100});
-	MainWindow.SetWindowScale({ 480, 800 });	
+	//MainWindow.SetWindowScale({ 1024, 570 });	
+	MainWindow.SetWindowScale({ 480,800 });
 
 	SetFrame(60);
 
@@ -39,10 +40,19 @@ void UAnipangCore::BeginPlay()
 	}
 
 	UEngineResourcesManager::GetInst().CuttingImage("TestSpriteAni.png", 13, 8);
+	UEngineResourcesManager::GetInst().CuttingImage("Amber.png", 20, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("Amethyst.png", 20, 3); // 문양이상
+	UEngineResourcesManager::GetInst().CuttingImage("Diamond.png", 20, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("Emerald.png", 20, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("Ruby.png", 20, 3);//이상
+	UEngineResourcesManager::GetInst().CuttingImage("Sapphire.png", 20, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("Topaz.png", 20, 3);
 	
+
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Cat"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Checkin"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Monkey"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Dog"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Mouse"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Pig"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Rabbit"));
@@ -58,7 +68,7 @@ void UAnipangCore::BeginPlay()
 	CreateLevel<UPlayLevel>("Play");
 	CreateLevel<UEndingLevel>("Ending");
 
-	ChangeLevel("Title");
+	ChangeLevel("Play");
 }
 
 void UAnipangCore::Tick(float _DeltaTime)

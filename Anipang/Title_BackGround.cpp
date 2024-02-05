@@ -12,6 +12,26 @@ void ATitle_BackGround::BeginPlay()
 {
 	AActor::BeginPlay();
 
+#pragma region bejuweled
+	
+	//// 타이틀 배경
+	//	Renderer = CreateImageRenderer(0);
+	//	Renderer->SetImage("gameselector_bg.png");
+	//	SetActorLocation({ 512, 245 });
+	//	Renderer->SetTransform({ {0,0}, {1024, 570} });
+	//	Renderer->SetImageCuttingTransform({ {0,0}, {1024, 570} });
+	//
+	////  타이틀 오브젝트 블럭Effect
+	//	UImageRenderer* Renderer2 = CreateImageRenderer(1);
+	//	Renderer2->SetImage("Topaz.png");	
+	//	Renderer2->SetTransform({ {100,200}, {84, 84} });
+	//	Renderer2->SetImageCuttingTransform({ {0,0}, {84, 84} });
+	//	Renderer2->CreateAnimation("Idle", "Topaz.png", 0, 19, 0.1f, true);
+	//	Renderer2->ChangeAnimation("Idle");
+	
+#pragma endregion
+
+#pragma region anipang 
 	{
 		// 이미지 한장 랜더
 		//Renderer = CreateImageRenderer(1);
@@ -22,9 +42,9 @@ void ATitle_BackGround::BeginPlay()
 	}
 
 	{
-		// 타이틀 배경
+		 //타이틀 배경  애니메이션
 		Renderer = CreateImageRenderer(0);
-		Renderer->SetImage("Intro_BG");  
+		Renderer->SetImage("Intro_BG");
 		SetActorLocation({ 240, 400 });
 		//Renderer->SetTransColor(Color8Bit::Magenta.ZeroAlphaColor());
 		Renderer->SetTransform({ {0,0}, {480, 800} });
@@ -35,25 +55,34 @@ void ATitle_BackGround::BeginPlay()
 
 	{
 		//  타이틀 오브젝트 애니메이션
-		UImageRenderer* Renderer2 = CreateImageRenderer(1);
-		Renderer2->SetImage("Intro_OBJ");	
-		Renderer2->SetTransform({ {20,100}, {100, 105} });
-		Renderer2->SetImageCuttingTransform({ {0,0}, {133, 139} });
-		Renderer2->CreateAnimation("Idle", "Intro_OBJ", 0, 1, 0.1f, true);
-		//Renderer->CreateAnimation("Attack", "TestSpriteAni.png", 26, 32, 0.5f, true);
-		Renderer2->ChangeAnimation("Idle");
+		//UImageRenderer* Renderer2 = CreateImageRenderer(1);
+		//Renderer2->SetImage("Intro_OBJ");	
+		//Renderer2->SetTransform({ {20,100}, {100, 105} });
+		//Renderer2->SetImageCuttingTransform({ {0,0}, {133, 139} });
+		//Renderer2->CreateAnimation("Idle", "Intro_OBJ", 0, 1, 0.1f, true);
+		////Renderer->CreateAnimation("Attack", "TestSpriteAni.png", 26, 32, 0.5f, true);
+		//Renderer2->ChangeAnimation("Idle");
 	}
 
 
 	{
-		//  타이틀 오브젝트로고
-		UImageRenderer* Renderer = CreateImageRenderer(2);
-		Renderer->SetImage("Intro_Logo.png");
-		//Renderer->SetTransColor(Color8Bit::Magenta.ZeroAlphaColor());
-		Renderer->SetTransform({ {10,-185}, {400, 300} });
-		Renderer->SetImageCuttingTransform({ {0,0}, {445, 356} });
+		// // 타이틀 오브젝트로고
+		//UImageRenderer* Renderer = CreateImageRenderer(2);
+		//Renderer->SetImage("Intro_Logo2.png");
+		////Renderer->SetTransColor(Color8Bit::Magenta.ZeroAlphaColor());
+		//Renderer->SetTransform({ {10,-185}, {400, 300} });
+		//Renderer->SetImageCuttingTransform({ {0,0}, {445, 356} });
 	}
 
+	{
+		// 타이틀 오브젝트로고
+		UImageRenderer* Renderer = CreateImageRenderer(1);
+		Renderer->SetImage("Intro_Logo3.png");
+		//Renderer->SetTransColor(Color8Bit::Magenta.ZeroAlphaColor());
+		Renderer->SetTransform({ {10,-185}, {350, 300} });
+		Renderer->SetImageCuttingTransform({ {0,0}, {750, 750} });
+	}
+#pragma endregion
 
 #pragma region 테스트 이미지
 
@@ -82,15 +111,15 @@ void ATitle_BackGround::BeginPlay()
 	}
 
 
-	{
-		// 스프라이트 테스트이미지
-		//UImageRenderer* Renderer2 = CreateImageRenderer(1);
-		//Renderer2->SetImage("Rabbit");
-		//Renderer2->SetTransform({ {100,200}, {133, 139} });
-		//Renderer2->SetImageCuttingTransform({ {0,0}, {133, 139} });
-		//Renderer2->CreateAnimation("Idle", "Rabbit", 0, 2, 1.1f, true);
-		//Renderer2->ChangeAnimation("Idle");
-	}
+	//{
+	//	// 스프라이트 테스트이미지
+	//	UImageRenderer* Renderer2 = CreateImageRenderer(1);
+	//	Renderer2->SetImage("Cat");
+	//	Renderer2->SetTransform({ {100,200}, {133, 139} });
+	//	Renderer2->SetImageCuttingTransform({ {0,0}, {133, 139} });
+	//	Renderer2->CreateAnimation("Idle", "Cat", 0, 2, 1.1f, true);
+	//	Renderer2->ChangeAnimation("Idle");
+	//}
 
 
 	{
@@ -103,10 +132,6 @@ void ATitle_BackGround::BeginPlay()
 		//Renderer2->ChangeAnimation("Idle");
 	}
 #pragma endregion
-
-
-	
-
 
 
 }

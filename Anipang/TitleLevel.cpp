@@ -17,6 +17,7 @@ void UTitleLevel::BeginPlay()
 	ULevel::BeginPlay();
 
 	SpawnActor<ATitle_BackGround>();
+	//SpawnActor<ATitle_Moon>();	
 	SpawnActor<ACursor_Pointe>();
 }
 

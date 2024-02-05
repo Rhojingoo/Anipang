@@ -14,7 +14,7 @@ void APlay_Frame::BeginPlay()
 	{
 		// 타이틀 배경
 		Renderer = CreateImageRenderer(0);
-		Renderer->SetImage("PlayFrame.bmp");
+		Renderer->SetImage("PlayFrame.png");
 		SetActorLocation({ 240, 400 });
 		Renderer->SetTransform({ {0,0}, {480, 800} });
 		Renderer->SetImageCuttingTransform({ {0,0}, {367, 609} });

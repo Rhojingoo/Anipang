@@ -48,6 +48,9 @@
     <ClInclude Include="Ending_BackGround.h">
       <Filter>Ending_Level\Ending_Level_Actor</Filter>
     </ClInclude>
+    <ClInclude Include="Play_Frame.h">
+      <Filter>Play_Level\Play_Level_Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnipangCore.cpp" />
@@ -96,6 +99,9 @@
     </ClCompile>
     <ClCompile Include="Ending_BackGround.cpp">
       <Filter>Ending_Level\Ending_Level_Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Play_Frame.cpp">
+      <Filter>Play_Level\Play_Level_Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

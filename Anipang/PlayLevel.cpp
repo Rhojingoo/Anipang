@@ -1,5 +1,6 @@
 #include "PlayLevel.h"
 #include <EngineCore\EngineCore.h>
+#include "Play_Frame.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -12,6 +13,7 @@ UPlayLevel::~UPlayLevel()
 void UPlayLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
+	SpawnActor<APlay_Frame>();
 }
 
 void UPlayLevel::Tick(float _DeltaTime)

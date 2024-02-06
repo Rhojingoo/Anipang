@@ -8,7 +8,7 @@
     <ClInclude Include="TestBullet.h">
       <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
-    <ClInclude Include="Rabit_Block.h">
+    <ClInclude Include="Rabbit_Block.h">
       <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Cat_Block.h">
@@ -41,7 +41,7 @@
     <ClInclude Include="Helper.h">
       <Filter>Anipang_Helper</Filter>
     </ClInclude>
-    <ClInclude Include="ACursor_Pointe.h" />
+    <ClInclude Include="ACursor_Point.h" />
     <ClInclude Include="EndingLevel.h">
       <Filter>Ending_Level</Filter>
     </ClInclude>
@@ -50,6 +50,18 @@
     </ClInclude>
     <ClInclude Include="Play_Frame.h">
       <Filter>Play_Level\Play_Level_Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Monkey_Block.h">
+      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_Manager.h">
+      <Filter>Play_Level\Play_Level_Actor\Block_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Title_Logo.h">
+      <Filter>Title_Level\Title_Level_Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Title_Button.h">
+      <Filter>Title_Level\Title_Level_Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -75,7 +87,7 @@
     <ClCompile Include="Pig_Block.cpp">
       <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
-    <ClCompile Include="Rabit_Block.cpp">
+    <ClCompile Include="Rabbit_Block.cpp">
       <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
@@ -93,7 +105,7 @@
     <ClCompile Include="Helper.cpp">
       <Filter>Anipang_Helper</Filter>
     </ClCompile>
-    <ClCompile Include="ACursor_Pointe.cpp" />
+    <ClCompile Include="ACursor_Point.cpp" />
     <ClCompile Include="EndingLevel.cpp">
       <Filter>Ending_Level</Filter>
     </ClCompile>
@@ -102,6 +114,18 @@
     </ClCompile>
     <ClCompile Include="Play_Frame.cpp">
       <Filter>Play_Level\Play_Level_Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Monkey_Block.cpp">
+      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_Manager.cpp">
+      <Filter>Play_Level\Play_Level_Actor\Block_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Title_Logo.cpp">
+      <Filter>Title_Level\Title_Level_Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Title_Button.cpp">
+      <Filter>Title_Level\Title_Level_Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +158,9 @@
     </Filter>
     <Filter Include="Ending_Level\Ending_Level_Actor">
       <UniqueIdentifier>{4eb29dce-6c2e-4501-a439-ffe11cce6ea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play_Level\Play_Level_Actor\Block_Manager">
+      <UniqueIdentifier>{c18fcdfb-c222-4977-b884-95eca860f55b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

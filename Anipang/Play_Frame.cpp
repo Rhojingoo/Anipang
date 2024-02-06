@@ -30,7 +30,17 @@ void APlay_Frame::BeginPlay()
 		//Renderer2->ChangeAnimation("Idle");
 	}
 
+	{
+		// 스프라이트 테스트이미지
+		//UImageRenderer* Renderer2 = CreateImageRenderer(1);
+		//Renderer2->SetImage("Boomb_Effect");
+		//Renderer2->SetTransform({ {100,200}, {135, 350} });
+		//Renderer2->SetImageCuttingTransform({ {0,0}, {135, 350} });
+		//Renderer2->CreateAnimation("Idle", "Boomb_Effect", 0, 6, 0.2f, true);
+		//Renderer2->ChangeAnimation("Idle");
+	}
 
+	
 	{
 		// 스프라이트 테스트이미지
 		//UImageRenderer* Renderer2 = CreateImageRenderer(1);
@@ -57,7 +67,7 @@ void APlay_Frame::BeginPlay()
 		Renderer2->SetImage("Phoenix Landing");
 		Renderer2->SetTransform({ {100,200}, {75, 200} });
 		Renderer2->SetImageCuttingTransform({ {0,0}, {70, 250} });
-		Renderer2->CreateAnimation("Idle", "Phoenix Landing", 0, 5, 0.2f, true);
+		Renderer2->CreateAnimation("Idle", "Phoenix Landing", 0, 5, 1.f, true);
 		Renderer2->ChangeAnimation("Idle");
 	}
 

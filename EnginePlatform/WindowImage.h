@@ -34,10 +34,10 @@ public:
 	UWindowImage();
 	~UWindowImage();
 
-	UWindowImage(const UWindowImage& _Other) = delete;
-	UWindowImage(UWindowImage&& _Other) noexcept = delete;
-	UWindowImage& operator=(const UWindowImage& _Other) = delete;
-	UWindowImage& operator=(UWindowImage&& _Other) noexcept = delete;
+	UWindowImage(const UWindowImage& _Other)							= delete;
+	UWindowImage(UWindowImage&& _Other) noexcept						= delete;
+	UWindowImage& operator=(const UWindowImage& _Other)					= delete;
+	UWindowImage& operator=(UWindowImage&& _Other) noexcept				= delete;
 
 	bool Load(UWindowImage* _Image);
 

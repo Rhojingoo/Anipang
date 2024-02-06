@@ -71,7 +71,7 @@ void UAnipangCore::BeginPlay()
 	CreateLevel<UPlayLevel>("Play");
 	CreateLevel<UEndingLevel>("Ending");
 
-	ChangeLevel("Play");
+	ChangeLevel("Title");
 }
 
 void UAnipangCore::Tick(float _DeltaTime)

@@ -162,12 +162,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ACursor_Pointe.h" />
+    <ClInclude Include="ACursor_Point.h" />
     <ClInclude Include="AnipangCore.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Animal_Block.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Block_Manager.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -183,6 +187,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Helper.h" />
+    <ClInclude Include="Monkey_Block.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Mouse_Block.h" />
     <ClInclude Include="Pig_Block.h" />
     <ClInclude Include="PlayLevel.h">
@@ -193,7 +201,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Rabit_Block.h" />
+    <ClInclude Include="Rabbit_Block.h" />
     <ClInclude Include="ScoreLevel.h">
       <SubType>
       </SubType>
@@ -207,14 +215,26 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Title_BackGround.h" />
+    <ClInclude Include="Title_Logo.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Title_Button.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ACursor_Pointe.cpp" />
+    <ClCompile Include="ACursor_Point.cpp" />
     <ClCompile Include="AnipangCore.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="Animal_Block.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Block_Manager.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -230,6 +250,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Helper.cpp" />
+    <ClCompile Include="Monkey_Block.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Mouse_Block.cpp" />
     <ClCompile Include="Pig_Block.cpp" />
     <ClCompile Include="PlayLevel.cpp">
@@ -240,7 +264,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Rabit_Block.cpp" />
+    <ClCompile Include="Rabbit_Block.cpp" />
     <ClCompile Include="ScoreLevel.cpp">
       <SubType>
       </SubType>
@@ -254,6 +278,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Title_BackGround.cpp" />
+    <ClCompile Include="Title_Logo.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Title_Button.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

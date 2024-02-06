@@ -12,9 +12,15 @@ public:
 	ATitle_BackGround& operator =(const ATitle_BackGround& _Other)			= delete;
 	ATitle_BackGround& operator =(ATitle_BackGround& _Other) noexcept		= delete;
 
+	bool Isfinish()
+	{
+		return FinalAnimation;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+	void AlphaSetting(float _DeltaTime);
 
 
 private:
@@ -24,6 +30,8 @@ private:
 	int AnimationFrame = 0;
 
 	float AlphaTime = 0.0f;
+	float CheckTime = 0.0f;
 	bool Dir = false;
+	bool FinalAnimation = false;
 };
 

@@ -49,7 +49,7 @@ void ATitle_BackGround::BeginPlay()
 		//Renderer->SetTransColor(Color8Bit::Magenta.ZeroAlphaColor());
 		Renderer->SetTransform({ {0,0}, {480, 800} });
 		Renderer->SetImageCuttingTransform({ {0,0}, {480, 800} });
-		Renderer->CreateAnimation("Idle", "Intro_BG", 0, 2, 1.f, false);
+		Renderer->CreateAnimation("Idle", "Intro_BG", 0, 2, 1.5f, false);
 		Renderer->ChangeAnimation("Idle");
 	}
 
@@ -57,6 +57,7 @@ void ATitle_BackGround::BeginPlay()
 		//  타이틀 오브젝트 애니메이션
 		//UImageRenderer* Renderer2 = CreateImageRenderer(1);
 		//Renderer2->SetImage("Intro_OBJ");	
+		//SetActorLocation({ 240, 400 });
 		//Renderer2->SetTransform({ {20,100}, {100, 105} });
 		//Renderer2->SetImageCuttingTransform({ {0,0}, {133, 139} });
 		//Renderer2->CreateAnimation("Idle", "Intro_OBJ", 0, 1, 0.1f, true);
@@ -64,24 +65,17 @@ void ATitle_BackGround::BeginPlay()
 		//Renderer2->ChangeAnimation("Idle");
 	}
 
-
 	{
 		// // 타이틀 오브젝트로고
 		//UImageRenderer* Renderer = CreateImageRenderer(2);
 		//Renderer->SetImage("Intro_Logo2.png");
+		//SetActorLocation({ 240, 400 });
 		////Renderer->SetTransColor(Color8Bit::Magenta.ZeroAlphaColor());
 		//Renderer->SetTransform({ {10,-185}, {400, 300} });
 		//Renderer->SetImageCuttingTransform({ {0,0}, {445, 356} });
 	}
 
-	{
-		// 타이틀 오브젝트로고
-		UImageRenderer* Renderer = CreateImageRenderer(1);
-		Renderer->SetImage("Intro_Logo3.png");
-		//Renderer->SetTransColor(Color8Bit::Magenta.ZeroAlphaColor());
-		Renderer->SetTransform({ {10,-185}, {350, 300} });
-		Renderer->SetImageCuttingTransform({ {0,0}, {750, 750} });
-	}
+
 #pragma endregion
 
 #pragma region 테스트 이미지
@@ -140,19 +134,32 @@ void ATitle_BackGround::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
-	//AlphaTime += _DeltaTime;
-	//if (1.0f <= AlphaTime)
-	//{
-	//	Dir = !Dir;
-	//	AlphaTime = 0.0f;
-	//}
+	AlphaSetting(_DeltaTime);
+}
 
-	//if (true == Dir)
-	//{
-	//	Renderer->SetAlpha(AlphaTime);
-	//}
-	//else
-	//{
-	//	Renderer->SetAlpha(1.0f - AlphaTime);
-	//}
+void ATitle_BackGround::AlphaSetting(float _DeltaTime)
+{
+	AlphaTime += _DeltaTime;
+	if (AlphaTime < 3.5)
+	{
+		CheckTime += _DeltaTime;
+		if (1.0f <= CheckTime)
+		{
+			Dir = !Dir;
+			CheckTime = 0.0f;
+		}
+		if (true == Dir)
+		{
+			Renderer->SetAlpha(CheckTime * 0.15f);
+		}
+		else
+		{
+			Renderer->SetAlpha(1.0f - CheckTime);
+		}
+	}
+	else
+	{
+		Renderer->SetAlpha(1.0f);
+		FinalAnimation = true;
+	}
 }

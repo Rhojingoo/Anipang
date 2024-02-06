@@ -2,7 +2,9 @@
 #include <EngineCore\EngineCore.h>
 #include "Title_BackGround.h"
 #include "Animal_Block.h"
-#include "ACursor_Pointe.h"
+#include "ACursor_Point.h"
+#include "Title_Logo.h"
+#include "Title_Button.h"
 
 UTitleLevel::UTitleLevel()
 {
@@ -16,14 +18,23 @@ void UTitleLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
 
-	SpawnActor<ATitle_BackGround>();
-	//SpawnActor<ATitle_Moon>();	
+	Title_BG = SpawnActor<ATitle_BackGround>();
 	SpawnActor<ACursor_Pointe>();
 }
 
 void UTitleLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
+
+	if (Title_BG->Isfinish() == true)
+	{
+		if (LogoMake == false)
+		{
+			SpawnActor<ATitle_Logo>();		
+			SpawnActor<ATitle_Button>();
+			LogoMake = true;
+		}
+	}
 
 	if (UEngineInput::IsDown('N'))
 	{

@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore\Level.h>
 
+class ATitle_BackGround;
 class UTitleLevel : public ULevel
 {
 public : 
@@ -19,5 +20,7 @@ protected:
 	void LevelEnd(ULevel* _Level) override;
 
 private:
+	ATitle_BackGround* Title_BG;
+	bool LogoMake = false;
 };
 

@@ -63,6 +63,12 @@
     <ClInclude Include="Title_Button.h">
       <Filter>Title_Level\Title_Level_Actor</Filter>
     </ClInclude>
+    <ClInclude Include="Title_LogoChick.h">
+      <Filter>Title_Level\Title_Level_Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Title_PointAnimation.h">
+      <Filter>Title_Level\Title_Level_Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnipangCore.cpp" />
@@ -125,6 +131,12 @@
       <Filter>Title_Level\Title_Level_Actor</Filter>
     </ClCompile>
     <ClCompile Include="Title_Button.cpp">
+      <Filter>Title_Level\Title_Level_Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Title_LogoChick.cpp">
+      <Filter>Title_Level\Title_Level_Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Title_PointAnimation.cpp">
       <Filter>Title_Level\Title_Level_Actor</Filter>
     </ClCompile>
   </ItemGroup>

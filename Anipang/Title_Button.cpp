@@ -11,13 +11,16 @@ ATitle_Button::~ATitle_Button()
 void ATitle_Button::BeginPlay()
 {
 	AActor::BeginPlay();
-	UImageRenderer* Renderer2 = CreateImageRenderer(1);
-	Renderer2->SetImage("Intro_OBJ");	
-	SetActorLocation({ 240, 400 });
-	Renderer2->SetTransform({ {20,100}, {100, 105} });
-	Renderer2->SetImageCuttingTransform({ {0,0}, {133, 139} });
-	Renderer2->CreateAnimation("Idle", "Intro_OBJ", 0, 1, 0.1f, true);
-	Renderer2->ChangeAnimation("Idle");
+
+	Renderer = CreateImageRenderer(6);
+	Renderer->SetImage("GameStart_UI.png");
+	SetActorLocation({ 200, 475 });
+	Renderer->SetTransform({ {50,50}, {250, 75} });
+	Renderer->SetImageCuttingTransform({ {0,0}, {350, 120} });
+
+
+
+
 }
 
 void ATitle_Button::Tick(float _DeltaTime)

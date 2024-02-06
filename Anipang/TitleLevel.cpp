@@ -5,6 +5,8 @@
 #include "ACursor_Point.h"
 #include "Title_Logo.h"
 #include "Title_Button.h"
+#include "Title_LogoChick.h"
+#include "Title_PointAnimation.h"
 
 UTitleLevel::UTitleLevel()
 {
@@ -31,6 +33,8 @@ void UTitleLevel::Tick(float _DeltaTime)
 		if (LogoMake == false)
 		{
 			SpawnActor<ATitle_Logo>();		
+			SpawnActor<ATitle_LogoChick>();			
+			SpawnActor<ATitle_PointAnimation>();
 			SpawnActor<ATitle_Button>();
 			LogoMake = true;
 		}

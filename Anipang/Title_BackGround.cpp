@@ -27,8 +27,7 @@ void ATitle_BackGround::BeginPlay()
 	//	Renderer2->SetTransform({ {100,200}, {84, 84} });
 	//	Renderer2->SetImageCuttingTransform({ {0,0}, {84, 84} });
 	//	Renderer2->CreateAnimation("Idle", "Topaz.png", 0, 19, 0.1f, true);
-	//	Renderer2->ChangeAnimation("Idle");
-	
+	//	Renderer2->ChangeAnimation("Idle");	
 #pragma endregion
 
 #pragma region anipang 

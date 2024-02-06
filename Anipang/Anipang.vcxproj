@@ -223,6 +223,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Title_LogoChick.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Title_PointAnimation.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ACursor_Point.cpp" />
@@ -283,6 +291,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Title_Button.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Title_LogoChick.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Title_PointAnimation.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -67,7 +67,7 @@ void APlay_Frame::BeginPlay()
 		Renderer2->SetImage("Phoenix Landing");
 		Renderer2->SetTransform({ {100,200}, {75, 200} });
 		Renderer2->SetImageCuttingTransform({ {0,0}, {70, 250} });
-		Renderer2->CreateAnimation("Idle", "Phoenix Landing", 0, 5, 1.f, true);
+		Renderer2->CreateAnimation("Idle", "Phoenix Landing", 0, 6, 0.1f, true);
 		Renderer2->ChangeAnimation("Idle");
 	}
 

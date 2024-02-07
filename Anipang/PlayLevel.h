@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore\Level.h>
 
+class ACursor;
 class UPlayLevel : public ULevel
 {
 public : 
@@ -18,6 +19,10 @@ protected:
 	void LevelStart(ULevel* _Level) override;
 	void LevelEnd(ULevel* _Level) override;
 
+	void OBJPOOLTEST();
+	void CreateBlock();
+
 private:
+	ACursor* Cursoor = nullptr;
 };
 

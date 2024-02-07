@@ -1,14 +1,14 @@
-#include "PadeIN_OUT.h"
+#include "FadeIN_OUT.h"
 
-APadeIN_OUT::APadeIN_OUT()
+AFadeIN_OUT::AFadeIN_OUT()
 {
 }
 
-APadeIN_OUT::~APadeIN_OUT()
+AFadeIN_OUT::~AFadeIN_OUT()
 {
 }
 
-void APadeIN_OUT::BeginPlay()
+void AFadeIN_OUT::BeginPlay()
 {
 	{
 		// 이미지 한장 랜더
@@ -20,7 +20,7 @@ void APadeIN_OUT::BeginPlay()
 	}
 }
 
-void APadeIN_OUT::Tick(float _DeltaTime)
+void AFadeIN_OUT::Tick(float _DeltaTime)
 {
 	
 	AlphaTime += _DeltaTime;

@@ -1,16 +1,16 @@
 #pragma once
 #include <EngineCore\Actor.h>
 
-class APadeIN_OUT : public AActor
+class AFadeIN_OUT : public AActor
 {
 public:
-	APadeIN_OUT();
-	~APadeIN_OUT();
+	AFadeIN_OUT();
+	~AFadeIN_OUT();
 
-	APadeIN_OUT(const APadeIN_OUT& _Other)						= delete;
-	APadeIN_OUT(APadeIN_OUT& _Other) noexcept					= delete;
-	APadeIN_OUT& operator =(const 	APadeIN_OUT& _Other)		= delete;
-	APadeIN_OUT& operator =(APadeIN_OUT& _Other)noexcept		= delete;
+	AFadeIN_OUT(const AFadeIN_OUT& _Other)						= delete;
+	AFadeIN_OUT(AFadeIN_OUT& _Other) noexcept					= delete;
+	AFadeIN_OUT& operator =(const 	AFadeIN_OUT& _Other)		= delete;
+	AFadeIN_OUT& operator =(AFadeIN_OUT& _Other)noexcept		= delete;
 
 
 protected:

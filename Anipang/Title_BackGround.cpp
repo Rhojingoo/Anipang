@@ -51,30 +51,6 @@ void ATitle_BackGround::BeginPlay()
 		Renderer->CreateAnimation("Idle", "Intro_BG", 0, 2, 1.5f, false);
 		Renderer->ChangeAnimation("Idle");
 	}
-
-	{
-		//  타이틀 오브젝트 애니메이션
-		//UImageRenderer* Renderer2 = CreateImageRenderer(1);
-		//Renderer2->SetImage("Intro_OBJ");	
-		//SetActorLocation({ 240, 400 });
-		//Renderer2->SetTransform({ {20,100}, {100, 105} });
-		//Renderer2->SetImageCuttingTransform({ {0,0}, {133, 139} });
-		//Renderer2->CreateAnimation("Idle", "Intro_OBJ", 0, 1, 0.1f, true);
-		////Renderer->CreateAnimation("Attack", "TestSpriteAni.png", 26, 32, 0.5f, true);
-		//Renderer2->ChangeAnimation("Idle");
-	}
-
-	{
-		// // 타이틀 오브젝트로고
-		//UImageRenderer* Renderer = CreateImageRenderer(2);
-		//Renderer->SetImage("Intro_Logo2.png");
-		//SetActorLocation({ 240, 400 });
-		////Renderer->SetTransColor(Color8Bit::Magenta.ZeroAlphaColor());
-		//Renderer->SetTransform({ {10,-185}, {400, 300} });
-		//Renderer->SetImageCuttingTransform({ {0,0}, {445, 356} });
-	}
-
-
 #pragma endregion
 
 #pragma region 테스트 이미지

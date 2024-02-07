@@ -27,8 +27,4 @@ void ATitle_Button::Tick(float _DeltaTime)
 	FVector Curpos = GetTransform().GetPosition();
 	Pos = RenderCurpos + Curpos;
 	Size = Renderer->GetTransform().GetScale();
-
-
-
-	int a = 0;
 }

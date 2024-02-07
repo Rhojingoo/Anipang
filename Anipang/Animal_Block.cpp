@@ -17,9 +17,6 @@ AAnimal_Block::~AAnimal_Block()
 void AAnimal_Block::BeginPlay()
 {
 	AActor::BeginPlay();
-
-
-
 	{
 		// 이미지 한장 랜더
 		//Renderer = CreateImageRenderer(0);
@@ -54,6 +51,8 @@ void AAnimal_Block::BeginPlay()
 void AAnimal_Block::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
+
+	PickingCheck();
 
 #pragma region 테스트 코드
 	//if (true == UEngineInput::IsPress('A'))
@@ -91,4 +90,27 @@ void AAnimal_Block::Tick(float _DeltaTime)
 
 
 #pragma endregion
+}
+
+void AAnimal_Block::PickingCheck()
+{
+	FVector Curpos = Cursor->GetPos();
+	
+	float MinX = Pos.X - Size.X / 2;
+	float MinY = Pos.Y - Size.Y / 2;
+	float MaxX = Pos.X + Size.X / 2;
+	float MaxY = Pos.Y + Size.Y / 2;
+
+	if (Curpos.X >= MinX && Curpos.X <= MaxX && Curpos.Y >= MinY && Curpos.Y <= MaxY)
+	{
+		int a = 0;
+		if (true == UEngineInput::IsDown(VK_LBUTTON))
+		{
+			BlockClick = !BlockClick;
+		}
+	}
+	else
+	{
+		int a = 0;
+	}
 }

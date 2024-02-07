@@ -6,6 +6,7 @@
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
 #include <EngineCore\EngineResourcesManager.h>
+#include "Block_Manager.h"
 
 UAnipangCore::UAnipangCore()
 : UEngineCore()
@@ -72,6 +73,8 @@ void UAnipangCore::BeginPlay()
 	CreateLevel<UEndingLevel>("Ending");
 
 	ChangeLevel("Title");
+	//Block_Manager::OBJPOOL = &Block_Manager::GetInstance();
+
 }
 
 void UAnipangCore::Tick(float _DeltaTime)

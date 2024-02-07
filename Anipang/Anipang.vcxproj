@@ -162,7 +162,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ACursor_Point.h" />
+    <ClInclude Include="Cursor.h" />
     <ClInclude Include="AnipangCore.h">
       <SubType>
       </SubType>
@@ -192,7 +192,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Mouse_Block.h" />
-    <ClInclude Include="PadeIN_OUT.h">
+    <ClInclude Include="FadeIN_OUT.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -241,7 +241,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ACursor_Point.cpp" />
+    <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="AnipangCore.cpp">
       <SubType>
       </SubType>
@@ -271,7 +271,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Mouse_Block.cpp" />
-    <ClCompile Include="PadeIN_OUT.cpp">
+    <ClCompile Include="FadeIN_OUT.cpp">
       <SubType>
       </SubType>
     </ClCompile>

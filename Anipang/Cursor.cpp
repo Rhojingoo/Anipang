@@ -1,17 +1,17 @@
-#include "ACursor_Point.h"
+#include "Cursor.h"
 #include <EnginePlatform\EngineInput.h>
 #include <EngineBase\EngineDebug.h>
 #include "Helper.h"
 
-ACursor_Pointe::ACursor_Pointe()
+ACursor::ACursor()
 {
 }
 
-ACursor_Pointe::~ACursor_Pointe()
+ACursor::~ACursor()
 {
 }
 
-void ACursor_Pointe::BeginPlay()
+void ACursor::BeginPlay()
 {
 	AActor::BeginPlay();
 	{
@@ -24,7 +24,7 @@ void ACursor_Pointe::BeginPlay()
 	}
 }
 
-void ACursor_Pointe::Tick(float _DeltaTime)
+void ACursor::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 

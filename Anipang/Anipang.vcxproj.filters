@@ -2,203 +2,206 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Animal_Block.h">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
     <ClInclude Include="TestBullet.h">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Rabbit_Block.h">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Cat_Block.h">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Checkin_Block.h">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Dog_Block.h">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Mouse_Block.h">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Pig_Block.h">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
     <ClInclude Include="PlayLevel.h">
-      <Filter>Play_Level</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level</Filter>
     </ClInclude>
     <ClInclude Include="TitleLevel.h">
-      <Filter>Title_Level</Filter>
+      <Filter>LEVEL &amp; ACTOR\Title_Level</Filter>
     </ClInclude>
     <ClInclude Include="ScoreLevel.h">
-      <Filter>Score_Level</Filter>
+      <Filter>LEVEL &amp; ACTOR\Score_Level</Filter>
     </ClInclude>
     <ClInclude Include="Title_BackGround.h">
-      <Filter>Title_Level\Title_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClInclude>
     <ClInclude Include="Helper.h">
       <Filter>Anipang_Helper</Filter>
     </ClInclude>
     <ClInclude Include="EndingLevel.h">
-      <Filter>Ending_Level</Filter>
+      <Filter>LEVEL &amp; ACTOR\Ending_Level</Filter>
     </ClInclude>
     <ClInclude Include="Ending_BackGround.h">
-      <Filter>Ending_Level\Ending_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Ending_Level\Ending_Level_Actor</Filter>
     </ClInclude>
     <ClInclude Include="Play_Frame.h">
-      <Filter>Play_Level\Play_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor</Filter>
     </ClInclude>
     <ClInclude Include="Monkey_Block.h">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Block_Manager.h">
-      <Filter>Play_Level\Play_Level_Actor\Block_Manager</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_Manager</Filter>
     </ClInclude>
     <ClInclude Include="Title_Logo.h">
-      <Filter>Title_Level\Title_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClInclude>
     <ClInclude Include="Title_Button.h">
-      <Filter>Title_Level\Title_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClInclude>
     <ClInclude Include="Title_LogoChick.h">
-      <Filter>Title_Level\Title_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClInclude>
     <ClInclude Include="Title_PointAnimation.h">
-      <Filter>Title_Level\Title_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClInclude>
     <ClInclude Include="PickingManager.h">
       <Filter>Anipang_Helper</Filter>
     </ClInclude>
-    <ClInclude Include="ACursor_Point.h">
+    <ClInclude Include="Cursor.h">
       <Filter>Public</Filter>
     </ClInclude>
     <ClInclude Include="AnipangCore.h">
-      <Filter>★Main</Filter>
+      <Filter>MAIN</Filter>
     </ClInclude>
-    <ClInclude Include="PadeIN_OUT.h">
+    <ClInclude Include="FadeIN_OUT.h">
       <Filter>Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animal_Block.cpp">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
     <ClCompile Include="TestBullet.cpp">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Cat_Block.cpp">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Checkin_Block.cpp">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Dog_Block.cpp">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Mouse_Block.cpp">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Pig_Block.cpp">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Rabbit_Block.cpp">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
-      <Filter>Play_Level</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level</Filter>
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
-      <Filter>Title_Level</Filter>
+      <Filter>LEVEL &amp; ACTOR\Title_Level</Filter>
     </ClCompile>
     <ClCompile Include="ScoreLevel.cpp">
-      <Filter>Score_Level</Filter>
+      <Filter>LEVEL &amp; ACTOR\Score_Level</Filter>
     </ClCompile>
     <ClCompile Include="Title_BackGround.cpp">
-      <Filter>Title_Level\Title_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClCompile>
     <ClCompile Include="Helper.cpp">
       <Filter>Anipang_Helper</Filter>
     </ClCompile>
     <ClCompile Include="EndingLevel.cpp">
-      <Filter>Ending_Level</Filter>
+      <Filter>LEVEL &amp; ACTOR\Ending_Level</Filter>
     </ClCompile>
     <ClCompile Include="Ending_BackGround.cpp">
-      <Filter>Ending_Level\Ending_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Ending_Level\Ending_Level_Actor</Filter>
     </ClCompile>
     <ClCompile Include="Play_Frame.cpp">
-      <Filter>Play_Level\Play_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor</Filter>
     </ClCompile>
     <ClCompile Include="Monkey_Block.cpp">
-      <Filter>Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Block_Manager.cpp">
-      <Filter>Play_Level\Play_Level_Actor\Block_Manager</Filter>
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_Manager</Filter>
     </ClCompile>
     <ClCompile Include="Title_Logo.cpp">
-      <Filter>Title_Level\Title_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClCompile>
     <ClCompile Include="Title_Button.cpp">
-      <Filter>Title_Level\Title_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClCompile>
     <ClCompile Include="Title_LogoChick.cpp">
-      <Filter>Title_Level\Title_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClCompile>
     <ClCompile Include="Title_PointAnimation.cpp">
-      <Filter>Title_Level\Title_Level_Actor</Filter>
+      <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClCompile>
     <ClCompile Include="PickingManager.cpp">
       <Filter>Anipang_Helper</Filter>
     </ClCompile>
-    <ClCompile Include="ACursor_Point.cpp">
+    <ClCompile Include="Cursor.cpp">
       <Filter>Public</Filter>
     </ClCompile>
     <ClCompile Include="AnipangCore.cpp">
-      <Filter>★Main</Filter>
+      <Filter>MAIN</Filter>
     </ClCompile>
-    <ClCompile Include="PadeIN_OUT.cpp">
+    <ClCompile Include="FadeIN_OUT.cpp">
       <Filter>Public</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Play_Level">
-      <UniqueIdentifier>{d63a53b7-c48e-4588-a145-1f3f8ec7d325}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Play_Level\Play_Level_Actor">
-      <UniqueIdentifier>{fc2c1506-e883-49b0-aad8-480b1faa2a6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Play_Level\Play_Level_Actor\Block_OBJ">
-      <UniqueIdentifier>{78f6310a-740d-4374-b9c6-d1a18258d3f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Score_Level">
-      <UniqueIdentifier>{7bfe1ff5-61d0-4080-b3e0-e7ae2c708e0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Score_Level\Scor_Level_Actor">
-      <UniqueIdentifier>{4e097af5-4e51-4786-8be8-a0e23eb80535}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Title_Level">
-      <UniqueIdentifier>{b1148e2d-e2c1-46a9-b341-105d497c94c2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Title_Level\Title_Level_Actor">
-      <UniqueIdentifier>{6f5660cc-d6db-4d0d-a2a2-625f5585a12c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Anipang_Helper">
       <UniqueIdentifier>{cb5abf74-7e84-41fd-9c3d-67e13dd6215f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Ending_Level">
-      <UniqueIdentifier>{b32ebf5c-4359-471f-8be4-440c63529f17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Ending_Level\Ending_Level_Actor">
-      <UniqueIdentifier>{4eb29dce-6c2e-4501-a439-ffe11cce6ea1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Play_Level\Play_Level_Actor\Block_Manager">
-      <UniqueIdentifier>{c18fcdfb-c222-4977-b884-95eca860f55b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Public">
       <UniqueIdentifier>{16e68bb2-4f4b-4358-b2c7-41d26e4a43ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="★Main">
+    <Filter Include="MAIN">
       <UniqueIdentifier>{48a3f161-aeab-4cb9-9c37-667306c90c5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR">
+      <UniqueIdentifier>{00d95d6e-eedd-4081-8f1e-56b9a3dd0b84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level">
+      <UniqueIdentifier>{d63a53b7-c48e-4588-a145-1f3f8ec7d325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor">
+      <UniqueIdentifier>{fc2c1506-e883-49b0-aad8-480b1faa2a6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ">
+      <UniqueIdentifier>{78f6310a-740d-4374-b9c6-d1a18258d3f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_Manager">
+      <UniqueIdentifier>{c18fcdfb-c222-4977-b884-95eca860f55b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Score_Level">
+      <UniqueIdentifier>{7bfe1ff5-61d0-4080-b3e0-e7ae2c708e0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Score_Level\Scor_Level_Actor">
+      <UniqueIdentifier>{4e097af5-4e51-4786-8be8-a0e23eb80535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Title_Level">
+      <UniqueIdentifier>{b1148e2d-e2c1-46a9-b341-105d497c94c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor">
+      <UniqueIdentifier>{6f5660cc-d6db-4d0d-a2a2-625f5585a12c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Ending_Level">
+      <UniqueIdentifier>{b32ebf5c-4359-471f-8be4-440c63529f17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Ending_Level\Ending_Level_Actor">
+      <UniqueIdentifier>{4eb29dce-6c2e-4501-a439-ffe11cce6ea1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,8 +1,7 @@
 #include "TitleLevel.h"
 #include <EngineCore\EngineCore.h>
 #include "Title_BackGround.h"
-#include "Animal_Block.h"
-#include "ACursor_Point.h"
+#include "Cursor.h"
 #include "Title_Logo.h"
 #include "Title_Button.h"
 #include "Title_LogoChick.h"
@@ -22,7 +21,7 @@ void UTitleLevel::BeginPlay()
 	ULevel::BeginPlay();
 
 	Title_BG = SpawnActor<ATitle_BackGround>();
-	Cursoor = SpawnActor<ACursor_Pointe>();
+	Cursor = SpawnActor<ACursor>();
 }
 
 void UTitleLevel::Tick(float _DeltaTime)
@@ -45,7 +44,7 @@ void UTitleLevel::Tick(float _DeltaTime)
 	if (LogoMake == true)
 	{
 		
-		FVector Curpos = Cursoor->GetPos();
+		FVector Curpos = Cursor->GetPos();
 		UIimage->GetSize();
 		float MinX = UIimage->GetPos().X - UIimage->GetSize().X/2;
 		float MinY = UIimage->GetPos().Y - UIimage->GetSize().Y/2;
@@ -54,11 +53,11 @@ void UTitleLevel::Tick(float _DeltaTime)
 
 		if (Curpos.X >= MinX && Curpos.X <= MaxX&& Curpos.Y >= MinY && Curpos.Y <= MaxY)
 		{
-			Cursoor->UIEnter(true);
+			Cursor->UIEnter(true);
 		}	
 		else
 		{
-			Cursoor->UIEnter(false);
+			Cursor->UIEnter(false);
 		}
 	}
 

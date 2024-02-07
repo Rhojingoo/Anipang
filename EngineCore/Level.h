@@ -36,6 +36,14 @@ public :
 		return NewActor;
 	}
 
+	//template<typename ActorType>
+	//ActorType* SpawnActor(ActorType* _Ac, int _Order = 0)
+	//{
+	//	ActorType* NewActor = _Ac;
+	//	ActorInit(NewActor);
+	//	AllActor[_Order].push_back(NewActor);
+	//	return NewActor;
+	//}
 
 protected:
 

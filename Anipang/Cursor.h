@@ -1,16 +1,16 @@
 #pragma once
 #include <EngineCore\Actor.h>
 
-class ACursor_Pointe : public AActor
+class ACursor : public AActor
 {
 public:
-	ACursor_Pointe();
-	~ACursor_Pointe();
+	ACursor();
+	~ACursor();
 
-	ACursor_Pointe(const ACursor_Pointe& _Other)							= delete;
-	ACursor_Pointe(ACursor_Pointe& _Other) noexcept							= delete;
-	ACursor_Pointe& operator =(const ACursor_Pointe& _Other)				= delete;
-	ACursor_Pointe& operator =(ACursor_Pointe& _Other) noexcept				= delete;
+	ACursor(const ACursor& _Other)							= delete;
+	ACursor(ACursor& _Other) noexcept							= delete;
+	ACursor& operator =(const ACursor& _Other)				= delete;
+	ACursor& operator =(ACursor& _Other) noexcept				= delete;
 
 	FVector GetSize()
 	{

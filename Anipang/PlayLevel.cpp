@@ -85,7 +85,7 @@ void UPlayLevel::OBJPOOLTEST()
                 NewBlock->SetCursor(Cursoor);
                 NewBlock->SetActive(true);
                 // 동물 블록 스폰
-                SpawnActor<AAnimal_Block>(NewBlock);
+                //SpawnActor<AAnimal_Block>(NewBlock);
             }
         }
     }

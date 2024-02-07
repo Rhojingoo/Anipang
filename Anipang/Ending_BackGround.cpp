@@ -15,8 +15,8 @@ void AEnding_BackGround::BeginPlay()
 		// 타이틀 배경
 		Renderer = CreateImageRenderer(0);
 		Renderer->SetImage("Ending_Level.png");
-		SetActorLocation({ 240, 400 });
-		Renderer->SetTransform({ {0,0}, {480, 800} });
+		SetActorLocation({ 240, 370 });
+		Renderer->SetTransform({ {0,0}, {480, 780} });
 		Renderer->SetImageCuttingTransform({ {0,0}, {1399, 812} });
 	}
 }

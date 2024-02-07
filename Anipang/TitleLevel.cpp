@@ -8,6 +8,7 @@
 #include "Title_LogoChick.h"
 #include "Title_PointAnimation.h"
 
+
 UTitleLevel::UTitleLevel()
 {
 }
@@ -35,7 +36,7 @@ void UTitleLevel::Tick(float _DeltaTime)
 			SpawnActor<ATitle_Logo>();		
 			SpawnActor<ATitle_LogoChick>();			
 			SpawnActor<ATitle_PointAnimation>();
-			UIimage = SpawnActor<ATitle_Button>();
+			UIimage = SpawnActor<ATitle_Button>();			
 			LogoMake = true;
 		}
 	}
@@ -73,5 +74,5 @@ void UTitleLevel::LevelStart(ULevel* _Level)
 
 void UTitleLevel::LevelEnd(ULevel* _Level)
 {
-	int a = 0;
+	
 }

@@ -192,6 +192,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Mouse_Block.h" />
+    <ClInclude Include="PadeIN_OUT.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PickingManager.h">
       <SubType>
       </SubType>
@@ -267,6 +271,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Mouse_Block.cpp" />
+    <ClCompile Include="PadeIN_OUT.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PickingManager.cpp">
       <SubType>
       </SubType>

@@ -3,7 +3,6 @@
 #include <EngineBase\EngineDebug.h>
 #include "Helper.h"
 
-
 ACursor_Pointe::ACursor_Pointe()
 {
 }
@@ -20,14 +19,26 @@ void ACursor_Pointe::BeginPlay()
 		Renderer = CreateImageRenderer(100);
 		Renderer->SetImage("Cursor.png");
 		SetActorLocation({ 50, 50 });
-		Renderer->SetTransform({ {0,0}, {50, 50} });
+		Renderer->SetTransform({ {15,20}, {50, 50} });
 		Renderer->SetImageCuttingTransform({ {0,0}, {213, 216} });
 	}
 }
 
 void ACursor_Pointe::Tick(float _DeltaTime)
 {
+	AActor::Tick(_DeltaTime);
+
 	UEngineDebug::OutPutDebugText(UHelper::GetMousePos().ToString());
 	SetActorLocation(UHelper::GetMousePos());
-	AActor::Tick(_DeltaTime);
+	Pos = GetTransform().GetPosition();
+
+	if (EnterUI == true)
+	{
+		if (true == UEngineInput::IsDown(VK_LBUTTON))
+		{
+			GEngine->ChangeLevel("Play");
+		}
+	}
+
+	int a = 0;
 }

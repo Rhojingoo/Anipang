@@ -21,7 +21,7 @@ void UTitleLevel::BeginPlay()
 	ULevel::BeginPlay();
 
 	Title_BG = SpawnActor<ATitle_BackGround>();
-	SpawnActor<ACursor_Pointe>();
+	Cursoor = SpawnActor<ACursor_Pointe>();
 }
 
 void UTitleLevel::Tick(float _DeltaTime)
@@ -35,8 +35,29 @@ void UTitleLevel::Tick(float _DeltaTime)
 			SpawnActor<ATitle_Logo>();		
 			SpawnActor<ATitle_LogoChick>();			
 			SpawnActor<ATitle_PointAnimation>();
-			SpawnActor<ATitle_Button>();
+			UIimage = SpawnActor<ATitle_Button>();
 			LogoMake = true;
+		}
+	}
+
+
+	if (LogoMake == true)
+	{
+		
+		FVector Curpos = Cursoor->GetPos();
+		UIimage->GetSize();
+		float MinX = UIimage->GetPos().X - UIimage->GetSize().X/2;
+		float MinY = UIimage->GetPos().Y - UIimage->GetSize().Y/2;
+		float MaxX = UIimage->GetPos().X + UIimage->GetSize().X/2;
+		float MaxY = UIimage->GetPos().Y + UIimage->GetSize().Y/2;
+
+		if (Curpos.X >= MinX && Curpos.X <= MaxX&& Curpos.Y >= MinY && Curpos.Y <= MaxY)
+		{
+			Cursoor->UIEnter(true);
+		}	
+		else
+		{
+			Cursoor->UIEnter(false);
 		}
 	}
 

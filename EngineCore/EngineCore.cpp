@@ -49,6 +49,13 @@ void UEngineCore::CoreTick()
 		DeltaTime = FrameTime;
 	}
 
+	if (1.0f / 60.0f <= DeltaTime)
+	{
+		DeltaTime = 1.0f / 60.0f;
+	}
+
+	UEngineInput::KeyCheckTick(DeltaTime);
+
 	if (nullptr != NextLevel)
 	{
 		// 최초에는 현재 레벨이 존재하지 않을 것이다.
@@ -70,7 +77,7 @@ void UEngineCore::CoreTick()
 		MsgBoxAssert("엔진을 시작할 레벨이 지정되지 않았습니다 치명적인 오류입니다");
 	}
 
-	UEngineInput::KeyCheckTick(DeltaTime);
+
 	CurLevel->Tick(DeltaTime);
 	CurLevel->LevelTick(DeltaTime);
 	MainWindow.ScreenClear();
@@ -132,10 +139,11 @@ void UEngineCore::ChangeLevel(std::string_view _Name)
 	{
 		MsgBoxAssert(std::string(_Name) + "라는 존재하지 않는 레벨로 체인지 하려고 했습니다");
 	}
-	CurLevel = AllLevel[UpperName];
+	NextLevel = AllLevel[UpperName];
 }
 
-void UEngineCore::LevelInit(ULevel* _Level)
+void UEngineCore::LevelInit(ULevel* _Level, std::string_view _Name)
 {
+	_Level->SetName(_Name);
 	_Level->BeginPlay();
 }

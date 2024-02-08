@@ -4,6 +4,14 @@
 #include "FadeIN_OUT.h"
 #include "Play_Frame.h"
 #include "Cat_Block.h"
+#include "Checkin_Block.h"
+#include "Dog_Block.h"
+#include "Mouse_Block.h"
+#include "Monkey_Block.h"
+#include "Pig_Block.h"
+#include "Rabbit_Block.h"
+#include "Helper.h"
+
 
 #include "Block_Manager.h"
 
@@ -37,7 +45,6 @@ void UPlayLevel::LevelStart(ULevel* _Level)
     SpawnActor<AFadeIN_OUT>();
     //OBJPOOLTEST();
     CreateBlock();
-    
 
 }
 
@@ -103,12 +110,43 @@ void UPlayLevel::CreateBlock()
         for (int col = 0; col < GridSize; ++col)
         {
             // 동물 블록 생성
-            AAnimal_Block* NewBlock = SpawnActor<ACat_Block>();
+            int random = 0;
+            random = UHelper::Random(0,6);     
+            AAnimal_Block* NewBlock = nullptr;
+            if (random == 0)
+            {
+                NewBlock = SpawnActor<ACat_Block>();
+            }
+            else if (random == 1)
+            {
+                NewBlock = SpawnActor<ACheckin_Block>();
+            }
+            else if (random == 2)
+            {
+               NewBlock = SpawnActor<ADog_Block>();
+            }
+            else if (random == 3)
+            {
+                NewBlock = SpawnActor<AMonkey_Block>();
+            }
+            else if (random == 4)
+            {
+                NewBlock = SpawnActor<AMouse_Block>();
+            }
+            else if (random == 5)
+            {
+                NewBlock = SpawnActor<APig_Block>();
+            }
+            else if (random == 6)
+            {
+                NewBlock = SpawnActor<ARabbit_Block>();
+            }          
+
             FVector BlockLocation;     // 동물 블록 위치 설정
             BlockLocation.X = StartLocation.X + (CellSize * col);  // 시작 위치에서 CellSize만큼 이동
             BlockLocation.Y = StartLocation.Y + (CellSize * row);
             NewBlock->SetActorLocation(BlockLocation);
-            NewBlock->SetCursor(Cursoor);                          
+            NewBlock->SetCursor(Cursoor);
         }
     }
 }

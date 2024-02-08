@@ -11,8 +11,8 @@ ARabbit_Block::~ARabbit_Block()
 
 void ARabbit_Block::BeginPlay()
 {
-	AActor::BeginPlay();
-	UImageRenderer* Renderer = CreateImageRenderer(1);
+	AAnimal_Block::BeginPlay();
+	Renderer = CreateImageRenderer(1);
 	Renderer->SetImage("Rabbit");
 	Renderer->SetTransform({ {0,0}, {75, 75} });
 	Renderer->SetImageCuttingTransform({ {0,0}, {133, 139} });
@@ -24,7 +24,7 @@ void ARabbit_Block::BeginPlay()
 
 void ARabbit_Block::Tick(float _DeltaTime)
 {
-	AActor::Tick(_DeltaTime);
+	AAnimal_Block::Tick(_DeltaTime);
 
 	FVector RenderCurpos = Renderer->GetTransform().GetPosition();
 	FVector Curpos = GetTransform().GetPosition();

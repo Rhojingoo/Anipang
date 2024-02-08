@@ -10,8 +10,8 @@ AMouse_Block::~AMouse_Block()
 
 void AMouse_Block::BeginPlay()
 {
-	AActor::BeginPlay();
-	UImageRenderer* Renderer = CreateImageRenderer(1);
+	AAnimal_Block::BeginPlay();
+	Renderer = CreateImageRenderer(1);
 	Renderer->SetImage("Mouse");
 	Renderer->SetTransform({ {0,0}, {75, 75} });
 	Renderer->SetImageCuttingTransform({ {0,0}, {133, 139} });
@@ -23,7 +23,7 @@ void AMouse_Block::BeginPlay()
 
 void AMouse_Block::Tick(float _DeltaTime)
 {
-	AActor::Tick(_DeltaTime);
+	AAnimal_Block::Tick(_DeltaTime);
 
 	FVector RenderCurpos = Renderer->GetTransform().GetPosition();
 	FVector Curpos = GetTransform().GetPosition();

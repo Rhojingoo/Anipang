@@ -6,6 +6,12 @@
 #include <vector>
 #include <list>
 
+bool AAnimal_Block::FirstClick = false;
+bool AAnimal_Block::SecondClick = false;
+bool AAnimal_Block::SwapREADY = false;
+bool AAnimal_Block::ClickChange = false;
+bool AAnimal_Block::SwapChange = false;
+
 AAnimal_Block::AAnimal_Block()
 {
 }
@@ -106,7 +112,42 @@ void AAnimal_Block::PickingCheck()
 		int a = 0;
 		if (true == UEngineInput::IsDown(VK_LBUTTON))
 		{
-			BlockClick = !BlockClick;
+			if (FirstClick == false)
+			{
+				if (FirstPick == false && SecondPick == false)
+				{
+					BlockClick = true;
+					FirstClick = true;
+					FirstPick = true;
+				}
+			}
+			else if (SecondClick == false)
+			{
+				if (FirstPick == false && SecondPick == false)
+				{
+					BlockClick = true;
+					SecondClick = true;
+					SecondPick = true;
+				}
+			}
+			else if (FirstClick == true)
+			{
+				if (FirstPick == true && BlockClick == true)
+				{
+					BlockClick = false;
+					FirstClick = false;
+					FirstPick = false;
+				}
+			}
+			//else if (SecondClick == true)
+			//{
+			//	if (SecondPick == true && BlockClick == true)
+			//	{
+			//		BlockClick = false;
+			//		SecondClick = false;
+			//		SecondPick = false;
+			//	}
+			//}
 		}
 	}
 	else

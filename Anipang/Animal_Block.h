@@ -6,6 +6,8 @@
 class AAnimal_Block : public AActor
 {
 public : 
+
+
 	enum class Block_Status
 	{
 		Idle, 
@@ -24,6 +26,32 @@ public :
 	AAnimal_Block& operator =(AAnimal_Block& _Other) noexcept				= delete;
 
 	void SetCursor(ACursor* _Cursor) { Cursor = _Cursor; }
+	void SetRow(int _Row) { Row = _Row; }
+	void SetColumn(int _Column) { Column = _Column; }
+
+	static bool GetFirstClick() { return FirstClick; }
+	static bool GetSecondClick() { return SecondClick; }
+	bool GetFirstPick() { return FirstPick; }
+	bool GetSecondPick() { return SecondPick; }
+	static bool SwapREADY;
+	static bool ClickChange; 
+	static bool SwapChange; 
+
+	void SetBlockstate(bool _Blockstatus, int _set)
+	{
+		BlockClick = _Blockstatus;
+		if (_set == 1)
+		{
+			FirstClick = _Blockstatus;
+			FirstPick = _Blockstatus;
+		}
+		else if (_set == 2)
+		{
+			SecondClick = _Blockstatus;
+			SecondPick = _Blockstatus;
+		}
+	}
+	
 
 protected:
 	UImageRenderer* Renderer = nullptr;
@@ -33,12 +61,20 @@ protected:
 	bool ClickCheck = false;
 	Block_Status Blockstatus = Block_Status::Idle;
 
+	static bool FirstClick;
+	static bool SecondClick;
+	int Row = 0;
+	int Column = 0;
+	bool FirstPick = false;
+	bool SecondPick = false;
+
+
+
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
 	ACursor* Cursor = nullptr;
-
 	void PickingCheck();
 };
 

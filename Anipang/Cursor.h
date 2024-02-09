@@ -7,9 +7,9 @@ public:
 	ACursor();
 	~ACursor();
 
-	ACursor(const ACursor& _Other)							= delete;
+	ACursor(const ACursor& _Other)								= delete;
 	ACursor(ACursor& _Other) noexcept							= delete;
-	ACursor& operator =(const ACursor& _Other)				= delete;
+	ACursor& operator =(const ACursor& _Other)					= delete;
 	ACursor& operator =(ACursor& _Other) noexcept				= delete;
 
 	FVector GetSize()

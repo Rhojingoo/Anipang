@@ -38,8 +38,10 @@ void ACat_Block::Tick(float _DeltaTime)
 		{
 			Renderer->ChangeAnimation("Click");
 			Blockstatus = Block_Status::Click;
+			int RenderNumber = 2;
+			Renderer->SetOrder(RenderNumber);
 			return;			
-		}	
+		}
 	}
 		break;
 	case AAnimal_Block::Block_Status::Click:
@@ -48,6 +50,8 @@ void ACat_Block::Tick(float _DeltaTime)
 		{
 			Renderer->ChangeAnimation("Idle");
 			Blockstatus = Block_Status::Idle;
+			int RenderNumber = 1;
+			Renderer->SetOrder(RenderNumber);
 			return;
 		}
 	}

@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore\Level.h>
 
+class AAnimal_Block;
 class ACursor;
 class UPlayLevel : public ULevel
 {
@@ -24,5 +25,11 @@ protected:
 
 private:
 	ACursor* Cursoor = nullptr;
+	AAnimal_Block* Blocks[7][7];
+	AAnimal_Block* click_block;
+	AAnimal_Block* swap_block;
+
+
+
 };
 

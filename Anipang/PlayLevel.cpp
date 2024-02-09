@@ -76,6 +76,7 @@ void UPlayLevel::Tick(float _DeltaTime)
             }
             else
             {
+                click_block->SetActorLocation({ TempSwap });
                 AAnimal_Block::ClickChange = true;
             }
 
@@ -85,6 +86,7 @@ void UPlayLevel::Tick(float _DeltaTime)
             }
             else
             {
+                swap_block->SetActorLocation({ TempClick });
                 AAnimal_Block::SwapChange = true;
             }
 

@@ -6,7 +6,11 @@
 class AAnimal_Block : public AActor
 {
 public : 
-
+	struct int2
+	{
+		int Row;
+		int Column;
+	};
 
 	enum class Block_Status
 	{
@@ -26,8 +30,9 @@ public :
 	AAnimal_Block& operator =(AAnimal_Block& _Other) noexcept				= delete;
 
 	void SetCursor(ACursor* _Cursor) { Cursor = _Cursor; }
-	void SetRow(int _Row) { Row = _Row; }
-	void SetColumn(int _Column) { Column = _Column; }
+	void SetRow(int _Row) { BlockLocation.Row = _Row; }
+	void SetColumn(int _Column) { BlockLocation.Column = _Column; }
+	int2 GetBlockLocation() { return BlockLocation; }
 
 	static bool GetFirstClick() { return FirstClick; }
 	static bool GetSecondClick() { return SecondClick; }
@@ -36,6 +41,8 @@ public :
 	static bool SwapREADY;
 	static bool ClickChange; 
 	static bool SwapChange; 
+
+
 
 	void SetBlockstate(bool _Blockstatus, int _set)
 	{
@@ -51,7 +58,7 @@ public :
 			SecondPick = _Blockstatus;
 		}
 	}
-	
+
 
 protected:
 	UImageRenderer* Renderer = nullptr;
@@ -63,12 +70,9 @@ protected:
 
 	static bool FirstClick;
 	static bool SecondClick;
-	int Row = 0;
-	int Column = 0;
+	int2 BlockLocation = {0,0};
 	bool FirstPick = false;
 	bool SecondPick = false;
-
-
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

@@ -37,158 +37,7 @@ void UPlayLevel::Tick(float _DeltaTime)
 
     if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
     {
-       static FVector Clickpos;
-       static FVector Swappos;
-       static FVector TempClick;
-       static FVector TempSwap;
-
-        if (AAnimal_Block::SwapREADY == false)
-        {
-            const int MapSize = 7;
-            for (int row = 0; row < MapSize; row++)
-            {
-                for (int col = 0; col < MapSize; col++)
-                {
-                    if (Blocks[col][row]->GetFirstPick() == true)
-                    {
-                        click_block = Blocks[col][row];
-                        Clickpos = click_block->GetActorLocation();                        
-                    }
-
-                    if (Blocks[col][row]->GetSecondPick() == true)
-                    {
-                        swap_block = Blocks[col][row];
-                        Swappos = swap_block->GetActorLocation();                        
-                    }
-                }               
-            }
-            TempClick = Clickpos;
-            TempSwap = Swappos;
-            AAnimal_Block::SwapREADY = true;
-        }
-        else
-        {
-            Clickpos = click_block->GetActorLocation();
-            Swappos = swap_block->GetActorLocation();
-            
-            int clickRow =  click_block->GetBlockLocation().Row;
-            int clickCol = click_block->GetBlockLocation().Column;
-            int swapkRow = swap_block->GetBlockLocation().Row;
-            int swapCol = swap_block->GetBlockLocation().Column;
-
-      
-            if (clickRow > swapkRow)
-            {
-                if (Clickpos.Y >= TempSwap.Y)
-                {
-                    click_block->AddActorLocation({ FVector::Up * 150.0f * _DeltaTime });
-                }
-                else
-                {
-                    click_block->SetActorLocation({ TempSwap });
-                    AAnimal_Block::ClickChange = true;
-                }
-
-                if (Swappos.Y <= TempClick.Y)
-                {
-                    swap_block->AddActorLocation(FVector::Down * 150.0f * _DeltaTime);
-                }
-                else
-                {
-                    swap_block->SetActorLocation({ TempClick });
-                    AAnimal_Block::SwapChange = true;
-                }
-
-            }
-
-            else if (clickRow < swapkRow)
-            {
-                if (Clickpos.Y<= TempSwap.Y)
-                {
-                    click_block->AddActorLocation({ FVector::Down * 150.0f * _DeltaTime });
-                }
-                else
-                {
-                    click_block->SetActorLocation({ TempSwap });
-                    AAnimal_Block::ClickChange = true;
-                }
-
-                if (Swappos.Y >= TempClick.Y)
-                {
-                    swap_block->AddActorLocation(FVector::Up * 150.0f * _DeltaTime);
-                }
-                else
-                {
-                    swap_block->SetActorLocation({ TempClick });
-                    AAnimal_Block::SwapChange = true;
-                }
-            }
-
-            else if (clickCol > swapCol)
-            {
-                if (Clickpos.X >= TempSwap.X)
-                {
-                    click_block->AddActorLocation({ FVector::Left * 150.0f * _DeltaTime });
-                }
-                else
-                {
-                    click_block->SetActorLocation({ TempSwap });
-                    AAnimal_Block::ClickChange = true;
-                }
-
-                if (Swappos.X <= TempClick.X)
-                {
-                    swap_block->AddActorLocation(FVector::Right * 150.0f * _DeltaTime);
-                }
-                else
-                {
-                    swap_block->SetActorLocation({ TempClick });         
-                    AAnimal_Block::SwapChange = true;
-                }
-            }
-
-            else if (clickCol < swapCol)
-            {
-                if (Clickpos.X <= TempSwap.X)
-                {
-                    click_block->AddActorLocation({ FVector::Right * 150.0f * _DeltaTime });
-                }
-                else
-                {
-                    click_block->SetActorLocation({ TempSwap });
-                    AAnimal_Block::ClickChange = true;
-                }
-
-                if (Swappos.X >= TempClick.X)
-                {
-                    swap_block->AddActorLocation(FVector::Left * 150.0f * _DeltaTime);
-                }
-                else
-                {
-                    swap_block->SetActorLocation({ TempClick });
-                    AAnimal_Block::SwapChange = true;
-                }
-            }
-
-
-
-            if (AAnimal_Block::SwapChange == true && AAnimal_Block::ClickChange == true)
-            {
-                bool _set = false;
-                click_block->SetBlockstate(_set, 1);
-                swap_block->SetBlockstate(_set, 2);
-                click_block->SetColumn(swapCol);
-                click_block->SetRow(swapkRow);
-                swap_block->SetColumn(clickCol);
-                swap_block->SetRow(clickRow);
-                AAnimal_Block::SwapREADY = false;
-                AAnimal_Block::SwapChange = false;
-                AAnimal_Block::ClickChange = false;
-            }
-
-
-       
-        }
+        BlockClickUpdate(_DeltaTime);
     }
 
 
@@ -208,6 +57,213 @@ void UPlayLevel::LevelStart(ULevel* _Level)
 
 void UPlayLevel::LevelEnd(ULevel* _Level)
 {
+}
+
+void UPlayLevel::BlockClickUpdate(float _DeltaTime)
+{
+    static FVector Clickpos;
+    static FVector Swappos;
+    static FVector TempClick;
+    static FVector TempSwap;
+
+    if (AAnimal_Block::SwapREADY == false)
+    {
+        const int MapSize = 7;
+        for (int row = 0; row < MapSize; row++)
+        {
+            for (int col = 0; col < MapSize; col++)
+            {
+                if (Blocks[col][row]->GetFirstPick() == true)
+                {
+                    click_block = Blocks[col][row];
+                    Clickpos = click_block->GetActorLocation();
+                }
+
+                if (Blocks[col][row]->GetSecondPick() == true)
+                {
+                    swap_block = Blocks[col][row];
+                    Swappos = swap_block->GetActorLocation();
+                }
+            }
+        }
+        TempClick = Clickpos;
+        TempSwap = Swappos;
+        AAnimal_Block::SwapREADY = true;
+    }
+    else
+    {
+        Clickpos = click_block->GetActorLocation();
+        Swappos = swap_block->GetActorLocation();
+
+        int clickRow = click_block->GetBlockLocation().Row;
+        int clickCol = click_block->GetBlockLocation().Column;
+        int swapkRow = swap_block->GetBlockLocation().Row;
+        int swapCol = swap_block->GetBlockLocation().Column;
+
+
+        int checkRowCick = clickRow - swapkRow;
+        int checkRowSwap = swapkRow - clickRow;
+        int checkColClick = clickCol - swapCol;
+        int checkColSwap = swapCol - clickCol;
+        if (checkRowCick > CheckBlock || checkRowSwap > CheckBlock || checkColClick > CheckBlock|| checkColSwap > CheckBlock)
+        {
+            Blockreturn();
+            return;
+        }      
+        else if (checkRowCick == CheckBlock && checkColClick == CheckBlock)
+        {
+            Blockreturn();
+            return;
+        }
+        else if (checkRowCick == CheckBlock && checkColSwap == CheckBlock)
+        {
+            Blockreturn();
+            return;
+        }
+        else if (checkRowSwap == CheckBlock && checkColClick == CheckBlock)
+        {
+            Blockreturn();
+            return;
+        }
+        else if (checkRowSwap == CheckBlock && checkColSwap == CheckBlock)
+        {
+            Blockreturn();
+            return;
+        }
+
+
+
+        if (clickRow > swapkRow)
+        {
+
+            if (Clickpos.Y >= TempSwap.Y)
+            {
+                click_block->AddActorLocation({ FVector::Up * 150.0f * _DeltaTime });
+            }
+            else
+            {
+                click_block->SetActorLocation({ TempSwap });
+                AAnimal_Block::ClickChange = true;
+            }
+
+            if (Swappos.Y <= TempClick.Y)
+            {
+                swap_block->AddActorLocation(FVector::Down * 150.0f * _DeltaTime);
+            }
+            else
+            {
+                swap_block->SetActorLocation({ TempClick });
+                AAnimal_Block::SwapChange = true;
+            }
+
+        }
+
+        else if (clickRow < swapkRow)
+        {
+
+
+            if (Clickpos.Y <= TempSwap.Y)
+            {
+                click_block->AddActorLocation({ FVector::Down * 150.0f * _DeltaTime });
+            }
+            else
+            {
+                click_block->SetActorLocation({ TempSwap });
+                AAnimal_Block::ClickChange = true;
+            }
+
+            if (Swappos.Y >= TempClick.Y)
+            {
+                swap_block->AddActorLocation(FVector::Up * 150.0f * _DeltaTime);
+            }
+            else
+            {
+                swap_block->SetActorLocation({ TempClick });
+                AAnimal_Block::SwapChange = true;
+            }
+        }
+
+        else if (clickCol > swapCol)
+        {
+
+            if (Clickpos.X >= TempSwap.X)
+            {
+                click_block->AddActorLocation({ FVector::Left * 150.0f * _DeltaTime });
+            }
+            else
+            {
+                click_block->SetActorLocation({ TempSwap });
+                AAnimal_Block::ClickChange = true;
+            }
+
+            if (Swappos.X <= TempClick.X)
+            {
+                swap_block->AddActorLocation(FVector::Right * 150.0f * _DeltaTime);
+            }
+            else
+            {
+                swap_block->SetActorLocation({ TempClick });
+                AAnimal_Block::SwapChange = true;
+            }
+        }
+
+        else if (clickCol < swapCol)
+        {
+
+            if (Clickpos.X <= TempSwap.X)
+            {
+                click_block->AddActorLocation({ FVector::Right * 150.0f * _DeltaTime });
+            }
+            else
+            {
+                click_block->SetActorLocation({ TempSwap });
+                AAnimal_Block::ClickChange = true;
+            }
+
+            if (Swappos.X >= TempClick.X)
+            {
+                swap_block->AddActorLocation(FVector::Left * 150.0f * _DeltaTime);
+            }
+            else
+            {
+                swap_block->SetActorLocation({ TempClick });
+                AAnimal_Block::SwapChange = true;
+            }
+        }
+
+
+
+        if (AAnimal_Block::SwapChange == true && AAnimal_Block::ClickChange == true)
+        {
+            bool _set = false;
+            click_block->SetBlockstate(_set, 1);
+            swap_block->SetBlockstate(_set, 2);
+            click_block->SetColumn(swapCol);
+            click_block->SetRow(swapkRow);
+            swap_block->SetColumn(clickCol);
+            swap_block->SetRow(clickRow);
+            AAnimal_Block::SwapREADY = false;
+            AAnimal_Block::SwapChange = false;
+            AAnimal_Block::ClickChange = false;
+        }
+    }
+}
+
+void UPlayLevel::Blockreturn()
+{
+    if (AAnimal_Block::SwapChange == false && AAnimal_Block::ClickChange == false)
+    {
+        bool _set = false;
+        click_block->SetBlockstate(_set, 1);
+        swap_block->SetBlockstate(_set, 2);
+        //click_block->SetColumn(swapCol);
+        //click_block->SetRow(swapkRow);
+        //swap_block->SetColumn(clickCol);
+        //swap_block->SetRow(clickRow);
+        AAnimal_Block::SwapREADY = false;
+        AAnimal_Block::SwapChange = false;
+        AAnimal_Block::ClickChange = false;
+    }
 }
 
 void UPlayLevel::OBJPOOLTEST()

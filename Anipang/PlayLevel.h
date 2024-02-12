@@ -20,6 +20,9 @@ protected:
 	void LevelStart(ULevel* _Level) override;
 	void LevelEnd(ULevel* _Level) override;
 
+	void BlockClickUpdate(float _DeltaTime);
+	void Blockreturn();
+
 	void OBJPOOLTEST();
 	void CreateBlock();
 
@@ -28,7 +31,7 @@ private:
 	AAnimal_Block* Blocks[7][7];
 	AAnimal_Block* click_block;
 	AAnimal_Block* swap_block;
-
+	const int CheckBlock = 1;
 
 
 };

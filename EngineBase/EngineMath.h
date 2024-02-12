@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <cmath>
 
 struct float4
 {
@@ -81,12 +82,12 @@ public:
 
 	int iX() const
 	{
-		return static_cast<int>(X);
+		return std::lround(X);
 	}
 
 	int iY() const
 	{
-		return static_cast<int>(Y);
+		return std::lround(Y);
 	}
 
 	float hX() const
@@ -102,12 +103,12 @@ public:
 
 	int ihY() const
 	{
-		return static_cast<int>(hY());
+		return std::lround(hY());
 	}
 
 	int ihX() const
 	{
-		return static_cast<int>(hX());
+		return std::lround(hX());
 	}
 
 	float4 operator+(const float4& _Other)
@@ -164,6 +165,16 @@ public:
 		return *this;
 	}
 
+	float4 operator-()
+	{
+		float4 Result;
+		Result.X = -X;
+		Result.Y = -Y;
+		Result.Z = -Z;
+		return Result;
+	}
+
+
 	float4 operator-(const float4& _Other)
 	{
 		float4 Result = *this;
@@ -200,13 +211,12 @@ public:
 	static const Color8Bit Magenta;
 	static const Color8Bit White;
 
-
-	//static const Color8Bit NABlack;
-	//static const Color8Bit NARed;
-	//static const Color8Bit NAGreen;
-	//static const Color8Bit NABlue;
-	//static const Color8Bit NAMagenta;
-	//static const Color8Bit NAWhite;
+	static const Color8Bit NABlack;
+	static const Color8Bit NARed;
+	static const Color8Bit NAGreen;
+	static const Color8Bit NABlue;
+	static const Color8Bit NAMagenta;
+	static const Color8Bit NAWhite;
 
 
 	union

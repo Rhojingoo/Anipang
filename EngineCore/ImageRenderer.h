@@ -86,6 +86,11 @@ public:
 		TransColor.A = static_cast<char>(_Alpha * 255.0f);
 	}
 
+	void CameraEffectOff()
+	{
+		CameraEffect = false;
+	}
+
 	UWindowImage* GetImage()
 	{
 		return Image;
@@ -99,6 +104,8 @@ private:
 	UWindowImage* Image = nullptr;
 	FTransform ImageCuttingTransform;
 	Color8Bit TransColor;
+
+	bool CameraEffect = true;
 
 	std::map<std::string, UAnimationInfo> AnimationInfos;
 	UAnimationInfo* CurAnimation = nullptr;

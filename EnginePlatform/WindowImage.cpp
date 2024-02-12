@@ -232,8 +232,28 @@ void UWindowImage::Cutting(int _X, int _Y)
 	}
 }
 
-Color8Bit UWindowImage::GetColor(int _X, int _Y)
+Color8Bit UWindowImage::GetColor(int _X, int _Y, Color8Bit _DefaultColor)
 {
+	if (0 > _X)
+	{
+		return _DefaultColor;
+	}
+
+	if (0 > _Y)
+	{
+		return _DefaultColor;
+	}
+
+	if (GetScale().iX() <= _X)
+	{
+		return _DefaultColor;
+	}
+
+	if (GetScale().iY() <= _Y)
+	{
+		return _DefaultColor;
+	}
+
 	Color8Bit Color;
 
 	Color.Color = ::GetPixel(ImageDC, _X, _Y);

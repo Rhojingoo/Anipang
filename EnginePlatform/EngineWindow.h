@@ -41,6 +41,12 @@ public :
 		return Scale;
 	}
 
+	void SetClearColor(Color8Bit _Color)
+	{
+		_Color.A = 0;
+		ClearColor = _Color;
+	}
+
 	FVector GetMousePosition();
 protected:
 
@@ -48,6 +54,8 @@ private:
 	static bool WindowLive;
 	static HINSTANCE hInstance;
 	static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+
+	Color8Bit ClearColor = Color8Bit::NAWhite;
 
 	HWND hWnd = nullptr;
 	UWindowImage* WindowImage = nullptr;

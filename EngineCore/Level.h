@@ -1,7 +1,9 @@
 #pragma once
 #include <EngineBase\NameObject.h>
+#include <EngineBase\EngineMath.h>
 #include <map>
 #include <list>
+
 
 //¾ÀÀ» ¸¸µé°÷
 class AActor;
@@ -45,6 +47,22 @@ public :
 	//	return NewActor;
 	//}
 
+	void SetCameraPos(FVector _CameraPos)
+	{
+		CameraPos = _CameraPos;
+	}
+
+
+	void AddCameraPos(FVector _CameraPos)
+	{
+		CameraPos += _CameraPos;
+	}
+
+	FVector GetCameraPos()
+	{
+		return CameraPos;
+	}
+
 protected:
 
 private:
@@ -55,5 +73,7 @@ private:
 	void LevelRender(float _DeltaTime);
 	void LevelRelease(float _DeltaTime);
 	std::map<int, std::list<UImageRenderer*>> Renderers;
+
+	FVector CameraPos = FVector::Zero;
 };
 

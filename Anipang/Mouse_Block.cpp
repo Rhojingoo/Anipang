@@ -19,6 +19,7 @@ void AMouse_Block::BeginPlay()
 	Renderer->CreateAnimation("Click", "Mouse", 1, 1, 1.1f, true);
 	Renderer->CreateAnimation("Boomb", "Mouse", 0, 2, 0.3f, true);
 	Renderer->ChangeAnimation("Idle");
+	Blocktype = Block_Type::Mouse;
 }
 
 void AMouse_Block::Tick(float _DeltaTime)
@@ -40,6 +41,13 @@ void AMouse_Block::Tick(float _DeltaTime)
 			Blockstatus = Block_Status::Click;
 			return;
 		}
+
+
+		if (BoombBlock == true)
+		{
+			Renderer->ChangeAnimation("Boomb");
+			Blockstatus = Block_Status::Boomb;
+		}
 	}
 	break;
 	case AAnimal_Block::Block_Status::Click:
@@ -49,6 +57,13 @@ void AMouse_Block::Tick(float _DeltaTime)
 			Renderer->ChangeAnimation("Idle");
 			Blockstatus = Block_Status::Idle;
 			return;
+		}
+
+
+		if (BoombBlock == true)
+		{
+			Renderer->ChangeAnimation("Boomb");
+			Blockstatus = Block_Status::Boomb;
 		}
 	}
 	break;

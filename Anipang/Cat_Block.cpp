@@ -19,6 +19,7 @@ void ACat_Block::BeginPlay()
 	Renderer->CreateAnimation("Click", "Cat", 1,1, 1.1f, true);
 	Renderer->CreateAnimation("Boomb", "Cat", 0, 2, 0.3f, true);
 	Renderer->ChangeAnimation("Idle");
+	Blocktype = Block_Type::Cat;
 
 }
 
@@ -42,6 +43,12 @@ void ACat_Block::Tick(float _DeltaTime)
 			Renderer->SetOrder(RenderNumber);
 			return;			
 		}
+
+		if (BoombBlock == true)
+		{
+			Renderer->ChangeAnimation("Boomb");
+			Blockstatus = Block_Status::Boomb;
+		}
 	}
 		break;
 	case AAnimal_Block::Block_Status::Click:
@@ -53,6 +60,12 @@ void ACat_Block::Tick(float _DeltaTime)
 			int RenderNumber = 1;
 			Renderer->SetOrder(RenderNumber);
 			return;
+		}
+
+		if (BoombBlock == true)
+		{
+			Renderer->ChangeAnimation("Boomb");
+			Blockstatus = Block_Status::Boomb;
 		}
 	}
 		break;

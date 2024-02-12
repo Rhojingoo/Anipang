@@ -40,6 +40,80 @@ void UPlayLevel::Tick(float _DeltaTime)
         BlockClickUpdate(_DeltaTime);
     }
 
+    {
+        //const int MapSize = 7;
+        //for (int row = 0; row < MapSize; row++)
+        //{
+        //    for (int col = 1; col < MapSize - 1; col++)
+        //    {
+        //        AAnimal_Block* CheckBlock = Blocks[col][row];
+        //        FVector CheckBlockpos = CheckBlock->GetActorLocation();
+
+        //        if (CheckBlock->GetBoomb() == true)
+        //        {
+        //            continue;
+        //        }
+
+        //        // 1. x축 기준으로 검사진행
+        //        // 0번째 와 마지막인 6번째는 제외 시키고 검사
+        //        {
+        //            AAnimal_Block* XLine_Check_Before = Blocks[col - 1][row];
+        //            AAnimal_Block* XLine_Check_After = Blocks[col + 1][row];
+
+        //            if (XLine_Check_Before->GetBlockType() != CheckBlock->GetBlockType())
+        //            {
+        //                continue;
+        //            }
+        //            if (XLine_Check_After->GetBlockType() != CheckBlock->GetBlockType())
+        //            {
+        //                continue;
+        //            }
+
+        //            XLine_Check_Before->SetBoomb(true);
+        //            XLine_Check_After->SetBoomb(true);
+        //            CheckBlock->SetBoomb(true);
+        //        }
+        //    }
+        //}    
+    }
+
+    {
+        const int MapSize = 7;
+        for (int row = 1; row < MapSize - 1; row++)
+        {
+            for (int col = 0; col < MapSize; col++)
+            {
+                AAnimal_Block* CheckBlock = Blocks[col][row];
+                FVector CheckBlockpos = CheckBlock->GetActorLocation();
+
+                if (CheckBlock->GetBoomb() == true)
+                {
+                    continue;
+                }
+                // 2. y축 기준으로 검사진행
+                 // 0번째 와 마지막인 6번째는 제외 시키고 검사
+                {
+                    AAnimal_Block* YLine_Check_Before = Blocks[col][row - 1];
+                    AAnimal_Block* YLine_Check_After = Blocks[col][row + 1];
+
+                    if (YLine_Check_Before->GetBlockType() != CheckBlock->GetBlockType())
+                    {
+                        continue;
+                    }
+                    if (YLine_Check_After->GetBlockType() != CheckBlock->GetBlockType())
+                    {
+                        continue;
+                    }
+
+                    YLine_Check_Before->SetBoomb(true);
+                    YLine_Check_After->SetBoomb(true);
+                    CheckBlock->SetBoomb(true);
+                }
+            }
+        }
+    }
+
+
 
 	if (UEngineInput::IsDown('N'))
 	{
@@ -242,6 +316,12 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
             click_block->SetRow(swapkRow);
             swap_block->SetColumn(clickCol);
             swap_block->SetRow(clickRow);
+
+            AAnimal_Block* XLine_Check_Before = Blocks[clickCol][clickCol];
+            Blocks[clickCol][clickRow] = Blocks[swapCol][swapkRow];
+            Blocks[swapCol][swapkRow] = XLine_Check_Before;
+            
+
             AAnimal_Block::SwapREADY = false;
             AAnimal_Block::SwapChange = false;
             AAnimal_Block::ClickChange = false;
@@ -256,10 +336,6 @@ void UPlayLevel::Blockreturn()
         bool _set = false;
         click_block->SetBlockstate(_set, 1);
         swap_block->SetBlockstate(_set, 2);
-        //click_block->SetColumn(swapCol);
-        //click_block->SetRow(swapkRow);
-        //swap_block->SetColumn(clickCol);
-        //swap_block->SetRow(clickRow);
         AAnimal_Block::SwapREADY = false;
         AAnimal_Block::SwapChange = false;
         AAnimal_Block::ClickChange = false;
@@ -360,7 +436,7 @@ void UPlayLevel::CreateBlock()
             BlockLocation.Y = StartLocation.Y + (CellSize * row);
             Blocks[col][row]->SetActorLocation(BlockLocation);
             Blocks[col][row]->SetCursor(Cursoor);
-            Blocks[col][row] ->SetColumn(col);
+            Blocks[col][row]->SetColumn(col);
             Blocks[col][row]->SetRow(row);
         }
     }

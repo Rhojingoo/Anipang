@@ -20,6 +20,19 @@ public :
 		End,
 	};
 
+	enum class Block_Type
+	{
+		None,
+		Cat,
+		Checkin,
+		Dog,
+		Monkey,
+		Mouse,
+		Pig,
+		Rabbit,
+		End,
+	};
+
 
 	AAnimal_Block();
 	~AAnimal_Block();
@@ -42,8 +55,6 @@ public :
 	static bool ClickChange; 
 	static bool SwapChange; 
 
-
-
 	void SetBlockstate(bool _Blockstatus, int _set)
 	{
 		BlockClick = _Blockstatus;
@@ -59,6 +70,10 @@ public :
 		}
 	}
 
+	Block_Type GetBlockType() { return Blocktype; }
+
+	void SetBoomb(bool _BoombBlock) { BoombBlock = _BoombBlock; }
+	bool GetBoomb() { return BoombBlock; }
 
 protected:
 	UImageRenderer* Renderer = nullptr;
@@ -67,12 +82,14 @@ protected:
 	bool BlockClick = false;
 	bool ClickCheck = false;
 	Block_Status Blockstatus = Block_Status::Idle;
+	Block_Type Blocktype = Block_Type::None;
 
 	static bool FirstClick;
 	static bool SecondClick;
 	int2 BlockLocation = {0,0};
 	bool FirstPick = false;
 	bool SecondPick = false;
+	bool BoombBlock = false;
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

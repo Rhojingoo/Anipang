@@ -17,7 +17,7 @@ void ACat_Block::BeginPlay()
 	Renderer->SetImageCuttingTransform({ {0,0}, {133, 139} });
 	Renderer->CreateAnimation("Idle", "Cat", 0, 0, 1.1f, true);
 	Renderer->CreateAnimation("Click", "Cat", 1,1, 1.1f, true);
-	Renderer->CreateAnimation("Boomb", "Cat", 0, 2, 0.3f, true);
+	Renderer->CreateAnimation("Boomb", "Cat", 0, 2, 0.1f, false);
 	Renderer->ChangeAnimation("Idle");
 	Blocktype = Block_Type::Cat;
 
@@ -91,7 +91,12 @@ void ACat_Block::Tick(float _DeltaTime)
 		break;
 	case AAnimal_Block::Block_Status::Boomb:
 	{
-
+		bool AnimationEnd =  Renderer->IsCurAnimationEnd();
+		if (AnimationEnd == true)
+		{
+			CreateBlockEffect();
+			Destroy(0.f);	
+		}
 	}
 		break;
 	case AAnimal_Block::Block_Status::End:

@@ -44,9 +44,7 @@ void UPlayLevel::Tick(float _DeltaTime)
     {
         const int MapSize = 7;
         const int TotalBlocks = MapSize * MapSize;
-        const int CellSize = 67;
-
-       
+        const int CellSize = 67;       
 
         for (int row = 0; row < MapSize - 1; row++)
         {
@@ -459,14 +457,9 @@ void UPlayLevel::BlockDestroyCheck()
                     XLine_Check_After->SetBoomb(true);
                     CheckBlock->SetBoomb(true);
 
-
-                    XLine_Check_Before->Destroy(0.f);
-                    XLine_Check_After->Destroy(0.f);
-                    CheckBlock->Destroy(0.f);
-
-                    Blocks[col][row] = nullptr;
-                    Blocks[col - 1][row] = nullptr;
                     Blocks[col + 1][row] = nullptr;
+                    Blocks[col - 1][row] = nullptr;
+                    Blocks[col][row] = nullptr;
                 }
             }
         }
@@ -507,13 +500,10 @@ void UPlayLevel::BlockDestroyCheck()
                     YLine_Check_After->SetBoomb(true);
                     CheckBlock->SetBoomb(true);
 
-                    YLine_Check_Before->Destroy(0.f);
-                    YLine_Check_After->Destroy(0.f);
-                    CheckBlock->Destroy(0.f);
-
+                     
+                    Blocks[col][row - 1] = nullptr;
+                    Blocks[col][row + 1] = nullptr;
                     Blocks[col][row] = nullptr;
-                    Blocks[col][row-1] = nullptr;
-                    Blocks[col][row+1] = nullptr;
                 }
             }
         }

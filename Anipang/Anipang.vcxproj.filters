@@ -79,6 +79,9 @@
     <ClInclude Include="FadeIN_OUT.h">
       <Filter>Public</Filter>
     </ClInclude>
+    <ClInclude Include="BlockBoomb_Effect.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animal_Block.cpp">
@@ -159,6 +162,9 @@
     <ClCompile Include="FadeIN_OUT.cpp">
       <Filter>Public</Filter>
     </ClCompile>
+    <ClCompile Include="BlockBoomb_Effect.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Anipang_Helper">
@@ -202,6 +208,9 @@
     </Filter>
     <Filter Include="LEVEL &amp; ACTOR\Ending_Level\Ending_Level_Actor">
       <UniqueIdentifier>{4eb29dce-6c2e-4501-a439-ffe11cce6ea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_Effect">
+      <UniqueIdentifier>{1b7424f9-23fa-4260-a8c3-0ce2d7d4266c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

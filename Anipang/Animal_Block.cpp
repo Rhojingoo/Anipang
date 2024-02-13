@@ -2,6 +2,7 @@
 #include <EngineCore\EngineCore.h>
 #include <EnginePlatform\EngineInput.h>
 #include "TestBullet.h"
+#include "BlockBoomb_Effect.h"
 #include <EngineBase\EngineTime.h>
 #include <vector>
 #include <list>
@@ -96,6 +97,12 @@ void AAnimal_Block::Tick(float _DeltaTime)
 
 
 #pragma endregion
+}
+
+void AAnimal_Block::CreateBlockEffect()
+{	
+	ABlockBoomb_Effect* BoomEffect = GetWorld()->SpawnActor<ABlockBoomb_Effect>();
+	BoomEffect->SetActorLocation(GetActorLocation());
 }
 
 void AAnimal_Block::PickingCheck()

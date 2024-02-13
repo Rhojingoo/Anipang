@@ -162,6 +162,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BlockBoomb_Effect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="AnipangCore.h">
       <SubType>
@@ -241,6 +245,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BlockBoomb_Effect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="AnipangCore.cpp">
       <SubType>

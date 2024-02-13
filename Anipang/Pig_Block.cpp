@@ -17,7 +17,7 @@ void APig_Block::BeginPlay()
 	Renderer->SetImageCuttingTransform({ {0,0}, {133, 139} });
 	Renderer->CreateAnimation("Idle", "Pig", 0, 0, 1.1f, true);
 	Renderer->CreateAnimation("Click", "Pig", 1, 1, 1.1f, true);
-	Renderer->CreateAnimation("Boomb", "Pig", 0, 2, 0.3f, true);
+	Renderer->CreateAnimation("Boomb", "Pig", 0, 2, 0.1f, false);
 	Renderer->ChangeAnimation("Idle");
 	Blocktype = Block_Type::Pig;
 }
@@ -90,7 +90,12 @@ void APig_Block::Tick(float _DeltaTime)
 	break;
 	case AAnimal_Block::Block_Status::Boomb:
 	{
-
+		bool AnimationEnd = Renderer->IsCurAnimationEnd();
+		if (AnimationEnd == true)
+		{
+			CreateBlockEffect();
+			Destroy(0.f);
+		}
 	}
 	break;
 	case AAnimal_Block::Block_Status::End:

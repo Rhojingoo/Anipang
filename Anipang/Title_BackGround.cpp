@@ -66,7 +66,6 @@ void ATitle_BackGround::BeginPlay()
 		//Renderer2->ChangeAnimation("Idle");
 	}
 
-
 	{
 		//  타이틀 오브젝트 폭탄Effect
 		//UImageRenderer* Renderer2 = CreateImageRenderer(1);
@@ -76,28 +75,6 @@ void ATitle_BackGround::BeginPlay()
 		//Renderer2->SetImageCuttingTransform({ {0,0}, {155, 265} });
 		//Renderer2->CreateAnimation("Idle", "Boomb_Effect", 0, 6, 0.1f, true);
 		////Renderer->CreateAnimation("Attack", "TestSpriteAni.png", 26, 32, 0.5f, true);
-		//Renderer2->ChangeAnimation("Idle");
-	}
-
-
-	//{
-	//	// 스프라이트 테스트이미지
-	//	UImageRenderer* Renderer2 = CreateImageRenderer(1);
-	//	Renderer2->SetImage("Cat");
-	//	Renderer2->SetTransform({ {100,200}, {133, 139} });
-	//	Renderer2->SetImageCuttingTransform({ {0,0}, {133, 139} });
-	//	Renderer2->CreateAnimation("Idle", "Cat", 0, 2, 1.1f, true);
-	//	Renderer2->ChangeAnimation("Idle");
-	//}
-
-
-	{
-		// 스프라이트 테스트이미지
-		//UImageRenderer* Renderer2 = CreateImageRenderer(1);
-		//Renderer2->SetImage("Intro_OBJ");	
-		//Renderer2->SetTransform({ {100,200}, {133, 139} });
-		//Renderer2->SetImageCuttingTransform({ {0,0}, {133, 139} });
-		//Renderer2->CreateAnimation("Idle", "Intro_OBJ", 0, 1, 0.1f, true);
 		//Renderer2->ChangeAnimation("Idle");
 	}
 #pragma endregion

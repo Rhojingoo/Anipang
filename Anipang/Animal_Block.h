@@ -2,7 +2,6 @@
 #include <EngineCore\Actor.h>
 #include "Cursor.h"
 
-
 class AAnimal_Block : public AActor
 {
 public : 
@@ -83,29 +82,30 @@ public :
 
 
 protected:
-	UImageRenderer* Renderer		 = nullptr;
-	FVector Pos						 = {};
-	FVector UnderPos				 = {};
-	FVector Size					 = {};
-	bool BlockClick					 = false;
-	bool ClickCheck					 = false;
-	Block_Status Blockstatus		 = Block_Status::Idle;
-	Block_Type Blocktype			 = Block_Type::None;
+	UImageRenderer* Renderer				= nullptr;	
+	FVector Pos								= {};
+	FVector UnderPos						= {};
+	FVector Size							= {};
+	bool BlockClick							= false;
+	bool ClickCheck							= false;
+	Block_Status Blockstatus				= Block_Status::Idle;
+	Block_Type Blocktype					= Block_Type::None;
 
 	static bool FirstClick;
 	static bool SecondClick;
-	int2 BlockLocation				 = {0,0};
-	bool FirstPick					 = false;
-	bool SecondPick					 = false;
-	bool BoombBlock					 = false;
-	bool UnderBlockBoomb			 = false;
+	int2 BlockLocation						= {0,0};
+	bool FirstPick							= false;
+	bool SecondPick							= false;
+	bool BoombBlock							= false;
+	bool UnderBlockBoomb					= false;
 
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+	void CreateBlockEffect();
 
 private:
-	ACursor* Cursor					 = nullptr;
+	ACursor* Cursor							= nullptr;
 	void PickingCheck();
 };
 

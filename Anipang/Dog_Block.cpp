@@ -26,7 +26,6 @@ void ADog_Block::BeginPlay()
 void ADog_Block::Tick(float _DeltaTime)
 {
 	AAnimal_Block::Tick(_DeltaTime);
-
 	FVector RenderCurpos = Renderer->GetTransform().GetPosition();
 	FVector Curpos = GetTransform().GetPosition();
 	Pos = RenderCurpos + Curpos;
@@ -40,14 +39,34 @@ void ADog_Block::Tick(float _DeltaTime)
 		{
 			Renderer->ChangeAnimation("Click");
 			Blockstatus = Block_Status::Click;
+			int RenderNumber = 2;
+			Renderer->SetOrder(RenderNumber);
 			return;
 		}
-
 
 		if (BoombBlock == true)
 		{
 			Renderer->ChangeAnimation("Boomb");
 			Blockstatus = Block_Status::Boomb;
+			return;
+		}
+
+		if (UnderBlockBoomb == true)
+		{
+			Blockstatus = Block_Status::Move;
+			return;
+		}
+	}
+	break;
+	case AAnimal_Block::Block_Status::Move:
+	{
+		AddActorLocation({ FVector::Down * 150.0f * _DeltaTime });
+		if (Pos.Y > UnderPos.Y)
+		{
+			SetUnderBoomb(false);
+			Pos.Y = UnderPos.Y;
+			Blockstatus = Block_Status::Idle;
+			return;
 		}
 	}
 	break;
@@ -57,19 +76,22 @@ void ADog_Block::Tick(float _DeltaTime)
 		{
 			Renderer->ChangeAnimation("Idle");
 			Blockstatus = Block_Status::Idle;
+			int RenderNumber = 1;
+			Renderer->SetOrder(RenderNumber);
 			return;
 		}
-
 
 		if (BoombBlock == true)
 		{
 			Renderer->ChangeAnimation("Boomb");
 			Blockstatus = Block_Status::Boomb;
+			return;
 		}
 	}
 	break;
 	case AAnimal_Block::Block_Status::Boomb:
 	{
+
 	}
 	break;
 	case AAnimal_Block::Block_Status::End:

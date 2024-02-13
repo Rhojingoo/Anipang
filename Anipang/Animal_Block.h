@@ -16,6 +16,7 @@ public :
 	{
 		Idle, 
 		Click,
+		Move,
 		Boomb,
 		End,
 	};
@@ -51,6 +52,7 @@ public :
 	static bool GetSecondClick() { return SecondClick; }
 	bool GetFirstPick() { return FirstPick; }
 	bool GetSecondPick() { return SecondPick; }
+
 	static bool SwapREADY;
 	static bool ClickChange; 
 	static bool SwapChange; 
@@ -77,10 +79,13 @@ public :
 
 	void SetUnderBoomb(bool _BoombBlock) { UnderBlockBoomb = _BoombBlock; }
 	bool GetUnderBoomb() { return UnderBlockBoomb; }
+	void SetUnderPos(FVector _Set) { UnderPos = _Set; }
+
 
 protected:
 	UImageRenderer* Renderer		 = nullptr;
 	FVector Pos						 = {};
+	FVector UnderPos				 = {};
 	FVector Size					 = {};
 	bool BlockClick					 = false;
 	bool ClickCheck					 = false;
@@ -94,6 +99,7 @@ protected:
 	bool SecondPick					 = false;
 	bool BoombBlock					 = false;
 	bool UnderBlockBoomb			 = false;
+
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

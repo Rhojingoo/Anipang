@@ -48,6 +48,25 @@ void ACat_Block::Tick(float _DeltaTime)
 		{
 			Renderer->ChangeAnimation("Boomb");
 			Blockstatus = Block_Status::Boomb;
+			return;
+		}
+
+		if (UnderBlockBoomb == true)
+		{
+			Blockstatus = Block_Status::Move;
+			return;
+		}
+	}
+		break;
+	case AAnimal_Block::Block_Status::Move:
+	{
+		AddActorLocation({ FVector::Down * 150.0f * _DeltaTime });
+		if (Pos.Y > UnderPos.Y)
+		{
+			SetUnderBoomb(false);
+			Pos.Y = UnderPos.Y;
+			Blockstatus = Block_Status::Idle;
+			return;
 		}
 	}
 		break;
@@ -66,11 +85,13 @@ void ACat_Block::Tick(float _DeltaTime)
 		{
 			Renderer->ChangeAnimation("Boomb");
 			Blockstatus = Block_Status::Boomb;
+			return;
 		}
 	}
 		break;
 	case AAnimal_Block::Block_Status::Boomb:
 	{
+
 	}
 		break;
 	case AAnimal_Block::Block_Status::End:

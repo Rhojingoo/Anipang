@@ -21,7 +21,8 @@ protected:
 	void LevelEnd(ULevel* _Level) override;
 
 	void BlockClickUpdate(float _DeltaTime);
-	void Blockreturn();
+	void Blockreturn(int _clickRow, int _clickCol, int _swapkRow, int _swapCol);
+		
 
 	void OBJPOOLTEST();
 	void CreateBlock();

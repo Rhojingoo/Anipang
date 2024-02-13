@@ -41,40 +41,40 @@ void UPlayLevel::Tick(float _DeltaTime)
     }
 
     {
-        //const int MapSize = 7;
-        //for (int row = 0; row < MapSize; row++)
-        //{
-        //    for (int col = 1; col < MapSize - 1; col++)
-        //    {
-        //        AAnimal_Block* CheckBlock = Blocks[col][row];
-        //        FVector CheckBlockpos = CheckBlock->GetActorLocation();
+        const int MapSize = 7;
+        for (int row = 0; row < MapSize; row++)
+        {
+            for (int col = 1; col < MapSize - 1; col++)
+            {
+                AAnimal_Block* CheckBlock = Blocks[col][row];
+                FVector CheckBlockpos = CheckBlock->GetActorLocation();
 
-        //        if (CheckBlock->GetBoomb() == true)
-        //        {
-        //            continue;
-        //        }
+                if (CheckBlock->GetBoomb() == true)
+                {
+                    continue;
+                }
 
-        //        // 1. x축 기준으로 검사진행
-        //        // 0번째 와 마지막인 6번째는 제외 시키고 검사
-        //        {
-        //            AAnimal_Block* XLine_Check_Before = Blocks[col - 1][row];
-        //            AAnimal_Block* XLine_Check_After = Blocks[col + 1][row];
+                // 1. x축 기준으로 검사진행
+                // 0번째 와 마지막인 6번째는 제외 시키고 검사
+                {
+                    AAnimal_Block* XLine_Check_Before = Blocks[col - 1][row];
+                    AAnimal_Block* XLine_Check_After = Blocks[col + 1][row];
 
-        //            if (XLine_Check_Before->GetBlockType() != CheckBlock->GetBlockType())
-        //            {
-        //                continue;
-        //            }
-        //            if (XLine_Check_After->GetBlockType() != CheckBlock->GetBlockType())
-        //            {
-        //                continue;
-        //            }
+                    if (XLine_Check_Before->GetBlockType() != CheckBlock->GetBlockType())
+                    {
+                        continue;
+                    }
+                    if (XLine_Check_After->GetBlockType() != CheckBlock->GetBlockType())
+                    {
+                        continue;
+                    }
 
-        //            XLine_Check_Before->SetBoomb(true);
-        //            XLine_Check_After->SetBoomb(true);
-        //            CheckBlock->SetBoomb(true);
-        //        }
-        //    }
-        //}    
+                    XLine_Check_Before->SetBoomb(true);
+                    XLine_Check_After->SetBoomb(true);
+                    CheckBlock->SetBoomb(true);
+                }
+            }
+        }    
     }
 
     {
@@ -86,16 +86,16 @@ void UPlayLevel::Tick(float _DeltaTime)
                 AAnimal_Block* CheckBlock = Blocks[col][row];
                 FVector CheckBlockpos = CheckBlock->GetActorLocation();
 
-                if (CheckBlock->GetBoomb() == true)
-                {
-                    continue;
-                }
+                AAnimal_Block* YLine_Check_Before = Blocks[col][row - 1];
+                AAnimal_Block* YLine_Check_After = Blocks[col][row + 1];
+
+                //if (CheckBlock->GetBoomb() == true)
+                //{
+                //    continue;
+                //}
                 // 2. y축 기준으로 검사진행
                  // 0번째 와 마지막인 6번째는 제외 시키고 검사
                 {
-                    AAnimal_Block* YLine_Check_Before = Blocks[col][row - 1];
-                    AAnimal_Block* YLine_Check_After = Blocks[col][row + 1];
-
                     if (YLine_Check_Before->GetBlockType() != CheckBlock->GetBlockType())
                     {
                         continue;
@@ -126,7 +126,6 @@ void UPlayLevel::LevelStart(ULevel* _Level)
     SpawnActor<AFadeIN_OUT>();
     //OBJPOOLTEST();
     CreateBlock();
-
 }
 
 void UPlayLevel::LevelEnd(ULevel* _Level)
@@ -181,27 +180,27 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
         int checkColSwap = swapCol - clickCol;
         if (checkRowCick > CheckBlock || checkRowSwap > CheckBlock || checkColClick > CheckBlock|| checkColSwap > CheckBlock)
         {
-            Blockreturn();
+            Blockreturn(clickRow, clickCol, swapkRow, swapCol);
             return;
         }      
         else if (checkRowCick == CheckBlock && checkColClick == CheckBlock)
         {
-            Blockreturn();
+            Blockreturn(clickRow, clickCol, swapkRow, swapCol);
             return;
         }
         else if (checkRowCick == CheckBlock && checkColSwap == CheckBlock)
         {
-            Blockreturn();
+            Blockreturn(clickRow, clickCol, swapkRow, swapCol);
             return;
         }
         else if (checkRowSwap == CheckBlock && checkColClick == CheckBlock)
         {
-            Blockreturn();
+            Blockreturn(clickRow, clickCol, swapkRow, swapCol);
             return;
         }
         else if (checkRowSwap == CheckBlock && checkColSwap == CheckBlock)
         {
-            Blockreturn();
+            Blockreturn(clickRow, clickCol, swapkRow, swapCol);
             return;
         }
 
@@ -317,7 +316,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
             swap_block->SetColumn(clickCol);
             swap_block->SetRow(clickRow);
 
-            AAnimal_Block* XLine_Check_Before = Blocks[clickCol][clickCol];
+            AAnimal_Block* XLine_Check_Before = Blocks[clickCol][clickRow];
             Blocks[clickCol][clickRow] = Blocks[swapCol][swapkRow];
             Blocks[swapCol][swapkRow] = XLine_Check_Before;
             
@@ -329,13 +328,27 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
     }
 }
 
-void UPlayLevel::Blockreturn()
+void UPlayLevel::Blockreturn(int _clickRow, int _clickCol, int _swapkRow, int _swapCol)
 {
     if (AAnimal_Block::SwapChange == false && AAnimal_Block::ClickChange == false)
     {
         bool _set = false;
         click_block->SetBlockstate(_set, 1);
         swap_block->SetBlockstate(_set, 2);
+
+        // ================ Test Move Block Begin ================
+        //click_block->SetColumn(_swapCol);
+        //click_block->SetRow(_swapkRow);
+        //swap_block->SetColumn(_clickCol);
+        //swap_block->SetRow(_clickRow);
+
+        //AAnimal_Block* XLine_Check_Before = Blocks[_clickCol][_clickRow];
+        //Blocks[_clickCol][_clickRow] = Blocks[_swapCol][_swapkRow];
+        //Blocks[_swapCol][_swapkRow] = XLine_Check_Before;
+        //  ================ Test Move Block End ================
+
+
+
         AAnimal_Block::SwapREADY = false;
         AAnimal_Block::SwapChange = false;
         AAnimal_Block::ClickChange = false;

@@ -15,6 +15,7 @@ public:
 	int CurFrame = 0;
 	float CurTime = 0.0f;
 	bool Loop = false;
+	bool IsEnd = false;
 	std::vector<float> Times;
 	std::vector<int> Indexs;
 
@@ -59,10 +60,18 @@ public:
 		int _Start,
 		int _End,
 		float _Inter,
-		bool Loop = true
+		bool _Loop = true
 	);
 
-	void ChangeAnimation(std::string_view _AnimationName, bool _IsForce = false);
+	void CreateAnimation(
+		std::string_view _AnimationName,
+		std::string_view _ImageName,
+		std::vector<int> _Indexs,
+		float _Inter,
+		bool _Loop = true
+	);
+
+	void ChangeAnimation(std::string_view _AnimationName, bool _IsForce = false, int _StartIndex = 0, float _Time = -1.0f);
 
 	void AnimationReset();
 
@@ -91,10 +100,32 @@ public:
 		CameraEffect = false;
 	}
 
-	UWindowImage* GetImage()
+	bool IsCurAnimationEnd() const
+	{
+		return CurAnimation->IsEnd;
+	}
+
+	bool GetCurAnimationFrame() const
+	{
+		return CurAnimation->CurFrame;
+	}
+
+	bool GetCurAnimationImageFrame() const
+	{
+		const std::vector<int>& Indexs = CurAnimation->Indexs;
+		return Indexs[CurAnimation->CurFrame];
+	}
+
+	float GetCurAnimationTime() const
+	{
+		return CurAnimation->CurTime;
+	}
+
+	UWindowImage* GetImage() const
 	{
 		return Image;
 	}
+		
 
 protected:
 	void BeginPlay() override;

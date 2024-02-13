@@ -22,18 +22,19 @@ protected:
 
 	void BlockClickUpdate(float _DeltaTime);
 	void Blockreturn(int _clickRow, int _clickCol, int _swapkRow, int _swapCol);
+	void BlockDestroyCheck();
 		
 
 	void OBJPOOLTEST();
 	void CreateBlock();
 
 private:
-	ACursor* Cursoor = nullptr;
-	AAnimal_Block* Blocks[7][7];
-	AAnimal_Block* click_block;
-	AAnimal_Block* swap_block;
-	const int CheckBlock = 1;
+	ACursor* Cursoor						= nullptr;
+	AAnimal_Block* Blocks[7][7]				= {};
+	AAnimal_Block* click_block				= nullptr;
+	AAnimal_Block* swap_block				= nullptr;
 
 
+	const int CheckBlock					= 1;
 };
 

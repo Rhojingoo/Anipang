@@ -118,14 +118,14 @@ void ATitle_BackGround::AlphaSetting(float _DeltaTime)
 	if (AlphaTime < 3.5)
 	{
 		CheckTime += _DeltaTime;
-		if (1.0f <= CheckTime)
+		if (1.f <= CheckTime)
 		{
 			Dir = !Dir;
 			CheckTime = 0.0f;
 		}
 		if (true == Dir)
 		{
-			Renderer->SetAlpha(CheckTime * 0.15f);
+			Renderer->SetAlpha(CheckTime * 0.25f);
 		}
 		else
 		{

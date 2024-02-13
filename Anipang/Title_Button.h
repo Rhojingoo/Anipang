@@ -26,8 +26,8 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* Renderer = nullptr;
-	FVector Pos = {};
-	FVector Size = {};
+	UImageRenderer* Renderer	 = nullptr;
+	FVector Pos					 = {};
+	FVector Size				 = {};
 };
 

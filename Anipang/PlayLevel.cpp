@@ -12,7 +12,6 @@
 #include "Rabbit_Block.h"
 #include "Helper.h"
 
-
 #include "Block_Manager.h"
 
 UPlayLevel::UPlayLevel()
@@ -40,80 +39,56 @@ void UPlayLevel::Tick(float _DeltaTime)
         BlockClickUpdate(_DeltaTime);
     }
 
+    BlockDestroyCheck();
+
     {
         const int MapSize = 7;
-        for (int row = 0; row < MapSize; row++)
-        {
-            for (int col = 1; col < MapSize - 1; col++)
-            {
-                AAnimal_Block* CheckBlock = Blocks[col][row];
-                FVector CheckBlockpos = CheckBlock->GetActorLocation();
+        const int TotalBlocks = MapSize * MapSize;
+        const int CellSize = 67;
 
-                if (CheckBlock->GetBoomb() == true)
+       
+
+        for (int row = 0; row < MapSize - 1; row++)
+        {
+            for (int col = 0; col < MapSize; col++)
+            {
+                // test 없애고 있는중
+                if (Blocks[col][row] == nullptr)
                 {
                     continue;
                 }
 
-                // 1. x축 기준으로 검사진행
-                // 0번째 와 마지막인 6번째는 제외 시키고 검사
-                {
-                    AAnimal_Block* XLine_Check_Before = Blocks[col - 1][row];
-                    AAnimal_Block* XLine_Check_After = Blocks[col + 1][row];
-
-                    if (XLine_Check_Before->GetBlockType() != CheckBlock->GetBlockType())
+                if (Blocks[col][row + 1] == nullptr)
+                {          
+                    static FVector BeenBlockpos;
+                    if (Blocks[col][row]->GetUnderBoomb() == false)
                     {
-                        continue;
+                        swap_block = Blocks[col][row];
+                        BeenBlockpos = FVector(swap_block->GetActorLocation().X, swap_block->GetActorLocation().Y + CellSize, swap_block->GetActorLocation().Z, swap_block->GetActorLocation().W);
+                        Blocks[col][row]->SetUnderBoomb(true);
                     }
-                    if (XLine_Check_After->GetBlockType() != CheckBlock->GetBlockType())
+                    else
                     {
-                        continue;
+                        //if (CheckBlock == nullptr)
+                        //    continue;
+
+                        if (swap_block->GetActorLocation().Y <= BeenBlockpos.Y)
+                        {
+                            swap_block->AddActorLocation({ FVector::Down * 150.0f * _DeltaTime });
+                        }
+                        else
+                        {
+                            swap_block->SetActorLocation({ BeenBlockpos });
+                            Blocks[col][row + 1] = Blocks[col][row];
+                           // Blocks[col][row]->SetRow(row + 1);
+                            Blocks[col][row]->SetUnderBoomb(false);
+                            Blocks[col][row] = nullptr;
+                        }
                     }
-
-                    XLine_Check_Before->SetBoomb(true);
-                    XLine_Check_After->SetBoomb(true);
-                    CheckBlock->SetBoomb(true);
-                }
-            }
-        }    
-    }
-
-    {
-        const int MapSize = 7;
-        for (int row = 1; row < MapSize - 1; row++)
-        {
-            for (int col = 0; col < MapSize; col++)
-            {
-                AAnimal_Block* CheckBlock = Blocks[col][row];
-                FVector CheckBlockpos = CheckBlock->GetActorLocation();
-
-                AAnimal_Block* YLine_Check_Before = Blocks[col][row - 1];
-                AAnimal_Block* YLine_Check_After = Blocks[col][row + 1];
-
-                //if (CheckBlock->GetBoomb() == true)
-                //{
-                //    continue;
-                //}
-                // 2. y축 기준으로 검사진행
-                 // 0번째 와 마지막인 6번째는 제외 시키고 검사
-                {
-                    if (YLine_Check_Before->GetBlockType() != CheckBlock->GetBlockType())
-                    {
-                        continue;
-                    }
-                    if (YLine_Check_After->GetBlockType() != CheckBlock->GetBlockType())
-                    {
-                        continue;
-                    }
-
-                    YLine_Check_Before->SetBoomb(true);
-                    YLine_Check_After->SetBoomb(true);
-                    CheckBlock->SetBoomb(true);
-                }
+                }                
             }
         }
     }
-
-
 
 	if (UEngineInput::IsDown('N'))
 	{
@@ -146,6 +121,12 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
         {
             for (int col = 0; col < MapSize; col++)
             {
+                // test 없애고 있는중
+                if (Blocks[col][row] == nullptr || Blocks[col - 1][row] == nullptr || Blocks[col + 1][row] == nullptr)
+                {
+                    continue;
+                }
+
                 if (Blocks[col][row]->GetFirstPick() == true)
                 {
                     click_block = Blocks[col][row];
@@ -328,32 +309,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
     }
 }
 
-void UPlayLevel::Blockreturn(int _clickRow, int _clickCol, int _swapkRow, int _swapCol)
-{
-    if (AAnimal_Block::SwapChange == false && AAnimal_Block::ClickChange == false)
-    {
-        bool _set = false;
-        click_block->SetBlockstate(_set, 1);
-        swap_block->SetBlockstate(_set, 2);
 
-        // ================ Test Move Block Begin ================
-        //click_block->SetColumn(_swapCol);
-        //click_block->SetRow(_swapkRow);
-        //swap_block->SetColumn(_clickCol);
-        //swap_block->SetRow(_clickRow);
-
-        //AAnimal_Block* XLine_Check_Before = Blocks[_clickCol][_clickRow];
-        //Blocks[_clickCol][_clickRow] = Blocks[_swapCol][_swapkRow];
-        //Blocks[_swapCol][_swapkRow] = XLine_Check_Before;
-        //  ================ Test Move Block End ================
-
-
-
-        AAnimal_Block::SwapREADY = false;
-        AAnimal_Block::SwapChange = false;
-        AAnimal_Block::ClickChange = false;
-    }
-}
 
 void UPlayLevel::OBJPOOLTEST()
 {
@@ -453,4 +409,124 @@ void UPlayLevel::CreateBlock()
             Blocks[col][row]->SetRow(row);
         }
     }
+}
+
+void UPlayLevel::Blockreturn(int _clickRow, int _clickCol, int _swapkRow, int _swapCol)
+{
+    if (AAnimal_Block::SwapChange == false && AAnimal_Block::ClickChange == false)
+    {
+        bool _set = false;
+        click_block->SetBlockstate(_set, 1);
+        swap_block->SetBlockstate(_set, 2);
+
+        // ================ Test Move Block Begin ================
+        //click_block->SetColumn(_swapCol);
+        //click_block->SetRow(_swapkRow);
+        //swap_block->SetColumn(_clickCol);
+        //swap_block->SetRow(_clickRow);
+
+        //AAnimal_Block* XLine_Check_Before = Blocks[_clickCol][_clickRow];
+        //Blocks[_clickCol][_clickRow] = Blocks[_swapCol][_swapkRow];
+        //Blocks[_swapCol][_swapkRow] = XLine_Check_Before;
+        //  ================ Test Move Block End ================
+
+
+
+        AAnimal_Block::SwapREADY = false;
+        AAnimal_Block::SwapChange = false;
+        AAnimal_Block::ClickChange = false;
+    }
+}
+
+void UPlayLevel::BlockDestroyCheck()
+{
+    {
+        const int MapSize = 7;
+        for (int row = 0; row < MapSize; row++)
+        {
+            for (int col = 1; col < MapSize - 1; col++)
+            {
+
+                // test 없애고 있는중
+                if (Blocks[col][row] == nullptr || Blocks[col - 1][row] == nullptr || Blocks[col + 1][row] == nullptr)
+                {
+                    continue;
+                }
+
+                AAnimal_Block* CheckBlock = Blocks[col][row];
+                FVector CheckBlockpos = CheckBlock->GetActorLocation();
+
+                AAnimal_Block* XLine_Check_Before = Blocks[col - 1][row];
+                AAnimal_Block* XLine_Check_After = Blocks[col + 1][row];
+                //if (CheckBlock->GetBoomb() == true)
+                //{
+                //    continue;
+                //}
+
+
+                // 1. x축 기준으로 검사진행
+                // 0번째 와 마지막인 6번째는 제외 시키고 검사
+                {
+                    if (XLine_Check_Before->GetBlockType() != CheckBlock->GetBlockType())
+                    {
+                        continue;
+                    }
+                    if (XLine_Check_After->GetBlockType() != CheckBlock->GetBlockType())
+                    {
+                        continue;
+                    }
+
+                    XLine_Check_Before->SetBoomb(true);
+                    XLine_Check_After->SetBoomb(true);
+                    CheckBlock->SetBoomb(true);
+
+
+                    XLine_Check_Before->Destroy(0.f);
+                    XLine_Check_After->Destroy(0.f);
+                    CheckBlock->Destroy(0.f);
+
+                    Blocks[col][row] = nullptr;
+                    Blocks[col - 1][row] = nullptr;
+                    Blocks[col + 1][row] = nullptr;
+                }
+            }
+        }
+    }
+
+    {
+        //const int MapSize = 7;
+        //for (int row = 1; row < MapSize - 1; row++)
+        //{
+        //    for (int col = 0; col < MapSize; col++)
+        //    {
+        //        AAnimal_Block* CheckBlock = Blocks[col][row];
+        //        FVector CheckBlockpos = CheckBlock->GetActorLocation();
+
+        //        AAnimal_Block* YLine_Check_Before = Blocks[col][row - 1];
+        //        AAnimal_Block* YLine_Check_After = Blocks[col][row + 1];
+
+        //        //if (CheckBlock->GetBoomb() == true)
+        //        //{
+        //        //    continue;
+        //        //}
+        //        // 2. y축 기준으로 검사진행
+        //         // 0번째 와 마지막인 6번째는 제외 시키고 검사
+        //        {
+        //            if (YLine_Check_Before->GetBlockType() != CheckBlock->GetBlockType())
+        //            {
+        //                continue;
+        //            }
+        //            if (YLine_Check_After->GetBlockType() != CheckBlock->GetBlockType())
+        //            {
+        //                continue;
+        //            }
+
+        //            YLine_Check_Before->SetBoomb(true);
+        //            YLine_Check_After->SetBoomb(true);
+        //            CheckBlock->SetBoomb(true);
+        //        }
+        //    }
+        //}
+    }
+
 }

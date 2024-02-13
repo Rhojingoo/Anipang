@@ -7,9 +7,9 @@ public:
 	ADog_Block();
 	~ADog_Block();
 
-	ADog_Block(const ADog_Block& _Other)								= delete;
+	ADog_Block(const ADog_Block& _Other)							= delete;
 	ADog_Block(ADog_Block& _Other) noexcept							= delete;
-	ADog_Block& operator =(const ADog_Block& _Other)					= delete;
+	ADog_Block& operator =(const ADog_Block& _Other)				= delete;
 	ADog_Block& operator =(ADog_Block& _Other) noexcept				= delete;
 
 protected:

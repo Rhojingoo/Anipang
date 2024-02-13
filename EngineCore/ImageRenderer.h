@@ -105,12 +105,12 @@ public:
 		return CurAnimation->IsEnd;
 	}
 
-	bool GetCurAnimationFrame() const
+	int GetCurAnimationFrame() const
 	{
 		return CurAnimation->CurFrame;
 	}
 
-	bool GetCurAnimationImageFrame() const
+	int GetCurAnimationImageFrame() const
 	{
 		const std::vector<int>& Indexs = CurAnimation->Indexs;
 		return Indexs[CurAnimation->CurFrame];

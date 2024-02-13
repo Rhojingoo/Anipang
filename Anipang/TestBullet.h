@@ -8,9 +8,9 @@ public :
 	~ATestBullet();
 
 	ATestBullet(const ATestBullet& _Other)								 = delete;
-	ATestBullet(ATestBullet& _Other) noexcept								 = delete;
+	ATestBullet(ATestBullet& _Other) noexcept							 = delete;
 	ATestBullet& operator =(const ATestBullet& _Other)					 = delete;
-	ATestBullet& operator =(ATestBullet& _Other) noexcept					 = delete;
+	ATestBullet& operator =(ATestBullet& _Other) noexcept				 = delete;
 
 
 	void SetDir(const FVector& _Dir)

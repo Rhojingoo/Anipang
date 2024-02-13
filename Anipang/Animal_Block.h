@@ -75,27 +75,31 @@ public :
 	void SetBoomb(bool _BoombBlock) { BoombBlock = _BoombBlock; }
 	bool GetBoomb() { return BoombBlock; }
 
+	void SetUnderBoomb(bool _BoombBlock) { UnderBlockBoomb = _BoombBlock; }
+	bool GetUnderBoomb() { return UnderBlockBoomb; }
+
 protected:
-	UImageRenderer* Renderer = nullptr;
-	FVector Pos = {};
-	FVector Size = {};
-	bool BlockClick = false;
-	bool ClickCheck = false;
-	Block_Status Blockstatus = Block_Status::Idle;
-	Block_Type Blocktype = Block_Type::None;
+	UImageRenderer* Renderer		 = nullptr;
+	FVector Pos						 = {};
+	FVector Size					 = {};
+	bool BlockClick					 = false;
+	bool ClickCheck					 = false;
+	Block_Status Blockstatus		 = Block_Status::Idle;
+	Block_Type Blocktype			 = Block_Type::None;
 
 	static bool FirstClick;
 	static bool SecondClick;
-	int2 BlockLocation = {0,0};
-	bool FirstPick = false;
-	bool SecondPick = false;
-	bool BoombBlock = false;
+	int2 BlockLocation				 = {0,0};
+	bool FirstPick					 = false;
+	bool SecondPick					 = false;
+	bool BoombBlock					 = false;
+	bool UnderBlockBoomb			 = false;
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
-	ACursor* Cursor = nullptr;
+	ACursor* Cursor					 = nullptr;
 	void PickingCheck();
 };
 

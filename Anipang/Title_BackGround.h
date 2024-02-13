@@ -24,14 +24,14 @@ protected:
 
 
 private:
-	float QSkillCool = 0.0f;
-	UImageRenderer* Renderer = nullptr;
-	float AnimationTime = 0.0f;
-	int AnimationFrame = 0;
+	float QSkillCool					 = 0.0f;
+	UImageRenderer* Renderer			 = nullptr;
+	float AnimationTime					 = 0.0f;
+	int AnimationFrame					 = 0;
 
-	float AlphaTime = 0.0f;
-	float CheckTime = 0.0f;
-	bool Dir = false;
-	bool FinalAnimation = false;
+	float AlphaTime						 = 0.0f;
+	float CheckTime						 = 0.0f;
+	bool Dir							 = false;
+	bool FinalAnimation					 = false;
 };
 

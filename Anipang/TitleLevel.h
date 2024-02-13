@@ -22,9 +22,9 @@ protected:
 	void LevelEnd(ULevel* _Level) override;
 
 private:
-	ATitle_BackGround* Title_BG;
-	bool LogoMake = false;
-	ACursor* Cursor = nullptr;
-	ATitle_Button* UIimage = nullptr;
+	ATitle_BackGround* Title_BG			 = nullptr;
+	bool LogoMake						 = false;
+	ACursor* Cursor						 = nullptr;
+	ATitle_Button* UIimage				 = nullptr;
 };
 

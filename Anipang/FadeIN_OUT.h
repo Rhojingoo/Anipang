@@ -18,9 +18,9 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* Renderer = nullptr;
-	float AlphaTime = 0.0f;
-	float CheckAlpha = 1.0f;
-	bool Dir = false;
+	UImageRenderer* Renderer			 = nullptr;
+	float AlphaTime						 = 0.0f;
+	float CheckAlpha					 = 1.0f;
+	bool Dir							 = false;
 };
 

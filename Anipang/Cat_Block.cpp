@@ -59,15 +59,15 @@ void ACat_Block::Tick(float _DeltaTime)
 	}
 		break;
 	case AAnimal_Block::Block_Status::Move:
-	{
-		AddActorLocation({ FVector::Down * 150.0f * _DeltaTime });
-		if (Pos.Y > UnderPos.Y)
+	{		
+		if (Pos.Y >= UnderPos.Y)
 		{
 			SetUnderBoomb(false);
-			Pos.Y = UnderPos.Y;
+			Pos.Y = UnderPos.Y;			
 			Blockstatus = Block_Status::Idle;
 			return;
 		}
+		AddActorLocation({ FVector::Down * 150.0f * _DeltaTime });
 	}
 		break;
 	case AAnimal_Block::Block_Status::Click:

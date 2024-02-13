@@ -455,7 +455,7 @@ void UPlayLevel::BlockDestroyCheck()
 
                     XLine_Check_Before->SetBoomb(true);
                     XLine_Check_After->SetBoomb(true);
-                    CheckBlock->SetBoomb(true);
+                    CheckBlock->SetBoomb(true);       
 
                     Blocks[col + 1][row] = nullptr;
                     Blocks[col - 1][row] = nullptr;

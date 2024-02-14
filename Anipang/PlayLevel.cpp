@@ -37,13 +37,15 @@ void UPlayLevel::BeginPlay()
     Timer = SpawnActor<ATimer>();
     Timer->SetActorLocation({ 231,705 });
 
-    //End_Rabbit = SpawnActor<AGame_End>();
-    //End->SetActorLocation({ 250,400 });
+    //
+    //
 }
 
 void UPlayLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
+
+
 
     if (GameStart == false)
     {
@@ -51,13 +53,25 @@ void UPlayLevel::Tick(float _DeltaTime)
     }
     else
     {
-        if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
+        if (Timer->IsFinish() == true)
         {
-            BlockClickUpdate(_DeltaTime);
+            if (GameEnd == false)
+            {
+                End_Rabbit = SpawnActor<AGame_End>();
+                End_Rabbit->SetActorLocation({ 250,400 });
+                GameEnd = true;
+            }
         }
-        BlockDestroyCheck();
-        BlockMove();
-        GenerateNewBlocks();
+        else
+        {
+            if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
+            {
+                BlockClickUpdate(_DeltaTime);
+            }
+            BlockDestroyCheck();
+            BlockMove();
+            GenerateNewBlocks();
+        }
     }
   
 	if (UEngineInput::IsDown('N'))

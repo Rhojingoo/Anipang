@@ -51,7 +51,7 @@ private:
 	const int CheckBlock					= 1;
 
 	bool GameStart							= false;
-
+	bool GameEnd							= false;
 
 };
 

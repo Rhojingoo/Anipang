@@ -13,6 +13,7 @@ public :
 	ATimer& operator =(ATimer& _Other) noexcept		 = delete;
 
 	void TimerStart() { Time = true; }
+	bool IsFinish() { return Finish; }
 
 protected:
 	UImageRenderer* Renderer = nullptr;
@@ -22,10 +23,14 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	bool Start			= false;
-	float Time			= 10.f;
-	int	  Size			= 458;
-	int	intTime = 0;
-	int mSize = 0;
+	bool Start						= false;
+	bool Finish						= false;
+	float Size						= 458.f;
+	float TotalSize					= 458.f;
+	float TotalTime					= 5.f;
+	float Time						= TotalTime;
+	float PreveTime					= TotalTime;
+
+
 };
 

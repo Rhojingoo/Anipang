@@ -17,11 +17,11 @@ void AGame_End::BeginPlay()
 	Renderer->CreateAnimation("Idle", "GameEnd", 0, 9, 0.1f, true);
 	Renderer->ChangeAnimation("Idle");
 }
-//			
+		
 void AGame_End::Tick(float _DeltaTime)
 {
-	//if (Renderer->IsCurAnimationEnd() == true)
-	//{
-	//	Destroy(0.f);
-	//}
+	if (Renderer->IsCurAnimationEnd() == true)
+	{
+		Destroy(0.f);
+	}
 }

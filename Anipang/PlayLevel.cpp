@@ -16,6 +16,7 @@
 #include "Game_End.h"
 #include "Game_Start.h"
 #include "Timer.h"
+#include "Number.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -37,8 +38,12 @@ void UPlayLevel::BeginPlay()
     Timer = SpawnActor<ATimer>();
     Timer->SetActorLocation({ 231,705 });
 
-    //
-    //
+
+    ANumber* Test = SpawnActor<ANumber>();
+    Test->SetActorLocation({ 235,405 });
+
+
+
 }
 
 void UPlayLevel::Tick(float _DeltaTime)

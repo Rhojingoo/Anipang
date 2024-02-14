@@ -62,7 +62,10 @@ void UAnipangCore::BeginPlay()
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Phoenix Landing"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("GameStart"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("GameEnd"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Time\\Big_Number"));
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Time\\Small_Number"));
 
+	
 	
 
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Title_Level\\Intro_BG"));

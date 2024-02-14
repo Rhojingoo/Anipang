@@ -91,6 +91,9 @@
     <ClInclude Include="Timer.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Timer</Filter>
     </ClInclude>
+    <ClInclude Include="Number.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Timer\Number</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animal_Block.cpp">
@@ -183,6 +186,9 @@
     <ClCompile Include="Timer.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Timer</Filter>
     </ClCompile>
+    <ClCompile Include="Number.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Timer\Number</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Anipang_Helper">
@@ -238,6 +244,9 @@
     </Filter>
     <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Timer">
       <UniqueIdentifier>{c03e5689-516f-4421-ae4b-f0c038b428a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Timer\Number">
+      <UniqueIdentifier>{c8421e69-f44f-46a5-a988-669e94df9e37}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

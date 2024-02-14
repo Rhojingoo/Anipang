@@ -39,8 +39,8 @@ void UPlayLevel::BeginPlay()
     Timer->SetActorLocation({ 231,705 });
 
 
-    ANumber* Test = SpawnActor<ANumber>();
-    Test->SetActorLocation({ 235,405 });
+    //ANumber* Test = SpawnActor<ANumber>();
+    //Test->SetActorLocation({ 235,405 });
 
 
 

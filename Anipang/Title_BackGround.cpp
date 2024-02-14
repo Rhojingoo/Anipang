@@ -48,7 +48,7 @@ void ATitle_BackGround::BeginPlay()
 		//Renderer->SetTransColor(Color8Bit::Magenta.ZeroAlphaColor());
 		Renderer->SetTransform({ {0,0}, {480, 800} });
 		Renderer->SetImageCuttingTransform({ {0,0}, {480, 800} });
-		Renderer->CreateAnimation("Idle", "Intro_BG", 0, 2, 1.5f, false);
+		Renderer->CreateAnimation("Idle", "Intro_BG", 0, 3, 1.65f, false);
 		Renderer->ChangeAnimation("Idle");
 	}
 #pragma endregion
@@ -92,17 +92,17 @@ void ATitle_BackGround::Tick(float _DeltaTime)
 void ATitle_BackGround::AlphaSetting(float _DeltaTime)
 {
 	AlphaTime += _DeltaTime;
-	if (AlphaTime < 3.5)
+	if (AlphaTime < 4.5)
 	{
 		CheckTime += _DeltaTime;
-		if (1.f <= CheckTime)
+		if (1.1f <= CheckTime)
 		{
 			Dir = !Dir;
 			CheckTime = 0.0f;
 		}
 		if (true == Dir)
 		{
-			Renderer->SetAlpha(CheckTime * 0.25f);
+			Renderer->SetAlpha(CheckTime * 0.15f);
 		}
 		else
 		{

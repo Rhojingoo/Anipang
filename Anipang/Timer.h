@@ -27,7 +27,7 @@ private:
 	bool Finish						= false;
 	float Size						= 458.f;
 	float TotalSize					= 458.f;
-	float TotalTime					= 5.f;
+	float TotalTime					= 60.f;
 	float Time						= TotalTime;
 	float PreveTime					= TotalTime;
 

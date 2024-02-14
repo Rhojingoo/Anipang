@@ -1,6 +1,10 @@
 #pragma once
 #include <EngineCore\Level.h>
 
+
+class ATimer;
+class AGame_End;
+class AGame_Start;
 class AAnimal_Block;
 class ACursor;
 class UPlayLevel : public ULevel
@@ -13,6 +17,7 @@ public :
 	UPlayLevel(UPlayLevel& _Other) noexcept						 = delete;
 	UPlayLevel& operator =(const UPlayLevel& _Other)			 = delete;
 	UPlayLevel& operator =(UPlayLevel& _Other) noexcept			 = delete;
+
 
 protected:
 	void BeginPlay() override;
@@ -35,11 +40,18 @@ private:
 	AAnimal_Block* Blocks[7][7]				= {};
 	AAnimal_Block* click_block				= nullptr;
 	AAnimal_Block* swap_block				= nullptr;
+	AGame_Start* Start_Rabbit				= nullptr;
+	AGame_End* End_Rabbit					= nullptr;
+	ATimer* Timer							= nullptr;
 
 	const int MapSize						= 7;
 	const int TotalBlocks					= MapSize * MapSize;
 	const int CellSize						= 67;
 	const FVector StartLocation				= { 32, 214 };
 	const int CheckBlock					= 1;
+
+	bool GameStart							= false;
+
+
 };
 

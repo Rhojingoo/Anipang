@@ -82,6 +82,15 @@
     <ClInclude Include="BlockBoomb_Effect.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Game_Start.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Start_OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="Game_End.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\End_OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Timer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animal_Block.cpp">
@@ -165,6 +174,15 @@
     <ClCompile Include="BlockBoomb_Effect.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_Effect</Filter>
     </ClCompile>
+    <ClCompile Include="Game_Start.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Start_OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="Game_End.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\End_OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Timer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Anipang_Helper">
@@ -211,6 +229,15 @@
     </Filter>
     <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_Effect">
       <UniqueIdentifier>{1b7424f9-23fa-4260-a8c3-0ce2d7d4266c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Start_OBJ">
+      <UniqueIdentifier>{e46648ee-6457-43b1-84e6-6f9c938e6dad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\End_OBJ">
+      <UniqueIdentifier>{24d1f23c-b107-49b9-9f81-0315fe4a3cae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Timer">
+      <UniqueIdentifier>{c03e5689-516f-4421-ae4b-f0c038b428a3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

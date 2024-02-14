@@ -13,6 +13,9 @@
 #include "Helper.h"
 
 #include "Block_Manager.h"
+#include "Game_End.h"
+#include "Game_Start.h"
+#include "Timer.h"
 
 UPlayLevel::UPlayLevel()
 {
@@ -22,27 +25,41 @@ UPlayLevel::~UPlayLevel()
 {
 }
 
+
 void UPlayLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
 	SpawnActor<APlay_Frame>();	
 	Cursoor = SpawnActor<ACursor>();
+    Start_Rabbit = SpawnActor<AGame_Start>();
+    Start_Rabbit->SetActorLocation({ 235,400 });
+
+    Timer = SpawnActor<ATimer>();
+    Timer->SetActorLocation({ 231,705 });
+
+    //End_Rabbit = SpawnActor<AGame_End>();
+    //End->SetActorLocation({ 250,400 });
 }
 
 void UPlayLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 
-
-    if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
+    if (GameStart == false)
     {
-        BlockClickUpdate(_DeltaTime);
+        GameStart = Start_Rabbit->IsStart();
     }
-
-    BlockDestroyCheck();
-    BlockMove();
-    GenerateNewBlocks();          
-
+    else
+    {
+        if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
+        {
+            BlockClickUpdate(_DeltaTime);
+        }
+        BlockDestroyCheck();
+        BlockMove();
+        GenerateNewBlocks();
+    }
+  
 	if (UEngineInput::IsDown('N'))
 	{
 		GEngine->ChangeLevel("Ending");
@@ -54,6 +71,7 @@ void UPlayLevel::LevelStart(ULevel* _Level)
     SpawnActor<AFadeIN_OUT>();
     //OBJPOOLTEST();
     CreateBlock();
+
 }
 
 void UPlayLevel::LevelEnd(ULevel* _Level)

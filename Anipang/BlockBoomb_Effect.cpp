@@ -10,7 +10,7 @@ ABlockBoomb_Effect::~ABlockBoomb_Effect()
 
 void ABlockBoomb_Effect::BeginPlay()
 {
-	Renderer = CreateImageRenderer(5);
+	Renderer = CreateImageRenderer(10);
 	Renderer->SetImage("Block_Effect");	
 	Renderer->SetTransform({ {0,0}, {133, 139} });
 	Renderer->SetImageCuttingTransform({ {0,0}, {133, 139} });

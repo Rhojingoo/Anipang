@@ -8,6 +8,9 @@
 #include "Title_PointAnimation.h"
 
 
+#include "Game_Start.h"
+#include "Game_End.h"
+
 UTitleLevel::UTitleLevel()
 {
 }
@@ -37,9 +40,11 @@ void UTitleLevel::Tick(float _DeltaTime)
 			SpawnActor<ATitle_PointAnimation>();
 			UIimage = SpawnActor<ATitle_Button>();			
 			LogoMake = true;
+
+
+				
 		}
 	}
-
 
 	if (LogoMake == true)
 	{

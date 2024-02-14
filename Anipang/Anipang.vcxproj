@@ -190,6 +190,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Game_End.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Game_Start.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Helper.h" />
     <ClInclude Include="Monkey_Block.h">
       <SubType>
@@ -219,6 +227,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="TestBullet.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -273,6 +285,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Game_End.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Game_Start.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Helper.cpp" />
     <ClCompile Include="Monkey_Block.cpp">
       <SubType>
@@ -302,6 +322,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TestBullet.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
       <SubType>
       </SubType>
     </ClCompile>

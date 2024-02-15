@@ -39,8 +39,8 @@ void UPlayLevel::BeginPlay()
     Start_Rabbit = SpawnActor<AGame_Start>();
     Start_Rabbit->SetActorLocation({ 235,400 });
 
-    ABoomb_Block_Effect* aTEST = SpawnActor<ABoomb_Block_Effect>();
-    aTEST->SetActorLocation({ 235,400 });
+    //ABoomb_Block_Effect* aTEST = SpawnActor<ABoomb_Block_Effect>();
+    //aTEST->SetActorLocation({ 235,400 });
 
     Timer = SpawnActor<ATime_Gauge>();
     Timer->SetActorLocation({ 231,705 });

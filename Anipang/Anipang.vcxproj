@@ -170,6 +170,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Boomb_Block_Effect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="CheckScore_UI.h">
       <SubType>
       </SubType>
@@ -302,6 +306,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BlockBoomb_Effect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Boomb_Block_Effect.cpp">
       <SubType>
       </SubType>
     </ClCompile>

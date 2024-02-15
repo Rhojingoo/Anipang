@@ -60,17 +60,6 @@ void APlay_Frame::BeginPlay()
 		//Renderer2->CreateAnimation("Idle", "Fireball_Projectile", 0, 11, 0.2f, true);
 		//Renderer2->ChangeAnimation("Idle");
 	}
-
-	{
-		// 스프라이트 테스트이미지
-		UImageRenderer* Renderer2 = CreateImageRenderer(1);
-		Renderer2->SetImage("Phoenix Landing");
-		Renderer2->SetTransform({ {100,200}, {75, 200} });
-		Renderer2->SetImageCuttingTransform({ {0,0}, {70, 250} });
-		Renderer2->CreateAnimation("Idle", "Phoenix Landing", 0, 6, 0.1f, true);
-		Renderer2->ChangeAnimation("Idle");
-	}
-
 }
 
 void APlay_Frame::Tick(float _DeltaTime)

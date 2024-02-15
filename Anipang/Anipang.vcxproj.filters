@@ -121,6 +121,9 @@
     <ClInclude Include="ReStart_UI.h">
       <Filter>Public\UI_OBJ</Filter>
     </ClInclude>
+    <ClInclude Include="Boomb_Block_Effect.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\BoombBlockEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animal_Block.cpp">
@@ -243,6 +246,9 @@
     <ClCompile Include="ReStart_UI.cpp">
       <Filter>Public\UI_OBJ</Filter>
     </ClCompile>
+    <ClCompile Include="Boomb_Block_Effect.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\BoombBlockEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Anipang_Helper">
@@ -316,6 +322,9 @@
     </Filter>
     <Filter Include="LEVEL &amp; ACTOR\ScreenScore_Level">
       <UniqueIdentifier>{57f12a0c-908d-4881-ac90-e296983431a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\BoombBlockEffect">
+      <UniqueIdentifier>{873409b4-20bd-4a1b-81ce-1a7dbfbd94a6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

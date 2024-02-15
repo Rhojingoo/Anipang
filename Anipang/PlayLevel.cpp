@@ -17,6 +17,8 @@
 #include "Game_Start.h"
 #include "Time_Gauge.h"
 #include "Number.h"
+#include "ScoreManager.h"
+
 
 UPlayLevel::UPlayLevel()
 {
@@ -38,18 +40,14 @@ void UPlayLevel::BeginPlay()
     Timer = SpawnActor<ATime_Gauge>();
     Timer->SetActorLocation({ 231,705 });
 
-
+    ScoreMN = SpawnActor<ScoreManager>();
     //ANumber* Test = SpawnActor<ANumber>();
     //Test->SetActorLocation({ 235,405 });
-
-
-
 }
 
 void UPlayLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
-
 
 
     if (GameStart == false)
@@ -79,6 +77,8 @@ void UPlayLevel::Tick(float _DeltaTime)
             GenerateNewBlocks();
         }
     }
+
+    ScoreMN->SetScore(Score);
   
 	if (UEngineInput::IsDown('N'))
 	{
@@ -97,7 +97,6 @@ void UPlayLevel::LevelStart(ULevel* _Level)
 void UPlayLevel::LevelEnd(ULevel* _Level)
 {
 }
-
 
 void UPlayLevel::OBJPOOLTEST()
 {
@@ -458,6 +457,7 @@ void UPlayLevel::BlockDestroyCheck()
 				Blocks[col + 1][row] = nullptr;
 				Blocks[col - 1][row] = nullptr;
 				Blocks[col][row] = nullptr;
+                Score += 10;
 			}
 		}
 	}
@@ -500,6 +500,7 @@ void UPlayLevel::BlockDestroyCheck()
 				Blocks[col][row - 1] = nullptr;
 				Blocks[col][row + 1] = nullptr;
 				Blocks[col][row] = nullptr;
+                Score += 10;
 			}
 		}
 	}

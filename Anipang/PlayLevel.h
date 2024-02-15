@@ -2,6 +2,7 @@
 #include <EngineCore\Level.h>
 
 
+class ScoreManager;
 class ATime_Gauge;
 class AGame_End;
 class AGame_Start;
@@ -42,7 +43,9 @@ private:
 	AAnimal_Block* swap_block				= nullptr;
 	AGame_Start* Start_Rabbit				= nullptr;
 	AGame_End* End_Rabbit					= nullptr;
-	ATime_Gauge* Timer							= nullptr;
+	ATime_Gauge* Timer						= nullptr;
+	ScoreManager* ScoreMN					= nullptr;
+
 
 	const int MapSize						= 7;
 	const int TotalBlocks					= MapSize * MapSize;
@@ -52,6 +55,7 @@ private:
 
 	bool GameStart							= false;
 	bool GameEnd							= false;
+	int Score								= 0;
 
 };
 

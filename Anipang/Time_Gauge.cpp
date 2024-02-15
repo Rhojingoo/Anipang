@@ -1,4 +1,5 @@
 #include "Time_Gauge.h"
+#include "Number.h"
 
 ATime_Gauge::ATime_Gauge()
 {

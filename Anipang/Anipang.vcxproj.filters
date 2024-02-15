@@ -94,6 +94,9 @@
     <ClInclude Include="Number.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Number_OBJ</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Score_OBJ</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animal_Block.cpp">
@@ -189,6 +192,9 @@
     <ClCompile Include="Number.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Number_OBJ</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Score_OBJ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Anipang_Helper">
@@ -247,6 +253,9 @@
     </Filter>
     <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Number_OBJ">
       <UniqueIdentifier>{c8421e69-f44f-46a5-a988-669e94df9e37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Score_OBJ">
+      <UniqueIdentifier>{e8b2da3e-92b0-4384-838b-c0a46d39515a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 #pragma once
 #include <EngineCore\Actor.h>
-#include "Number.h"
 
+class ANumber;
 class ATime_Gauge : public AActor
 {
 public : 
@@ -34,8 +34,7 @@ private:
 	float TotalTime					= 60.f;
 	float Time						= TotalTime;
 	float PreveTime					= TotalTime;
-
-	
+		
 	ANumber* Tens = nullptr;
 	ANumber* Units = nullptr;
 };

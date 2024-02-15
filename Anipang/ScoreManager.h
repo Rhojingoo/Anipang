@@ -23,11 +23,13 @@ protected:
 
 
 private:
-	int Score = 0;
-
-	ANumber* Units = nullptr;
-	ANumber* Tens = nullptr;
-	ANumber* Hunders = nullptr;
-	ANumber* Thousions = nullptr;
+	bool ScoreLevel_Use					 = false;
+	int Score							 = 0;
+	
+	
+	ANumber* Units						 = nullptr;
+	ANumber* Tens						 = nullptr;
+	ANumber* Hunders					 = nullptr;
+	ANumber* Thousions					 = nullptr;
 };
 

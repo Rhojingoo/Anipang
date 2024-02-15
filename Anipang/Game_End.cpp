@@ -1,4 +1,5 @@
 #include "Game_End.h"
+#include <EngineCore\EngineCore.h>
 
 AGame_End::AGame_End()
 {
@@ -22,6 +23,7 @@ void AGame_End::Tick(float _DeltaTime)
 {
 	if (Renderer->IsCurAnimationEnd() == true)
 	{
+		GEngine->ChangeLevel("Score");
 		Destroy(0.f);
 	}
 }

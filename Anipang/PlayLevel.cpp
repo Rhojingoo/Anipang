@@ -41,8 +41,6 @@ void UPlayLevel::BeginPlay()
     Timer->SetActorLocation({ 231,705 });
 
     ScoreMN = SpawnActor<ScoreManager>();
-    //ANumber* Test = SpawnActor<ANumber>();
-    //Test->SetActorLocation({ 235,405 });
 }
 
 void UPlayLevel::Tick(float _DeltaTime)
@@ -82,7 +80,7 @@ void UPlayLevel::Tick(float _DeltaTime)
   
 	if (UEngineInput::IsDown('N'))
 	{
-		GEngine->ChangeLevel("Ending");
+        GEngine->ChangeLevel("Score");
 	}
 }
 

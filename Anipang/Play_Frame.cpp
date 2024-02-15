@@ -17,7 +17,7 @@ void APlay_Frame::BeginPlay()
 		Renderer->SetImage("PlayFrame2.png");
 		SetActorLocation({ 240, 400 });
 		Renderer->SetTransform({ {-8,0}, {464, 800} });
-		Renderer->SetImageCuttingTransform({ {0,0}, {367, 609} });
+		//Renderer->SetImageCuttingTransform({ {0,0}, {367, 609} });
 	}
 
 	{

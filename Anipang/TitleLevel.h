@@ -1,7 +1,6 @@
 #pragma once
 #include <EngineCore\Level.h>
 
-class ATitle_Button;
 class ACursor;
 class ATitle_BackGround;
 class UTitleLevel : public ULevel
@@ -25,6 +24,6 @@ private:
 	ATitle_BackGround* Title_BG			 = nullptr;
 	bool LogoMake						 = false;
 	ACursor* Cursor						 = nullptr;
-	ATitle_Button* UIimage				 = nullptr;
+
 };
 

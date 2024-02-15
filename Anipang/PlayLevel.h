@@ -37,7 +37,7 @@ protected:
 	void CreateBlock();
 
 private:
-	ACursor* Cursoor						= nullptr;
+	ACursor* Cursor							= nullptr;
 	AAnimal_Block* Blocks[7][7]				= {};
 	AAnimal_Block* click_block				= nullptr;
 	AAnimal_Block* swap_block				= nullptr;

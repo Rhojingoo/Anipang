@@ -3,9 +3,11 @@
 #include "Title_BackGround.h"
 #include "Cursor.h"
 #include "Title_Logo.h"
-#include "Title_Button.h"
 #include "Title_LogoChick.h"
 #include "Title_PointAnimation.h"
+#include "GameStart_UI.h"
+#include "CheckScore_UI.h"
+#include "GameEnd_UI.h"
 
 
 #include "Game_Start.h"
@@ -38,31 +40,21 @@ void UTitleLevel::Tick(float _DeltaTime)
 			SpawnActor<ATitle_Logo>();		
 			SpawnActor<ATitle_LogoChick>();			
 			SpawnActor<ATitle_PointAnimation>();
-			UIimage = SpawnActor<ATitle_Button>();			
-			LogoMake = true;
+			AGameStart_UI* GameStartUI = SpawnActor<AGameStart_UI>();
+			GameStartUI->SetActorLocation({ 240,440 });
+			GameStartUI->SetCursor(Cursor);		
 
+			//48
+			ACheckScore_UI* ScoreUI = SpawnActor<ACheckScore_UI>();
+			ScoreUI->SetActorLocation({ 240,488 });
+			ScoreUI->SetCursor(Cursor);
+			
 
-				
-		}
-	}
+			AGameEnd_UI* GameendUI = SpawnActor<AGameEnd_UI>();
+			GameendUI->SetActorLocation({ 240,536 });
+			GameendUI->SetCursor(Cursor);
 
-	if (LogoMake == true)
-	{
-		
-		FVector Curpos = Cursor->GetPos();
-		UIimage->GetSize();
-		float MinX = UIimage->GetPos().X - UIimage->GetSize().X/2;
-		float MinY = UIimage->GetPos().Y - UIimage->GetSize().Y/2;
-		float MaxX = UIimage->GetPos().X + UIimage->GetSize().X/2;
-		float MaxY = UIimage->GetPos().Y + UIimage->GetSize().Y/2;
-
-		if (Curpos.X >= MinX && Curpos.X <= MaxX&& Curpos.Y >= MinY && Curpos.Y <= MaxY)
-		{
-			Cursor->UIEnter(true);
-		}	
-		else
-		{
-			Cursor->UIEnter(false);
+			LogoMake = true;				
 		}
 	}
 

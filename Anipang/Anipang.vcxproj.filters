@@ -58,9 +58,6 @@
     <ClInclude Include="Title_Logo.h">
       <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClInclude>
-    <ClInclude Include="Title_Button.h">
-      <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
-    </ClInclude>
     <ClInclude Include="Title_LogoChick.h">
       <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClInclude>
@@ -102,6 +99,27 @@
     </ClInclude>
     <ClInclude Include="FadeIN_OUT.h">
       <Filter>Public\FadeIN_FadeOUT</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_OBJ.h">
+      <Filter>Public\UI_OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStart_UI.h">
+      <Filter>Public\UI_OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEnd_UI.h">
+      <Filter>Public\UI_OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckScore_UI.h">
+      <Filter>Public\UI_OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenScore_Level.h">
+      <Filter>LEVEL &amp; ACTOR\ScreenScore_Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MainScreen_UI.h">
+      <Filter>Public\UI_OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="ReStart_UI.h">
+      <Filter>Public\UI_OBJ</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -162,9 +180,6 @@
     <ClCompile Include="Title_Logo.cpp">
       <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Title_Button.cpp">
-      <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
-    </ClCompile>
     <ClCompile Include="Title_LogoChick.cpp">
       <Filter>LEVEL &amp; ACTOR\Title_Level\Title_Level_Actor</Filter>
     </ClCompile>
@@ -206,6 +221,27 @@
     </ClCompile>
     <ClCompile Include="FadeIN_OUT.cpp">
       <Filter>Public\FadeIN_FadeOUT</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_OBJ.cpp">
+      <Filter>Public\UI_OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStart_UI.cpp">
+      <Filter>Public\UI_OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEnd_UI.cpp">
+      <Filter>Public\UI_OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckScore_UI.cpp">
+      <Filter>Public\UI_OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenScore_Level.cpp">
+      <Filter>LEVEL &amp; ACTOR\ScreenScore_Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MainScreen_UI.cpp">
+      <Filter>Public\UI_OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="ReStart_UI.cpp">
+      <Filter>Public\UI_OBJ</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +310,12 @@
     </Filter>
     <Filter Include="Public\FadeIN_FadeOUT">
       <UniqueIdentifier>{c6a5a588-f5d7-464a-885f-8e4840202f84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\UI_OBJ">
+      <UniqueIdentifier>{38dadc18-9dd6-4296-8d48-6c5043c6921e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\ScreenScore_Level">
+      <UniqueIdentifier>{57f12a0c-908d-4881-ac90-e296983431a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

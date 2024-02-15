@@ -15,6 +15,18 @@ public :
 
 	void TimerStart() { Start = true; }
 	bool IsFinish() { return Finish; }
+	void Finishreturn()
+	{
+		Size = TotalSize;
+		PreveTime = TotalTime;
+		Time = TotalTime;
+		Finish = false;
+		Start = false;
+		Hurry = false;
+		Renderer->SetScale({Size, 30.f});//231,705
+		SetActorLocation({ 231,705 });
+		Renderer->ChangeAnimation("Nomarl");
+	}
 
 protected:
 	UImageRenderer* Renderer = nullptr;
@@ -31,7 +43,7 @@ private:
 
 	float Size						= 458.f;
 	float TotalSize					= 458.f;
-	float TotalTime					= 60.f;
+	float TotalTime					= 5.f;
 	float Time						= TotalTime;
 	float PreveTime					= TotalTime;
 		

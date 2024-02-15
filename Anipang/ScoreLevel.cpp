@@ -4,7 +4,11 @@
 #include "Score_BackGround.h"
 #include "ScoreBoard.h"
 #include "Cursor.h"
+#include "ScoreManager.h"
 
+#include "ReStart_UI.h"
+#include "GameEnd_UI.h"
+#include "MainScreen_UI.h"
 
 UScoreLevel::UScoreLevel()
 {
@@ -19,7 +23,24 @@ void UScoreLevel::BeginPlay()
 	ULevel::BeginPlay();
 	SpawnActor<AScore_BackGround>();
 	SpawnActor<AScoreBoard>();
-	Cursoor = SpawnActor<ACursor>();
+	Cursor = SpawnActor<ACursor>();
+	bool Scoreset = true;
+	ScoreMN = SpawnActor<ScoreManager>();
+	ScoreMN->ScoreLevelON();
+
+	AReStart_UI* GameStartUI = SpawnActor<AReStart_UI>();
+	GameStartUI->SetActorLocation({ 240,540 });
+	GameStartUI->SetCursor(Cursor);
+
+	//48
+	AMainScreen_UI* ScoreUI = SpawnActor<AMainScreen_UI>();
+	ScoreUI->SetActorLocation({ 240,588 });
+	ScoreUI->SetCursor(Cursor);
+
+
+	AGameEnd_UI* GameendUI = SpawnActor<AGameEnd_UI>();
+	GameendUI->SetActorLocation({ 240,636 });
+	GameendUI->SetCursor(Cursor);
 }
 
 void UScoreLevel::Tick(float _DeltaTime)

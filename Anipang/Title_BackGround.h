@@ -29,7 +29,7 @@ private:
 	float AnimationTime					 = 0.0f;
 	int AnimationFrame					 = 0;
 
-	float AlphaTime						 = 0.0f;
+	static float AlphaTime;
 	float CheckTime						 = 0.0f;
 	bool Dir							 = false;
 	bool FinalAnimation					 = false;

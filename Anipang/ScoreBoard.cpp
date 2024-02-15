@@ -14,7 +14,7 @@ void AScoreBoard::BeginPlay()
 	AActor::BeginPlay();
 	Renderer = CreateImageRenderer(1);
 	Renderer->SetImage("ScoreBoard.png");
-	SetActorLocation({ 240, 400 });
+	SetActorLocation({ 240, 300 });
 	Renderer->SetTransform({ {0,0}, {412, 686} });
 }
 

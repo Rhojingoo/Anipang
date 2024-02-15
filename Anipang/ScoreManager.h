@@ -13,7 +13,12 @@ public :
 	ScoreManager& operator =(const ScoreManager& _Other)	 = delete;
 	ScoreManager& operator =(ScoreManager& _Other) noexcept	 = delete;
 
-	void SetScore(int _Score) { Score = _Score; }
+	static void SetScore(int _Score) { Score = _Score; }
+	static int GetScore() { return Score; }
+	void ScoreLevelON() { ScoreLevel_Use = true; }
+	static void ClearScore() { Score = 0;}
+	static void SetReStart() { Restart = true; }
+
 
 protected:
 	FVector Pos = {};
@@ -24,8 +29,8 @@ protected:
 
 private:
 	bool ScoreLevel_Use					 = false;
-	int Score							 = 0;
-	
+	static bool Restart;
+	static int Score;
 	
 	ANumber* Units						 = nullptr;
 	ANumber* Tens						 = nullptr;

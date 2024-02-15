@@ -170,6 +170,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="CheckScore_UI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="AnipangCore.h">
       <SubType>
@@ -194,6 +198,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GameEnd_UI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Game_End.h">
       <SubType>
       </SubType>
@@ -203,6 +211,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Helper.h" />
+    <ClInclude Include="MainScreen_UI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Monkey_Block.h">
       <SubType>
       </SubType>
@@ -230,6 +242,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Rabbit_Block.h" />
+    <ClInclude Include="ReStart_UI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ScoreBoard.h">
       <SubType>
       </SubType>
@@ -243,6 +259,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Score_BackGround.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ScreenScore_Level.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -263,7 +283,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Title_Button.h">
+    <ClInclude Include="GameStart_UI.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -275,9 +295,17 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="UI_OBJ.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BlockBoomb_Effect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="CheckScore_UI.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -305,6 +333,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GameEnd_UI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Game_End.cpp">
       <SubType>
       </SubType>
@@ -314,6 +346,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Helper.cpp" />
+    <ClCompile Include="MainScreen_UI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Monkey_Block.cpp">
       <SubType>
       </SubType>
@@ -341,6 +377,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Rabbit_Block.cpp" />
+    <ClCompile Include="ReStart_UI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ScoreBoard.cpp">
       <SubType>
       </SubType>
@@ -354,6 +394,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Score_BackGround.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ScreenScore_Level.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -374,7 +418,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Title_Button.cpp">
+    <ClCompile Include="GameStart_UI.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -383,6 +427,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Title_PointAnimation.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="UI_OBJ.cpp">
       <SubType>
       </SubType>
     </ClCompile>

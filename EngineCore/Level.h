@@ -38,6 +38,7 @@ public :
 		return NewActor;
 	}
 
+
 	//template<typename ActorType>
 	//ActorType* SpawnActor(ActorType* _Ac, int _Order = 0)
 	//{

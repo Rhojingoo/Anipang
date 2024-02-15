@@ -23,7 +23,7 @@ void AGame_End::Tick(float _DeltaTime)
 {
 	if (Renderer->IsCurAnimationEnd() == true)
 	{
-		GEngine->ChangeLevel("Score");
+		GEngine->ChangeLevel("GetScore");
 		Destroy(0.f);
 	}
 }

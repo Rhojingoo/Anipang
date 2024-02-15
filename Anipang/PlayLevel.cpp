@@ -33,7 +33,7 @@ void UPlayLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
 	SpawnActor<APlay_Frame>();	
-	Cursoor = SpawnActor<ACursor>();
+	Cursor = SpawnActor<ACursor>();
     Start_Rabbit = SpawnActor<AGame_Start>();
     Start_Rabbit->SetActorLocation({ 235,400 });
 
@@ -80,20 +80,39 @@ void UPlayLevel::Tick(float _DeltaTime)
   
 	if (UEngineInput::IsDown('N'))
 	{
-        GEngine->ChangeLevel("Score");
+        GEngine->ChangeLevel("GetScore");
 	}
 }
 
 void UPlayLevel::LevelStart(ULevel* _Level)
 {
+    Score = ScoreManager::GetScore();
     SpawnActor<AFadeIN_OUT>();
     //OBJPOOLTEST();
     CreateBlock();
+    Start_Rabbit = SpawnActor<AGame_Start>();
+    Start_Rabbit->SetActorLocation({ 235,400 });
 
 }
 
 void UPlayLevel::LevelEnd(ULevel* _Level)
 {
+    for (int row = 0; row < MapSize; ++row)
+    {
+        for (int col = 0; col < MapSize; ++col)
+        {         
+            if (Blocks[col][row] == nullptr)
+            {
+                continue;
+            }
+
+            Blocks[col][row]->Destroy(0.f);
+            Blocks[col][row] = nullptr;
+        }
+    }
+    Timer->Finishreturn();
+    GameEnd = false;
+    GameStart = false;
 }
 
 void UPlayLevel::OBJPOOLTEST()
@@ -133,7 +152,7 @@ void UPlayLevel::OBJPOOLTEST()
                 BlockLocation.X = StartLocation.X + (CellSize * col);  // 시작 위치에서 CellSize만큼 이동
                 BlockLocation.Y = StartLocation.Y + (CellSize * row);
                 NewBlock->SetActorLocation(BlockLocation);
-                NewBlock->SetCursor(Cursoor);
+                NewBlock->SetCursor(Cursor);
                 NewBlock->SetActive(true);
                 // 동물 블록 스폰
                 //SpawnActor<AAnimal_Block>(NewBlock);
@@ -184,7 +203,7 @@ void UPlayLevel::CreateBlock()
             BlockLocation.X = StartLocation.X + (CellSize * col);  // 시작 위치에서 CellSize만큼 이동
             BlockLocation.Y = StartLocation.Y + (CellSize * row);
             Blocks[col][row]->SetActorLocation(BlockLocation);
-            Blocks[col][row]->SetCursor(Cursoor);
+            Blocks[col][row]->SetCursor(Cursor);
             Blocks[col][row]->SetColumn(col);
             Blocks[col][row]->SetRow(row);
         }
@@ -573,7 +592,7 @@ void UPlayLevel::GenerateNewBlocks()
             BlockLocation.X = StartLocation.X + (CellSize * col);  // 시작 위치에서 CellSize만큼 이동
             BlockLocation.Y = StartLocation.Y + (CellSize * 0);
             Blocks[col][0]->SetActorLocation(BlockLocation);
-            Blocks[col][0]->SetCursor(Cursoor);
+            Blocks[col][0]->SetCursor(Cursor);
             Blocks[col][0]->SetColumn(col);
             Blocks[col][0]->SetRow(0);
             continue;

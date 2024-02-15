@@ -1,5 +1,6 @@
 #include "Title_BackGround.h"
 
+float ATitle_BackGround::AlphaTime = 0.f;
 ATitle_BackGround::ATitle_BackGround()
 {
 }
@@ -85,33 +86,36 @@ void ATitle_BackGround::BeginPlay()
 void ATitle_BackGround::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-
-	AlphaSetting(_DeltaTime);
+	if (FinalAnimation == false)
+	{
+		AlphaSetting(_DeltaTime);
+	}
 }
 
 void ATitle_BackGround::AlphaSetting(float _DeltaTime)
 {
-	AlphaTime += _DeltaTime;
-	if (AlphaTime < 4.5)
-	{
-		CheckTime += _DeltaTime;
-		if (1.1f <= CheckTime)
+
+		AlphaTime += _DeltaTime;
+		if (AlphaTime < 4.5)
 		{
-			Dir = !Dir;
-			CheckTime = 0.0f;
-		}
-		if (true == Dir)
-		{
-			Renderer->SetAlpha(CheckTime * 0.15f);
+			CheckTime += _DeltaTime;
+			if (1.1f <= CheckTime)
+			{
+				Dir = !Dir;
+				CheckTime = 0.0f;
+			}
+			if (true == Dir)
+			{
+				Renderer->SetAlpha(CheckTime * 0.15f);
+			}
+			else
+			{
+				Renderer->SetAlpha(1.0f - CheckTime);
+			}
 		}
 		else
 		{
-			Renderer->SetAlpha(1.0f - CheckTime);
-		}
-	}
-	else
-	{
-		Renderer->SetAlpha(1.0f);
-		FinalAnimation = true;
-	}
+			Renderer->SetAlpha(1.0f);
+			FinalAnimation = true;
+		}	
 }

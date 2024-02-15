@@ -16,7 +16,7 @@ void ATime_Gauge::BeginPlay()
 	Renderer->CreateAnimation("Nomarl", "TimeGauge", 0, 0, 0.1f, true);
 	Renderer->CreateAnimation("Hurry", "TimeGauge", 1, 1, 0.1f, true);
 	Renderer->SetTransform({ {0.f,0.f}, {Size, 30.f} });	
-	Renderer->SetImageCuttingTransform({ {0,0}, {410, 29} });
+	//Renderer->SetImageCuttingTransform({ {0,0}, {410, 29} });
 	Renderer->ChangeAnimation("Nomarl");
 	//Renderer->SetImage("UnderBarUI2.png");
 }

@@ -21,8 +21,7 @@ void AFadeIN_OUT::BeginPlay()
 }
 
 void AFadeIN_OUT::Tick(float _DeltaTime)
-{
-	
+{	
 	AlphaTime += _DeltaTime;
 	if (1.0f <= AlphaTime)
 	{		
@@ -36,6 +35,7 @@ void AFadeIN_OUT::Tick(float _DeltaTime)
 		 if (CheckAlpha < 0.f)
 		 {
 			 Dir = true;
+			 Destroy(0.f);
 		 }
 	}	
 }

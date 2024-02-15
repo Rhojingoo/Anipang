@@ -27,6 +27,7 @@ private:
 	bool Start						= false;
 	bool Finish						= false;
 	bool NumCreate					= false;
+	bool Hurry						= false;
 
 	float Size						= 458.f;
 	float TotalSize					= 458.f;

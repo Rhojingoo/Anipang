@@ -11,9 +11,13 @@ ATime_Gauge::~ATime_Gauge()
 void ATime_Gauge::BeginPlay()
 {
 	Renderer = CreateImageRenderer(5);
-	Renderer->SetImage("UnderBarUI2.png");
-	Renderer->SetTransform({ {0.f,0.f}, {Size, 30.f} });
+	Renderer->SetImage("TimeGauge");
+	Renderer->CreateAnimation("Nomarl", "TimeGauge", 0, 0, 0.1f, true);
+	Renderer->CreateAnimation("Hurry", "TimeGauge", 1, 1, 0.1f, true);
+	Renderer->SetTransform({ {0.f,0.f}, {Size, 30.f} });	
 	Renderer->SetImageCuttingTransform({ {0,0}, {410, 29} });
+	Renderer->ChangeAnimation("Nomarl");
+	//Renderer->SetImage("UnderBarUI2.png");
 }
 
 void ATime_Gauge::Tick(float _DeltaTime)
@@ -54,6 +58,15 @@ void ATime_Gauge::Tick(float _DeltaTime)
 			Units->SetNumber(Num_Units);
 			int Num_Tens = static_cast<int>(Time) / 10;
 			Tens->SetNumber(Num_Tens);
+		}
+
+		if (Time < 10.f)
+		{
+			if (Hurry == false)
+			{
+				Renderer->ChangeAnimation("Hurry");
+				Hurry = true;
+			}
 		}
 
 		if (Time <= 0.f)

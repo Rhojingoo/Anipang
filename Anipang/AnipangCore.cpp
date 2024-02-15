@@ -64,7 +64,7 @@ void UAnipangCore::BeginPlay()
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("GameEnd"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Time\\Big_Number"));
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Time\\Small_Number"));
-
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Time\\TimeGauge"));
 	
 	
 

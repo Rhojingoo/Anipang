@@ -1,0 +1,64 @@
+#include "Time_Gauge.h"
+
+ATime_Gauge::ATime_Gauge()
+{
+}
+
+ATime_Gauge::~ATime_Gauge()
+{
+}
+
+void ATime_Gauge::BeginPlay()
+{
+	Renderer = CreateImageRenderer(5);
+	Renderer->SetImage("UnderBarUI2.png");
+	Renderer->SetTransform({ {0.f,0.f}, {Size, 30.f} });
+	Renderer->SetImageCuttingTransform({ {0,0}, {410, 29} });
+}
+
+void ATime_Gauge::Tick(float _DeltaTime)
+{
+	Pos = GetActorLocation();
+
+	if (Start == true)
+	{
+		if (NumCreate == false)
+		{
+			Tens = GetWorld()->SpawnActor<ANumber>();
+			Tens->SetNumber(6);
+			Tens->SetActorLocation({ 224 ,705 });
+			Tens->SetNumScale(25, 25);
+
+			Units = GetWorld()->SpawnActor<ANumber>();
+			Units->SetNumber(0);
+			Units->SetActorLocation({ 241 ,705 });
+			Units->SetNumScale(25, 25);
+			NumCreate = true;
+		}
+
+		Time -= _DeltaTime;
+		float checktime = PreveTime - Time;
+		if (checktime >= 1.f)
+		{
+			PreveTime = Time;
+			float SumTotalSize = (TotalSize - (TotalSize * (Time / TotalTime)));
+			float SumChangeSize = (Size - (TotalSize * (Time / TotalTime)));
+			Size = TotalSize - SumTotalSize;
+			Renderer->SetScale({ Size, 30.f });
+			Pos.X = Pos.X - SumChangeSize / 2;
+			SetActorLocation(Pos);
+		}
+
+		{
+			int Num_Units = static_cast<int>(Time) % 10;			
+			Units->SetNumber(Num_Units);
+			int Num_Tens = static_cast<int>(Time) / 10;
+			Tens->SetNumber(Num_Tens);
+		}
+
+		if (Time <= 0.f)
+		{
+			Finish = true;
+		}
+	}
+}

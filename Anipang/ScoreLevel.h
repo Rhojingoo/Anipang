@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore\Level.h>
 
+class ACursor;
 class UScoreLevel : public ULevel
 {
 public : 
@@ -19,5 +20,6 @@ protected:
 	void LevelEnd(ULevel* _Level) override;
 
 private:
+	ACursor* Cursoor = nullptr;
 };
 

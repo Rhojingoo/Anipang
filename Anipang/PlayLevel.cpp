@@ -15,7 +15,7 @@
 #include "Block_Manager.h"
 #include "Game_End.h"
 #include "Game_Start.h"
-#include "Timer.h"
+#include "Time_Gauge.h"
 #include "Number.h"
 
 UPlayLevel::UPlayLevel()
@@ -35,7 +35,7 @@ void UPlayLevel::BeginPlay()
     Start_Rabbit = SpawnActor<AGame_Start>();
     Start_Rabbit->SetActorLocation({ 235,400 });
 
-    Timer = SpawnActor<ATimer>();
+    Timer = SpawnActor<ATime_Gauge>();
     Timer->SetActorLocation({ 231,705 });
 
 
@@ -58,6 +58,7 @@ void UPlayLevel::Tick(float _DeltaTime)
     }
     else
     {
+        Timer->TimerStart();
         if (Timer->IsFinish() == true)
         {
             if (GameEnd == false)

@@ -2,7 +2,7 @@
 #include <EngineCore\Level.h>
 
 
-class ATimer;
+class ATime_Gauge;
 class AGame_End;
 class AGame_Start;
 class AAnimal_Block;
@@ -42,7 +42,7 @@ private:
 	AAnimal_Block* swap_block				= nullptr;
 	AGame_Start* Start_Rabbit				= nullptr;
 	AGame_End* End_Rabbit					= nullptr;
-	ATimer* Timer							= nullptr;
+	ATime_Gauge* Timer							= nullptr;
 
 	const int MapSize						= 7;
 	const int TotalBlocks					= MapSize * MapSize;

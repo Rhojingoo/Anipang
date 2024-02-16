@@ -11,6 +11,8 @@
 #include "GameEnd_UI.h"
 #include "MainScreen_UI.h"
 
+#include "NumberFont.h"
+
 UScreenScore_Level::UScreenScore_Level()
 {
 }
@@ -40,11 +42,38 @@ void UScreenScore_Level::BeginPlay()
 	GameendUI->SetActorLocation({ 240,686 });
 	GameendUI->SetCursor(Cursor);
 
+	{
+		ANumberFont* font = SpawnActor<ANumberFont>();
+		font->SetActorLocation({ 40,100 });
+		font->SetFont("1.", 35.f); 
+	}
+	{
+		ANumberFont* font = SpawnActor<ANumberFont>();
+		font->SetActorLocation({ 40,180 });
+		font->SetFont("2.", 35.f);
+	}
+	{
+		ANumberFont* font = SpawnActor<ANumberFont>();
+		font->SetActorLocation({ 40,260 });
+		font->SetFont("3.", 35.f);
+	}
+	{
+		ANumberFont* font = SpawnActor<ANumberFont>();
+		font->SetActorLocation({ 40,340 });
+		font->SetFont("4.", 35.f);
+	}
+	{
+		ANumberFont* font = SpawnActor<ANumberFont>();
+		font->SetActorLocation({ 40,420 });
+		font->SetFont("5.", 35.f);
+	}
 }
+
 
 void UScreenScore_Level::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
+
 }
 
 void UScreenScore_Level::LevelStart(ULevel* _Level)

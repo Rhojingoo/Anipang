@@ -127,6 +127,29 @@ public:
 	}
 		
 
+
+	void TextRender(float _DeltaTime);
+	void ImageRender(float _DeltaTime);
+
+	void SetText(std::string_view _Text)
+	{
+		Text = _Text;
+	}
+	void SetFont(std::string_view _Font)
+	{
+		Font = _Font;
+	}
+	void SetTextSize(float _Value)
+	{
+		Size = _Value;
+	}
+	void SetTextColor(Color8Bit _Color)
+	{
+		TextColor = _Color;
+	}
+
+	FTransform GetRenderTransForm();
+
 protected:
 	void BeginPlay() override;
 
@@ -140,5 +163,11 @@ private:
 
 	std::map<std::string, UAnimationInfo> AnimationInfos;
 	UAnimationInfo* CurAnimation = nullptr;
+
+
+	std::string Text = "";
+	std::string Font = "³ª´®°íµñ";
+	float Size = 10.0f;
+	Color8Bit TextColor = Color8Bit::NARed;
 };
 

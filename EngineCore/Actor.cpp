@@ -18,18 +18,42 @@ AActor::~AActor()
 		ImageRenderer = nullptr;
 	}
 	Renderers.clear();
+
+	for (UCollision* Collision : Collisions)
+	{
+		if (nullptr == Collision)
+		{
+			MsgBoxAssert("이미지 랜더러가 nullptr인 상황이 있었습니다");
+		}
+
+		delete Collision;
+		Collision = nullptr;
+	}
+
+	Collisions.clear();
 }
 
 
-UImageRenderer* AActor::CreateImageRenderer(int Order)
+UCollision* AActor::CreateCollision(int _Order)
 {
-	UImageRenderer* NewRenderer = new UImageRenderer();
-	UActorComponent* ActorCom = NewRenderer;
+	UCollision* Component = new UCollision();
+	UActorComponent* ActorCom = Component;
 	ActorCom->SetOwner(this);
-	ActorCom->SetOrder(Order);
+	ActorCom->SetOrder(_Order);
 	ActorCom->BeginPlay();
-	Renderers.push_back(NewRenderer);
-	return NewRenderer;
+	Collisions.push_back(Component);
+	return Component;
+}
+
+UImageRenderer* AActor::CreateImageRenderer(int _Order)
+{
+	UImageRenderer* Component = new UImageRenderer();
+	UActorComponent* ActorCom = Component;
+	ActorCom->SetOwner(this);
+	ActorCom->SetOrder(_Order);
+	ActorCom->BeginPlay();
+	Renderers.push_back(Component);
+	return Component;
 }
 
 void AActor::Destroy(float _DestroyTime)
@@ -40,6 +64,11 @@ void AActor::Destroy(float _DestroyTime)
 	{
 		Renderer->Destroy(_DestroyTime);
 	}
+
+	for (UCollision* Collision : Collisions)
+	{
+		Collision->Destroy(_DestroyTime);
+	}
 }
 
 void AActor::DestroyUpdate(float _DeltaTime)
@@ -49,6 +78,11 @@ void AActor::DestroyUpdate(float _DeltaTime)
 	for (UImageRenderer* Renderer : Renderers)
 	{
 		Renderer->DestroyUpdate(_DeltaTime);
+	}
+
+	for (UCollision* Collision : Collisions)
+	{
+		Collision->DestroyUpdate(_DeltaTime);
 	}
 }
 
@@ -61,7 +95,86 @@ void AActor::ActiveUpdate(float _DeltaTime)
 	{
 		Renderer->ActiveUpdate(_DeltaTime);
 	}
+
+	for (UCollision* Collision : Collisions)
+	{
+		Collision->ActiveUpdate(_DeltaTime);
+	}
 }
+
+void AActor::CheckReleaseChild()
+{
+	{
+		std::list<UImageRenderer*>::iterator StartIter = Renderers.begin();
+		std::list<UImageRenderer*>::iterator EndIter = Renderers.end();
+
+		for (; StartIter != EndIter;)
+		{
+			UImageRenderer* Renderer = StartIter.operator*();
+
+			if (nullptr == Renderer)
+			{
+				MsgBoxAssert("Collision가 nullptr인 경우가 존재했습니다");
+				return;
+			}
+
+			if (false == Renderer->IsDestroy())
+			{
+				++StartIter;
+				continue;
+			}
+
+			delete Renderer;
+			Renderer = nullptr;
+			StartIter = Renderers.erase(StartIter);
+		}
+	}
+
+	{
+		std::list<UCollision*>::iterator StartIter = Collisions.begin();
+		std::list<UCollision*>::iterator EndIter = Collisions.end();
+
+		for (; StartIter != EndIter;)
+		{
+			UCollision* Collision = StartIter.operator*();
+
+			if (nullptr == Collision)
+			{
+				MsgBoxAssert("Collision가 nullptr인 경우가 존재했습니다");
+				return;
+			}
+
+			if (false == Collision->IsDestroy())
+			{
+				++StartIter;
+				continue;
+			}
+
+			delete Collision;
+			Collision = nullptr;
+			StartIter = Collisions.erase(StartIter);
+		}
+	}
+}
+
+
+void AActor::AllRenderersActiveOff()
+{
+	for (UImageRenderer* Renderer : Renderers)
+	{
+		Renderer->ActiveOff();
+	}
+}
+
+
+void AActor::AllRenderersActiveOn()
+{
+	for (UImageRenderer* Renderer : Renderers)
+	{
+		Renderer->ActiveOn();
+	}
+}
+
 
 void AActor::Tick(float _DeltaTime)
 {

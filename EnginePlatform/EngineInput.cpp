@@ -16,12 +16,13 @@ UEngineInput::~UEngineInput()
 {
 }
 
-void UEngineInput::UEngineKey::KeyCheck()
+void UEngineInput::UEngineKey::KeyCheck(float _DeltaTime)
 {
 	if (0 != GetAsyncKeyState(Key))
 	{
 		if (true == Free)
 		{
+			PressTime = 0.0f;
 			Down = true;
 			Press = true;
 			Up = false;
@@ -29,6 +30,7 @@ void UEngineInput::UEngineKey::KeyCheck()
 		}
 		else if (true == Down)
 		{
+			PressTime += _DeltaTime;
 			Down = false;
 			Press = true;
 			Up = false;
@@ -39,6 +41,7 @@ void UEngineInput::UEngineKey::KeyCheck()
 	{
 		if (true == Press)
 		{
+			PressTime = 0.0f;
 			Down = false;
 			Press = false;
 			Up = true;
@@ -46,6 +49,7 @@ void UEngineInput::UEngineKey::KeyCheck()
 		}
 		else if (true == Up)
 		{
+			PressTime = 0.0f;
 			Down = false;
 			Press = false;
 			Up = false;
@@ -171,7 +175,7 @@ void UEngineInput::KeyCheckTick(float _DeltaTime)
 	{
 		UEngineKey& CurKey = Key.second;
 
-		CurKey.KeyCheck();
+		CurKey.KeyCheck(_DeltaTime);
 
 		if (true == CurKey.Press)
 		{

@@ -6,7 +6,7 @@ class UNameObject
 {
 public:
 	UNameObject();
-	~UNameObject();
+	virtual~UNameObject();
 
 	UNameObject(const UNameObject& _Other)						= delete;
 	UNameObject(UNameObject&& _Other) noexcept					= delete;

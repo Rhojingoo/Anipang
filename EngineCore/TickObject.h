@@ -5,7 +5,7 @@ class UTickObject
 {
 public:
 	UTickObject();
-	~UTickObject();
+	virtual ~UTickObject();
 
 	UTickObject(const UTickObject& _Other)								= delete;
 	UTickObject(UTickObject&& _Other) noexcept							= delete;

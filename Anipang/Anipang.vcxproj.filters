@@ -124,6 +124,9 @@
     <ClInclude Include="Boomb_Block_Effect.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\BoombBlockEffect</Filter>
     </ClInclude>
+    <ClInclude Include="NumberFont.h">
+      <Filter>LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animal_Block.cpp">
@@ -249,6 +252,9 @@
     <ClCompile Include="Boomb_Block_Effect.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\BoombBlockEffect</Filter>
     </ClCompile>
+    <ClCompile Include="NumberFont.cpp">
+      <Filter>LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Anipang_Helper">
@@ -325,6 +331,9 @@
     </Filter>
     <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\BoombBlockEffect">
       <UniqueIdentifier>{873409b4-20bd-4a1b-81ce-1a7dbfbd94a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor">
+      <UniqueIdentifier>{35f43313-6eda-4660-82e9-b588723af7c7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

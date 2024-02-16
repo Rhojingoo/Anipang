@@ -75,6 +75,26 @@ void UPlayLevel::Tick(float _DeltaTime)
             {
                 BlockClickUpdate(_DeltaTime);
             }
+    
+            // 검사 로직이 되는것을 확인필요.
+            //{
+            //}
+
+
+
+            // 만약 검사가 통과못했다면 [bool Blockreturn false값을 주어서 이용할것]
+            // {
+            // }
+            
+
+
+            // 만약 검사에 통과못했다면 [bool Blockreturn false값일때 사용이부분진행]              
+            // 클릭한거 이동한뒤 match가 안되면 되돌아가는 로직 짜기  
+            // {
+            // }
+
+
+            // 만약 검사가 통과했다면 [bool Blockreturn true값일때 사용이부분진행]              
             BlockDestroyCheck();
             BlockMove();
             GenerateNewBlocks();
@@ -447,8 +467,6 @@ void UPlayLevel::BlockDestroyCheck()
 	{
 		for (int col = 1; col < MapSize - 1; col++)
 		{
-
-			// test 없애고 있는중
 			if (Blocks[col][row] == nullptr || Blocks[col - 1][row] == nullptr || Blocks[col + 1][row] == nullptr)
 			{
 				continue;

@@ -67,7 +67,7 @@ void AMonkey_Block::Tick(float _DeltaTime)
 			Blockstatus = Block_Status::Idle;
 			return;
 		}
-		AddActorLocation({ FVector::Down * 150.0f * _DeltaTime });
+		AddActorLocation({ FVector::Down * DownSpeed * _DeltaTime });
 	}
 	break;
 	case AAnimal_Block::Block_Status::Click:

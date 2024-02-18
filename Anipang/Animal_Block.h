@@ -4,7 +4,7 @@
 
 class AAnimal_Block : public AActor
 {
-public : 
+public:
 	struct int2
 	{
 		int Row;
@@ -13,7 +13,7 @@ public :
 
 	enum class Block_Status
 	{
-		Idle, 
+		Idle,
 		Click,
 		Move,
 		Boomb,
@@ -37,10 +37,10 @@ public :
 	AAnimal_Block();
 	~AAnimal_Block();
 
-	AAnimal_Block(const AAnimal_Block& _Other)								= delete;
-	AAnimal_Block(AAnimal_Block& _Other) noexcept							= delete;
-	AAnimal_Block& operator =(const AAnimal_Block& _Other)					= delete;
-	AAnimal_Block& operator =(AAnimal_Block& _Other) noexcept				= delete;
+	AAnimal_Block(const AAnimal_Block& _Other) = delete;
+	AAnimal_Block(AAnimal_Block& _Other) noexcept = delete;
+	AAnimal_Block& operator =(const AAnimal_Block& _Other) = delete;
+	AAnimal_Block& operator =(AAnimal_Block& _Other) noexcept = delete;
 
 	void SetCursor(ACursor* _Cursor) { Cursor = _Cursor; }
 	void SetRow(int _Row) { BlockLocation.Row = _Row; }
@@ -53,8 +53,8 @@ public :
 	bool GetSecondPick() { return SecondPick; }
 
 	static bool SwapREADY;
-	static bool ClickChange; 
-	static bool SwapChange; 
+	static bool ClickChange;
+	static bool SwapChange;
 
 	void SetBlockstate(bool _Blockstatus, int _set)
 	{
@@ -79,25 +79,26 @@ public :
 	void SetUnderBoomb(bool _BoombBlock) { UnderBlockBoomb = _BoombBlock; }
 	bool GetUnderBoomb() { return UnderBlockBoomb; }
 	void SetUnderPos(FVector _Set) { UnderPos = _Set; }
-
+	FVector GetUnderPos() { return UnderPos; }
 
 protected:
-	UImageRenderer* Renderer				= nullptr;	
-	FVector Pos								= {};
-	FVector UnderPos						= {};
-	FVector Size							= {};
-	bool BlockClick							= false;
-	bool ClickCheck							= false;
-	Block_Status Blockstatus				= Block_Status::Idle;
-	Block_Type Blocktype					= Block_Type::None;
+	UImageRenderer* Renderer = nullptr;
+	FVector Pos = {};
+	FVector UnderPos = {};
+	FVector Size = {};
+	bool BlockClick = false;
+	bool ClickCheck = false;
+	Block_Status Blockstatus = Block_Status::Idle;
+	Block_Type Blocktype = Block_Type::None;
 
 	static bool FirstClick;
 	static bool SecondClick;
-	int2 BlockLocation						= {0,0};
-	bool FirstPick							= false;
-	bool SecondPick							= false;
-	bool BoombBlock							= false;
-	bool UnderBlockBoomb					= false;
+	int2 BlockLocation = { 0,0 };
+	bool FirstPick = false;
+	bool SecondPick = false;
+	bool BoombBlock = false;
+	bool UnderBlockBoomb = false;
+	float DownSpeed = 150.f;
 
 
 	void BeginPlay() override;
@@ -105,7 +106,7 @@ protected:
 	void CreateBlockEffect();
 
 private:
-	ACursor* Cursor							= nullptr;
+	ACursor* Cursor = nullptr;
 	void PickingCheck();
 };
 

@@ -57,5 +57,27 @@ private:
 	bool GameEnd							= false;
 	int Score								= 0;
 
+	bool XCLICKMOVE							= false;
+	bool XSWAPMOVE							= false;
+	bool YCLICKMOVE							= false;
+	bool YSWAPMOVE							= false;
+
+	const int BlockChangeDefault = 0;
+	const int BlockChangeSuccess = 1;
+	const int BlockChangeFail = 2;
+
+	int XLINE_ChageCheck = BlockChangeDefault;
+	int YLINE_ChageCheck = BlockChangeDefault;
+	bool XlinemoveCheck = false;
+	bool YlinemoveCheck = false;
+	void XlineBlock_Swap_Check(float _DeltaTime);
+	void XlineBlock_Swap_Move(float _DeltaTime);
+	void YlineBlock_Swap_Check(float _DeltaTime);
+	void YlineBlock_Swap_Move(float _DeltaTime);
+
+	FVector Clickpos;
+	FVector Swappos;
+	FVector TempClick;
+	FVector TempSwap;
 };
 

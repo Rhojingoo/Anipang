@@ -61,13 +61,13 @@ public :
 		BlockClick = _Blockstatus;
 		if (_set == 1)
 		{
-			FirstClick = _Blockstatus;
-			FirstPick = _Blockstatus;
+			FirstClick = BlockClick;
+			FirstPick = BlockClick;
 		}
 		else if (_set == 2)
 		{
-			SecondClick = _Blockstatus;
-			SecondPick = _Blockstatus;
+			SecondClick = BlockClick;
+			SecondPick = BlockClick;
 		}
 	}
 

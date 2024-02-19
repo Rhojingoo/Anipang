@@ -46,6 +46,8 @@ public:
 	void SetRow(int _Row) { BlockLocation.Row = _Row; }
 	void SetColumn(int _Column) { BlockLocation.Column = _Column; }
 	int2 GetBlockLocation() { return BlockLocation; }
+	int GetBlockLocationRow() { return BlockLocation.Row; }
+	int GetBlockLocationCol() { return BlockLocation.Column; }
 
 	static bool GetFirstClick() { return FirstClick; }
 	static bool GetSecondClick() { return SecondClick; }
@@ -81,6 +83,7 @@ public:
 	void SetUnderPos(FVector _Set) { UnderPos = _Set; }
 	FVector GetUnderPos() { return UnderPos; }
 
+
 protected:
 	UImageRenderer* Renderer = nullptr;
 	FVector Pos = {};
@@ -99,6 +102,7 @@ protected:
 	bool BoombBlock = false;
 	bool UnderBlockBoomb = false;
 	float DownSpeed = 150.f;
+
 
 
 	void BeginPlay() override;

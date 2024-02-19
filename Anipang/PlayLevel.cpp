@@ -71,46 +71,47 @@ void UPlayLevel::Tick(float _DeltaTime)
         }
         else
         {
-            if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
+
+            // Before GameStart CanMake3match Checks Logics;
+            CanAMatch = CanMakeAMatch();
+
+
+            if (CanAMatch == true)
             {
-                BlockClickUpdate(_DeltaTime);
-            }
+                if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
+                {
+                    BlockClickUpdate(_DeltaTime);
+                }
 
-            if (ClickChangeCheck == true)
+                if (ClickChangeCheck == true)
+                {
+                    ////클릭으로 이동된 블럭 3Match가 되는지 판단하는 검사로직
+                    XlineBlock_Swap_Check(_DeltaTime);
+                    XlineBlock_Swap_Move(_DeltaTime);
+                    ////검사된 블럭의 return 또는 stay를 나타내는 실행로직
+                    YlineBlock_Swap_Check(_DeltaTime);
+                    YlineBlock_Swap_Move(_DeltaTime);
+
+                    //수정블럭이동
+                    BlockDestroyAllow = true;
+                }
+
+
+                if (BlockDestroyAllow == true)
+                {
+                    BlockDestroyCheck();
+                }
+
+                BlockMove(_DeltaTime);
+                GenerateNewBlocks();
+                BlockMoveCheck();
+            }
+            else
             {
-                ////클릭으로 이동된 블럭 3Match가 되는지 판단하는 검사로직
-                XlineBlock_Swap_Check(_DeltaTime);
-                XlineBlock_Swap_Move(_DeltaTime);
-                ////검사된 블럭의 return 또는 stay를 나타내는 실행로직
-                YlineBlock_Swap_Check(_DeltaTime);
-                YlineBlock_Swap_Move(_DeltaTime);
+                int a = 0;
+                MsgBoxAssert("움직일수 있는 블럭이 없습니다.");
             }
-
-
-
-
-
-            BlockDestroyCheck();
-            BlockMove();
-            GenerateNewBlocks();
         }
-
-
-
-
-
-        // 검사 로직이 되는것을 확인필요.
-        //{
-        //}
-        // 만약 검사가 통과못했다면 [bool Blockreturn false값을 주어서 이용할것]
-        // {
-        // }  
-        // 만약 검사에 통과못했다면 [bool Blockreturn false값일때 사용이부분진행]              
-        // 클릭한거 이동한뒤 match가 안되면 되돌아가는 로직 짜기  
-        // {
-        // }
-        // 만약 검사가 통과했다면 [bool Blockreturn true값일때 사용이부분진행]              
-
     }
 
 
@@ -248,6 +249,95 @@ void UPlayLevel::CreateBlock()
             Blocks[col][row]->SetRow(row);
         }
     }
+}
+
+bool UPlayLevel::CanMakeAMatch()
+{
+    for (int row = 0; row < MapSize; row++)
+    {
+        for (int col = 0; col < MapSize; col++)
+        {
+            if (Blocks[col][row] == nullptr)
+            {
+                continue;
+            }
+
+            // 스왑할 수 있는 두 방향: 오른쪽과 아래
+            int directions[2][2] = { {0, 1}, {1, 0} }; // {dx, dy}
+
+            for (auto& dir : directions)
+            {
+                int newRow = row + dir[1];
+                int newCol = col + dir[0];
+
+                // 새 위치가 보드 내에 있는지 확인
+                if (newRow < MapSize && newCol < MapSize && Blocks[newCol][newRow] != nullptr)
+                {
+                    // 블록을 스왑
+                    AAnimal_Block* temp = Blocks[col][row];
+                    Blocks[col][row] = Blocks[newCol][newRow];
+                    Blocks[newCol][newRow] = temp;
+
+                    // 스왑 후 매치가 있는지 확인
+                    if (CheckForMatch(col, row) == true || CheckForMatch(newCol, newRow) == true)
+                    {
+                        // 원상태로 복구
+                        Blocks[newCol][newRow] = Blocks[col][row];
+                        Blocks[col][row] = temp;
+                        return true; // 한 번의 움직임으로 매치 가능
+                    }
+
+                    // 원상태로 복구
+                    Blocks[newCol][newRow] = Blocks[col][row];
+                    Blocks[col][row] = temp;
+                }
+            }
+        }
+    }
+    return false; // 어떤 움직임으로도 3개 이상의 매치를 만들 수 없음
+}
+
+bool UPlayLevel::CheckForMatch(int _col, int _row)
+{
+    if (Blocks[_col][_row] == nullptr)
+        return false;
+
+    AAnimal_Block::Block_Type CheckBL = Blocks[_col][_row]->GetBlockType();
+    int matchCount = 1; // 시작 블록을 포함하여 카운트 시작
+
+    // 수평 방향 검사 (왼쪽)
+    for (int i = _col - 1; i >= 0 && Blocks[i][_row] != nullptr && Blocks[i][_row]->GetBlockType() == CheckBL; i--)
+    {
+        matchCount++;
+    }
+    // 수평 방향 검사 (오른쪽)
+    for (int i = _col + 1; i < MapSize && Blocks[i][_row] != nullptr && Blocks[i][_row]->GetBlockType() == CheckBL; i++)
+    {
+        matchCount++;
+    }
+    if (matchCount >= 3)
+    {
+        return true; // 수평 방향으로 3개 이상 일치
+    }
+
+    matchCount = 1; // 카운트 초기화 후 수직 방향 검사
+
+    // 수직 방향 검사 (위)
+    for (int i = _row - 1; i >= 0 && Blocks[_col][i] != nullptr && Blocks[_col][i]->GetBlockType() == CheckBL; i--)
+    {
+        matchCount++;
+    }
+    // 수직 방향 검사 (아래)
+    for (int i = _row + 1; i < MapSize && Blocks[_col][i] != nullptr && Blocks[_col][i]->GetBlockType() == CheckBL; i++)
+    {
+        matchCount++;
+    }
+    if (matchCount >= 3)
+    {
+        return true; // 수직 방향으로 3개 이상 일치
+    }
+
+    return false; // 수평 또는 수직 방향에서 3개 이상 일치하는 블록이 없음
 }
 
 
@@ -829,40 +919,6 @@ void UPlayLevel::BlockDestroyCheck()
                 Score += 10 * matchCount; // 점수 증가
                 col += matchCount - 1; // 이미 검사한 블록은 건너뛰기
             }
-
-
-            //if (Blocks[col][row] == nullptr || Blocks[col - 1][row] == nullptr || Blocks[col + 1][row] == nullptr)
-            //{
-            //	continue;
-            //}
-
-            //AAnimal_Block* CheckBlock = Blocks[col][row];
-            //FVector CheckBlockpos = CheckBlock->GetActorLocation();
-
-            //AAnimal_Block* XLine_Check_Before = Blocks[col - 1][row];
-            //AAnimal_Block* XLine_Check_After = Blocks[col + 1][row];
-
-            //// 1. x축 기준으로 검사진행
-            //// 0번째 와 마지막인 6번째는 제외 시키고 검사
-            //{
-            //	if (XLine_Check_Before->GetBlockType() != CheckBlock->GetBlockType())
-            //	{
-            //		continue;
-            //	}
-            //	if (XLine_Check_After->GetBlockType() != CheckBlock->GetBlockType())
-            //	{
-            //		continue;
-            //	}
-
-            //	XLine_Check_Before->SetBoomb(true);
-            //	XLine_Check_After->SetBoomb(true);
-            //	CheckBlock->SetBoomb(true);
-
-            //	Blocks[col + 1][row] = nullptr;
-            //	Blocks[col - 1][row] = nullptr;
-            //	Blocks[col][row] = nullptr;
-   //             Score += 10;
-            //}
         }
     }
 
@@ -897,49 +953,11 @@ void UPlayLevel::BlockDestroyCheck()
                 Score += 10 * matchCount; // 점수 증가
                 row += matchCount - 1; // 이미 검사한 블록은 건너뛰기
             }
-
-
-
-            // test 없애고 있는중
-            //if (Blocks[col][row] == nullptr || Blocks[col][row - 1] == nullptr || Blocks[col][row + 1] == nullptr)
-            //{
-            //	continue;
-            //}
-
-
-            //AAnimal_Block* CheckBlock = Blocks[col][row];
-            //FVector CheckBlockpos = CheckBlock->GetActorLocation();
-
-            //AAnimal_Block* YLine_Check_Before = Blocks[col][row - 1];
-            //AAnimal_Block* YLine_Check_After = Blocks[col][row + 1];
-
-            //// 2. y축 기준으로 검사진행
-            // // 0번째 와 마지막인 6번째는 제외 시키고 검사
-            //{
-            //	if (YLine_Check_Before->GetBlockType() != CheckBlock->GetBlockType())
-            //	{
-            //		continue;
-            //	}
-            //	if (YLine_Check_After->GetBlockType() != CheckBlock->GetBlockType())
-            //	{
-            //		continue;
-            //	}
-
-            //	YLine_Check_Before->SetBoomb(true);
-            //	YLine_Check_After->SetBoomb(true);
-            //	CheckBlock->SetBoomb(true);
-
-
-            //	Blocks[col][row - 1] = nullptr;
-            //	Blocks[col][row + 1] = nullptr;
-            //	Blocks[col][row] = nullptr;
-   //             Score += 10;
-            //}
         }
     }
 }
 
-void UPlayLevel::BlockMove()
+void UPlayLevel::BlockMove(float _DeltaTime)
 {
     for (int row = 0; row < MapSize - 1; row++)
     {
@@ -949,6 +967,7 @@ void UPlayLevel::BlockMove()
             {
                 continue;
             }
+            int count = 0;
 
             if (Blocks[col][row + 1] == nullptr)
             {
@@ -957,10 +976,9 @@ void UPlayLevel::BlockMove()
                     swap_block = Blocks[col][row];
                     FVector BeenBlockpos = FVector(swap_block->GetActorLocation().X, swap_block->GetActorLocation().Y + CellSize, swap_block->GetActorLocation().Z, swap_block->GetActorLocation().W);
                     Blocks[col][row]->SetUnderPos(BeenBlockpos);
-                    Blocks[col][row]->SetUnderBoomb(true);
-
-                    Blocks[col][row + 1] = Blocks[col][row];
                     Blocks[col][row]->SetRow(row + 1);
+                    Blocks[col][row]->SetUnderBoomb(true);
+                    Blocks[col][row + 1] = Blocks[col][row];
                     Blocks[col][row] = nullptr;
                 }
             }
@@ -1016,3 +1034,47 @@ void UPlayLevel::GenerateNewBlocks()
         }
     }
 }
+
+void UPlayLevel::BlockMoveCheck()
+{
+    int count = 0;
+
+    for (int row = 0; row < MapSize - 1; row++)
+    {
+        for (int col = 0; col < MapSize; col++)
+        {
+            if (Blocks[col][row] == nullptr)
+            {
+                ++count;
+            }
+        }
+    }
+
+    for (int row = 0; row < MapSize - 1; row++)
+    {
+        for (int col = 0; col < MapSize; col++)
+        {
+            if (Blocks[col][row] == nullptr)
+            {
+                continue;
+            }
+            if (Blocks[col][row]->GetUnderBoomb() == true)
+            {
+                ++count;
+            }
+        }
+    }
+
+    if (count >= 1)
+    {
+        BlockDestroyAllow = false;
+    }
+    else if (count == 0)
+    {
+        BlockDestroyAllow = true;
+    }
+
+}
+
+
+

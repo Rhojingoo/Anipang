@@ -1,16 +1,16 @@
 #pragma once
 #include <EngineBase\EngineMath.h>
 
-class Block_Location
+class UBlock_Location
 {
 public:
-	Block_Location();
-	~Block_Location();
+	UBlock_Location();
+	~UBlock_Location();
 
-	Block_Location(const Block_Location& _Other)					= delete;
-	Block_Location(Block_Location& _Other) noexcept					= delete;
-	Block_Location& operator =(const 	Block_Location& _Other)		= delete;
-	Block_Location& operator =(Block_Location& _Other)noexcept		= delete;
+	UBlock_Location(const UBlock_Location& _Other)					= delete;
+	UBlock_Location(UBlock_Location& _Other) noexcept					= delete;
+	UBlock_Location& operator =(const 	UBlock_Location& _Other)		= delete;
+	UBlock_Location& operator =(UBlock_Location& _Other)noexcept		= delete;
 
 	const FVector GetBlockFVector(int _XLocation,int _YLocation);
 

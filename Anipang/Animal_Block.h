@@ -3,7 +3,7 @@
 #include "Block_Location.h"
 #include "Cursor.h"
 
-class AAnimal_Block : public AActor,  public Block_Location
+class AAnimal_Block : public AActor,  public UBlock_Location
 {
 public:
 	struct int2

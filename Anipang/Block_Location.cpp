@@ -1,14 +1,14 @@
 #include "Block_Location.h"
 
-Block_Location::Block_Location()
+UBlock_Location::UBlock_Location()
 {
 }
 
-Block_Location::~Block_Location()
+UBlock_Location::~UBlock_Location()
 {
 }
 
-const FVector Block_Location::GetBlockFVector(int _XLocation, int _YLocation)
+const FVector UBlock_Location::GetBlockFVector(int _XLocation, int _YLocation)
 {
 	if (_XLocation == 0 && _YLocation == 0)
 	{

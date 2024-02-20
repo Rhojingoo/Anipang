@@ -13,46 +13,18 @@ void ATitle_BackGround::BeginPlay()
 {
 	AActor::BeginPlay();
 
-#pragma region bejuweled
 	
-	//// 타이틀 배경
-	//	Renderer = CreateImageRenderer(0);
-	//	Renderer->SetImage("gameselector_bg.png");
-	//	SetActorLocation({ 512, 245 });
-	//	Renderer->SetTransform({ {0,0}, {1024, 570} });
-	//	Renderer->SetImageCuttingTransform({ {0,0}, {1024, 570} });
-	//
-	////  타이틀 오브젝트 블럭Effect
-	//	UImageRenderer* Renderer2 = CreateImageRenderer(1);
-	//	Renderer2->SetImage("Topaz.png");	
-	//	Renderer2->SetTransform({ {100,200}, {84, 84} });
-	//	Renderer2->SetImageCuttingTransform({ {0,0}, {84, 84} });
-	//	Renderer2->CreateAnimation("Idle", "Topaz.png", 0, 19, 0.1f, true);
-	//	Renderer2->ChangeAnimation("Idle");	
-#pragma endregion
-
-#pragma region anipang 
-	{
-		// 이미지 한장 랜더
-		//Renderer = CreateImageRenderer(1);
-		//Renderer->SetImage("boom2.png");
-		//SetActorLocation({ 50, 50 });
-		//Renderer->SetTransform({ {50,50}, {50, 50} });
-		//Renderer->SetImageCuttingTransform({ {0,0}, {80, 80} });
-	}
-
-	{
-		 //타이틀 배경  애니메이션
-		Renderer = CreateImageRenderer(0);
-		Renderer->SetImage("Intro_BG");
-		SetActorLocation({ 240, 400 });
-		//Renderer->SetTransColor(Color8Bit::Magenta.ZeroAlphaColor());
-		Renderer->SetTransform({ {0,0}, {480, 800} });
-		Renderer->SetImageCuttingTransform({ {0,0}, {480, 800} });
-		Renderer->CreateAnimation("Idle", "Intro_BG", 0, 3, 1.65f, false);
-		Renderer->ChangeAnimation("Idle");
-	}
-#pragma endregion
+	//타이틀 배경  애니메이션
+	Renderer = CreateImageRenderer(0);
+	Renderer->SetImage("Intro_BG");
+	SetActorLocation({ 240, 400 });
+	//Renderer->SetTransColor(Color8Bit::Magenta.ZeroAlphaColor());
+	Renderer->SetTransform({ {0,0}, {480, 800} });
+	Renderer->SetImageCuttingTransform({ {0,0}, {480, 800} });
+	Renderer->CreateAnimation("Idle", "Intro_BG", 0, 3, 1.25f, false);
+	//Renderer->CreateAnimation("Idle", "Intro_BG", 0, 3, 1.55f, false);
+	Renderer->ChangeAnimation("Idle");
+	
 
 #pragma region 테스트 이미지
 

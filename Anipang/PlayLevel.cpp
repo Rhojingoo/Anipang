@@ -99,15 +99,23 @@ void UPlayLevel::Tick(float _DeltaTime)
                     BlockDestroyAllow = true;
                 }
 
-
                 if (BlockDestroyAllow == true)
                 {
                     BlockDestroyCheck();
+                    BlockDestroyAllow = false;
                 }
 
                 BlockMove(_DeltaTime);
                 GenerateNewBlocks();
                 BlockMoveCheck();
+
+                // 콤보가 10이상 일때 폭탄 블럭 생성
+                {
+                    //if (Combo - ComboTens >= 10)
+                    //{
+                    //    
+                    //}
+                }
             }
             else
             {
@@ -122,9 +130,6 @@ void UPlayLevel::Tick(float _DeltaTime)
             }
         }
     }
-
-
-
 
     ScoreMN->SetScore(Score);
 
@@ -363,20 +368,6 @@ bool UPlayLevel::CheckForMatch(int _col, int _row)
     return false; // 수평 또는 수직 방향에서 3개 이상 일치하는 블록이 없음
 }
 
-void UPlayLevel::AllDestroyCheck()
-{
-    for (int row = 0; row < MapSize; row++)
-    {
-        for (int col = 0; col < MapSize; col++)
-        {
-            bool Boomb = true;
-            Blocks[col][row]->SetBoomb(Boomb);
-            Blocks[col][row] = nullptr;
-        }
-    }
-    AllDestroy = true;
-}
-
 
 
 void UPlayLevel::BlockClickUpdate(float _DeltaTime)
@@ -607,7 +598,6 @@ void UPlayLevel::Blockreturn(int _clickRow, int _clickCol, int _swapkRow, int _s
     }
 }
 
-
 bool UPlayLevel::CheckMatchAroundBlock(int col, int row)
 {
     // 현재 블록의 타입 가져오기
@@ -663,6 +653,7 @@ bool UPlayLevel::CheckMatchAroundBlock(int col, int row)
     // 수평 및 수직 매치 모두 없으면 false 반환
     return false;
 }
+
 
 
 void UPlayLevel::XlineBlock_Swap_Check(float _DeltaTime)
@@ -925,6 +916,7 @@ void UPlayLevel::BlockDestroyCheck()
     //콤보가 5이상일
     if (Combo >= ComboBoombCheck)
     {
+        // X축 검사
         for (int row = 0; row < MapSize; row++)
         {
             for (int col = 0; col < MapSize; col++)
@@ -936,7 +928,8 @@ void UPlayLevel::BlockDestroyCheck()
                 int matchCount = 1;
 
                 // 오른쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
-                for (int checkCol = col + 1; checkCol < MapSize; checkCol++) {
+                for (int checkCol = col + 1; checkCol < MapSize; checkCol++)
+                {
                     if (Blocks[checkCol][row] != nullptr && Blocks[checkCol][row]->GetBlockType() == StartBlock->GetBlockType())
                     {
                         matchCount++;
@@ -947,21 +940,45 @@ void UPlayLevel::BlockDestroyCheck()
                     }
                 }
 
-                // 3개 이상 연속일 경우 모든 연속 블록 제거
-                if (matchCount >= 3)
+                if (matchCount >= 3) // 조건을 충족하는 경우
                 {
-                    for (int i = 0; i < matchCount; i++)
+                    Score += (10 * matchCount) * (Combo + 1);
+
+                    for (int Y = -1; Y <= 1; Y++) // Y 범위 수정
                     {
-                        Blocks[col + i][row]->SetBoomb(true);
-                        Blocks[col + i][row] = nullptr;
+                        for (int X = 0; X < matchCount; X++)
+                        {
+                            // 배열 범위를 벗어나는지 확인
+                            if (col + X >= MapSize || row + Y < 0 || row + Y >= MapSize)
+                                continue;
+
+                            // 기본 폭발 로직
+                            if (Blocks[col + X][row + Y] != nullptr)
+                            {
+                                Blocks[col + X][row + Y]->SetBoomb(true);
+                                Blocks[col + X][row + Y] = nullptr;
+                                Score += 10 * Combo;
+                            }
+                        }
                     }
-                    if (Combo == 0)
+
+                    // 가로 매치의 경우 가운데 줄 기준 양옆 추가 폭발
+                    if (row > 0 && row < MapSize - 1) // 범위 체크
                     {
-                        Score += 10 * matchCount; // 점수 증가
-                    }
-                    else
-                    {
-                        Score += 10 * matchCount * Combo;
+                        // 왼쪽 추가 폭발
+                        if (col > 0 && Blocks[col - 1][row] != nullptr)
+                        {
+                            Blocks[col - 1][row]->SetBoomb(true);
+                            Blocks[col - 1][row] = nullptr;
+                            Score += 10 * Combo;
+                        }
+                        // 오른쪽 추가 폭발
+                        if (col + matchCount < MapSize && Blocks[col + matchCount][row] != nullptr)
+                        {
+                            Blocks[col + matchCount][row]->SetBoomb(true);
+                            Blocks[col + matchCount][row] = nullptr;
+                            Score += 10 * Combo;
+                        }
                     }
                     ++Combo;
                     col += matchCount - 1; // 이미 검사한 블록은 건너뛰기
@@ -970,6 +987,7 @@ void UPlayLevel::BlockDestroyCheck()
         }
 
 
+        // Y축 검사
         for (int row = 0; row < MapSize; row++)
         {
             for (int col = 0; col < MapSize; col++)
@@ -980,30 +998,57 @@ void UPlayLevel::BlockDestroyCheck()
                 int matchCount = 1;
 
                 // 아래쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
-                for (int checkRow = row + 1; checkRow < MapSize; checkRow++) {
+                for (int checkRow = row + 1; checkRow < MapSize; checkRow++)
+                {
                     if (Blocks[col][checkRow] != nullptr && Blocks[col][checkRow]->GetBlockType() == StartBlock->GetBlockType())
                     {
                         matchCount++;
                     }
-                    else {
+                    else
+                    {
                         break;
                     }
                 }
 
-                // 3개 이상 연속일 경우 모든 연속 블록 제거
-                if (matchCount >= 3) {
-                    for (int i = 0; i < matchCount; i++)
+                if (matchCount >= 3) // 조건을 충족하는 경우
+                {
+
+
+                    for (int Y = 0; Y < matchCount; Y++)
                     {
-                        Blocks[col][row + i]->SetBoomb(true);
-                        Blocks[col][row + i] = nullptr;
+                        for (int X = -1; X <= 1; X++) // X 범위 수정
+                        {
+                            // 배열 범위를 벗어나는지 확인
+                            if (col + X < 0 || col + X >= MapSize || row + Y >= MapSize)
+                                continue;
+
+                            // 기본 폭발 로직
+                            if (Blocks[col + X][row + Y] != nullptr)
+                            {
+                                Blocks[col + X][row + Y]->SetBoomb(true);
+                                Blocks[col + X][row + Y] = nullptr;
+                                Score += 10 * Combo;
+                            }
+                        }
                     }
-                    if (Combo == 0)
+
+                    // 세로 매치의 경우 가운데 줄 기준 위아래 추가 폭발
+                    if (col > 0 && col < MapSize - 1) // 범위 체크
                     {
-                        Score += 10 * matchCount; // 점수 증가
-                    }
-                    else
-                    {
-                        Score += 10 * matchCount * Combo;
+                        // 위쪽 추가 폭발
+                        if (row > 0 && Blocks[col][row - 1] != nullptr)
+                        {
+                            Blocks[col][row - 1]->SetBoomb(true);
+                            Blocks[col][row - 1] = nullptr;
+                            Score += 10 * Combo;
+                        }
+                        // 아래쪽 추가 폭발
+                        if (row + matchCount < MapSize && Blocks[col][row + matchCount] != nullptr)
+                        {
+                            Blocks[col][row + matchCount]->SetBoomb(true);
+                            Blocks[col][row + matchCount] = nullptr;
+                            Score += 10 * Combo;
+                        }
                     }
                     ++Combo;
                     row += matchCount - 1; // 이미 검사한 블록은 건너뛰기
@@ -1081,7 +1126,8 @@ void UPlayLevel::BlockDestroyCheck()
                 }
 
                 // 3개 이상 연속일 경우 모든 연속 블록 제거
-                if (matchCount >= 3) {
+                if (matchCount >= 3)
+                {
                     for (int i = 0; i < matchCount; i++)
                     {
                         Blocks[col][row + i]->SetBoomb(true);
@@ -1221,7 +1267,22 @@ void UPlayLevel::BlockMoveCheck()
         BlockDestroyAllow = true;
         CheckMatch = true;
     }
+
 }
 
 
+
+void UPlayLevel::AllDestroyCheck()
+{
+    for (int row = 0; row < MapSize; row++)
+    {
+        for (int col = 0; col < MapSize; col++)
+        {
+            bool Boomb = true;
+            Blocks[col][row]->SetBoomb(Boomb);
+            Blocks[col][row] = nullptr;
+        }
+    }
+    AllDestroy = true;
+}
 

@@ -1,6 +1,6 @@
 #pragma once
 #include <EngineCore\Level.h>
-
+#include <List>
 
 class ScoreManager;
 class ATime_Gauge;
@@ -50,6 +50,7 @@ private:
 	AAnimal_Block* Blocks[7][7] = {};
 	AAnimal_Block* click_block = nullptr;
 	AAnimal_Block* swap_block = nullptr;
+	AAnimal_Block* Combo_block = nullptr;
 	AGame_Start* Start_Rabbit = nullptr;
 	AGame_End* End_Rabbit = nullptr;
 	ATime_Gauge* Timer = nullptr;
@@ -92,9 +93,14 @@ private:
 
 	int Combo = 0;
 	const int ComboBoombCheck = 5;
+	bool ComboBomb_Right = false;
+	bool ComboBomb_Left = false;
+
+
 	int ComboTens = 0;
 	float ComboTime = 0.f;
 	void ComboCheck(float _DeltaTime);
+
 
 	bool CanMakeAMatch();
 	bool CheckForMatch(int _col, int _row);

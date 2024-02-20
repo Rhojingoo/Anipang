@@ -71,10 +71,13 @@ void UPlayLevel::Tick(float _DeltaTime)
         }
         else
         {
+            //ComboCheck(_DeltaTime);
 
             // Before GameStart CanMake3match Checks Logics;
-            CanAMatch = CanMakeAMatch();
-
+            if (CheckMatch == true)
+            {
+                CanAMatch = CanMakeAMatch();
+            }
 
             if (CanAMatch == true)
             {
@@ -108,8 +111,14 @@ void UPlayLevel::Tick(float _DeltaTime)
             }
             else
             {
-                int a = 0;
-                MsgBoxAssert("움직일수 있는 블럭이 없습니다.");
+                AllDestroyCheck();
+                if (AllDestroy == true)
+                {
+                    CreateBlock();
+                    AllDestroy = false;
+                }
+                // int a = 0;
+                // MsgBoxAssert("움직일수 있는 블럭이 없습니다.");
             }
         }
     }
@@ -154,6 +163,7 @@ void UPlayLevel::LevelEnd(ULevel* _Level)
     Timer->Finishreturn();
     GameEnd = false;
     GameStart = false;
+    Combo = 0;
 }
 
 void UPlayLevel::OBJPOOLTEST()
@@ -251,6 +261,19 @@ void UPlayLevel::CreateBlock()
     }
 }
 
+void UPlayLevel::ComboCheck(float _DeltaTime)
+{
+    if (Combo >= 1)
+    {
+        ComboTime += _DeltaTime;
+        if (ComboTime >= 2.0f)
+        {
+            ComboTime = 0.f;
+            Combo = 0;
+        }
+    }
+}
+
 bool UPlayLevel::CanMakeAMatch()
 {
     for (int row = 0; row < MapSize; row++)
@@ -263,7 +286,7 @@ bool UPlayLevel::CanMakeAMatch()
             }
 
             // 스왑할 수 있는 두 방향: 오른쪽과 아래
-            int directions[2][2] = { {0, 1}, {1, 0} }; // {dx, dy}
+            int directions[2][2] = { {0, 1}, {1, 0} };
 
             for (auto& dir : directions)
             {
@@ -338,6 +361,20 @@ bool UPlayLevel::CheckForMatch(int _col, int _row)
     }
 
     return false; // 수평 또는 수직 방향에서 3개 이상 일치하는 블록이 없음
+}
+
+void UPlayLevel::AllDestroyCheck()
+{
+    for (int row = 0; row < MapSize; row++)
+    {
+        for (int col = 0; col < MapSize; col++)
+        {
+            bool Boomb = true;
+            Blocks[col][row]->SetBoomb(Boomb);
+            Blocks[col][row] = nullptr;
+        }
+    }
+    AllDestroy = true;
 }
 
 
@@ -885,73 +922,182 @@ void UPlayLevel::YlineBlock_Swap_Move(float _DeltaTime)
 
 void UPlayLevel::BlockDestroyCheck()
 {
-    for (int row = 0; row < MapSize; row++)
+    //콤보가 5이상일
+    if (Combo >= ComboBoombCheck)
     {
-        for (int col = 0; col < MapSize; col++)
+        for (int row = 0; row < MapSize; row++)
         {
-
-            if (Blocks[col][row] == nullptr)
-                continue;
-
-            AAnimal_Block* StartBlock = Blocks[col][row];
-            int matchCount = 1;
-
-            // 오른쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
-            for (int checkCol = col + 1; checkCol < MapSize; checkCol++) {
-                if (Blocks[checkCol][row] != nullptr && Blocks[checkCol][row]->GetBlockType() == StartBlock->GetBlockType())
-                {
-                    matchCount++;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            // 3개 이상 연속일 경우 모든 연속 블록 제거
-            if (matchCount >= 3)
+            for (int col = 0; col < MapSize; col++)
             {
-                for (int i = 0; i < matchCount; i++)
-                {
-                    Blocks[col + i][row]->SetBoomb(true);
-                    Blocks[col + i][row] = nullptr;
+                if (Blocks[col][row] == nullptr)
+                    continue;
+
+                AAnimal_Block* StartBlock = Blocks[col][row];
+                int matchCount = 1;
+
+                // 오른쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
+                for (int checkCol = col + 1; checkCol < MapSize; checkCol++) {
+                    if (Blocks[checkCol][row] != nullptr && Blocks[checkCol][row]->GetBlockType() == StartBlock->GetBlockType())
+                    {
+                        matchCount++;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-                Score += 10 * matchCount; // 점수 증가
-                col += matchCount - 1; // 이미 검사한 블록은 건너뛰기
+
+                // 3개 이상 연속일 경우 모든 연속 블록 제거
+                if (matchCount >= 3)
+                {
+                    for (int i = 0; i < matchCount; i++)
+                    {
+                        Blocks[col + i][row]->SetBoomb(true);
+                        Blocks[col + i][row] = nullptr;
+                    }
+                    if (Combo == 0)
+                    {
+                        Score += 10 * matchCount; // 점수 증가
+                    }
+                    else
+                    {
+                        Score += 10 * matchCount * Combo;
+                    }
+                    ++Combo;
+                    col += matchCount - 1; // 이미 검사한 블록은 건너뛰기
+                }
             }
         }
-    }
 
 
-    for (int row = 0; row < MapSize; row++)
-    {
-        for (int col = 0; col < MapSize; col++)
+        for (int row = 0; row < MapSize; row++)
         {
-            if (Blocks[col][row] == nullptr) continue;
+            for (int col = 0; col < MapSize; col++)
+            {
+                if (Blocks[col][row] == nullptr) continue;
 
-            AAnimal_Block* StartBlock = Blocks[col][row];
-            int matchCount = 1;
+                AAnimal_Block* StartBlock = Blocks[col][row];
+                int matchCount = 1;
 
-            // 아래쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
-            for (int checkRow = row + 1; checkRow < MapSize; checkRow++) {
-                if (Blocks[col][checkRow] != nullptr && Blocks[col][checkRow]->GetBlockType() == StartBlock->GetBlockType())
-                {
-                    matchCount++;
+                // 아래쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
+                for (int checkRow = row + 1; checkRow < MapSize; checkRow++) {
+                    if (Blocks[col][checkRow] != nullptr && Blocks[col][checkRow]->GetBlockType() == StartBlock->GetBlockType())
+                    {
+                        matchCount++;
+                    }
+                    else {
+                        break;
+                    }
                 }
-                else {
-                    break;
+
+                // 3개 이상 연속일 경우 모든 연속 블록 제거
+                if (matchCount >= 3) {
+                    for (int i = 0; i < matchCount; i++)
+                    {
+                        Blocks[col][row + i]->SetBoomb(true);
+                        Blocks[col][row + i] = nullptr;
+                    }
+                    if (Combo == 0)
+                    {
+                        Score += 10 * matchCount; // 점수 증가
+                    }
+                    else
+                    {
+                        Score += 10 * matchCount * Combo;
+                    }
+                    ++Combo;
+                    row += matchCount - 1; // 이미 검사한 블록은 건너뛰기
                 }
             }
+        }
 
-            // 3개 이상 연속일 경우 모든 연속 블록 제거
-            if (matchCount >= 3) {
-                for (int i = 0; i < matchCount; i++)
-                {
-                    Blocks[col][row + i]->SetBoomb(true);
-                    Blocks[col][row + i] = nullptr;
+    }
+    else
+    {
+        for (int row = 0; row < MapSize; row++)
+        {
+            for (int col = 0; col < MapSize; col++)
+            {
+
+                if (Blocks[col][row] == nullptr)
+                    continue;
+
+                AAnimal_Block* StartBlock = Blocks[col][row];
+                int matchCount = 1;
+
+                // 오른쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
+                for (int checkCol = col + 1; checkCol < MapSize; checkCol++) {
+                    if (Blocks[checkCol][row] != nullptr && Blocks[checkCol][row]->GetBlockType() == StartBlock->GetBlockType())
+                    {
+                        matchCount++;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-                Score += 10 * matchCount; // 점수 증가
-                row += matchCount - 1; // 이미 검사한 블록은 건너뛰기
+
+                // 3개 이상 연속일 경우 모든 연속 블록 제거
+                if (matchCount >= 3)
+                {
+                    for (int i = 0; i < matchCount; i++)
+                    {
+                        Blocks[col + i][row]->SetBoomb(true);
+                        Blocks[col + i][row] = nullptr;
+                    }
+                    if (Combo == 0)
+                    {
+                        Score += 10 * matchCount; // 점수 증가
+                    }
+                    else
+                    {
+                        Score += 10 * matchCount * Combo;
+                    }
+                    ++Combo;
+                    col += matchCount - 1; // 이미 검사한 블록은 건너뛰기
+                }
+            }
+        }
+
+
+        for (int row = 0; row < MapSize; row++)
+        {
+            for (int col = 0; col < MapSize; col++)
+            {
+                if (Blocks[col][row] == nullptr) continue;
+
+                AAnimal_Block* StartBlock = Blocks[col][row];
+                int matchCount = 1;
+
+                // 아래쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
+                for (int checkRow = row + 1; checkRow < MapSize; checkRow++) {
+                    if (Blocks[col][checkRow] != nullptr && Blocks[col][checkRow]->GetBlockType() == StartBlock->GetBlockType())
+                    {
+                        matchCount++;
+                    }
+                    else {
+                        break;
+                    }
+                }
+
+                // 3개 이상 연속일 경우 모든 연속 블록 제거
+                if (matchCount >= 3) {
+                    for (int i = 0; i < matchCount; i++)
+                    {
+                        Blocks[col][row + i]->SetBoomb(true);
+                        Blocks[col][row + i] = nullptr;
+                    }
+                    if (Combo == 0)
+                    {
+                        Score += 10 * matchCount; // 점수 증가
+                    }
+                    else
+                    {
+                        Score += 10 * matchCount * Combo;
+                    }
+                    ++Combo;
+                    row += matchCount - 1; // 이미 검사한 블록은 건너뛰기
+                }
             }
         }
     }
@@ -1068,12 +1214,13 @@ void UPlayLevel::BlockMoveCheck()
     if (count >= 1)
     {
         BlockDestroyAllow = false;
+        CheckMatch = false;
     }
     else if (count == 0)
     {
         BlockDestroyAllow = true;
+        CheckMatch = true;
     }
-
 }
 
 

@@ -31,43 +31,6 @@ void AAnimal_Block::Tick(float _DeltaTime)
 	AActor::Tick(_DeltaTime);
 
 	PickingCheck();
-
-#pragma region 테스트 코드
-	//if (true == UEngineInput::IsPress('A'))
-	//{
-	//	AddActorLocation(FVector::Left * 500.0f * _DeltaTime);
-	//}
-
-	//if (true == UEngineInput::IsPress('D'))
-	//{
-	//	AddActorLocation(FVector::Right * 500.0f * _DeltaTime);
-	//}
-
-	//if (true == UEngineInput::IsPress('W'))
-	//{
-	//	AddActorLocation(FVector::Up * 500.0f * _DeltaTime);
-	//}
-
-	//if (true == UEngineInput::IsPress('S'))
-	//{
-	//	AddActorLocation(FVector::Down * 500.0f * _DeltaTime);
-	//}
-
-	//if (true == UEngineInput::IsPress('Q'))
-	//{
-	//	Renderer->ChangeAnimation("Attack");
-	//}
-
-
-	//if (true == UEngineInput::IsDown(VK_LBUTTON))
-	//{
-	//	ATestBullet* NewBullet = GetWorld()->SpawnActor<ATestBullet>();
-	//	NewBullet->SetActorLocation(GetActorLocation());
-	//	NewBullet->SetDir(FVector::Right);
-	//}
-
-
-#pragma endregion
 }
 
 void AAnimal_Block::CreateBlockEffect()

@@ -77,7 +77,7 @@ private:
 	bool YSWAPMOVE = false;
 
 
-
+	bool CheckMatch = true;
 	bool CanAMatch = false;
 	bool ClickChangeCheck = false;
 	const int BlockChangeDefault = 0;
@@ -90,8 +90,17 @@ private:
 
 	bool BlockDestroyAllow = true;
 
+	int Combo = 0;
+	const int ComboBoombCheck = 5;
+	int ComboTens = 0;
+	float ComboTime = 0.f;
+	void ComboCheck(float _DeltaTime);
+
 	bool CanMakeAMatch();
 	bool CheckForMatch(int _col, int _row);
+
+	void AllDestroyCheck();
+	bool AllDestroy = false;
 
 
 };

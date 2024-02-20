@@ -3,7 +3,7 @@
 
 
 int ScoreManager::Score = 0;
-bool ScoreManager::Restart= false;
+bool ScoreManager::Restart = false;
 
 ScoreManager::ScoreManager()
 {
@@ -43,6 +43,33 @@ void ScoreManager::Tick(float _DeltaTime)
 		if (Score < 10)
 		{
 			Units->SetNumber(Score);
+		}
+		else if (Score >= 1000)
+		{
+			if (Thousions == nullptr)
+			{
+				Thousions = GetWorld()->SpawnActor<ANumber>();
+				Thousions->SetNumScale(55, 55);
+				Thousions->SetNumber(1);
+				Thousions->SetActorLocation({ 195,200 });
+				Hunders = GetWorld()->SpawnActor<ANumber>();
+				Hunders->SetNumScale(55, 55);
+				Hunders->SetNumber(1);
+				Hunders->SetActorLocation({ 225,200 });
+				Tens = GetWorld()->SpawnActor<ANumber>();
+				Tens->SetActorLocation({ 240,200 });
+				Tens->SetNumScale(55, 55);
+				Tens->SetActorLocation({ 255,200 });
+				Units->SetActorLocation({ 285,200 });
+			}
+			int NumThousions = Score / 1000;
+			int NumHundress = (Score - (NumThousions * 1000)) / 100;
+			int Numtens = (Score - (NumThousions * 1000) - (NumHundress * 100)) / 10;
+			int Numunits = Score % 10;
+			Thousions->SetNumber(NumThousions);
+			Hunders->SetNumber(NumHundress);
+			Units->SetNumber(Numunits);
+			Tens->SetNumber(Numtens);
 		}
 		else if (Score >= 100)
 		{
@@ -97,7 +124,7 @@ void ScoreManager::Tick(float _DeltaTime)
 				}
 				if (Hunders != nullptr)
 				{
-					Hunders ->Destroy(0.f);
+					Hunders->Destroy(0.f);
 					Hunders = nullptr;
 				}
 				if (Tens != nullptr)
@@ -115,6 +142,27 @@ void ScoreManager::Tick(float _DeltaTime)
 			if (Score < 10)
 			{
 				Units->SetNumber(Score);
+			}
+			else if (Score >= 1000)
+			{
+				if (Thousions == nullptr)
+				{
+					Thousions = GetWorld()->SpawnActor<ANumber>();
+					Thousions->SetNumScale(55, 55);
+					Thousions->SetNumber(1);
+					Thousions->SetActorLocation({ 195,50 });
+					Hunders->SetActorLocation({ 225,50 });
+					Tens->SetActorLocation({ 255,50 });
+					Units->SetActorLocation({ 285,50 });
+				}
+				int NumThousions = Score / 1000;
+				int NumHundress = (Score - (NumThousions * 1000)) / 100;
+				int Numtens = (Score - (NumThousions * 1000) - (NumHundress * 100)) / 10;
+				int Numunits = Score % 10;
+				Thousions->SetNumber(NumThousions);
+				Hunders->SetNumber(NumHundress);
+				Units->SetNumber(Numunits);
+				Tens->SetNumber(Numtens);
 			}
 			else if (Score >= 100)
 			{
@@ -152,16 +200,13 @@ void ScoreManager::Tick(float _DeltaTime)
 				Tens->SetNumber(Numtens);
 			}
 
-			else if (Score >= 1000)
-			{
 
-			}
 			else if (Score >= 10000)
 			{
 
 			}
 		}
-		
+
 	}
 
 }

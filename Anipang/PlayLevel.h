@@ -67,6 +67,7 @@ private:
 	const int CellSize = 67;
 	const FVector StartLocation = { 32, 214 };
 	const int CheckBlock = 1;
+	const float BlockSpeed = 300.f;
 
 	bool GameStart = false;
 	bool GameEnd = false;

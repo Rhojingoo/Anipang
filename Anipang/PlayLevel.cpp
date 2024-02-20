@@ -450,7 +450,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
         {
             if (Clickpos.Y >= TempSwap.Y)
             {
-                click_block->AddActorLocation({ FVector::Up * 150.0f * _DeltaTime });
+                click_block->AddActorLocation({ FVector::Up * BlockSpeed * _DeltaTime });
             }
             else
             {
@@ -461,7 +461,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
 
             if (Swappos.Y <= TempClick.Y)
             {
-                swap_block->AddActorLocation(FVector::Down * 150.0f * _DeltaTime);
+                swap_block->AddActorLocation(FVector::Down * BlockSpeed * _DeltaTime);
             }
             else
             {
@@ -475,7 +475,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
         {
             if (Clickpos.Y <= TempSwap.Y)
             {
-                click_block->AddActorLocation({ FVector::Down * 150.0f * _DeltaTime });
+                click_block->AddActorLocation({ FVector::Down * BlockSpeed * _DeltaTime });
             }
             else
             {
@@ -486,7 +486,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
 
             if (Swappos.Y >= TempClick.Y)
             {
-                swap_block->AddActorLocation(FVector::Up * 150.0f * _DeltaTime);
+                swap_block->AddActorLocation(FVector::Up * BlockSpeed* _DeltaTime);
             }
             else
             {
@@ -501,7 +501,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
 
             if (Clickpos.X >= TempSwap.X)
             {
-                click_block->AddActorLocation({ FVector::Left * 150.0f * _DeltaTime });
+                click_block->AddActorLocation({ FVector::Left * BlockSpeed * _DeltaTime });
             }
             else
             {
@@ -512,7 +512,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
 
             if (Swappos.X <= TempClick.X)
             {
-                swap_block->AddActorLocation(FVector::Right * 150.0f * _DeltaTime);
+                swap_block->AddActorLocation(FVector::Right * BlockSpeed * _DeltaTime);
             }
             else
             {
@@ -526,7 +526,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
 
             if (Clickpos.X <= TempSwap.X)
             {
-                click_block->AddActorLocation({ FVector::Right * 150.0f * _DeltaTime });
+                click_block->AddActorLocation({ FVector::Right * BlockSpeed * _DeltaTime });
             }
             else
             {
@@ -537,7 +537,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
 
             if (Swappos.X >= TempClick.X)
             {
-                swap_block->AddActorLocation(FVector::Left * 150.0f * _DeltaTime);
+                swap_block->AddActorLocation(FVector::Left * BlockSpeed* _DeltaTime);
             }
             else
             {
@@ -1166,7 +1166,9 @@ void UPlayLevel::BlockMove(float _DeltaTime)
                 if (Blocks[col][row]->GetUnderBoomb() == false)
                 {
                     swap_block = Blocks[col][row];
-                    FVector BeenBlockpos = FVector(swap_block->GetActorLocation().X, swap_block->GetActorLocation().Y + CellSize, swap_block->GetActorLocation().Z, swap_block->GetActorLocation().W);
+                    //FVector BeenBlockpos = FVector(swap_block->GetActorLocation().X, swap_block->GetActorLocation().Y + CellSize, swap_block->GetActorLocation().Z, swap_block->GetActorLocation().W);
+                    FVector BeenBlockpos = Blocks[col][row]->GetBlockFVector(col, row + 1);
+
                     Blocks[col][row]->SetUnderPos(BeenBlockpos);
                     Blocks[col][row]->SetRow(row + 1);
                     Blocks[col][row]->SetUnderBoomb(true);

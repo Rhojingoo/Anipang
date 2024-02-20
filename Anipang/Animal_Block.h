@@ -1,8 +1,9 @@
 #pragma once
 #include <EngineCore\Actor.h>
+#include "Block_Location.h"
 #include "Cursor.h"
 
-class AAnimal_Block : public AActor
+class AAnimal_Block : public AActor,  public Block_Location
 {
 public:
 	struct int2
@@ -101,7 +102,7 @@ protected:
 	bool SecondPick = false;
 	bool BoombBlock = false;
 	bool UnderBlockBoomb = false;
-	float DownSpeed = 150.f;
+	float DownSpeed = 300.f;
 
 
 

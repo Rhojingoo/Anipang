@@ -127,6 +127,9 @@
     <ClInclude Include="NumberFont.h">
       <Filter>LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor</Filter>
     </ClInclude>
+    <ClInclude Include="Block_Location.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animal_Block.cpp">
@@ -254,6 +257,9 @@
     </ClCompile>
     <ClCompile Include="NumberFont.cpp">
       <Filter>LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_Location.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

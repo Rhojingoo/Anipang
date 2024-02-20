@@ -9,6 +9,9 @@
 #include <EngineCore\EngineResourcesManager.h>
 #include "Block_Manager.h"
 
+#include "TestLevel.h"
+
+
 UAnipangCore::UAnipangCore()
 : UEngineCore()
 {
@@ -93,8 +96,10 @@ void UAnipangCore::BeginPlay()
 	CreateLevel<UScreenScore_Level>("ScreenScore");
 	CreateLevel<UPlayLevel>("Play");
 	CreateLevel<UEndingLevel>("Ending");
-
-	ChangeLevel("Title");
+	CreateLevel<TestLevel>("TestLevel");
+	
+	//ChangeLevel("Title");
+	ChangeLevel("TestLevel");
 	//Block_Manager::OBJPOOL = &Block_Manager::GetInstance();
 
 }

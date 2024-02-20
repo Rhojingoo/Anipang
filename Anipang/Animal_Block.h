@@ -31,6 +31,7 @@ public:
 		Mouse,
 		Pig,
 		Rabbit,
+		Boomb,
 		End,
 	};
 

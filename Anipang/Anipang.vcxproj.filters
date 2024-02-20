@@ -4,9 +4,6 @@
     <ClInclude Include="Animal_Block.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
-    <ClInclude Include="TestBullet.h">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClInclude>
     <ClInclude Include="Rabbit_Block.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
@@ -130,12 +127,18 @@
     <ClInclude Include="Block_Location.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
+    <ClInclude Include="TestLevel.h">
+      <Filter>LEVEL &amp; ACTOR\TestLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Boomb_Block.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
+    </ClInclude>
+    <ClInclude Include="TestBullet.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animal_Block.cpp">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClCompile>
-    <ClCompile Include="TestBullet.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Cat_Block.cpp">
@@ -261,6 +264,15 @@
     <ClCompile Include="Block_Location.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
+    <ClCompile Include="TestLevel.cpp">
+      <Filter>LEVEL &amp; ACTOR\TestLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="Boomb_Block.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
+    </ClCompile>
+    <ClCompile Include="TestBullet.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Anipang_Helper">
@@ -340,6 +352,12 @@
     </Filter>
     <Filter Include="LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor">
       <UniqueIdentifier>{35f43313-6eda-4660-82e9-b588723af7c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\TestLevel">
+      <UniqueIdentifier>{7c54283d-6d7a-4111-b3f4-e71d847bdb97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block">
+      <UniqueIdentifier>{a798d669-9e2b-4781-bb09-c83d049c963b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

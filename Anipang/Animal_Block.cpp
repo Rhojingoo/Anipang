@@ -53,6 +53,15 @@ void AAnimal_Block::PickingCheck()
 		int a = 0;
 		if (true == UEngineInput::IsDown(VK_LBUTTON))
 		{
+			if (Blocktype == Block_Type::Boomb)
+			{
+				if (BlockClick == false)
+				{
+					BlockClick = true;
+				}				
+				return;
+			}
+
 			if (FirstClick == false)
 			{
 				if (FirstPick == false && SecondPick == false)

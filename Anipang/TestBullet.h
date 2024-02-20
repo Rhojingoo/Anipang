@@ -24,6 +24,6 @@ protected:
 
 private:
 	FVector Dir = FVector::Zero;
-	float Speed = 100.0f;
+	const float Speed = 250.0f;
 };
 

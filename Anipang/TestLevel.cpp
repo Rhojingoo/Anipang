@@ -48,7 +48,7 @@ void TestLevel::Tick(float _DeltaTime)
                     continue;
 
 
-                if (Blocks[col][row]->Check_Boomb_FirstToutch() == true)
+                if (Blocks[col][row]->Check_Boomb_Effect_Toutch() == true)
                 {
                     Blocks[col][row]->SetBoomb(true);
                     Blocks[col][row] = nullptr;

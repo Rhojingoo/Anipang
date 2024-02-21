@@ -25,7 +25,5 @@ protected:
 
 private:
 	bool FirstEffect_Create = false;;
-
-
 };
 

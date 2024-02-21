@@ -41,12 +41,13 @@ void ABoomb_Block::Tick(float _DeltaTime)
 	case AAnimal_Block::Block_Status::Idle:
 	{
 		if (BlockClick == true)
-		{			
+		{
 			Blockstatus = Block_Status::Click;
 			Create_First_Effect();
 			// 블럭이펙트 만들고 클릭으로 보내버린다.
 			BlockClick = false;
-		
+
+			return;
 			// ※블럭이펙트 생성시 조건(고려사항)
 			// 블럭이펙트는 블럭이 생기는 위치에서 떨어지도록 처리하며.
 			// 블럭과 만났을때 또 다른 이펙트를 생성한다.
@@ -57,21 +58,15 @@ void ABoomb_Block::Tick(float _DeltaTime)
 			// => 조건4. 폭탄블럭이 벽끝에 있다면 블럭과 만났을때 벽 반대 방향으로만 이펙트 생성 후 발사한다.
 			// => 조건5. 폭탄블럭이 벽에 붙어있지 않다면 블럭과 만났을때 양쪽으로 발사 가능하다.
 			// => 조건6. 폭탄블럭이 중앙에 있다면 아래방향, 양옆방향으로 이펙트를 생성 후 발사한다.
-			// => 조건7. 두번째 이펙트들도 다른블럭과 만나게 되면 다른블럭들은 터질것이다.
-	
-
-			//int RenderNumber = 2;
-			//Renderer->SetOrder(RenderNumber);
-			return;
+			// => 조건7. 두번째 이펙트들도 다른블럭과 만나게 되면 다른블럭들은 터질것이다.		}
 		}
-
 		if (UnderBlockBoomb == true)
 		{
 			Blockstatus = Block_Status::Move;
 			return;
 		}
 	}
-	break;
+		break;
 	case AAnimal_Block::Block_Status::Move:
 	{
 		if (Pos.Y >= UnderPos.Y)
@@ -97,7 +92,9 @@ void ABoomb_Block::Tick(float _DeltaTime)
 	{
 		// 붐블럭이 죽을때는 이펙트 만났을대만이다.
 		// 붐블럭이 플레이레벨에서 Destroycheck시 터지는 상황이 없도록 예외 처리 할것!
-		Destroy(0.f);		
+		CreateBlockEffect();
+		Destroy(0.f);
+		return;
 	}
 	break;
 	case AAnimal_Block::Block_Status::End:
@@ -107,6 +104,7 @@ void ABoomb_Block::Tick(float _DeltaTime)
 	}
 
 
+	
 }
 
 void ABoomb_Block::Create_First_Effect()
@@ -124,7 +122,6 @@ void ABoomb_Block::Create_First_Effect()
 }
 
 
-// 오버라이드로 만들자~~~~~~~~
 void ABoomb_Block::CollCheck_First_Effect()
 {
 	if (BoombBlock_FirstEffect_Create == true)
@@ -252,6 +249,7 @@ void ABoomb_Block::CollCheck_First_Effect()
 				BoombBlock_First_Effect->Destroy(0.0f);
 				BoombBlock_First_Effect = nullptr;
 				BoombBlock_FirstEffect_Create = false;
+				BoombBlock_First_Toutch = true;
 			}
 		}
 	}

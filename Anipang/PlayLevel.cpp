@@ -10,7 +10,9 @@
 #include "Monkey_Block.h"
 #include "Pig_Block.h"
 #include "Rabbit_Block.h"
+#include "Boomb_Block.h"
 #include "Helper.h"
+
 
 #include "Block_Manager.h"
 #include "Game_End.h"
@@ -80,7 +82,7 @@ void UPlayLevel::Tick(float _DeltaTime)
 
             if (CanAMatch == true)
             {
-                //BoombBlock_Destrot_Check();
+                BoombBlock_Destrot_Check();
 
                 if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
                 {
@@ -110,13 +112,7 @@ void UPlayLevel::Tick(float _DeltaTime)
                 GenerateNewBlocks();
                 BlockMoveCheck();
 
-                // 콤보가 10이상 일때 폭탄 블럭 생성
-                {
-                    //if (Combo - ComboTens >= 10)
-                    //{
-                    //    
-                    //}
-                }
+            
             }
             else
             {
@@ -920,10 +916,19 @@ void UPlayLevel::BoombBlock_Destrot_Check()
                 continue;
 
             if (Blocks[col][row]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+            {
+                if (Blocks[col][row] != nullptr)
+                {
+                    if (Blocks[col][row]->Check_Boomb_first_Toutch())
+                    {
+                        Blocks[col][row]->SetBoomb(true);
+                        Blocks[col][row] = nullptr;
+                    }
+                }
                 continue;
+            }
 
-
-            if (Blocks[col][row]->Check_Boomb_FirstToutch() == true)
+            if (Blocks[col][row]->Check_Boomb_Effect_Toutch() == true)
             {
                 Blocks[col][row]->SetBoomb(true);
                 Blocks[col][row] = nullptr;
@@ -1207,35 +1212,44 @@ void UPlayLevel::GenerateNewBlocks()
     {
         if (Blocks[col][0] == nullptr)
         {
-            int random = 0;
-            random = UHelper::Random(0, 6);
-            if (random == 0)
+            // 콤보가 10이상 일때 폭탄 블럭 생성      
+            if (Combo - ComboTens >= 10)
             {
-                Blocks[col][0] = SpawnActor<ACat_Block>();
+                Blocks[col][0] = SpawnActor<ABoomb_Block>();
+                Combo = ComboTens;
             }
-            else if (random == 1)
+            else
             {
-                Blocks[col][0] = SpawnActor<ACheckin_Block>();
-            }
-            else if (random == 2)
-            {
-                Blocks[col][0] = SpawnActor<ADog_Block>();
-            }
-            else if (random == 3)
-            {
-                Blocks[col][0] = SpawnActor<AMonkey_Block>();
-            }
-            else if (random == 4)
-            {
-                Blocks[col][0] = SpawnActor<AMouse_Block>();
-            }
-            else if (random == 5)
-            {
-                Blocks[col][0] = SpawnActor<APig_Block>();
-            }
-            else if (random == 6)
-            {
-                Blocks[col][0] = SpawnActor<ARabbit_Block>();
+                int random = 0;
+                random = UHelper::Random(0, 6);
+                if (random == 0)
+                {
+                    Blocks[col][0] = SpawnActor<ACat_Block>();
+                }
+                else if (random == 1)
+                {
+                    Blocks[col][0] = SpawnActor<ACheckin_Block>();
+                }
+                else if (random == 2)
+                {
+                    Blocks[col][0] = SpawnActor<ADog_Block>();
+                }
+                else if (random == 3)
+                {
+                    Blocks[col][0] = SpawnActor<AMonkey_Block>();
+                }
+                else if (random == 4)
+                {
+                    Blocks[col][0] = SpawnActor<AMouse_Block>();
+                }
+                else if (random == 5)
+                {
+                    Blocks[col][0] = SpawnActor<APig_Block>();
+                }
+                else if (random == 6)
+                {
+                    Blocks[col][0] = SpawnActor<ARabbit_Block>();
+                }
             }
 
             FVector BlockLocation;     // 동물 블록 위치 설정

@@ -86,8 +86,8 @@ public:
 	void SetUnderPos(FVector _Set) { UnderPos = _Set; }
 	FVector GetUnderPos() { return UnderPos; }
 
-	bool Check_Boomb_FirstToutch() { return BoombBlock_First_Effect_Toutch; }
-
+	bool Check_Boomb_Effect_Toutch() { return BoombBlock_First_Effect_Toutch; }
+	bool Check_Boomb_first_Toutch() { return BoombBlock_First_Toutch; }
 protected:
 	UImageRenderer* Renderer					 = nullptr;
 	FVector Pos									 = {};
@@ -128,6 +128,7 @@ protected:
 	static FVector BoombBlock_Down_Effect_Pos;
 	void CheckBoombBlockEffect();
 	bool BoombBlock_First_Effect_Toutch				 = false;
+	bool BoombBlock_First_Toutch					 = false;
 
 
 

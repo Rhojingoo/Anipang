@@ -82,7 +82,7 @@ void UPlayLevel::Tick(float _DeltaTime)
 
             if (CanAMatch == true)
             {
-                BoombBlock_Destrot_Check();
+
 
                 if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
                 {
@@ -108,11 +108,11 @@ void UPlayLevel::Tick(float _DeltaTime)
                     BlockDestroyAllow = false;
                 }
 
+                BoombBlock_Destrot_Check();
+
                 BlockMove(_DeltaTime);
                 GenerateNewBlocks();
-                BlockMoveCheck();
-
-            
+                BlockMoveCheck();                            
             }
             else
             {

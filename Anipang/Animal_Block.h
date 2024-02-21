@@ -3,6 +3,7 @@
 #include "Block_Location.h"
 #include "Cursor.h"
 
+class ABoombBlock_Effect;
 class AAnimal_Block : public AActor,  public UBlock_Location
 {
 public:
@@ -85,25 +86,26 @@ public:
 	void SetUnderPos(FVector _Set) { UnderPos = _Set; }
 	FVector GetUnderPos() { return UnderPos; }
 
+	bool Check_Boomb_FirstToutch() { return BoombBlock_First_Effect_Toutch; }
 
 protected:
-	UImageRenderer* Renderer = nullptr;
-	FVector Pos = {};
-	FVector UnderPos = {};
-	FVector Size = {};
-	bool BlockClick = false;
-	bool ClickCheck = false;
-	Block_Status Blockstatus = Block_Status::Idle;
-	Block_Type Blocktype = Block_Type::None;
+	UImageRenderer* Renderer					 = nullptr;
+	FVector Pos									 = {};
+	FVector UnderPos							 = {};
+	FVector Size								 = {};
+	bool BlockClick								 = false;
+	bool ClickCheck								 = false;
+	Block_Status Blockstatus					 = Block_Status::Idle;
+	Block_Type Blocktype						 = Block_Type::None;
 
 	static bool FirstClick;
 	static bool SecondClick;
-	int2 BlockLocation = { 0,0 };
-	bool FirstPick = false;
-	bool SecondPick = false;
-	bool BoombBlock = false;
-	bool UnderBlockBoomb = false;
-	float DownSpeed = 300.f;
+	int2 BlockLocation							 = { 0,0 };
+	bool FirstPick								 = false;
+	bool SecondPick								 = false;
+	bool BoombBlock								 = false;
+	bool UnderBlockBoomb						 = false;
+	float DownSpeed								 = 300.f;
 
 
 
@@ -111,8 +113,29 @@ protected:
 	void Tick(float _DeltaTime) override;
 	void CreateBlockEffect();
 
+	static ABoombBlock_Effect* BoombBlock_First_Effect;
+	static ABoombBlock_Effect* BoombBlock_Left_Effect;
+	static ABoombBlock_Effect* BoombBlock_Right_Effect;
+	static ABoombBlock_Effect* BoombBlock_Down_Effect;
+
+
+	static bool BoombBlock_FirstEffect_Create;
+	static bool BoombBlock_SecondEffect_Create;
+
+	static FVector BoombBlock_First_Effect_Pos;
+	static FVector BoombBlock_Right_Effect_Pos;
+	static FVector BoombBlock_Left_Effect_Pos;
+	static FVector BoombBlock_Down_Effect_Pos;
+	void CheckBoombBlockEffect();
+	bool BoombBlock_First_Effect_Toutch				 = false;
+
+
+
 private:
-	ACursor* Cursor = nullptr;
+	ACursor* Cursor									 = nullptr;
 	void PickingCheck();
+
+
+
 };
 

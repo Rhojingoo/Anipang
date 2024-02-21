@@ -72,7 +72,6 @@ void UPlayLevel::Tick(float _DeltaTime)
         else
         {
             //ComboCheck(_DeltaTime);
-
             // Before GameStart CanMake3match Checks Logics;
             if (CheckMatch == true)
             {
@@ -81,6 +80,8 @@ void UPlayLevel::Tick(float _DeltaTime)
 
             if (CanAMatch == true)
             {
+                //BoombBlock_Destrot_Check();
+
                 if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
                 {
                     BlockClickUpdate(_DeltaTime);
@@ -909,7 +910,27 @@ void UPlayLevel::YlineBlock_Swap_Move(float _DeltaTime)
     }
 }
 
+void UPlayLevel::BoombBlock_Destrot_Check()
+{
+    for (int row = 0; row < MapSize; ++row)
+    {
+        for (int col = 0; col < MapSize; ++col)
+        {
+            if (Blocks[col][row] == nullptr)
+                continue;
 
+            if (Blocks[col][row]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                continue;
+
+
+            if (Blocks[col][row]->Check_Boomb_FirstToutch() == true)
+            {
+                Blocks[col][row]->SetBoomb(true);
+                Blocks[col][row] = nullptr;
+            }
+        }
+    }
+}
 
 void UPlayLevel::BlockDestroyCheck()
 {
@@ -1271,7 +1292,6 @@ void UPlayLevel::BlockMoveCheck()
     }
 
 }
-
 
 
 void UPlayLevel::AllDestroyCheck()

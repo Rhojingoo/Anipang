@@ -282,7 +282,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TestBullet.h">
+    <ClInclude Include="BoombBlock_Effect.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -437,7 +437,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="TestBullet.cpp">
+    <ClCompile Include="BoombBlock_Effect.cpp">
       <SubType>
       </SubType>
     </ClCompile>

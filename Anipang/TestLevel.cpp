@@ -36,6 +36,33 @@ void TestLevel::Tick(float _DeltaTime)
 {
     ULevel::Tick(_DeltaTime);
 
+    {
+        for (int row = 0; row < MapSize; ++row)
+        {
+            for (int col = 0; col < MapSize; ++col)
+            {
+                if (Blocks[col][row] == nullptr)
+                    continue;
+
+                if (Blocks[col][row]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                    continue;
+
+
+                if (Blocks[col][row]->Check_Boomb_FirstToutch() == true)
+                {
+                    Blocks[col][row]->SetBoomb(true);
+                    Blocks[col][row] = nullptr;
+                }
+            }
+        }
+    }
+
+    if (true == UEngineInput::IsDown('1'))
+    {
+        AllDestroy = true;
+    }
+
+
     if (AllDestroy == true)
     {
         AllDestroyCheck();
@@ -119,6 +146,9 @@ void TestLevel::AllDestroyCheck()
     {
         for (int col = 0; col < MapSize; col++)
         {
+            if (Blocks[col][row] == nullptr)
+                continue;
+
             bool Boomb = true;
             Blocks[col][row]->SetBoomb(Boomb);
             Blocks[col][row] = nullptr;

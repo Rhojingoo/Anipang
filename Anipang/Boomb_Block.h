@@ -2,7 +2,7 @@
 #include "Animal_Block.h"
 
 
-class ATestBullet;
+class ABoombBlock_Effect;
 class ABoomb_Block : public AAnimal_Block
 {
 public:
@@ -21,14 +21,11 @@ protected:
 
 	void Create_First_Effect();
 	void CollCheck_First_Effect();
+	void Check_Second_Destroy();
 
 private:
-	bool FirstEffect_Create = false;
-	ATestBullet* First_Effect = nullptr;
-	FVector First_Effect_Pos = {};
+	bool FirstEffect_Create = false;;
 
-	ATestBullet* Left_Effect = nullptr;
-	ATestBullet* Right_Effect = nullptr;
-	ATestBullet* Down_Effect = nullptr;
+
 };
 

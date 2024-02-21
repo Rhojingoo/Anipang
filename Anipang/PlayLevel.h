@@ -34,7 +34,7 @@ protected:
 	void YlineBlock_Swap_Check(float _DeltaTime);
 	void YlineBlock_Swap_Move(float _DeltaTime);
 
-
+	void BoombBlock_Destrot_Check();
 
 	void BlockDestroyCheck();
 	void BlockMove(float _DeltaTime);
@@ -46,60 +46,60 @@ protected:
 	void CreateBlock();
 
 private:
-	ACursor* Cursor = nullptr;
-	AAnimal_Block* Blocks[7][7] = {};
-	AAnimal_Block* click_block = nullptr;
-	AAnimal_Block* swap_block = nullptr;
-	AAnimal_Block* Combo_block = nullptr;
-	AGame_Start* Start_Rabbit = nullptr;
-	AGame_End* End_Rabbit = nullptr;
-	ATime_Gauge* Timer = nullptr;
-	ScoreManager* ScoreMN = nullptr;
+	ACursor* Cursor							 = nullptr;
+	AAnimal_Block* Blocks[7][7]				 = {};
+	AAnimal_Block* click_block				 = nullptr;
+	AAnimal_Block* swap_block				 = nullptr;
+	AAnimal_Block* Combo_block				 = nullptr;
+	AGame_Start* Start_Rabbit				 = nullptr;
+	AGame_End* End_Rabbit					 = nullptr;
+	ATime_Gauge* Timer						 = nullptr;
+	ScoreManager* ScoreMN					 = nullptr;
 
 
-	FVector Clickpos = {};
-	FVector Swappos = {};
-	FVector TempClick = {};
-	FVector TempSwap = {};
+	FVector Clickpos						 = {};
+	FVector Swappos							 = {};
+	FVector TempClick						 = {};
+	FVector TempSwap						 = {};
 
-	const int MapSize = 7;
-	const int TotalBlocks = MapSize * MapSize;
-	const int CellSize = 67;
-	const FVector StartLocation = { 32, 214 };
-	const int CheckBlock = 1;
-	const float BlockSpeed = 300.f;
+	const int MapSize						 = 7;
+	const int TotalBlocks					 = MapSize * MapSize;
+	const int CellSize						 = 67;
+	const FVector StartLocation				 = { 32, 214 };
+	const int CheckBlock					 = 1;
+	const float BlockSpeed					 = 300.f;
 
-	bool GameStart = false;
-	bool GameEnd = false;
-	int Score = 0;
+	bool GameStart							 = false;
+	bool GameEnd							 = false;
+	int Score								 = 0;
 
-	bool XCLICKMOVE = false;
-	bool XSWAPMOVE = false;
-	bool YCLICKMOVE = false;
-	bool YSWAPMOVE = false;
-
-
-	bool CheckMatch = true;
-	bool CanAMatch = false;
-	bool ClickChangeCheck = false;
-	const int BlockChangeDefault = 0;
-	const int BlockChangeSuccess = 1;
-	const int BlockChangeFail = 2;
-	int XLINE_ChageCheck = BlockChangeDefault;
-	int YLINE_ChageCheck = BlockChangeDefault;
-	bool XlinemoveCheck = false;
-	bool YlinemoveCheck = false;
-
-	bool BlockDestroyAllow = true;
-
-	int Combo = 0;
-	const int ComboBoombCheck = 5;
-	bool ComboBomb_Right = false;
-	bool ComboBomb_Left = false;
+	bool XCLICKMOVE							 = false;
+	bool XSWAPMOVE							 = false;
+	bool YCLICKMOVE							 = false;
+	bool YSWAPMOVE							 = false;
 
 
-	int ComboTens = 0;
-	float ComboTime = 0.f;
+	bool CheckMatch							 = true;
+	bool CanAMatch							 = false;
+	bool ClickChangeCheck					 = false;
+	const int BlockChangeDefault			 = 0;
+	const int BlockChangeSuccess			 = 1;
+	const int BlockChangeFail				 = 2;
+	int XLINE_ChageCheck					 = BlockChangeDefault;
+	int YLINE_ChageCheck					 = BlockChangeDefault;
+	bool XlinemoveCheck						 = false;
+	bool YlinemoveCheck						 = false;
+
+	bool BlockDestroyAllow					 = true;
+
+	int Combo								 = 0;
+	const int ComboBoombCheck				 = 5;
+	bool ComboBomb_Right					 = false;
+	bool ComboBomb_Left						 = false;
+
+
+	int ComboTens							 = 0;
+	float ComboTime							 = 0.f;
 	void ComboCheck(float _DeltaTime);
 
 
@@ -107,7 +107,7 @@ private:
 	bool CheckForMatch(int _col, int _row);
 
 	void AllDestroyCheck();
-	bool AllDestroy = false;
+	bool AllDestroy							 = false;
 
 
 };

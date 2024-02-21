@@ -1,5 +1,5 @@
 #include "Boomb_Block.h"
-#include "TestBullet.h"
+#include "BoombBlock_Effect.h"
 
 
 ABoomb_Block::ABoomb_Block()
@@ -34,8 +34,7 @@ void ABoomb_Block::Tick(float _DeltaTime)
 
 	CollCheck_First_Effect();
 
-	
-
+	Check_Second_Destroy();
 
 	switch (Blockstatus)
 	{
@@ -108,132 +107,180 @@ void ABoomb_Block::Tick(float _DeltaTime)
 	}
 
 
-
 }
 
 void ABoomb_Block::Create_First_Effect()
 {
-	First_Effect = GetWorld()->SpawnActor<ATestBullet>();
+	BoombBlock_First_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
 	int col = GetBlockLocationCol();
 	int row = 0;
 	FVector SetPos = GetBlockFVector(col, row);
 
 	int a = 0;
-	First_Effect->SetActorLocation(SetPos);
-	First_Effect->SetDir(FVector::Down);
+	BoombBlock_First_Effect->SetActorLocation(SetPos);
+	BoombBlock_First_Effect->SetDir(FVector::Down);
+	BoombBlock_FirstEffect_Create = true;
 	FirstEffect_Create = true;
 }
 
+
+// 오버라이드로 만들자~~~~~~~~
 void ABoomb_Block::CollCheck_First_Effect()
 {
-	if (FirstEffect_Create == true)
+	if (BoombBlock_FirstEffect_Create == true)
 	{
-		FVector abctest = First_Effect->GetActorLocation();
-
-		float MinX = Pos.X - Size.X / 2;
-		float MinY = Pos.Y - Size.Y / 2;
-		float MaxX = Pos.X + Size.X / 2;
-		float MaxY = Pos.Y + Size.Y / 2;
-		int a = 0;
-		if (abctest.X >= MinX && abctest.X <= MaxX && abctest.Y - 75.f >= MinY && abctest.Y - 75.f <= MaxY)
+		if (FirstEffect_Create == true)
 		{
-			// 콜리전 체크 하면서 현재블럭의 row와 col을 받아서 조건을 달것.
-			// row와 col의 위치에따라 left인지 right인지, down인지 정해서 만들어 보내줄것.
+			BoombBlock_First_Effect_Pos = BoombBlock_First_Effect->GetActorLocation();
 
-			int Row = GetBlockLocationRow();
-			int Col = GetBlockLocationCol();
-
+			float MinX = Pos.X - Size.X / 2;
+			float MinY = Pos.Y - Size.Y / 2;
+			float MaxX = Pos.X + Size.X / 2;
+			float MaxY = Pos.Y + Size.Y / 2;
 			int a = 0;
-
-			if (Col == 0)
+			if (BoombBlock_First_Effect_Pos.X >= MinX && BoombBlock_First_Effect_Pos.X <= MaxX && BoombBlock_First_Effect_Pos.Y - 75.f >= MinY && BoombBlock_First_Effect_Pos.Y - 75.f <= MaxY)
 			{
+				// 콜리전 체크 하면서 현재블럭의 row와 col을 받아서 조건을 달것.
+				// row와 col의 위치에따라 left인지 right인지, down인지 정해서 만들어 보내줄것.
+				
+				int Row = GetBlockLocationRow();
+				int Col = GetBlockLocationCol();
+
+				int a = 0;
+
+
+				if (Col == 0 && Row == 6)
 				{
-					Right_Effect = GetWorld()->SpawnActor<ATestBullet>();
-					FVector SetPos = GetActorLocation();
-					Right_Effect->SetActorLocation(SetPos);
-					Right_Effect->SetDir(FVector::Right);
+					BoombBlock_Right_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+					BoombBlock_Right_Effect_Pos = GetActorLocation();
+					BoombBlock_Right_Effect->SetActorLocation(BoombBlock_Right_Effect_Pos);
+					BoombBlock_Right_Effect->SetDir(FVector::Right);
+					BoombBlock_Right_Effect->SetSideReder();
+					BoombBlock_SecondEffect_Create = true;
+				}
+				else if (Row == 6 && Col == 6)
+				{
+					BoombBlock_Left_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+					BoombBlock_Left_Effect_Pos = GetActorLocation();
+					BoombBlock_Left_Effect->SetActorLocation(BoombBlock_Left_Effect_Pos);
+					BoombBlock_Left_Effect->SetDir(FVector::Left);
+					BoombBlock_Left_Effect->SetSideReder();
+					BoombBlock_SecondEffect_Create = true;
+				}
+				else if (Col == 0)
+				{
+					{
+						BoombBlock_Right_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Right_Effect_Pos = GetActorLocation();
+						BoombBlock_Right_Effect->SetActorLocation(BoombBlock_Right_Effect_Pos);
+						BoombBlock_Right_Effect->SetDir(FVector::Right);
+						BoombBlock_Right_Effect->SetSideReder();
+					}
+
+					{
+						BoombBlock_Down_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Down_Effect_Pos = GetActorLocation();
+						BoombBlock_Down_Effect->SetActorLocation(BoombBlock_Down_Effect_Pos);
+						BoombBlock_Down_Effect->SetDir(FVector::Down);
+					}
+					BoombBlock_SecondEffect_Create = true;
+				}
+				else if (Col == 6)
+				{
+					{
+						BoombBlock_Left_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Left_Effect_Pos = GetActorLocation();
+						BoombBlock_Left_Effect->SetActorLocation(BoombBlock_Left_Effect_Pos);
+						BoombBlock_Left_Effect->SetDir(FVector::Left);
+						BoombBlock_Left_Effect->SetSideReder();
+					}
+					{
+						BoombBlock_Down_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Down_Effect_Pos = GetActorLocation();
+						BoombBlock_Down_Effect->SetActorLocation(BoombBlock_Down_Effect_Pos);
+						BoombBlock_Down_Effect->SetDir(FVector::Down);
+					}
+					BoombBlock_SecondEffect_Create = true;
+				}
+				else if (Row == 6)
+				{
+					{
+						BoombBlock_Left_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Left_Effect_Pos = GetActorLocation();
+						BoombBlock_Left_Effect->SetActorLocation(BoombBlock_Left_Effect_Pos);
+						BoombBlock_Left_Effect->SetDir(FVector::Left);
+						BoombBlock_Left_Effect->SetSideReder();
+					}
+
+					{
+						BoombBlock_Right_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Right_Effect_Pos = GetActorLocation();
+						BoombBlock_Right_Effect->SetActorLocation(BoombBlock_Right_Effect_Pos);
+						BoombBlock_Right_Effect->SetDir(FVector::Right);
+						BoombBlock_Right_Effect->SetSideReder();
+					}
+					BoombBlock_SecondEffect_Create = true;
 				}
 
+				else
 				{
-					Down_Effect = GetWorld()->SpawnActor<ATestBullet>();
-					FVector SetPos = GetActorLocation();
-					Down_Effect->SetActorLocation(SetPos);
-					Down_Effect->SetDir(FVector::Down);
+					{
+						BoombBlock_Right_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Right_Effect_Pos = GetActorLocation();
+						BoombBlock_Right_Effect->SetActorLocation(BoombBlock_Right_Effect_Pos);
+						BoombBlock_Right_Effect->SetDir(FVector::Right);
+						BoombBlock_Right_Effect->SetSideReder();
+					}
+
+					{
+						BoombBlock_Left_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Left_Effect_Pos = GetActorLocation();
+						BoombBlock_Left_Effect->SetActorLocation(BoombBlock_Left_Effect_Pos);
+						BoombBlock_Left_Effect->SetDir(FVector::Left);
+						BoombBlock_Left_Effect->SetSideReder();
+					}
+
+					{
+						BoombBlock_Down_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Down_Effect_Pos = GetActorLocation();
+						BoombBlock_Down_Effect->SetActorLocation(BoombBlock_Down_Effect_Pos);
+						BoombBlock_Down_Effect->SetDir(FVector::Down);
+					}
+					BoombBlock_SecondEffect_Create = true;
 				}
 
+				BoombBlock_First_Effect->Destroy(0.0f);
+				BoombBlock_First_Effect = nullptr;
+				BoombBlock_FirstEffect_Create = false;
 			}
-			else if (Row == 6 && Col == 0)
-			{
-				Right_Effect = GetWorld()->SpawnActor<ATestBullet>();
-				FVector SetPos = GetActorLocation();
-				Right_Effect->SetActorLocation(SetPos);
-				Right_Effect->SetDir(FVector::Right);
-			}
-			else if (Row == 6 && Col == 6)
-			{
-				Left_Effect = GetWorld()->SpawnActor<ATestBullet>();
-				FVector SetPos = GetActorLocation();
-				Left_Effect->SetActorLocation(SetPos);
-				Left_Effect->SetDir(FVector::Left);
-			}
-			else if (Col == 6)
-			{
-				{
-					Left_Effect = GetWorld()->SpawnActor<ATestBullet>();
-					FVector SetPos = GetActorLocation();
-					Left_Effect->SetActorLocation(SetPos);
-					Left_Effect->SetDir(FVector::Left);
-				}
-				{
-					Down_Effect = GetWorld()->SpawnActor<ATestBullet>();
-					FVector SetPos = GetActorLocation();
-					Down_Effect->SetActorLocation(SetPos);
-					Down_Effect->SetDir(FVector::Down);
-				}
-			}
-			else if (Row == 6)
-			{ 
-				{
-					Left_Effect = GetWorld()->SpawnActor<ATestBullet>();
-					FVector SetPos = GetActorLocation();
-					Left_Effect->SetActorLocation(SetPos);
-					Left_Effect->SetDir(FVector::Left);
-				}
-	
-				{
-					Right_Effect = GetWorld()->SpawnActor<ATestBullet>();
-					FVector SetPos = GetActorLocation();
-					Right_Effect->SetActorLocation(SetPos);
-					Right_Effect->SetDir(FVector::Right);
-				}
-			}
-			
-			else
-			{
-				{
-					Right_Effect = GetWorld()->SpawnActor<ATestBullet>();
-					FVector SetPos = GetActorLocation();
-					Right_Effect->SetActorLocation(SetPos);
-					Right_Effect->SetDir(FVector::Right);
-				}
+		}
+	}
+}
 
-				{
-					Left_Effect = GetWorld()->SpawnActor<ATestBullet>();
-					FVector SetPos = GetActorLocation();
-					Left_Effect->SetActorLocation(SetPos);
-					Left_Effect->SetDir(FVector::Left);
-				}
-
-				{
-					Down_Effect = GetWorld()->SpawnActor<ATestBullet>();
-					FVector SetPos = GetActorLocation();
-					Down_Effect->SetActorLocation(SetPos);
-					Down_Effect->SetDir(FVector::Down);
-				}
-			}
-
-			First_Effect->Destroy(0.0f);
-			FirstEffect_Create = false;		
+void ABoomb_Block::Check_Second_Destroy()
+{
+	if (BoombBlock_Left_Effect != nullptr)
+	{
+		if (BoombBlock_Left_Effect->IsSecondEffectDEATH() == true)
+		{
+			BoombBlock_Left_Effect->Destroy(0.f);
+			BoombBlock_Left_Effect = nullptr;
+		}
+	}
+	if (BoombBlock_Right_Effect != nullptr)
+	{
+		if (BoombBlock_Right_Effect->IsSecondEffectDEATH() == true)
+		{
+			BoombBlock_Right_Effect->Destroy(0.f);
+			BoombBlock_Right_Effect = nullptr;
+		}
+	}
+	if (BoombBlock_Down_Effect != nullptr)
+	{
+		if (BoombBlock_Down_Effect_Pos.Y >=685.f)
+		{
+			BoombBlock_Down_Effect->Destroy(0.f);
+			BoombBlock_Down_Effect = nullptr;
 		}
 	}
 }

@@ -133,7 +133,7 @@
     <ClInclude Include="Boomb_Block.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
     </ClInclude>
-    <ClInclude Include="TestBullet.h">
+    <ClInclude Include="BoombBlock_Effect.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
     </ClInclude>
   </ItemGroup>
@@ -270,7 +270,7 @@
     <ClCompile Include="Boomb_Block.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
     </ClCompile>
-    <ClCompile Include="TestBullet.cpp">
+    <ClCompile Include="BoombBlock_Effect.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
     </ClCompile>
   </ItemGroup>

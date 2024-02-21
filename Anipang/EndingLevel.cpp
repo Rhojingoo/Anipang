@@ -23,6 +23,11 @@ void UEndingLevel::BeginPlay()
 void UEndingLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
+
+	if (true == UEngineInput::IsDown(VK_ESCAPE))
+	{
+		GEngine->MainWindow.Off();
+	}
 }
 
 void UEndingLevel::LevelStart(ULevel* _Level)

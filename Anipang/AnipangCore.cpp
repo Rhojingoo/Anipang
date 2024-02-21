@@ -7,6 +7,10 @@
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
 #include <EngineCore\EngineResourcesManager.h>
+#include <EnginePlatform\EngineInput.h>
+#include <EnginePlatform\WindowImage.h>
+
+
 #include "Block_Manager.h"
 
 #include "TestLevel.h"
@@ -88,7 +92,9 @@ void UAnipangCore::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("UI_Image\\MainScreen_UI"));
 	}
 
-
+	//UWindowImage* Rot = UEngineResourcesManager::GetInst().FindImg("Dir.png");
+	//UWindowImage* Mask = UEngineResourcesManager::GetInst().FindImg("Dir_Mask.bmp");
+	//Rot->SetRotationMaskImage(Mask);
 
 
 	CreateLevel<UTitleLevel>("Title");

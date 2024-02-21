@@ -73,6 +73,11 @@ public:
 
 	void ChangeAnimation(std::string_view _AnimationName, bool _IsForce = false, int _StartIndex = 0, float _Time = -1.0f);
 
+	void SetAngle(float _Angle)
+	{
+		Angle = _Angle;
+	}
+
 	void AnimationReset();
 
 	void SetTransColor(Color8Bit _Color)
@@ -126,8 +131,6 @@ public:
 		return Image;
 	}
 		
-
-
 	void TextRender(float _DeltaTime);
 	void ImageRender(float _DeltaTime);
 
@@ -148,6 +151,10 @@ public:
 		TextColor = _Color;
 		TextColor2 = _Color2; //추가
 	}
+	void SetCameraRatio(float _Ratio)
+	{
+		CameraRatio = _Ratio;
+	}
 
 	FTransform GetRenderTransForm();
 	void SwitchTextBold() { TextBoldSwitch = !TextBoldSwitch; }
@@ -161,10 +168,12 @@ private:
 	Color8Bit TransColor;
 
 	bool CameraEffect = true;
+	float CameraRatio = 1.0f;
 
 	std::map<std::string, UAnimationInfo> AnimationInfos;
 	UAnimationInfo* CurAnimation = nullptr;
 
+	float Angle = 0.0f;
 
 	std::string Text = "";
 	std::string Font = "양재깨비체B";	//동글체 , Vagron
@@ -172,6 +181,8 @@ private:
 	Color8Bit TextColor = Color8Bit::NARed;
 	Color8Bit TextColor2 = Color8Bit::NARed; //추가
 	bool TextBoldSwitch = false;
+
+
 
 };
 

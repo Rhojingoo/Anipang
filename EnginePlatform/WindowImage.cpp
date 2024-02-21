@@ -274,6 +274,10 @@ Color8Bit UWindowImage::GetColor(int _X, int _Y, Color8Bit _DefaultColor)
 	return Color;
 }
 
+void UWindowImage::TextPrint(std::string_view _Text, FVector _Pos)
+{
+}
+
 void UWindowImage::BitCopy(UWindowImage* _CopyImage, const FTransform& _Trans)
 {	
 	HDC hdc = ImageDC;
@@ -388,25 +392,73 @@ void UWindowImage::AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans,
 	);
 }
 
-void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color)
+void UWindowImage::PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, float _RadAngle)
 {
-	// 원래 텍스트를 중앙에 그립니다.
-	//graphics.DrawString(WText.c_str(), -1, &fnt, rectF, &stringFormat, &fillBrush);
+	if (nullptr == _CopyImage)
+	{
+		MsgBoxAssert("nullptr 인 이미지를 복사할 수 없습니다");
+	}
 
-	Gdiplus::Graphics graphics(ImageDC);
-	std::wstring WFont = UEngineString::AnsiToUniCode(_Font);
-	Gdiplus::Font fnt(WFont.c_str(), _Size, Gdiplus::FontStyleBold | Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
-	// Gdiplus::HatchBrush hB(HatchStyle::HatchStyle05Percent, Gdiplus::Color(_Color.R, _Color.G, _Color.B), Gdiplus::Color::Transparent);
-	Gdiplus::SolidBrush hB(Gdiplus::Color(_Color.R, _Color.G, _Color.B));
-	FVector Pos = _Trans.GetPosition();
-	// Gdiplus::PointF ptf(Pos.X, Pos.Y);
-	Gdiplus::RectF  rectF(_Trans.GetPosition().X, _Trans.GetPosition().Y, 0, 0);
+	if (_Index >= _CopyImage->Infos.size())
+	{
+		MsgBoxAssert(GetName() + "이미지 정보의 인덱스를 오버하여 사용했습니다");
+	}
 
-	Gdiplus::StringFormat stringFormat;
-	stringFormat.SetAlignment(Gdiplus::StringAlignmentCenter);
-	stringFormat.SetLineAlignment(Gdiplus::StringAlignmentCenter);
-	std::wstring WText = UEngineString::AnsiToUniCode(_Text);
-	graphics.DrawString(WText.c_str(), -1, &fnt, rectF, &stringFormat, &hB);  //출력
+
+	FTransform& ImageTrans = _CopyImage->Infos[_Index].CuttingTrans;
+
+	POINT Arr[3];
+
+	{
+		FTransform Trans = FTransform(float4::Zero, _Trans.GetScale());
+
+		FVector LeftTop = Trans.LeftTop();
+		FVector RightTop = Trans.RightTop();
+		FVector LeftBot = Trans.LeftBottom();
+
+		LeftTop.RotationZToRad(_RadAngle);
+		RightTop.RotationZToRad(_RadAngle);
+		LeftBot.RotationZToRad(_RadAngle);
+
+		LeftTop += _Trans.GetPosition();
+		RightTop += _Trans.GetPosition();
+		LeftBot += _Trans.GetPosition();
+
+		Arr[0] = LeftTop.ConvertToWinApiPOINT();
+		Arr[1] = RightTop.ConvertToWinApiPOINT();
+		Arr[2] = LeftBot.ConvertToWinApiPOINT();
+	}
+
+	int ImageLeft = ImageTrans.GetPosition().iX();
+	int ImageTop = ImageTrans.GetPosition().iY();
+	int ImageScaleX = ImageTrans.GetScale().iX();
+	int ImageScaleY = ImageTrans.GetScale().iY();
+
+	//// 각도만큼 회전시킨 값을 만들어 내야 합니다.
+	//// 어떻게 그렇게 만들수 있을까?
+
+	if (nullptr == _CopyImage->RotationMaskImage)
+	{
+		MsgBoxAssert("이미지를 회전시키려고 했는데 이미지가 없습니다.");
+	}
+
+	HDC hdc = ImageDC;
+	//// 이미지
+	HDC hdcSrc = _CopyImage->Infos[_Index].ImageDC;
+
+	PlgBlt(
+		hdc, 							  // HDC hdc, // 
+		Arr,
+		hdcSrc,							// HDC hdcSrc, 
+		ImageLeft,   							// int y1, 
+		ImageTop,   							// int x1,  
+		ImageScaleX, 							// int y1, 
+		ImageScaleY, 							// int y1, 
+		_CopyImage->RotationMaskImage->hBitMap, // 투명처리할 부분을 알려달라고 하는데
+		ImageLeft,   							// int y1, 
+		ImageTop   							// int x1,  
+	);
+	
 }
 
 void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _OutLineColor, Color8Bit _FillColor)
@@ -455,6 +507,33 @@ void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, 
 		}
 	}
 
+}
+
+
+void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color)
+{
+	Gdiplus::StringFormat stringFormat;
+	stringFormat.SetAlignment(Gdiplus::StringAlignmentCenter);
+	stringFormat.SetLineAlignment(Gdiplus::StringAlignmentCenter);
+	TextCopyFormat(_Text, _Font, stringFormat, _Size, _Trans, _Color);  //출력	
+}
+
+
+void UWindowImage::TextCopyFormat(const std::string& _Text, const std::string& _Font, const Gdiplus::StringFormat& stringFormat, float _Size, const FTransform& _Trans, Color8Bit _Color)
+{
+	// 원래 텍스트를 중앙에 그립니다.
+	//graphics.DrawString(WText.c_str(), -1, &fnt, rectF, &stringFormat, &fillBrush);
+
+	Gdiplus::Graphics graphics(ImageDC);
+	std::wstring WFont = UEngineString::AnsiToUniCode(_Font);
+	Gdiplus::Font fnt(WFont.c_str(), _Size, Gdiplus::FontStyleBold | Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+	Gdiplus::SolidBrush hB(Gdiplus::Color(_Color.R, _Color.G, _Color.B));
+	FVector Pos = _Trans.GetPosition();
+	Gdiplus::RectF  rectF(_Trans.GetPosition().X, _Trans.GetPosition().Y, 0, 0);
+
+
+	std::wstring WText = UEngineString::AnsiToUniCode(_Text);
+	graphics.DrawString(WText.c_str(), -1, &fnt, rectF, &stringFormat, &hB);  //출력
 }
 
 bool UWindowImage::Create(HDC _MainDC)

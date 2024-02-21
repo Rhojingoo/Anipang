@@ -119,6 +119,10 @@ void UEngineCore::CoreInit(HINSTANCE _HINSTANCE)
 	EngineInit = true;
 }
 
+void UEngineCore::Exit()
+{
+}
+
 void UEngineCore::BeginPlay()
 {
 }

@@ -1,6 +1,7 @@
 #include "Cursor.h"
 #include <EnginePlatform\EngineInput.h>
 #include <EngineBase\EngineDebug.h>
+#include <EngineCore\EngineDebug.h>
 #include "Helper.h"
 
 ACursor::ACursor()
@@ -39,6 +40,12 @@ void ACursor::Tick(float _DeltaTime)
 			GEngine->ChangeLevel("Play");
 		}
 	}
+
+
+	UEngineDebug::DebugTextPrint("PlayerPos : " + GetTransform().GetPosition().ToString(), 15.0f);
+	UEngineDebug::DebugTextPrint("PlayerScale : " + GetTransform().GetPosition().ToString(), 20.0f);
+	UEngineDebug::DebugTextPrint("한글 나오나", 20.0f);
+	UEngineDebug::DebugTextPrint("오호", 20.0f);
 
 	int a = 0;
 }

@@ -136,6 +136,9 @@
     <ClInclude Include="BoombBlock_Effect.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
     </ClInclude>
+    <ClInclude Include="Combo_OBJ.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Combo_OBJ</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animal_Block.cpp">
@@ -273,6 +276,9 @@
     <ClCompile Include="BoombBlock_Effect.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
     </ClCompile>
+    <ClCompile Include="Combo_OBJ.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Combo_OBJ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Anipang_Helper">
@@ -358,6 +364,9 @@
     </Filter>
     <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block">
       <UniqueIdentifier>{a798d669-9e2b-4781-bb09-c83d049c963b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Combo_OBJ">
+      <UniqueIdentifier>{0711d81e-0917-41a4-86b9-f924d4bad2dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

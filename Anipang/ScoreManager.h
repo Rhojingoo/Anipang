@@ -19,6 +19,8 @@ public :
 	static void ClearScore() { Score = 0;}
 	static void SetReStart() { Restart = true; }
 
+	void SetFont();
+	void ScoreImageRender();
 
 protected:
 	FVector Pos = {};
@@ -36,5 +38,8 @@ private:
 	ANumber* Tens						 = nullptr;
 	ANumber* Hunders					 = nullptr;
 	ANumber* Thousions					 = nullptr;
+
+	std::string Text = "";
+	UImageRenderer* Renderer = nullptr;
 };
 

@@ -19,6 +19,7 @@ public:
 		Click,
 		Move,
 		Boomb,
+		Find,
 		End,
 	};
 
@@ -88,6 +89,9 @@ public:
 
 	bool Check_Boomb_Effect_Toutch() { return BoombBlock_First_Effect_Toutch; }
 	bool Check_Boomb_first_Toutch() { return BoombBlock_First_Toutch; }
+
+	void FindBlock() { LetsFind = true; }
+	bool ISFind() { return FindEnd; }
 protected:
 	UImageRenderer* Renderer					 = nullptr;
 	FVector Pos									 = {};
@@ -106,8 +110,10 @@ protected:
 	bool BoombBlock								 = false;
 	bool UnderBlockBoomb						 = false;
 	float DownSpeed								 = 300.f;
-
-
+	float FindTime								 = 0.f;
+	bool AlphaBlend								 = false;
+	bool LetsFind								 = false;
+	bool FindEnd								 = false;
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

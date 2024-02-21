@@ -2,6 +2,7 @@
 #include <EngineCore\Level.h>
 #include <List>
 
+class ACombo_OBJ;
 class ScoreManager;
 class ATime_Gauge;
 class AGame_End;
@@ -50,12 +51,12 @@ private:
 	AAnimal_Block* Blocks[7][7]				 = {};
 	AAnimal_Block* click_block				 = nullptr;
 	AAnimal_Block* swap_block				 = nullptr;
-	AAnimal_Block* Combo_block				 = nullptr;
+	AAnimal_Block* Find_block				 = nullptr;
 	AGame_Start* Start_Rabbit				 = nullptr;
 	AGame_End* End_Rabbit					 = nullptr;
 	ATime_Gauge* Timer						 = nullptr;
 	ScoreManager* ScoreMN					 = nullptr;
-
+	ACombo_OBJ* Combo_OBJ					 = nullptr;
 
 	FVector Clickpos						 = {};
 	FVector Swappos							 = {};
@@ -78,7 +79,7 @@ private:
 	bool YCLICKMOVE							 = false;
 	bool YSWAPMOVE							 = false;
 
-
+	bool FindBlock							 = false;
 	bool CheckMatch							 = true;
 	bool CanAMatch							 = false;
 	bool ClickChangeCheck					 = false;
@@ -93,15 +94,18 @@ private:
 	bool BlockDestroyAllow					 = true;
 
 	int Combo								 = 0;
+	int PreveCombo							 = 0;
+	bool ComboAdd							 = false;
 	const int ComboBoombCheck				 = 5;
 	bool ComboBomb_Right					 = false;
 	bool ComboBomb_Left						 = false;
 
-
+	bool BoombBlock_Destroy_Start			 = false;
 	int ComboTens							 = 0;
 	float ComboTime							 = 0.f;
+	bool ComboTimeCheck						 = false;
 	void ComboCheck(float _DeltaTime);
-
+	void ClearCombotime() { ComboTime = 0.f; }
 
 	bool CanMakeAMatch();
 	bool CheckForMatch(int _col, int _row);

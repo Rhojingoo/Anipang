@@ -41,6 +41,7 @@ void ARabbit_Block::Tick(float _DeltaTime)
 			Blockstatus = Block_Status::Click;
 			int RenderNumber = 2;
 			Renderer->SetOrder(RenderNumber);
+
 			return;
 		}
 
@@ -54,6 +55,12 @@ void ARabbit_Block::Tick(float _DeltaTime)
 		if (UnderBlockBoomb == true)
 		{
 			Blockstatus = Block_Status::Move;
+			return;
+		}
+
+		if (LetsFind == true)
+		{
+			Blockstatus = Block_Status::Find;
 			return;
 		}
 	}
@@ -96,6 +103,53 @@ void ARabbit_Block::Tick(float _DeltaTime)
 		{
 			CreateBlockEffect();
 			Destroy(0.f);
+		}
+	}
+	break;
+
+	case AAnimal_Block::Block_Status::Find:
+	{
+		FindTime += _DeltaTime;
+		if (1.f <= FindTime)
+		{
+			AlphaBlend = !AlphaBlend;
+			FindTime = 0.0f;
+		}
+		if (true == AlphaBlend)
+		{
+			Renderer->SetAlpha(FindTime * 0.45f);
+		}
+		else
+		{
+			Renderer->SetAlpha(1.0f - FindTime);
+		}
+
+		if (BlockClick == true)
+		{
+			Renderer->ChangeAnimation("Click");
+			Blockstatus = Block_Status::Click;
+			int RenderNumber = 2;
+			Renderer->SetOrder(RenderNumber);
+			Renderer->SetAlpha(1.0f);
+			FindEnd = true;
+			return;
+		}
+
+		if (BoombBlock == true)
+		{
+			Renderer->ChangeAnimation("Boomb");
+			Blockstatus = Block_Status::Boomb;
+			Renderer->SetAlpha(1.0f);
+			FindEnd = true;
+			return;
+		}
+
+		if (UnderBlockBoomb == true)
+		{
+			Blockstatus = Block_Status::Move;
+			Renderer->SetAlpha(1.0f);
+			FindEnd = true;
+			return;
 		}
 	}
 	break;

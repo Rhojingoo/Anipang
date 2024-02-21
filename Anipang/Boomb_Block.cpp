@@ -60,6 +60,13 @@ void ABoomb_Block::Tick(float _DeltaTime)
 			// => 조건6. 폭탄블럭이 중앙에 있다면 아래방향, 양옆방향으로 이펙트를 생성 후 발사한다.
 			// => 조건7. 두번째 이펙트들도 다른블럭과 만나게 되면 다른블럭들은 터질것이다.		}
 		}
+
+		if (BoombBlock == true)
+		{
+			Blockstatus = Block_Status::Boomb;
+			return;
+		}
+
 		if (UnderBlockBoomb == true)
 		{
 			Blockstatus = Block_Status::Move;
@@ -93,7 +100,7 @@ void ABoomb_Block::Tick(float _DeltaTime)
 		// 붐블럭이 죽을때는 이펙트 만났을대만이다.
 		// 붐블럭이 플레이레벨에서 Destroycheck시 터지는 상황이 없도록 예외 처리 할것!
 		CreateBlockEffect();
-		Destroy(0.f);
+		Destroy(0.0f);
 		return;
 	}
 	break;

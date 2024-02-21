@@ -12,7 +12,7 @@
 #include "Rabbit_Block.h"
 #include "Boomb_Block.h"
 #include "Helper.h"
-
+#include "Combo_OBJ.h"
 
 #include "Block_Manager.h"
 #include "Game_End.h"
@@ -46,6 +46,8 @@ void UPlayLevel::BeginPlay()
 
     Timer = SpawnActor<ATime_Gauge>();
     Timer->SetActorLocation({ 231,705 });
+    Combo_OBJ = SpawnActor<ACombo_OBJ>();
+    Combo_OBJ->SetActorLocation({ 240,150 });
 
     ScoreMN = SpawnActor<ScoreManager>();
 }
@@ -73,7 +75,20 @@ void UPlayLevel::Tick(float _DeltaTime)
         }
         else
         {
-            //ComboCheck(_DeltaTime);
+            Combo_OBJ->SetCombo(Combo);
+            int CheckCombo = Combo - PreveCombo;
+            if (CheckCombo >= 1)
+            {
+                Combo_OBJ->SetFont();
+                PreveCombo = Combo;
+            }       
+            if (ComboTimeCheck == false)
+            {
+                ClearCombotime();
+            }
+            ComboCheck(_DeltaTime);
+   
+
             // Before GameStart CanMake3match Checks Logics;
             if (CheckMatch == true)
             {
@@ -82,8 +97,6 @@ void UPlayLevel::Tick(float _DeltaTime)
 
             if (CanAMatch == true)
             {
-
-
                 if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
                 {
                     BlockClickUpdate(_DeltaTime);
@@ -107,9 +120,8 @@ void UPlayLevel::Tick(float _DeltaTime)
                     BlockDestroyCheck();
                     BlockDestroyAllow = false;
                 }
-
-                BoombBlock_Destrot_Check();
-
+               
+                BoombBlock_Destrot_Check(); 
                 BlockMove(_DeltaTime);
                 GenerateNewBlocks();
                 BlockMoveCheck();                            
@@ -129,6 +141,16 @@ void UPlayLevel::Tick(float _DeltaTime)
     }
 
     ScoreMN->SetScore(Score);
+    if (Find_block != nullptr)
+    {
+        if (Find_block->ISFind() == true)
+        {
+            Find_block = nullptr;
+            FindBlock = false;
+            ClearCombotime();
+        }
+    }
+
 
     if (UEngineInput::IsDown('N'))
     {
@@ -144,7 +166,9 @@ void UPlayLevel::LevelStart(ULevel* _Level)
     CreateBlock();
     Start_Rabbit = SpawnActor<AGame_Start>();
     Start_Rabbit->SetActorLocation({ 235,400 });
-
+    Combo_OBJ->ClearCombo();
+    Combo = 0;
+    PreveCombo = 0;
 }
 
 void UPlayLevel::LevelEnd(ULevel* _Level)
@@ -166,6 +190,8 @@ void UPlayLevel::LevelEnd(ULevel* _Level)
     GameEnd = false;
     GameStart = false;
     Combo = 0;
+    PreveCombo = 0;
+    Combo_OBJ->ClearCombo();
 }
 
 void UPlayLevel::OBJPOOLTEST()
@@ -267,11 +293,22 @@ void UPlayLevel::ComboCheck(float _DeltaTime)
 {
     if (Combo >= 1)
     {
-        ComboTime += _DeltaTime;
-        if (ComboTime >= 2.0f)
+        ComboTimeCheck = true;
+        if (ComboTimeCheck == true)
         {
-            ComboTime = 0.f;
-            Combo = 0;
+            ComboTime += _DeltaTime;
+
+            if (FindBlock ==false && ComboTime >= 3.0f)
+            {
+                Find_block->FindBlock(); ;
+                FindBlock = true;
+            }
+
+            if (ComboTime >= 5.0f)
+            {
+                ClearCombotime();
+                Combo = 0;
+            }
         }
     }
 }
@@ -334,11 +371,19 @@ bool UPlayLevel::CheckForMatch(int _col, int _row)
     for (int i = _col - 1; i >= 0 && Blocks[i][_row] != nullptr && Blocks[i][_row]->GetBlockType() == CheckBL; i--)
     {
         matchCount++;
+        if (matchCount == 3)
+        {
+            Find_block = Blocks[_col][_row]; // 3매치 발생 시 현재 블록 저장
+        }
     }
     // 수평 방향 검사 (오른쪽)
     for (int i = _col + 1; i < MapSize && Blocks[i][_row] != nullptr && Blocks[i][_row]->GetBlockType() == CheckBL; i++)
     {
         matchCount++;
+        if (matchCount == 3) 
+        {
+            Find_block = Blocks[_col][_row];// 3매치 발생 시 현재 블록 저장
+        }
     }
     if (matchCount >= 3)
     {
@@ -351,11 +396,19 @@ bool UPlayLevel::CheckForMatch(int _col, int _row)
     for (int i = _row - 1; i >= 0 && Blocks[_col][i] != nullptr && Blocks[_col][i]->GetBlockType() == CheckBL; i--)
     {
         matchCount++;
+        if (matchCount == 3)
+        {
+            Find_block = Blocks[_col][_row]; // 3매치 발생 시 현재 블록 저장
+        }
     }
     // 수직 방향 검사 (아래)
     for (int i = _row + 1; i < MapSize && Blocks[_col][i] != nullptr && Blocks[_col][i]->GetBlockType() == CheckBL; i++)
     {
         matchCount++;
+        if (matchCount == 3)
+        {
+            Find_block = Blocks[_col][_row]; // 3매치 발생 시 현재 블록 저장
+        }
     }
     if (matchCount >= 3)
     {
@@ -923,6 +976,7 @@ void UPlayLevel::BoombBlock_Destrot_Check()
                     {
                         Blocks[col][row]->SetBoomb(true);
                         Blocks[col][row] = nullptr;
+                        ComboTimeCheck = false;
                     }
                 }
                 continue;
@@ -932,6 +986,17 @@ void UPlayLevel::BoombBlock_Destrot_Check()
             {
                 Blocks[col][row]->SetBoomb(true);
                 Blocks[col][row] = nullptr;
+
+                if (Combo == 0)
+                {
+                    Score += 10; // 점수 증가
+                    ComboTimeCheck = false;
+                }
+                else
+                {
+                    Score += 10 * Combo;                
+                    ComboTimeCheck = false;
+                }               
             }
         }
     }
@@ -981,9 +1046,14 @@ void UPlayLevel::BlockDestroyCheck()
                             // 기본 폭발 로직
                             if (Blocks[col + X][row + Y] != nullptr)
                             {
+                                if (Blocks[col + X][row + Y]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                                    continue;
+
                                 Blocks[col + X][row + Y]->SetBoomb(true);
                                 Blocks[col + X][row + Y] = nullptr;
                                 Score += 10 * Combo;
+                                ComboAdd = true;
+                                ComboTimeCheck = false;
                             }
                         }
                     }
@@ -994,22 +1064,32 @@ void UPlayLevel::BlockDestroyCheck()
                         // 왼쪽 추가 폭발
                         if (col > 0 && Blocks[col - 1][row] != nullptr)
                         {
+                            if (Blocks[col - 1][row]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                                continue;
+
                             Blocks[col - 1][row]->SetBoomb(true);
                             Blocks[col - 1][row] = nullptr;
-                            Score += 10 * Combo;
+                            Score += 10 * Combo;                            
                         }
                         // 오른쪽 추가 폭발
                         if (col + matchCount < MapSize && Blocks[col + matchCount][row] != nullptr)
                         {
+                            if (Blocks[col + matchCount][row]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                                continue;
+
                             Blocks[col + matchCount][row]->SetBoomb(true);
                             Blocks[col + matchCount][row] = nullptr;
-                            Score += 10 * Combo;
+                            Score += 10 * Combo;                            
                         }
-                    }
-                    ++Combo;
+                    }                   
                     col += matchCount - 1; // 이미 검사한 블록은 건너뛰기
                 }
             }
+        }
+        if (ComboAdd ==true)
+        {
+            ++Combo;
+            ComboAdd = false;
         }
 
 
@@ -1051,9 +1131,14 @@ void UPlayLevel::BlockDestroyCheck()
                             // 기본 폭발 로직
                             if (Blocks[col + X][row + Y] != nullptr)
                             {
+                                if (Blocks[col + X][row + Y]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                                    continue;
+
                                 Blocks[col + X][row + Y]->SetBoomb(true);
                                 Blocks[col + X][row + Y] = nullptr;
                                 Score += 10 * Combo;
+                                ComboAdd = true;
+                                ComboTimeCheck = false;
                             }
                         }
                     }
@@ -1064,6 +1149,9 @@ void UPlayLevel::BlockDestroyCheck()
                         // 위쪽 추가 폭발
                         if (row > 0 && Blocks[col][row - 1] != nullptr)
                         {
+                            if (Blocks[col][row - 1]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                                continue;
+
                             Blocks[col][row - 1]->SetBoomb(true);
                             Blocks[col][row - 1] = nullptr;
                             Score += 10 * Combo;
@@ -1071,15 +1159,22 @@ void UPlayLevel::BlockDestroyCheck()
                         // 아래쪽 추가 폭발
                         if (row + matchCount < MapSize && Blocks[col][row + matchCount] != nullptr)
                         {
+                            if (Blocks[col][row + matchCount]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                                continue;
+
                             Blocks[col][row + matchCount]->SetBoomb(true);
                             Blocks[col][row + matchCount] = nullptr;
                             Score += 10 * Combo;
                         }
-                    }
-                    ++Combo;
+                    }                   
                     row += matchCount - 1; // 이미 검사한 블록은 건너뛰기
                 }
             }
+        }
+        if (ComboAdd == true)
+        {
+            ++Combo;
+            ComboAdd = false;
         }
 
     }
@@ -1125,6 +1220,7 @@ void UPlayLevel::BlockDestroyCheck()
                         Score += 10 * matchCount * Combo;
                     }
                     ++Combo;
+                    ComboTimeCheck = false;
                     col += matchCount - 1; // 이미 검사한 블록은 건너뛰기
                 }
             }
@@ -1155,7 +1251,7 @@ void UPlayLevel::BlockDestroyCheck()
                 if (matchCount >= 3)
                 {
                     for (int i = 0; i < matchCount; i++)
-                    {
+                    {         
                         Blocks[col][row + i]->SetBoomb(true);
                         Blocks[col][row + i] = nullptr;
                     }
@@ -1168,6 +1264,7 @@ void UPlayLevel::BlockDestroyCheck()
                         Score += 10 * matchCount * Combo;
                     }
                     ++Combo;
+                    ComboTimeCheck = false;
                     row += matchCount - 1; // 이미 검사한 블록은 건너뛰기
                 }
             }
@@ -1213,10 +1310,11 @@ void UPlayLevel::GenerateNewBlocks()
         if (Blocks[col][0] == nullptr)
         {
             // 콤보가 10이상 일때 폭탄 블럭 생성      
-            if (Combo - ComboTens >= 10)
+            int CheckCombo = Combo - ComboTens;
+            if (CheckCombo >= 10)
             {
                 Blocks[col][0] = SpawnActor<ABoomb_Block>();
-                Combo = ComboTens;
+                ComboTens=  Combo;
             }
             else
             {

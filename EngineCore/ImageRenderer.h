@@ -143,13 +143,14 @@ public:
 	{
 		Size = _Value;
 	}
-	void SetTextColor(Color8Bit _Color)
+	void SetTextColor(Color8Bit _Color, Color8Bit _Color2 = Color8Bit::White)  //변경
 	{
 		TextColor = _Color;
+		TextColor2 = _Color2; //추가
 	}
 
 	FTransform GetRenderTransForm();
-
+	void SwitchTextBold() { TextBoldSwitch = !TextBoldSwitch; }
 protected:
 	void BeginPlay() override;
 
@@ -166,8 +167,11 @@ private:
 
 
 	std::string Text = "";
-	std::string Font = "나눔고딕";
+	std::string Font = "양재깨비체B";	//동글체 , Vagron
 	float Size = 10.0f;
 	Color8Bit TextColor = Color8Bit::NARed;
+	Color8Bit TextColor2 = Color8Bit::NARed; //추가
+	bool TextBoldSwitch = false;
+
 };
 

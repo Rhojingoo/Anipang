@@ -9,6 +9,7 @@
 #include <EngineCore\EngineResourcesManager.h>
 #include <EnginePlatform\EngineInput.h>
 #include <EnginePlatform\WindowImage.h>
+#include <EnginePlatform\EngineSound.h>
 
 
 #include "Block_Manager.h"
@@ -101,6 +102,22 @@ void UAnipangCore::BeginPlay()
 		Rot->SetRotationMaskImageFolder(Mask);	
 	}
 
+
+
+
+	{
+		std::list<UEngineFile> NewList = NewDir.AllFile({ ".wav", ".mp3" }, true);
+		// 엔진만의 규칙을 정할거냐.
+		for (UEngineFile& File : NewList)
+		{
+			UEngineSound::Load(File.GetFullPath());
+		}
+	}
+
+
+
+
+
 	CreateLevel<UTitleLevel>("Title");
 	CreateLevel<UScoreLevel>("GetScore");
 	CreateLevel<UScreenScore_Level>("ScreenScore");
@@ -108,6 +125,10 @@ void UAnipangCore::BeginPlay()
 	CreateLevel<UEndingLevel>("Ending");
 	CreateLevel<TestLevel>("TestLevel");
 	
+
+
+	//UEngineSound::Load("aaaa", "bbb");
+
 	//ChangeLevel("Title");
 	ChangeLevel("TestLevel");
 	//Block_Manager::OBJPOOL = &Block_Manager::GetInstance();

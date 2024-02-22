@@ -1,5 +1,7 @@
 #pragma once
 #include <EngineCore\Level.h>
+#include <EnginePlatform\EngineSound.h>
+
 
 class ACursor;
 class AAnimal_Block;
@@ -25,6 +27,8 @@ protected:
 	void AllDestroyCheck();
 
 private:
+	UEngineSoundPlayer BGMPlayer;
+
 	ACursor* Cursor						 = nullptr;
 	AAnimal_Block* Blocks[7][7]			 = {};
 	AAnimal_Block* click_block			 = nullptr;

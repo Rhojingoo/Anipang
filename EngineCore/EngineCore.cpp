@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include "Level.h"
 #include "EnginePlatform\EngineInput.h"
+#include <EnginePlatform\EngineSound.h>
+
 
 UEngineCore* GEngine = nullptr;
 bool UEngineCore::IsDebugValue = false;
@@ -54,6 +56,7 @@ void UEngineCore::CoreTick()
 		DeltaTime = 1.0f / 60.0f;
 	}
 
+	UEngineSound::Update();
 	UEngineInput::KeyCheckTick(DeltaTime);
 
 	if (nullptr != NextLevel)

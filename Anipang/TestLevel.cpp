@@ -32,11 +32,26 @@ void TestLevel::BeginPlay()
    // CreateBlock();
     ABoombBlock_Effect* Test =  SpawnActor<ABoombBlock_Effect>();
     Test->SetActorLocation({240,480});
+
+
+    // Foot_1_1.wav
+    //BGMPlayer = UEngineSound::SoundPlay("Foot_1_1.wav");
+    //BGMPlayer.Loop();
+     BGMPlayer = UEngineSound::SoundPlay("anipang_ingame_wav.wav");
+    // BGMPlayer.Off();
+
+
 }
 
 void TestLevel::Tick(float _DeltaTime)
 {
     ULevel::Tick(_DeltaTime);
+
+    if (UEngineInput::IsDown(VK_F3))
+    {
+        BGMPlayer.OnOffSwitch();
+    }
+
 
     {
         for (int row = 0; row < MapSize; ++row)

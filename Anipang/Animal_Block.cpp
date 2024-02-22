@@ -53,8 +53,8 @@ void AAnimal_Block::Tick(float _DeltaTime)
 
 void AAnimal_Block::CreateBlockEffect()
 {	
-	ABlockBoomb_Effect* BoomEffect = GetWorld()->SpawnActor<ABlockBoomb_Effect>();
-	BoomEffect->SetActorLocation(GetActorLocation());
+	Block_Destroy_Effect = GetWorld()->SpawnActor<ABlockBoomb_Effect>();
+	Block_Destroy_Effect->SetActorLocation(GetActorLocation());
 }
 
 void AAnimal_Block::PickingCheck()
@@ -68,7 +68,6 @@ void AAnimal_Block::PickingCheck()
 
 	if (Curpos.X >= MinX && Curpos.X <= MaxX && Curpos.Y >= MinY && Curpos.Y <= MaxY)
 	{
-		int a = 0;
 		if (true == UEngineInput::IsDown(VK_LBUTTON))
 		{
 			if (Blocktype == Block_Type::Boomb)
@@ -80,32 +79,63 @@ void AAnimal_Block::PickingCheck()
 				return;
 			}
 
-			if (FirstClick == false)
+			if (FirstClick == false && FirstPick == false)
 			{
-				if (FirstPick == false && SecondPick == false)
+				if (SecondPick == true)
 				{
-					BlockClick = true;
-					FirstClick = true;
-					FirstPick = true;
-				}
+					return;
+				}		
+				BlockClick = true;
+				FirstClick = true;
+				FirstPick = true;				
 			}
-			else if (SecondClick == false)
+			else if (SecondClick == false && SecondPick == false)
 			{
-				if (FirstPick == false && SecondPick == false)
+				if (FirstPick == true)
 				{
-					BlockClick = true;
-					SecondClick = true;
-					SecondPick = true;
-				}
+					return;
+				}		
+				BlockClick = true;
+				SecondClick = true;
+				SecondPick = true;
 			}
-			else if (FirstClick == true)
-			{
-				if (FirstPick == true && BlockClick == true)
+			//else if (FirstClick == true && SecondClick == true)
+			//{
+			//	if (FirstPick == true)
+			//	{
+			//		BlockClick = false;
+			//		FirstClick = false;
+			//		FirstPick = false;
+			//	}
+			//	else if (SecondPick == true)
+			//	{
+			//		BlockClick = false;
+			//		SecondClick = false;
+			//		SecondPick = false;
+			//	}
+			//}
+
+			else if (FirstClick == true && FirstPick == true)
+			{				
+				if (SecondPick == true)
 				{
-					BlockClick = false;
-					FirstClick = false;
-					FirstPick = false;
+					return;
 				}
+				BlockClick = false;
+				FirstClick = false;
+				FirstPick = false;
+				
+			}
+			else if (SecondClick == true && SecondPick == true)
+			{
+				if (FirstPick == true)
+				{
+					return;
+				}
+				BlockClick = false;
+				SecondClick = false;
+				SecondPick = false;
+				
 			}
 		}
 	}

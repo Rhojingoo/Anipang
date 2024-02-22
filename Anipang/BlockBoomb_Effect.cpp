@@ -15,7 +15,7 @@ void ABlockBoomb_Effect::BeginPlay()
 	Renderer->SetImage("Block_Effect");	
 	Renderer->SetTransform({ {0,0}, {133, 139} });
 	Renderer->SetImageCuttingTransform({ {0,0}, {133, 139} });
-	Renderer->CreateAnimation("Idle", "Block_Effect", 0, 4, 0.1f, false);
+	Renderer->CreateAnimation("Idle", "Block_Effect", 0, 4, 0.07f, false);
 	Renderer->ChangeAnimation("Idle");
 }
 

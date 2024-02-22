@@ -3,6 +3,7 @@
 #include "Block_Location.h"
 #include "Cursor.h"
 
+class ABlockBoomb_Effect;
 class ABoombBlock_Effect;
 class AAnimal_Block : public AActor,  public UBlock_Location
 {
@@ -78,6 +79,7 @@ public:
 	}
 
 	Block_Type GetBlockType() { return Blocktype; }
+	Block_Status GetBlockStatus() { return Blockstatus; }
 
 	void SetBoomb(bool _BoombBlock) { BoombBlock = _BoombBlock; }
 	bool GetBoomb() { return BoombBlock; }
@@ -91,9 +93,11 @@ public:
 	bool Check_Boomb_first_Toutch() { return BoombBlock_First_Toutch; }
 
 	void FindBlock() { LetsFind = true; }
+	void FindEndBlock() { LetsFind = false; }
 	bool ISFind() { return FindEnd; }
 protected:
 	UImageRenderer* Renderer					 = nullptr;
+	ABlockBoomb_Effect* Block_Destroy_Effect	 = nullptr;
 	FVector Pos									 = {};
 	FVector UnderPos							 = {};
 	FVector Size								 = {};

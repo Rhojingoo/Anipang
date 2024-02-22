@@ -7,15 +7,28 @@ public :
 	ABoombBlock_Effect();
 	~ABoombBlock_Effect();
 
-	ABoombBlock_Effect(const ABoombBlock_Effect& _Other)								 = delete;
+	ABoombBlock_Effect(const ABoombBlock_Effect& _Other)							 = delete;
 	ABoombBlock_Effect(ABoombBlock_Effect& _Other) noexcept							 = delete;
-	ABoombBlock_Effect& operator =(const ABoombBlock_Effect& _Other)					 = delete;
+	ABoombBlock_Effect& operator =(const ABoombBlock_Effect& _Other)				 = delete;
 	ABoombBlock_Effect& operator =(ABoombBlock_Effect& _Other) noexcept				 = delete;
 
 
 	void SetDir(const FVector& _Dir)
 	{
 		Dir = _Dir;
+
+		if (Dir.X == -1.0f)
+		{
+			float Angle = 90.0f;
+			Renderer->SetAngle(Angle);
+			Destroy(5.f);
+		}
+		else if (Dir.X == 1.0f)
+		{
+			float Angle = -90.0f;
+			Renderer->SetAngle(Angle);
+			Destroy(5.f);
+		}
 	}
 	void SetSideReder() { SideRender = true; }
 	bool IsSecondEffectDEATH() { return Death; }
@@ -26,7 +39,6 @@ protected:
 
 private:
 	UImageRenderer* Renderer = nullptr;
-	UImageRenderer* DirRenderer = nullptr;
 	FVector Dir = FVector::Zero;
 	const float Speed = 250.0f;
 	bool SideRender = false;

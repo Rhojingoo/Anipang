@@ -24,6 +24,7 @@ void AMonkey_Block::BeginPlay()
 }
 
 void AMonkey_Block::Tick(float _DeltaTime)
+
 {
 	AAnimal_Block::Tick(_DeltaTime);
 	FVector RenderCurpos = Renderer->GetTransform().GetPosition();
@@ -46,8 +47,10 @@ void AMonkey_Block::Tick(float _DeltaTime)
 
 		if (BoombBlock == true)
 		{
+			CreateBlockEffect();
 			Renderer->ChangeAnimation("Boomb");
 			Blockstatus = Block_Status::Boomb;
+			FindEnd = true;
 			return;
 		}
 
@@ -78,6 +81,7 @@ void AMonkey_Block::Tick(float _DeltaTime)
 	break;
 	case AAnimal_Block::Block_Status::Click:
 	{
+
 		if (BlockClick == false)
 		{
 			Renderer->ChangeAnimation("Idle");
@@ -89,18 +93,22 @@ void AMonkey_Block::Tick(float _DeltaTime)
 
 		if (BoombBlock == true)
 		{
+			CreateBlockEffect();
 			Renderer->ChangeAnimation("Boomb");
 			Blockstatus = Block_Status::Boomb;
+			FindEnd = true;
 			return;
 		}
 	}
 	break;
 	case AAnimal_Block::Block_Status::Boomb:
 	{
+
 		bool AnimationEnd = Renderer->IsCurAnimationEnd();
 		if (AnimationEnd == true)
 		{
-			CreateBlockEffect();
+			/*CreateBlockEffect();*/
+			FindEnd = true;
 			Destroy(0.f);
 		}
 	}
@@ -123,6 +131,13 @@ void AMonkey_Block::Tick(float _DeltaTime)
 			Renderer->SetAlpha(1.0f - FindTime);
 		}
 
+		if (LetsFind == false)
+		{
+			Blockstatus = Block_Status::Idle;
+			Renderer->SetAlpha(1.0f);
+			return;
+		}
+
 		if (BlockClick == true)
 		{
 			Renderer->ChangeAnimation("Click");
@@ -131,11 +146,13 @@ void AMonkey_Block::Tick(float _DeltaTime)
 			Renderer->SetOrder(RenderNumber);
 			Renderer->SetAlpha(1.0f);
 			FindEnd = true;
+			LetsFind = false;
 			return;
 		}
 
 		if (BoombBlock == true)
 		{
+			CreateBlockEffect();
 			Renderer->ChangeAnimation("Boomb");
 			Blockstatus = Block_Status::Boomb;
 			Renderer->SetAlpha(1.0f);
@@ -148,10 +165,12 @@ void AMonkey_Block::Tick(float _DeltaTime)
 			Blockstatus = Block_Status::Move;
 			Renderer->SetAlpha(1.0f);
 			FindEnd = true;
+			LetsFind = false;
 			return;
 		}
 	}
 	break;
+
 	case AAnimal_Block::Block_Status::End:
 		break;
 	default:

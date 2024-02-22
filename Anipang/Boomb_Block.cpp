@@ -34,7 +34,7 @@ void ABoomb_Block::Tick(float _DeltaTime)
 
 	CollCheck_First_Effect();
 
-	Check_Second_Destroy();
+	//Check_Second_Destroy();
 
 	switch (Blockstatus)
 	{
@@ -252,7 +252,7 @@ void ABoomb_Block::CollCheck_First_Effect()
 					}
 					BoombBlock_SecondEffect_Create = true;
 				}
-
+				
 				BoombBlock_First_Effect->Destroy(0.0f);
 				BoombBlock_First_Effect = nullptr;
 				BoombBlock_FirstEffect_Create = false;

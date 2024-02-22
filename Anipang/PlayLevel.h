@@ -51,7 +51,7 @@ private:
 	AAnimal_Block* Blocks[7][7]				 = {};
 	AAnimal_Block* click_block				 = nullptr;
 	AAnimal_Block* swap_block				 = nullptr;
-	AAnimal_Block* Find_block				 = nullptr;
+	AAnimal_Block* Hint_block				 = nullptr;
 	AGame_Start* Start_Rabbit				 = nullptr;
 	AGame_End* End_Rabbit					 = nullptr;
 	ATime_Gauge* Timer						 = nullptr;
@@ -79,7 +79,7 @@ private:
 	bool YCLICKMOVE							 = false;
 	bool YSWAPMOVE							 = false;
 
-	bool FindBlock							 = false;
+	bool HintBlock							 = false;
 	bool CheckMatch							 = true;
 	bool CanAMatch							 = false;
 	bool ClickChangeCheck					 = false;

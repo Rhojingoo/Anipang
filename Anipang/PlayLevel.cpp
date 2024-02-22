@@ -68,32 +68,29 @@ void UPlayLevel::Tick(float _DeltaTime)
         {
             if (GameEnd == false)
             {
-                End_Rabbit = SpawnActor<AGame_End>();
-                End_Rabbit->SetActorLocation({ 250,400 });
-                GameEnd = true;
+                //End_Rabbit = SpawnActor<AGame_End>();
+                //End_Rabbit->SetActorLocation({ 250,400 });
+                //GameEnd = true;
             }
         }
         else
         {
-            Combo_OBJ->SetCombo(Combo);
-            int CheckCombo = Combo - PreveCombo;
-            if (CheckCombo >= 1)
-            {
-                Combo_OBJ->SetFont();
-                PreveCombo = Combo;
-            }       
-            if (ComboTimeCheck == false)
-            {
-                ClearCombotime();
-            }
-            ComboCheck(_DeltaTime);
-   
+            ComboCheck(_DeltaTime);           
 
             // Before GameStart CanMake3match Checks Logics;
             if (CheckMatch == true)
             {
                 CanAMatch = CanMakeAMatch();
             }
+
+            if (HintBlock == false && ComboTime >= 3.0f)
+            {
+                if (Hint_block == nullptr)
+                    return;
+                Hint_block->FindBlock();
+                HintBlock = true;
+            }
+
 
             if (CanAMatch == true)
             {
@@ -141,14 +138,17 @@ void UPlayLevel::Tick(float _DeltaTime)
     }
 
     ScoreMN->SetScore(Score);
-    if (Find_block != nullptr)
+
+
+
+    if (Hint_block != nullptr)
     {
-        if (Find_block->ISFind() == true)
+        if (Hint_block->ISFind() == true)
         {
-            Find_block = nullptr;
-            FindBlock = false;
+            Hint_block = nullptr;
+            HintBlock = false;
             ClearCombotime();
-        }
+        }  
     }
 
 
@@ -169,6 +169,7 @@ void UPlayLevel::LevelStart(ULevel* _Level)
     Combo_OBJ->ClearCombo();
     Combo = 0;
     PreveCombo = 0;
+    Hint_block = nullptr;
 }
 
 void UPlayLevel::LevelEnd(ULevel* _Level)
@@ -192,6 +193,7 @@ void UPlayLevel::LevelEnd(ULevel* _Level)
     Combo = 0;
     PreveCombo = 0;
     Combo_OBJ->ClearCombo();
+    Hint_block = nullptr;
 }
 
 void UPlayLevel::OBJPOOLTEST()
@@ -291,23 +293,30 @@ void UPlayLevel::CreateBlock()
 
 void UPlayLevel::ComboCheck(float _DeltaTime)
 {
-    if (Combo >= 1)
+    Combo_OBJ->SetCombo(Combo);
+    int CheckCombo = Combo - PreveCombo;
+    if (CheckCombo >= 1)
+    {
+        Combo_OBJ->SetFont();
+        PreveCombo = Combo;
+    }
+    if (ComboTimeCheck == false)
+    {
+        ClearCombotime();
+    }
+
+    //if (Combo >= 1)
     {
         ComboTimeCheck = true;
         if (ComboTimeCheck == true)
         {
             ComboTime += _DeltaTime;
 
-            if (FindBlock ==false && ComboTime >= 3.0f)
-            {
-                Find_block->FindBlock(); ;
-                FindBlock = true;
-            }
-
             if (ComboTime >= 5.0f)
             {
                 ClearCombotime();
                 Combo = 0;
+                PreveCombo = 0;
             }
         }
     }
@@ -361,60 +370,124 @@ bool UPlayLevel::CanMakeAMatch()
 
 bool UPlayLevel::CheckForMatch(int _col, int _row)
 {
-    if (Blocks[_col][_row] == nullptr)
-        return false;
-
-    AAnimal_Block::Block_Type CheckBL = Blocks[_col][_row]->GetBlockType();
-    int matchCount = 1; // 시작 블록을 포함하여 카운트 시작
-
-    // 수평 방향 검사 (왼쪽)
-    for (int i = _col - 1; i >= 0 && Blocks[i][_row] != nullptr && Blocks[i][_row]->GetBlockType() == CheckBL; i--)
+    if(HintBlock == false)
     {
-        matchCount++;
-        if (matchCount == 3)
+        if (Blocks[_col][_row] == nullptr)
+            return false;
+
+        AAnimal_Block::Block_Type CheckBL = Blocks[_col][_row]->GetBlockType();
+        int matchCount = 1; // 시작 블록을 포함하여 카운트 시작
+
+        // 수평 방향 검사 (왼쪽)
+        for (int i = _col - 1; i >= 0 && Blocks[i][_row] != nullptr && Blocks[i][_row]->GetBlockType() == CheckBL; i--)
         {
-            Find_block = Blocks[_col][_row]; // 3매치 발생 시 현재 블록 저장
+            matchCount++;
+            if (matchCount == 3)
+            {
+                if (Hint_block == nullptr)
+                {
+                    Hint_block = Blocks[_col][_row]; // 3매치 발생 시 현재 블록 저장
+                }
+            }
+        }
+        // 수평 방향 검사 (오른쪽)
+        for (int i = _col + 1; i < MapSize && Blocks[i][_row] != nullptr && Blocks[i][_row]->GetBlockType() == CheckBL; i++)
+        {
+            matchCount++;
+            if (matchCount == 3)
+            {
+                if (Hint_block == nullptr)
+                {
+                    Hint_block = Blocks[_col][_row]; // 3매치 발생 시 현재 블록 저장
+                }
+            }
+        }
+        if (matchCount >= 3)
+        {
+            return true; // 수평 방향으로 3개 이상 일치
+        }
+
+        matchCount = 1; // 카운트 초기화 후 수직 방향 검사
+
+        // 수직 방향 검사 (위)
+        for (int i = _row - 1; i >= 0 && Blocks[_col][i] != nullptr && Blocks[_col][i]->GetBlockType() == CheckBL; i--)
+        {
+            matchCount++;
+            if (matchCount == 3)
+            {
+                if (Hint_block == nullptr)
+                {
+                    Hint_block = Blocks[_col][_row]; // 3매치 발생 시 현재 블록 저장
+                }
+            }
+        }
+        // 수직 방향 검사 (아래)
+        for (int i = _row + 1; i < MapSize && Blocks[_col][i] != nullptr && Blocks[_col][i]->GetBlockType() == CheckBL; i++)
+        {
+            matchCount++;
+            if (matchCount == 3)
+            {
+                if (Hint_block == nullptr)
+                {
+                    Hint_block = Blocks[_col][_row]; // 3매치 발생 시 현재 블록 저장
+                }
+            }
+        }
+        if (matchCount >= 3)
+        {
+            return true; // 수직 방향으로 3개 이상 일치
         }
     }
-    // 수평 방향 검사 (오른쪽)
-    for (int i = _col + 1; i < MapSize && Blocks[i][_row] != nullptr && Blocks[i][_row]->GetBlockType() == CheckBL; i++)
+    else
     {
-        matchCount++;
-        if (matchCount == 3) 
+        int HIINTCOL = Hint_block->GetBlockLocationCol();
+        int HIINTROW = Hint_block->GetBlockLocationRow();
+
+        if (Blocks[HIINTCOL][HIINTROW] == nullptr)
+            return false;
+
+        AAnimal_Block::Block_Type CheckBL = Blocks[HIINTCOL][HIINTROW]->GetBlockType();
+        int matchCount = 1; // 시작 블록을 포함하여 카운트 시작
+
+        // 수평 방향 검사 (왼쪽)
+        for (int i = HIINTCOL - 1; i >= 0 && Blocks[i][HIINTROW] != nullptr && Blocks[i][HIINTROW]->GetBlockType() == CheckBL; i--)
         {
-            Find_block = Blocks[_col][_row];// 3매치 발생 시 현재 블록 저장
+            matchCount++; 
+        }
+        // 수평 방향 검사 (오른쪽)
+        for (int i = HIINTCOL + 1; i < MapSize && Blocks[i][HIINTROW] != nullptr && Blocks[i][HIINTROW]->GetBlockType() == CheckBL; i++)
+        {
+            matchCount++;     
+        }
+        if (matchCount >= 3)
+        {
+            return true; // 수평 방향으로 3개 이상 일치
+        }
+
+        matchCount = 1; // 카운트 초기화 후 수직 방향 검사
+
+        // 수직 방향 검사 (위)
+        for (int i = HIINTROW - 1; i >= 0 && Blocks[HIINTCOL][i] != nullptr && Blocks[HIINTCOL][i]->GetBlockType() == CheckBL; i--)
+        {
+            matchCount++;
+        }
+        // 수직 방향 검사 (아래)
+        for (int i = HIINTROW + 1; i < MapSize && Blocks[_col][i] != nullptr && Blocks[_col][i]->GetBlockType() == CheckBL; i++)
+        {
+            matchCount++;
+        }
+        if (matchCount >= 3)
+        {
+            return true; 
         }
     }
-    if (matchCount >= 3)
-    {
-        return true; // 수평 방향으로 3개 이상 일치
-    }
 
-    matchCount = 1; // 카운트 초기화 후 수직 방향 검사
-
-    // 수직 방향 검사 (위)
-    for (int i = _row - 1; i >= 0 && Blocks[_col][i] != nullptr && Blocks[_col][i]->GetBlockType() == CheckBL; i--)
+    HintBlock = false;
+    if (Hint_block != nullptr)
     {
-        matchCount++;
-        if (matchCount == 3)
-        {
-            Find_block = Blocks[_col][_row]; // 3매치 발생 시 현재 블록 저장
-        }
+        Hint_block->FindEndBlock();
+        Hint_block = nullptr;
     }
-    // 수직 방향 검사 (아래)
-    for (int i = _row + 1; i < MapSize && Blocks[_col][i] != nullptr && Blocks[_col][i]->GetBlockType() == CheckBL; i++)
-    {
-        matchCount++;
-        if (matchCount == 3)
-        {
-            Find_block = Blocks[_col][_row]; // 3매치 발생 시 현재 블록 저장
-        }
-    }
-    if (matchCount >= 3)
-    {
-        return true; // 수직 방향으로 3개 이상 일치
-    }
-
     return false; // 수평 또는 수직 방향에서 3개 이상 일치하는 블록이 없음
 }
 
@@ -433,13 +506,13 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
                     continue;
                 }
 
-                if (Blocks[col][row]->GetFirstPick() == true)
+                if (Blocks[col][row]->GetFirstPick() == true && AAnimal_Block::GetFirstClick() ==true)
                 {
                     click_block = Blocks[col][row];
                     Clickpos = click_block->GetActorLocation();
                 }
 
-                if (Blocks[col][row]->GetSecondPick() == true)
+                if (Blocks[col][row]->GetSecondPick() == true && AAnimal_Block::GetSecondClick() == true)
                 {
                     swap_block = Blocks[col][row];
                     Swappos = swap_block->GetActorLocation();
@@ -1417,6 +1490,8 @@ void UPlayLevel::AllDestroyCheck()
             Blocks[col][row] = nullptr;
         }
     }
+    Hint_block = nullptr;
+    HintBlock = false;
     AllDestroy = true;
 }
 

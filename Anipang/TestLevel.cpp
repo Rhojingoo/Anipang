@@ -27,17 +27,16 @@ TestLevel::~TestLevel()
 void TestLevel::BeginPlay()
 {
     ULevel::BeginPlay();
-    //SpawnActor<APlay_Frame>();
+    SpawnActor<APlay_Frame>();
     Cursor = SpawnActor<ACursor>();
-   // CreateBlock();
-    ABoombBlock_Effect* Test =  SpawnActor<ABoombBlock_Effect>();
-    Test->SetActorLocation({240,480});
+    CreateBlock();
+
 
 
     // Foot_1_1.wav
     //BGMPlayer = UEngineSound::SoundPlay("Foot_1_1.wav");
     //BGMPlayer.Loop();
-    // BGMPlayer = UEngineSound::SoundPlay("anipang_ingame_wav.wav");
+    //BGMPlayer = UEngineSound::SoundPlay("anipang_ingame_wav.wav");
     // BGMPlayer.Off();
 
 

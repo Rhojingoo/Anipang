@@ -37,7 +37,7 @@ void TestLevel::BeginPlay()
     // Foot_1_1.wav
     //BGMPlayer = UEngineSound::SoundPlay("Foot_1_1.wav");
     //BGMPlayer.Loop();
-     BGMPlayer = UEngineSound::SoundPlay("anipang_ingame_wav.wav");
+    // BGMPlayer = UEngineSound::SoundPlay("anipang_ingame_wav.wav");
     // BGMPlayer.Off();
 
 

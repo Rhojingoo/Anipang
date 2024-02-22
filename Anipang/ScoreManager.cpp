@@ -238,7 +238,7 @@ void ScoreManager::BeginPlay()
 	Renderer->SetText(Text);
 	Renderer->SetTextSize(45);
 	Renderer->SetTextColor(Color8Bit::Black, Color8Bit::White);
-	Renderer->SwitchTextBold();
+	Renderer->SetTextEffect(1);
 	SetActorLocation({ 240,60 });
 	/*if (ScoreLevel_Use == false)
 	{

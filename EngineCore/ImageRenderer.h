@@ -157,7 +157,14 @@ public:
 	}
 
 	FTransform GetRenderTransForm();
-	void SwitchTextBold() { TextBoldSwitch = !TextBoldSwitch; }
+
+
+	void SetTextEffect(int _Effect = 0)
+	{
+		TextEffect = _Effect;
+	}
+
+
 protected:
 	void BeginPlay() override;
 
@@ -180,7 +187,7 @@ private:
 	float Size = 10.0f;
 	Color8Bit TextColor = Color8Bit::NARed;
 	Color8Bit TextColor2 = Color8Bit::NARed; //Ãß°¡
-	bool TextBoldSwitch = false;
+	int TextEffect = 0;
 
 
 

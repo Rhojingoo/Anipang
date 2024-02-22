@@ -129,8 +129,8 @@ void UAnipangCore::BeginPlay()
 
 	//UEngineSound::Load("aaaa", "bbb");
 
-	//ChangeLevel("Title");
-	ChangeLevel("TestLevel");
+	ChangeLevel("Title");
+	//ChangeLevel("TestLevel");
 	//Block_Manager::OBJPOOL = &Block_Manager::GetInstance();
 
 }

@@ -330,6 +330,8 @@ public:
 	static const Color8Bit Magenta;
 	static const Color8Bit White;
 	static const Color8Bit Orange;
+	static const Color8Bit Yellow;
+	
 
 	static const Color8Bit NABlack;
 	static const Color8Bit NARed;
@@ -338,8 +340,8 @@ public:
 	static const Color8Bit NAMagenta;
 	static const Color8Bit NAWhite;
 	static const Color8Bit NAOrange;
-
-
+	static const Color8Bit NAYellow;
+	
 	union
 	{
 		struct

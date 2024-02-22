@@ -17,8 +17,6 @@ void ScoreManager::SetFont()
 {
 	Text = std::to_string(Score);
 	Renderer->SetText(Text);
-
-
 }
 
 void ScoreManager::ScoreImageRender()

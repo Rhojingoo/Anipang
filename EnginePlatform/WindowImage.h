@@ -2,6 +2,7 @@
 #include <EngineBase\PathObject.h>
 #include <EngineBase\EngineMath.h>
 #include <EngineBase\Transform.h>
+#include <EngineBase\EngineDebug.h>
 #include <Windows.h>
 #include <string>
 #include <string_view>
@@ -23,12 +24,13 @@ enum class EWIndowImageType
 	IMG_PNG
 };
 
-class ImageInfo
+class UImageInfo
 {
 public:
 	HBITMAP hBitMap;
 	HDC ImageDC = nullptr;
 	FTransform CuttingTrans;
+	UImageInfo* RotationMaskImage = nullptr;
 	EWIndowImageType ImageType = EWIndowImageType::IMG_NONE;
 };
 
@@ -81,9 +83,24 @@ public:
 	}
 	void TextPrint(std::string_view _Text, FVector _Pos);
 
-	void SetRotationMaskImage(UWindowImage* _RotationMaskImage)
+	void SetRotationMaskImage(int _Index, UWindowImage* _RotationMaskImage, int _MaskIndex)
 	{
-		RotationMaskImage = _RotationMaskImage;
+		UImageInfo& Ref = _RotationMaskImage->Infos[_MaskIndex];
+		Infos[_Index].RotationMaskImage = &Ref;
+	}
+
+	void SetRotationMaskImageFolder(UWindowImage* _RotationMaskImage)
+	{
+		if (Infos.size() != _RotationMaskImage->Infos.size())
+		{
+			MsgBoxAssert("이미지정보의 크기가 다른 이미지 끼리 매칭을 할수가 없습니다.");
+			return;
+		}
+
+		for (int i = 0; i < static_cast<int>(Infos.size()); i++)
+		{
+			SetRotationMaskImage(i, _RotationMaskImage, i);
+		}
 	}
 
 protected:
@@ -96,7 +113,7 @@ private:
 	HDC ImageDC = 0;
 	BITMAP BitMapInfo = BITMAP();
 	EWIndowImageType ImageType = EWIndowImageType::IMG_NONE;
-	std::vector<ImageInfo> Infos;
+	std::vector<UImageInfo> Infos;
 	bool Create(HDC _MainDC);
 };
 

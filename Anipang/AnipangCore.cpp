@@ -69,7 +69,10 @@ void UAnipangCore::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Pig"));
 		UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Rabbit"));
 		UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Block_Effect"));
-		UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Boomb_Effect"));
+		//UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Boomb_Effect"));
+		//UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Boomb_Effect_Dir"));
+	
+
 		UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("World_On_Fire_Projectile"));
 		UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Phoenix Landing"));
 		UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("GameStart"));
@@ -92,10 +95,11 @@ void UAnipangCore::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("UI_Image\\MainScreen_UI"));
 	}
 
-	//UWindowImage* Rot = UEngineResourcesManager::GetInst().FindImg("Dir.png");
-	//UWindowImage* Mask = UEngineResourcesManager::GetInst().FindImg("Dir_Mask.bmp");
-	//Rot->SetRotationMaskImage(Mask);
-
+	{
+		UWindowImage* Rot = UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Boomb_Effect"));
+		UWindowImage* Mask = UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Boomb_Effect_Dir"));
+		Rot->SetRotationMaskImageFolder(Mask);	
+	}
 
 	CreateLevel<UTitleLevel>("Title");
 	CreateLevel<UScoreLevel>("GetScore");
@@ -104,8 +108,8 @@ void UAnipangCore::BeginPlay()
 	CreateLevel<UEndingLevel>("Ending");
 	CreateLevel<TestLevel>("TestLevel");
 	
-	ChangeLevel("Title");
-	//ChangeLevel("TestLevel");
+	//ChangeLevel("Title");
+	ChangeLevel("TestLevel");
 	//Block_Manager::OBJPOOL = &Block_Manager::GetInstance();
 
 }

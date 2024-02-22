@@ -11,7 +11,7 @@
 #include "Rabbit_Block.h"
 #include "Boomb_Block.h"
 
-
+#include "BoombBlock_Effect.h"
 #include "Boomb_Block_Effect.h"
 #include "Helper.h"
 
@@ -27,9 +27,11 @@ TestLevel::~TestLevel()
 void TestLevel::BeginPlay()
 {
     ULevel::BeginPlay();
-    SpawnActor<APlay_Frame>();
+    //SpawnActor<APlay_Frame>();
     Cursor = SpawnActor<ACursor>();
-    CreateBlock();
+   // CreateBlock();
+    ABoombBlock_Effect* Test =  SpawnActor<ABoombBlock_Effect>();
+    Test->SetActorLocation({240,480});
 }
 
 void TestLevel::Tick(float _DeltaTime)

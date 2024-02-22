@@ -17,6 +17,9 @@ void ABoomb_Block_Effect::BeginPlay()
 	Renderer->SetImageCuttingTransform({ {0,0}, {70, 250} });
 	Renderer->CreateAnimation("Idle", "Phoenix Landing", 0, 6, 0.1f, true);
 	Renderer->ChangeAnimation("Idle");
+
+
+
 }
 
 void ABoomb_Block_Effect::Tick(float _DeltaTime)

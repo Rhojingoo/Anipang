@@ -96,5 +96,5 @@ UWindowImage* UEngineResourcesManager::LoadFolder(std::string_view _Path, std::s
 
 	Images[UpperName] = NewImage;
 
-	return nullptr;
+	return NewImage;
 }

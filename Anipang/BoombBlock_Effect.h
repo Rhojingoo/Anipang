@@ -26,6 +26,7 @@ protected:
 
 private:
 	UImageRenderer* Renderer = nullptr;
+	UImageRenderer* DirRenderer = nullptr;
 	FVector Dir = FVector::Zero;
 	const float Speed = 250.0f;
 	bool SideRender = false;

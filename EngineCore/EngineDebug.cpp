@@ -29,12 +29,9 @@ namespace UEngineDebug
 		for (int i = 0; i < static_cast<int>(PrintText.size()); i++)
 		{
 			TextOutData& Data = PrintText[i];
-			_Image->TextCopyFormat(Data.Text, "±Ã¼­", stringFormat, Data._Size, Trans, Color);
+			_Image->TextCopyFormat(Data.Text, "궁서­", stringFormat, Data._Size, Trans, Color);
 			Trans.AddPosition({ 0.0f, Data._Size });
 		}
-
 		PrintText.clear();
 	}
-
-
 }

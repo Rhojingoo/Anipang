@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore\Level.h>
 #include <List>
+#include <EnginePlatform\EngineSound.h>
 
 class ACombo_OBJ;
 class ScoreManager;
@@ -42,7 +43,6 @@ protected:
 	void GenerateNewBlocks();
 	void BlockMoveCheck();
 
-
 	void OBJPOOLTEST();
 	void CreateBlock();
 
@@ -57,6 +57,8 @@ private:
 	ATime_Gauge* Timer						 = nullptr;
 	ScoreManager* ScoreMN					 = nullptr;
 	ACombo_OBJ* Combo_OBJ					 = nullptr;
+
+	UEngineSoundPlayer Play_Game_Sound;
 
 	FVector Clickpos						 = {};
 	FVector Swappos							 = {};
@@ -113,6 +115,6 @@ private:
 	void AllDestroyCheck();
 	bool AllDestroy							 = false;
 
-
+	bool BackGroundSound = false;
 };
 

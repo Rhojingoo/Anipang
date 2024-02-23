@@ -37,9 +37,7 @@ void UPlayLevel::BeginPlay()
 {
     ULevel::BeginPlay();
     SpawnActor<APlay_Frame>();
-    Cursor = SpawnActor<ACursor>();
-    Start_Rabbit = SpawnActor<AGame_Start>();
-    Start_Rabbit->SetActorLocation({ 235,400 });
+    Cursor = SpawnActor<ACursor>(); 
 
     //ABoomb_Block_Effect* aTEST = SpawnActor<ABoomb_Block_Effect>();
     //aTEST->SetActorLocation({ 235,400 });
@@ -59,18 +57,28 @@ void UPlayLevel::Tick(float _DeltaTime)
 
     if (GameStart == false)
     {
-        GameStart = Start_Rabbit->IsStart();
+        GameStart = Start_Rabbit->IsStart();    
+
     }
     else
     {
+        if (BackGroundSound == false)
+        {
+            Play_Game_Sound = UEngineSound::SoundPlay("Anipang_Playgame.mp3");
+            Play_Game_Sound.Loop();
+            BackGroundSound = true;
+        }
+
         Timer->TimerStart();
         if (Timer->IsFinish() == true)
         {
             if (GameEnd == false)
             {
-                //End_Rabbit = SpawnActor<AGame_End>();
-                //End_Rabbit->SetActorLocation({ 250,400 });
-                //GameEnd = true;
+                End_Rabbit = SpawnActor<AGame_End>();
+                End_Rabbit->SetActorLocation({ 250,400 });
+                Play_Game_Sound.Off();
+                UEngineSound::SoundPlay("TimeOver.mp3");
+                GameEnd = true;
             }
         }
         else
@@ -166,10 +174,13 @@ void UPlayLevel::LevelStart(ULevel* _Level)
     CreateBlock();
     Start_Rabbit = SpawnActor<AGame_Start>();
     Start_Rabbit->SetActorLocation({ 235,400 });
+    UEngineSound::SoundPlay("Ready_Go.mp3");
+
     Combo_OBJ->ClearCombo();
     Combo = 0;
     PreveCombo = 0;
     Hint_block = nullptr;
+    BackGroundSound = false;
 }
 
 void UPlayLevel::LevelEnd(ULevel* _Level)
@@ -194,6 +205,7 @@ void UPlayLevel::LevelEnd(ULevel* _Level)
     PreveCombo = 0;
     Combo_OBJ->ClearCombo();
     Hint_block = nullptr;
+    BackGroundSound = false;
 }
 
 void UPlayLevel::OBJPOOLTEST()

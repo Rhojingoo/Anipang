@@ -48,6 +48,7 @@ void ARabbit_Block::Tick(float _DeltaTime)
 		if (BoombBlock == true)
 		{
 			CreateBlockEffect();
+			UEngineSound::SoundPlay("Block_BOOM.mp3");
 			Renderer->ChangeAnimation("Boomb");
 			Blockstatus = Block_Status::Boomb;
 			FindEnd = true;
@@ -94,6 +95,7 @@ void ARabbit_Block::Tick(float _DeltaTime)
 		if (BoombBlock == true)
 		{
 			CreateBlockEffect();
+			UEngineSound::SoundPlay("Block_BOOM.mp3");
 			Renderer->ChangeAnimation("Boomb");
 			Blockstatus = Block_Status::Boomb;
 			FindEnd = true;
@@ -153,6 +155,7 @@ void ARabbit_Block::Tick(float _DeltaTime)
 		if (BoombBlock == true)
 		{
 			CreateBlockEffect();
+			UEngineSound::SoundPlay("Block_BOOM.mp3");
 			Renderer->ChangeAnimation("Boomb");
 			Blockstatus = Block_Status::Boomb;
 			Renderer->SetAlpha(1.0f);

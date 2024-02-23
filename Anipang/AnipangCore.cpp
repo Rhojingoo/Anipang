@@ -70,8 +70,7 @@ void UAnipangCore::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Pig"));
 		UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Animal\\Rabbit"));
 		UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Block_Effect"));
-		//UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Boomb_Effect"));
-		//UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("Boomb_Effect_Dir"));
+
 	
 
 		UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("World_On_Fire_Projectile"));
@@ -103,8 +102,8 @@ void UAnipangCore::BeginPlay()
 	}
 
 
-
-
+	NewDir.MoveParent();
+	NewDir.Move("Sound");
 	{
 		std::list<UEngineFile> NewList = NewDir.AllFile({ ".wav", ".mp3" }, true);
 		// 엔진만의 규칙을 정할거냐.
@@ -114,10 +113,6 @@ void UAnipangCore::BeginPlay()
 		}
 	}
 
-
-
-
-
 	CreateLevel<UTitleLevel>("Title");
 	CreateLevel<UScoreLevel>("GetScore");
 	CreateLevel<UScreenScore_Level>("ScreenScore");
@@ -125,9 +120,6 @@ void UAnipangCore::BeginPlay()
 	CreateLevel<UEndingLevel>("Ending");
 	CreateLevel<TestLevel>("TestLevel");
 	
-
-
-	//UEngineSound::Load("aaaa", "bbb");
 
 	ChangeLevel("Title");
 	//ChangeLevel("TestLevel");

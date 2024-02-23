@@ -54,8 +54,18 @@ void UTitleLevel::Tick(float _DeltaTime)
 			GameendUI->SetActorLocation({ 240,536 });
 			GameendUI->SetCursor(Cursor);
 
-			LogoMake = true;				
+			LogoMake = true;	
+			BGMPlayer = UEngineSound::SoundPlay("Anipang_Title_Music.mp3");		
 		}
+	}
+	if (LogoMake == true)
+	{
+		if (SoundSwitch == false)
+		{
+			BGMPlayer.On();	
+			SoundSwitch = true;
+		}
+
 	}
 
 	if (UEngineInput::IsDown('N'))
@@ -70,5 +80,7 @@ void UTitleLevel::LevelStart(ULevel* _Level)
 
 void UTitleLevel::LevelEnd(ULevel* _Level)
 {
-	
+	BGMPlayer.Off();
+	BGMPlayer.Replay();
+	SoundSwitch = false;
 }

@@ -2,6 +2,7 @@
 #include <EngineCore\Actor.h>
 #include "Block_Location.h"
 #include "Cursor.h"
+#include <EnginePlatform\EngineSound.h>
 
 class ABlockBoomb_Effect;
 class ABoombBlock_Effect;
@@ -105,6 +106,8 @@ protected:
 	bool ClickCheck								 = false;
 	Block_Status Blockstatus					 = Block_Status::Idle;
 	Block_Type Blocktype						 = Block_Type::None;
+
+
 
 	static bool FirstClick;
 	static bool SecondClick;

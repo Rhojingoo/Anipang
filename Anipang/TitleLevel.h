@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore\Level.h>
+#include <EnginePlatform\EngineSound.h>
 
 class ACursor;
 class ATitle_BackGround;
@@ -21,9 +22,11 @@ protected:
 	void LevelEnd(ULevel* _Level) override;
 
 private:
+	UEngineSoundPlayer BGMPlayer;
 	ATitle_BackGround* Title_BG			 = nullptr;
 	bool LogoMake						 = false;
 	ACursor* Cursor						 = nullptr;
+	bool SoundSwitch					 = false;
 
 };
 

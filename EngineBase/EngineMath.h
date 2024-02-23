@@ -164,10 +164,13 @@ public:
 	void Normalize2D()
 	{
 		float Size = Size2D();
-		X /= Size;
-		Y /= Size;
-		Z = 0.0f;
-		W = 0.0f;
+		if (0.0f < Size && false == isnan(Size))
+		{
+			X /= Size;
+			Y /= Size;
+			Z = 0.0f;
+			W = 0.0f;
+		}
 	}
 
 	// 자신은 안변하며 1로 변한 나와 방향이 같은 벡터를 리턴

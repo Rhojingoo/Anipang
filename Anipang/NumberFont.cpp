@@ -15,6 +15,8 @@ void ANumberFont::BeginPlay()
 	Renderer = CreateImageRenderer(100);
 	Renderer->SetText("Text");
 	Renderer->SetTextSize(50);
+	Renderer->SetTextEffect(1);
+	Renderer->SetTextColor(Color8Bit::Black);
 }
 
 void ANumberFont::Tick(float _DeltaTime)

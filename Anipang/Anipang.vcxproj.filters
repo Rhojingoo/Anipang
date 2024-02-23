@@ -139,6 +139,9 @@
     <ClInclude Include="Combo_OBJ.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Combo_OBJ</Filter>
     </ClInclude>
+    <ClInclude Include="Screen_Score_Board.h">
+      <Filter>LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animal_Block.cpp">
@@ -278,6 +281,9 @@
     </ClCompile>
     <ClCompile Include="Combo_OBJ.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Combo_OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="Screen_Score_Board.cpp">
+      <Filter>LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

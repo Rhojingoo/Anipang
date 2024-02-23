@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore\Level.h>
+#include <EnginePlatform\EngineSound.h>
 
 class ScoreManager;
 class ACursor;
@@ -23,6 +24,7 @@ protected:
 
 
 private:
+	UEngineSoundPlayer Play_Game_Sound;
 	ACursor* Cursor = nullptr;
 	ScoreManager* ScoreMN = nullptr;
 };

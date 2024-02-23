@@ -5,6 +5,7 @@
 #include "ScoreBoard.h"
 #include "Cursor.h"
 #include "ScoreManager.h"
+#include "Screen_Score_Board.h"
 
 #include "GameStart_UI.h"
 #include "CheckScore_UI.h"
@@ -29,43 +30,33 @@ void UScreenScore_Level::BeginPlay()
 	Cursor = SpawnActor<ACursor>();
 
 	AGameStart_UI* GameStartUI = SpawnActor<AGameStart_UI>();
-	GameStartUI->SetActorLocation({ 240,590 });
+	GameStartUI->SetActorLocation({ 240,540 });
 	GameStartUI->SetCursor(Cursor);
 
 	//48
 	AMainScreen_UI* ScoreUI = SpawnActor<AMainScreen_UI>();
-	ScoreUI->SetActorLocation({ 240,638 });
+	ScoreUI->SetActorLocation({ 240,588 });
 	ScoreUI->SetCursor(Cursor);
 
 
 	AGameEnd_UI* GameendUI = SpawnActor<AGameEnd_UI>();
-	GameendUI->SetActorLocation({ 240,686 });
+	GameendUI->SetActorLocation({ 240,636 });
 	GameendUI->SetCursor(Cursor);
+
+
+	AScreen_Score_Board* Score_Board = SpawnActor<AScreen_Score_Board>();
+	Score_Board->SetActorLocation({ 240,285 });
+
 
 	{
 		ANumberFont* font = SpawnActor<ANumberFont>();
-		font->SetActorLocation({ 40,100 });
-		font->SetFont("1.", 35.f); 
+		font->SetActorLocation({ 120,380 });
+		font->SetFont("4.", 30.f);
 	}
 	{
 		ANumberFont* font = SpawnActor<ANumberFont>();
-		font->SetActorLocation({ 40,180 });
-		font->SetFont("2.", 35.f);
-	}
-	{
-		ANumberFont* font = SpawnActor<ANumberFont>();
-		font->SetActorLocation({ 40,260 });
-		font->SetFont("3.", 35.f);
-	}
-	{
-		ANumberFont* font = SpawnActor<ANumberFont>();
-		font->SetActorLocation({ 40,340 });
-		font->SetFont("4.", 35.f);
-	}
-	{
-		ANumberFont* font = SpawnActor<ANumberFont>();
-		font->SetActorLocation({ 40,420 });
-		font->SetFont("5.", 35.f);
+		font->SetActorLocation({ 120,460 });
+		font->SetFont("5.", 30.f);
 	}
 }
 
@@ -79,8 +70,10 @@ void UScreenScore_Level::Tick(float _DeltaTime)
 void UScreenScore_Level::LevelStart(ULevel* _Level)
 {
 	SpawnActor<AFadeIN_OUT>();
+	Play_Game_Sound = UEngineSound::SoundPlay("Anipang_Title_Music.mp3");
 }
 
 void UScreenScore_Level::LevelEnd(ULevel* _Level)
 {
+	Play_Game_Sound.Off();
 }

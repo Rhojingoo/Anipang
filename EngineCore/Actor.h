@@ -72,6 +72,7 @@ public :
 	void Destroy(float _DestroyTime = 0.0f) override;
 	void DestroyUpdate(float _DeltaTime) override;
 
+	void SetActive(bool _Active, float _ActiveTime = 0.0f) override;
 	void ActiveUpdate(float _DeltaTime) override;
 
 	void CheckReleaseChild();

@@ -86,6 +86,22 @@ void AActor::DestroyUpdate(float _DeltaTime)
 	}
 }
 
+void AActor::SetActive(bool _Active, float _ActiveTime)
+{
+	UTickObject::SetActive(_Active, _ActiveTime);
+
+	// 자신이 관리하고 있는 랜더러들도 다 죽여야 한다.
+	for (UImageRenderer* Renderer : Renderers)
+	{
+		Renderer->SetActive(_Active, _ActiveTime);
+	}
+
+	for (UCollision* Collision : Collisions)
+	{
+		Collision->SetActive(_Active, _ActiveTime);
+	}
+}
+
 void AActor::ActiveUpdate(float _DeltaTime)
 {
 	// 부모의 함수를 호출하는게 기본이다.

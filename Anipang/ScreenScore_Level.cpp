@@ -30,17 +30,17 @@ void UScreenScore_Level::BeginPlay()
 	Cursor = SpawnActor<ACursor>();
 
 	AGameStart_UI* GameStartUI = SpawnActor<AGameStart_UI>();
-	GameStartUI->SetActorLocation({ 240,540 });
+	GameStartUI->SetActorLocation({ 240,590 });
 	GameStartUI->SetCursor(Cursor);
 
 	//48
 	AMainScreen_UI* ScoreUI = SpawnActor<AMainScreen_UI>();
-	ScoreUI->SetActorLocation({ 240,588 });
+	ScoreUI->SetActorLocation({ 240,638 });
 	ScoreUI->SetCursor(Cursor);
 
 
 	AGameEnd_UI* GameendUI = SpawnActor<AGameEnd_UI>();
-	GameendUI->SetActorLocation({ 240,636 });
+	GameendUI->SetActorLocation({ 240,686 });
 	GameendUI->SetCursor(Cursor);
 
 
@@ -50,13 +50,13 @@ void UScreenScore_Level::BeginPlay()
 
 	{
 		ANumberFont* font = SpawnActor<ANumberFont>();
-		font->SetActorLocation({ 120,380 });
-		font->SetFont("4.", 30.f);
+		font->SetActorLocation({ 110,400 });
+		font->SetFont("4.", 40.f);
 	}
 	{
 		ANumberFont* font = SpawnActor<ANumberFont>();
-		font->SetActorLocation({ 120,460 });
-		font->SetFont("5.", 30.f);
+		font->SetActorLocation({ 110,490 });
+		font->SetFont("5.", 40.f);
 	}
 }
 

@@ -126,6 +126,11 @@ public:
 		return CurAnimation->CurTime;
 	}
 
+	UAnimationInfo* GetCurAnimation() const
+	{
+		return CurAnimation;
+	}
+
 	UWindowImage* GetImage() const
 	{
 		return Image;

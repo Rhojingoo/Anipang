@@ -3,7 +3,6 @@
 #include <EnginePlatform\WindowImage.h>
 #include <map>
 
-
 class UAnimationInfo
 {
 public:
@@ -22,9 +21,14 @@ public:
 	int Update(float _DeltaTime);
 };
 
+
+class AActor;
 class UWindowImage;
 class UImageRenderer : public USceneComponent
 {
+public:
+	friend AActor;
+
 public:
 	UImageRenderer();
 	~UImageRenderer();
@@ -172,6 +176,7 @@ public:
 
 protected:
 	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
 
 private:
 	int InfoIndex = 0;

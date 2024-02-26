@@ -135,6 +135,17 @@ void UImageRenderer::BeginPlay()
 	USceneComponent::BeginPlay();
 }
 
+void UImageRenderer::Tick(float _DeltaTime)
+{
+	USceneComponent::Tick(_DeltaTime);
+
+	if (nullptr != CurAnimation)
+	{
+		Image = CurAnimation->Image;
+		InfoIndex = CurAnimation->Update(_DeltaTime);
+	}
+}
+
 int UAnimationInfo::Update(float _DeltaTime)
 {
 	IsEnd = false;
@@ -214,12 +225,6 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 	if (nullptr == Image)
 	{
 		MsgBoxAssert("이미지가 존재하지 않는 랜더러 입니다");
-	}
-
-	if (nullptr != CurAnimation)
-	{
-		Image = CurAnimation->Image;
-		InfoIndex = CurAnimation->Update(_DeltaTime);
 	}
 
 	FTransform RendererTrans = GetRenderTransForm();

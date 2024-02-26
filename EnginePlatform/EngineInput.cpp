@@ -85,8 +85,6 @@ void UEngineInput::InputInit()
 	AllKeys[VK_IME_ON] = UEngineKey(VK_IME_ON);
 	AllKeys[VK_JUNJA] = UEngineKey(VK_JUNJA);
 	AllKeys[VK_FINAL] = UEngineKey(VK_FINAL);
-	AllKeys[VK_HANJA] = UEngineKey(VK_HANJA);
-	AllKeys[VK_KANJI] = UEngineKey(VK_KANJI);
 	AllKeys[VK_IME_OFF] = UEngineKey(VK_IME_OFF);
 	AllKeys[VK_ESCAPE] = UEngineKey(VK_ESCAPE);
 	AllKeys[VK_CONVERT] = UEngineKey(VK_CONVERT);

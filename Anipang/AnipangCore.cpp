@@ -37,8 +37,9 @@ void UAnipangCore::BeginPlay()
 	UEngineDirectory NewDir;
 	NewDir.MoveParent();
 
-	NewDir.Move("ContentsResources");
-	NewDir.Move("Texture");
+	std::list<UEngineDirectory> Dirs = NewDir.AllDirectory();
+	NewDir.MoveToSearchChild("ContentsResources");
+	NewDir.MoveToSearchChild("Texture");
 
 	// resource Image의 전체적인 순회
 	std::list<UEngineFile> AllFileList = NewDir.AllFile({ ".png", ".bmp" }, true);
@@ -102,8 +103,12 @@ void UAnipangCore::BeginPlay()
 	}
 
 
-	NewDir.MoveParent();
-	NewDir.Move("Sound");
+	//NewDir.MoveParent();
+	//NewDir.Move("Sound");
+	//NewDir.MoveToSearchChild("Sound");
+	NewDir.MoveToSearchChild("ContentsResources");
+	NewDir.MoveToSearchChild("Sound");
+
 	{
 		std::list<UEngineFile> NewList = NewDir.AllFile({ ".wav", ".mp3" }, true);
 		// 엔진만의 규칙을 정할거냐.

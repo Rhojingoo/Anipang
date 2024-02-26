@@ -54,6 +54,11 @@ std::string UEnginePath::GetExtension() const
 	return Text.string();
 }
 
+bool UEnginePath::IsRoot()
+{
+	return Path.root_path() == Path;
+}
+
 void UEnginePath::MoveParent()
 {
 	Path = Path.parent_path();

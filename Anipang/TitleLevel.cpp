@@ -76,6 +76,7 @@ void UTitleLevel::Tick(float _DeltaTime)
 
 void UTitleLevel::LevelStart(ULevel* _Level)
 {
+	SoundSwitch = false;
 }
 
 void UTitleLevel::LevelEnd(ULevel* _Level)

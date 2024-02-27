@@ -15,6 +15,12 @@
 #include "Boomb_Block_Effect.h"
 #include "Helper.h"
 
+//파일 입출력
+#include <EngineBase\EngineDirectory.h>
+#include <EngineBase\EngineSerializer.h>
+#include <EngineBase\EngineFile.h>
+//
+
 
 TestLevel::TestLevel()
 {
@@ -27,19 +33,52 @@ TestLevel::~TestLevel()
 void TestLevel::BeginPlay()
 {
     ULevel::BeginPlay();
-    SpawnActor<APlay_Frame>();
+    //SpawnActor<APlay_Frame>();
     Cursor = SpawnActor<ACursor>();
-    CreateBlock();
+    //CreateBlock();
 
 
+    UEngineDirectory NewDir;
+    NewDir.MoveToSearchChild("ContentsResources");
+    //NewDir.Move("Save");
 
-    // Foot_1_1.wav
-    //BGMPlayer = UEngineSound::SoundPlay("Foot_1_1.wav");
-    //BGMPlayer.Loop();
-    //BGMPlayer = UEngineSound::SoundPlay("anipang_ingame_wav.wav");
-    // BGMPlayer.Off();
+    {
+        std::string Text = "파일저장 시도";
+        std::string Text2 = "파일저장 잘되나요?";
+        int SetA = 20;
+        int SetB = 20;
 
 
+        UEngineSerializer Ser;
+        //Ser << Text;
+        //Ser << Text2;
+        Ser << SetA;
+        //Ser << SetB;
+
+        UEngineFile NewFile = NewDir.NewFile("TEST.txt");
+        NewFile.Open(IOOpenMode::Write, IODataType::Text);
+        NewFile.Save(Ser);
+
+        int a = 0;
+    }
+
+    {
+        std::string Text;
+        std::string Text2;
+        int SetA = 0;
+
+        UEngineSerializer Ser;
+
+        UEngineFile NewFile = NewDir.NewFile("TEST.txt");
+        NewFile.Open(IOOpenMode::Read, IODataType::Text);
+        NewFile.Load(Ser);
+
+        Ser >> SetA;
+        //Ser >> Text;
+        //Ser >> Text2;
+
+        int a = 0;
+    }
 }
 
 void TestLevel::Tick(float _DeltaTime)

@@ -27,6 +27,8 @@ public:
 
 	std::list<UEngineDirectory> AllDirectory(bool _Recursive = false);
 
+	UEngineFile NewFile(std::string_view FileName);
+
 protected:
 
 private:

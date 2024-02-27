@@ -140,3 +140,9 @@ std::list<UEngineDirectory> UEngineDirectory::AllDirectory(bool _Recursive)
 	AllDirectoryRecursive(Path.string(), Result, _Recursive);
 	return Result;
 }
+
+UEngineFile UEngineDirectory::NewFile(std::string_view FileName)
+{
+	std::string NewFilePath = GetFullPath() + "\\" + FileName.data();
+	return std::filesystem::path(NewFilePath);
+}

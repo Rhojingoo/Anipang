@@ -25,8 +25,15 @@
     <ClInclude Include="EnginePath.h">
       <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="NameObject.h" />
-    <ClInclude Include="PathObject.h" />
+    <ClInclude Include="PathObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="NameObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineSerializer.h">
+      <Filter>IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineDebug.cpp">
@@ -53,8 +60,15 @@
     <ClCompile Include="EnginePath.cpp">
       <Filter>IO</Filter>
     </ClCompile>
-    <ClCompile Include="NameObject.cpp" />
-    <ClCompile Include="PathObject.cpp" />
+    <ClCompile Include="NameObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PathObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSerializer.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
@@ -71,6 +85,9 @@
     </Filter>
     <Filter Include="IO">
       <UniqueIdentifier>{1eca5514-484e-49ff-b852-41e075b8b236}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{2dce9a76-54d2-4669-bf43-ee624ebbeff7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

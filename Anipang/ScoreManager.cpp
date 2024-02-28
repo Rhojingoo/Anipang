@@ -19,6 +19,56 @@ void ScoreManager::SetFont()
 	Renderer->SetText(Text);
 }
 
+
+
+void ScoreManager::BeginPlay()
+{
+	AActor::BeginPlay();
+
+	Renderer = CreateImageRenderer(100);
+	Text = std::to_string(Score);
+	Renderer->SetText(Text);
+	Renderer->SetTextSize(45);
+	Renderer->SetTextColor(Color8Bit::Black, Color8Bit::White);
+	Renderer->SetTextEffect(1);
+	SetActorLocation({ 240,60 });
+	/*if (ScoreLevel_Use == false)
+	{
+		Units = GetWorld()->SpawnActor<ANumber>();
+		Units->SetActorLocation({ 240,50 });
+		Units->SetNumScale(55, 55);
+	}*/
+}
+
+void ScoreManager::Tick(float _DeltaTime)
+{
+	AActor::Tick(_DeltaTime);
+	
+	//if (Screen_ScoreLevel_Use == true)
+	//{
+	//	if (Renderer != nullptr)
+	//	{
+	//		Renderer->Destroy();
+	//		Renderer = nullptr;
+	//	}
+	//}
+	if (ScoreLevel_Use == true)
+	{
+		SetActorLocation({ 240,200 });
+	}
+	Text = std::to_string(Score);
+	Renderer->SetText(Text);
+
+	//if (Renderer != nullptr)
+	//{
+	//	Text = std::to_string(Score);
+	//	Renderer->SetText(Text);
+	//}
+
+	//ScoreImageRender();
+}
+
+
 void ScoreManager::ScoreImageRender()
 {
 	if (ScoreLevel_Use == true)
@@ -227,37 +277,4 @@ void ScoreManager::ScoreImageRender()
 		}
 
 	}
-}
-
-void ScoreManager::BeginPlay()
-{
-	AActor::BeginPlay();
-
-	Renderer = CreateImageRenderer(100);
-	Text = std::to_string(Score);
-	Renderer->SetText(Text);
-	Renderer->SetTextSize(45);
-	Renderer->SetTextColor(Color8Bit::Black, Color8Bit::White);
-	Renderer->SetTextEffect(1);
-	SetActorLocation({ 240,60 });
-	/*if (ScoreLevel_Use == false)
-	{
-		Units = GetWorld()->SpawnActor<ANumber>();
-		Units->SetActorLocation({ 240,50 });
-		Units->SetNumScale(55, 55);
-	}*/
-}
-
-void ScoreManager::Tick(float _DeltaTime)
-{
-	AActor::Tick(_DeltaTime);
-	
-	if (ScoreLevel_Use == true)
-	{
-		SetActorLocation({ 240,200 });
-	}
-	Text = std::to_string(Score);
-	Renderer->SetText(Text);
-
-	//ScoreImageRender();
 }

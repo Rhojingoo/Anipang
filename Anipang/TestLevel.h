@@ -9,16 +9,16 @@
 #include <fstream>
 #include <EngineBase\EngineFile.h>
 
-class Scoremanager
-{
-public:
-	int Num = 0;
-	std::string Name = {};
-	int Score = 0;
-
-	Scoremanager(int _num, std::string _name, int _score)
-		: Num(_num), Name(_name), Score(_score) {}
-};
+//class ScoreRecord
+//{
+//public:
+//	int Num = 0;
+//	std::string Name = {};
+//	int Score = 0;
+//
+//	ScoreRecord(int _num, std::string _name, int _score)
+//		: Num(_num), Name(_name), Score(_score) {}
+//};
 
 
 class ACursor;
@@ -63,10 +63,15 @@ private:
 
 
 	// 스코어 변경 할수 있는 함수
-	std::list<Scoremanager*> check_list;
+	std::list<class ScoreRecord*> check_list;
 	UEngineFile NewFile;
 	std::fstream fs;
 	int count = 0;
 	class ANumberFont* font[5];
+	std::string TextInput;
+	bool teststringbool = false;
+	bool Input_Text = false;
+	void InputCheck();
+	class ANumberFont* testfont = nullptr;
 };
 

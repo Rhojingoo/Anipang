@@ -481,8 +481,16 @@ void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, 
 	Gdiplus::RectF rectF(Pos.X, Pos.Y, 0, 0);
 
 	Gdiplus::StringFormat stringFormat;
-	stringFormat.SetAlignment(Gdiplus::StringAlignmentCenter);
-	stringFormat.SetLineAlignment(Gdiplus::StringAlignmentCenter);
+	if (TextCenter == true)
+	{
+		stringFormat.SetAlignment(Gdiplus::StringAlignmentCenter);
+		stringFormat.SetLineAlignment(Gdiplus::StringAlignmentCenter);
+	}
+	else
+	{
+		stringFormat.SetAlignment(Gdiplus::StringAlignmentNear);
+		stringFormat.SetLineAlignment(Gdiplus::StringAlignmentCenter);
+	}
 	std::wstring WText = UEngineString::AnsiToUniCode(_Text);
 
 	// 테두리 효과를 위해 텍스트를 여러 방향으로 그립니다.

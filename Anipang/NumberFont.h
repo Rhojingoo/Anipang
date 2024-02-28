@@ -19,6 +19,10 @@ public :
 		Renderer->SetText(Text);
 		Renderer->SetTextSize(_Size);
 	}
+	void FontCenterSwitch()
+	{
+		Renderer->TextCneterSwitch();
+	}
 
 protected:
 	UImageRenderer* Renderer = nullptr;

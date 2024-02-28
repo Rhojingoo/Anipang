@@ -28,6 +28,7 @@ void ACombo_OBJ::BeginPlay()
 	Renderer->SetTextSize(50);
 	Renderer->SetTextColor(Color8Bit::Black, Color8Bit::Orange);
 	Renderer->SetTextEffect(1);
+	Renderer->TextCneterSwitch();
 }
 
 void ACombo_OBJ::Tick(float _DeltaTime)

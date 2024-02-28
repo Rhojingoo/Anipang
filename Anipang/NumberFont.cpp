@@ -24,13 +24,13 @@ void ANumberFont::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
-	if (true == UEngineInput::IsPress('A'))
-	{
-		AllRenderersActiveOff();
-	}
+	//if (true == UEngineInput::IsPress('A'))
+	//{
+	//	AllRenderersActiveOff();
+	//}
 
-	if (true == UEngineInput::IsPress('D'))
-	{
-		AllRenderersActiveOn();
-	}
+	//if (true == UEngineInput::IsPress('D'))
+	//{
+	//	AllRenderersActiveOn();
+	//}
 }

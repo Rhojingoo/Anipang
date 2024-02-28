@@ -173,6 +173,8 @@ public:
 		TextEffect = _Effect;
 	}
 
+	void TextCneterSwitch();
+
 
 protected:
 	void BeginPlay() override;

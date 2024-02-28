@@ -252,3 +252,7 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 		break;
 	}
 }
+void UImageRenderer::TextCneterSwitch()
+{
+	GEngine->MainWindow.GetBackBufferImage()->TextCenterSwitch();
+}

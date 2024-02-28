@@ -161,6 +161,8 @@ void UEngineInput::InputInit()
 		AllKeys[i] = UEngineKey(i);
 	}
 
+
+
 	for (int i = '0'; i <= '9'; i++)
 	{
 		AllKeys[i] = UEngineKey(i);

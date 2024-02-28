@@ -104,6 +104,7 @@ public:
 			SetRotationMaskImage(i, _RotationMaskImage, i);
 		}
 	}
+	void TextCenterSwitch() { TextCenter = !TextCenter; }
 
 protected:
 
@@ -117,5 +118,6 @@ private:
 	EWIndowImageType ImageType = EWIndowImageType::IMG_NONE;
 	std::vector<UImageInfo> Infos;
 	bool Create(HDC _MainDC);
+	bool TextCenter = true;
 };
 

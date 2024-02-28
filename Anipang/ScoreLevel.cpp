@@ -25,6 +25,7 @@ void UScoreLevel::BeginPlay()
 	SpawnActor<AScoreBoard>();
 	Cursor = SpawnActor<ACursor>();
 	bool Scoreset = true;
+
 	ScoreMN = SpawnActor<ScoreManager>();
 	ScoreMN->ScoreLevelON();
 
@@ -32,11 +33,9 @@ void UScoreLevel::BeginPlay()
 	GameStartUI->SetActorLocation({ 240,540 });
 	GameStartUI->SetCursor(Cursor);
 
-	//48
 	AMainScreen_UI* ScoreUI = SpawnActor<AMainScreen_UI>();
 	ScoreUI->SetActorLocation({ 240,588 });
 	ScoreUI->SetCursor(Cursor);
-
 
 	AGameEnd_UI* GameendUI = SpawnActor<AGameEnd_UI>();
 	GameendUI->SetActorLocation({ 240,636 });
@@ -47,10 +46,10 @@ void UScoreLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 
-	if (UEngineInput::IsDown('N'))
-	{
-		GEngine->ChangeLevel("Ending");
-	}
+	//if (UEngineInput::IsDown('N'))
+	//{
+	//	GEngine->ChangeLevel("Ending");
+	//}
 }
 
 void UScoreLevel::LevelStart(ULevel* _Level)

@@ -3,6 +3,24 @@
 #include <EnginePlatform\EngineSound.h>
 
 
+#include <list>
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <EngineBase\EngineFile.h>
+
+class Scoremanager
+{
+public:
+	int Num = 0;
+	std::string Name = {};
+	int Score = 0;
+
+	Scoremanager(int _num, std::string _name, int _score)
+		: Num(_num), Name(_name), Score(_score) {}
+};
+
+
 class ACursor;
 class AAnimal_Block;
 class TestLevel : public ULevel
@@ -42,5 +60,13 @@ private:
 	const float BlockSpeed				 = 300.f;
 
 	bool AllDestroy						 = false;
+
+
+	// 스코어 변경 할수 있는 함수
+	std::list<Scoremanager*> check_list;
+	UEngineFile NewFile;
+	std::fstream fs;
+	int count = 0;
+	class ANumberFont* font[5];
 };
 

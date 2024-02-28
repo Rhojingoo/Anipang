@@ -121,9 +121,6 @@
     <ClInclude Include="Boomb_Block_Effect.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\BoombBlockEffect</Filter>
     </ClInclude>
-    <ClInclude Include="NumberFont.h">
-      <Filter>LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor</Filter>
-    </ClInclude>
     <ClInclude Include="Block_Location.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
@@ -141,6 +138,9 @@
     </ClInclude>
     <ClInclude Include="Screen_Score_Board.h">
       <Filter>LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="NumberFont.h">
+      <Filter>Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -264,9 +264,6 @@
     <ClCompile Include="Boomb_Block_Effect.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\BoombBlockEffect</Filter>
     </ClCompile>
-    <ClCompile Include="NumberFont.cpp">
-      <Filter>LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor</Filter>
-    </ClCompile>
     <ClCompile Include="Block_Location.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
@@ -284,6 +281,9 @@
     </ClCompile>
     <ClCompile Include="Screen_Score_Board.cpp">
       <Filter>LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="NumberFont.cpp">
+      <Filter>Public</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

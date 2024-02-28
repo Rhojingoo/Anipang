@@ -96,10 +96,11 @@ void TestLevel::BeginPlay()
     {
         int num = sm->Num;
         int score = sm->Score;
-        std::string name = sm->Name + " : ";
+
+        std::string name = sm->Name + " : " + std::to_string(score);
         font[count] = SpawnActor<ANumberFont>();
         font[count] -> SetActorLocation({ 110,100 + 100* count });
-        font[count] -> SetFont(name + " : ", 40.f);
+        font[count] -> SetFont(name , 40.f);
         font[count];
         ++count;
     }

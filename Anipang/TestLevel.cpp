@@ -100,12 +100,6 @@ void TestLevel::Tick(float _DeltaTime)
     //    BGMPlayer.OnOffSwitch();
     //}
 
-   
-    
-   
-
-    
-
 
  /*   {
         for (int row = 0; row < MapSize; ++row)
@@ -374,10 +368,4 @@ void TestLevel::InputCheck()
         TextInput += 'M';
         Input_Text = true;
     }
-
-
-
-	
-
-
 }

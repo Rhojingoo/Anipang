@@ -39,9 +39,6 @@ void UPlayLevel::BeginPlay()
     SpawnActor<APlay_Frame>();
     Cursor = SpawnActor<ACursor>(); 
 
-    //ABoomb_Block_Effect* aTEST = SpawnActor<ABoomb_Block_Effect>();
-    //aTEST->SetActorLocation({ 235,400 });
-
     Timer = SpawnActor<ATime_Gauge>();
     Timer->SetActorLocation({ 231,705 });
     Combo_OBJ = SpawnActor<ACombo_OBJ>();
@@ -109,7 +106,7 @@ void UPlayLevel::Tick(float _DeltaTime)
 
                 if (ClickChangeCheck == true)
                 {
-                    ////클릭으로 이동된 블럭 3Match가 되는지 판단하는 검사로직
+                    //클릭으로 이동된 블럭 3Match가 되는지 판단하는 검사로직
                     XlineBlock_Swap_Check(_DeltaTime);
                     XlineBlock_Swap_Move(_DeltaTime);
                     ////검사된 블럭의 return 또는 stay를 나타내는 실행로직
@@ -139,15 +136,11 @@ void UPlayLevel::Tick(float _DeltaTime)
                     CreateBlock();
                     AllDestroy = false;
                 }
-                // int a = 0;
-                // MsgBoxAssert("움직일수 있는 블럭이 없습니다.");
             }
         }
     }
 
     ScoreMN->SetScore(Score);
-
-
 
     if (Hint_block != nullptr)
     {
@@ -159,7 +152,6 @@ void UPlayLevel::Tick(float _DeltaTime)
         }  
     }
 
-
     if (UEngineInput::IsDown('N'))
     {
         GEngine->ChangeLevel("GetScore");
@@ -170,7 +162,6 @@ void UPlayLevel::LevelStart(ULevel* _Level)
 {
     Score = ScoreManager::GetScore();
     SpawnActor<AFadeIN_OUT>();
-    //OBJPOOLTEST();
     CreateBlock();
     Start_Rabbit = SpawnActor<AGame_Start>();
     Start_Rabbit->SetActorLocation({ 235,400 });
@@ -207,52 +198,6 @@ void UPlayLevel::LevelEnd(ULevel* _Level)
     Hint_block = nullptr;
     BackGroundSound = false;
     HintBlock = false;
-}
-
-void UPlayLevel::OBJPOOLTEST()
-{
-    Block_Manager::OBJPOOL->BeginPlay();
-
-    const int MapSize = 7;
-    const int TotalBlocks = MapSize * MapSize;
-    const int CellSize = 67;
-    const FVector StartLocation({ 32, 214 });
-
-    for (int row = 0; row < MapSize; ++row)
-    {
-        for (int col = 0; col < MapSize; ++col)
-        {
-            // 생성할 동물 블록의 유형 결정
-            Block_Manager::eBlock blockType;
-            if (col >= MapSize - 7 && row >= MapSize - 7) // 오른쪽 아래 7x7 영역
-            {
-                blockType = Block_Manager::eBlock::Cat_Block;
-            }
-            else
-            {
-                // 다른 동물 블록 유형 결정
-                // 예를 들어 Dog_Block, Checkin_Block 등
-                // 필요에 따라 로직 추가
-            }
-
-            // 동물 블록 생성
-            AAnimal_Block* NewBlock = Block_Manager::GetInstance().GetNextAnimalBlock(blockType);
-
-
-            if (NewBlock != nullptr)
-            {
-                // 동물 블록 위치 설정
-                FVector BlockLocation;
-                BlockLocation.X = StartLocation.X + (CellSize * col);  // 시작 위치에서 CellSize만큼 이동
-                BlockLocation.Y = StartLocation.Y + (CellSize * row);
-                NewBlock->SetActorLocation(BlockLocation);
-                NewBlock->SetCursor(Cursor);
-                NewBlock->SetActive(true);
-                // 동물 블록 스폰
-                //SpawnActor<AAnimal_Block>(NewBlock);
-            }
-        }
-    }
 }
 
 void UPlayLevel::CreateBlock()
@@ -318,7 +263,6 @@ void UPlayLevel::ComboCheck(float _DeltaTime)
         ClearCombotime();
     }
 
-    //if (Combo >= 1)
     {
         ComboTimeCheck = true;
         if (ComboTimeCheck == true)
@@ -453,12 +397,6 @@ bool UPlayLevel::CheckForMatch(int _col, int _row)
     }
     else
     {
-        //if (Hint_block == nullptr)
-        //{
-        //    HintBlock = false;
-        //    return false;
-        //}
-
         int HIINTCOL = Hint_block->GetBlockLocationCol();
         int HIINTROW = Hint_block->GetBlockLocationRow();
 
@@ -721,19 +659,6 @@ void UPlayLevel::Blockreturn(int _clickRow, int _clickCol, int _swapkRow, int _s
         click_block->SetBlockstate(_set, 1);
         swap_block->SetBlockstate(_set, 2);
 
-        // ================ Test Move Block Begin ================
-        //click_block->SetColumn(_swapCol);
-        //click_block->SetRow(_swapkRow);
-        //swap_block->SetColumn(_clickCol);
-        //swap_block->SetRow(_clickRow);
-
-        //AAnimal_Block* XLine_Check_Before = Blocks[_clickCol][_clickRow];
-        //Blocks[_clickCol][_clickRow] = Blocks[_swapCol][_swapkRow];
-        //Blocks[_swapCol][_swapkRow] = XLine_Check_Before;
-        //  ================ Test Move Block End ================
-
-
-
         AAnimal_Block::SwapREADY = false;
         AAnimal_Block::SwapChange = false;
         AAnimal_Block::ClickChange = false;
@@ -744,7 +669,9 @@ bool UPlayLevel::CheckMatchAroundBlock(int col, int row)
 {
     // 현재 블록의 타입 가져오기
     if (Blocks[col][row] == nullptr) // 현재 위치에 블록이 없다면 검사하지 않음
+    {
         return false;
+    }
     AAnimal_Block::Block_Type currentType = Blocks[col][row]->GetBlockType();
 
     // 수평 방향 매치 검사
@@ -755,7 +682,8 @@ bool UPlayLevel::CheckMatchAroundBlock(int col, int row)
         {
             horizontalMatchCount++;
         }
-        else {
+        else
+        {
             break; // 연속되지 않으면 중단
         }
     }
@@ -764,7 +692,8 @@ bool UPlayLevel::CheckMatchAroundBlock(int col, int row)
         if (Blocks[i][row] != nullptr && Blocks[i][row]->GetBlockType() == currentType) {
             horizontalMatchCount++;
         }
-        else {
+        else 
+        {
             break; // 연속되지 않으면 중단
         }
     }
@@ -777,7 +706,8 @@ bool UPlayLevel::CheckMatchAroundBlock(int col, int row)
         if (Blocks[col][i] != nullptr && Blocks[col][i]->GetBlockType() == currentType) {
             verticalMatchCount++;
         }
-        else {
+        else
+        {
             break; // 연속되지 않으면 중단
         }
     }
@@ -786,7 +716,8 @@ bool UPlayLevel::CheckMatchAroundBlock(int col, int row)
         if (Blocks[col][i] != nullptr && Blocks[col][i]->GetBlockType() == currentType) {
             verticalMatchCount++;
         }
-        else {
+        else
+        {
             break; // 연속되지 않으면 중단
         }
     }
@@ -842,7 +773,7 @@ void UPlayLevel::XlineBlock_Swap_Move(float _DeltaTime)
         {
             if (Clickpos.X <= TempClick.X)
             {
-                click_block->AddActorLocation({ FVector::Right * 150.0f * _DeltaTime });
+                click_block->AddActorLocation({ FVector::Right * BlockSpeed * _DeltaTime });
             }
             else
             {
@@ -851,7 +782,7 @@ void UPlayLevel::XlineBlock_Swap_Move(float _DeltaTime)
 
             if (Swappos.X >= TempSwap.X)
             {
-                swap_block->AddActorLocation(FVector::Left * 150.0f * _DeltaTime);
+                swap_block->AddActorLocation(FVector::Left * BlockSpeed * _DeltaTime);
             }
             else
             {
@@ -863,7 +794,7 @@ void UPlayLevel::XlineBlock_Swap_Move(float _DeltaTime)
         {
             if (Clickpos.X >= TempClick.X)
             {
-                click_block->AddActorLocation({ FVector::Left * 150.0f * _DeltaTime });
+                click_block->AddActorLocation({ FVector::Left * BlockSpeed * _DeltaTime });
             }
             else
             {
@@ -873,7 +804,7 @@ void UPlayLevel::XlineBlock_Swap_Move(float _DeltaTime)
 
             if (Swappos.X <= TempSwap.X)
             {
-                swap_block->AddActorLocation(FVector::Right * 150.0f * _DeltaTime);
+                swap_block->AddActorLocation(FVector::Right * BlockSpeed * _DeltaTime);
             }
             else
             {
@@ -968,7 +899,7 @@ void UPlayLevel::YlineBlock_Swap_Move(float _DeltaTime)
         {
             if (Clickpos.Y <= TempClick.Y)
             {
-                click_block->AddActorLocation({ FVector::Down * 150.0f * _DeltaTime });
+                click_block->AddActorLocation({ FVector::Down * BlockSpeed * _DeltaTime });
             }
             else
             {
@@ -977,7 +908,7 @@ void UPlayLevel::YlineBlock_Swap_Move(float _DeltaTime)
 
             if (Swappos.Y >= TempSwap.Y)
             {
-                swap_block->AddActorLocation(FVector::Up * 150.0f * _DeltaTime);
+                swap_block->AddActorLocation(FVector::Up * BlockSpeed * _DeltaTime);
             }
             else
             {
@@ -989,7 +920,7 @@ void UPlayLevel::YlineBlock_Swap_Move(float _DeltaTime)
         {
             if (Clickpos.Y >= TempClick.Y)
             {
-                click_block->AddActorLocation({ FVector::Up * 150.0f * _DeltaTime });
+                click_block->AddActorLocation({ FVector::Up * BlockSpeed * _DeltaTime });
             }
             else
             {
@@ -999,7 +930,7 @@ void UPlayLevel::YlineBlock_Swap_Move(float _DeltaTime)
 
             if (Swappos.Y <= TempSwap.Y)
             {
-                swap_block->AddActorLocation(FVector::Down * 150.0f * _DeltaTime);
+                swap_block->AddActorLocation(FVector::Down * BlockSpeed * _DeltaTime);
             }
             else
             {
@@ -1210,8 +1141,6 @@ void UPlayLevel::BlockDestroyCheck()
 
                 if (matchCount >= 3) // 조건을 충족하는 경우
                 {
-
-
                     for (int Y = 0; Y < matchCount; Y++)
                     {
                         for (int X = -1; X <= 1; X++) // X 범위 수정
@@ -1268,7 +1197,6 @@ void UPlayLevel::BlockDestroyCheck()
             ++Combo;
             ComboAdd = false;
         }
-
     }
     else
     {
@@ -1318,7 +1246,6 @@ void UPlayLevel::BlockDestroyCheck()
             }
         }
 
-
         for (int row = 0; row < MapSize; row++)
         {
             for (int col = 0; col < MapSize; col++)
@@ -1334,7 +1261,8 @@ void UPlayLevel::BlockDestroyCheck()
                     {
                         matchCount++;
                     }
-                    else {
+                    else 
+                    {
                         break;
                     }
                 }
@@ -1381,7 +1309,6 @@ void UPlayLevel::BlockMove(float _DeltaTime)
                 if (Blocks[col][row]->GetUnderBoomb() == false)
                 {
                     swap_block = Blocks[col][row];
-                    //FVector BeenBlockpos = FVector(swap_block->GetActorLocation().X, swap_block->GetActorLocation().Y + CellSize, swap_block->GetActorLocation().Z, swap_block->GetActorLocation().W);
                     FVector BeenBlockpos = Blocks[col][row]->GetBlockFVector(col, row + 1);
 
                     Blocks[col][row]->SetUnderPos(BeenBlockpos);
@@ -1494,7 +1421,6 @@ void UPlayLevel::BlockMoveCheck()
         BlockDestroyAllow = true;
         CheckMatch = true;
     }
-
 }
 
 

@@ -16,10 +16,10 @@ public:
 	UPlayLevel();
 	~UPlayLevel();
 
-	UPlayLevel(const UPlayLevel& _Other) = delete;
-	UPlayLevel(UPlayLevel& _Other) noexcept = delete;
-	UPlayLevel& operator =(const UPlayLevel& _Other) = delete;
-	UPlayLevel& operator =(UPlayLevel& _Other) noexcept = delete;
+	UPlayLevel(const UPlayLevel& _Other)					= delete;
+	UPlayLevel(UPlayLevel& _Other) noexcept					= delete;
+	UPlayLevel& operator =(const UPlayLevel& _Other)		= delete;
+	UPlayLevel& operator =(UPlayLevel& _Other) noexcept		= delete;
 
 
 protected:
@@ -43,7 +43,6 @@ protected:
 	void GenerateNewBlocks();
 	void BlockMoveCheck();
 
-	void OBJPOOLTEST();
 	void CreateBlock();
 
 private:
@@ -115,6 +114,6 @@ private:
 	void AllDestroyCheck();
 	bool AllDestroy							 = false;
 
-	bool BackGroundSound = false;
+	bool BackGroundSound					 = false;
 };
 

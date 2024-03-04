@@ -8,9 +8,9 @@ public :
 	ATime_Gauge();
 	~ATime_Gauge();
 
-	ATime_Gauge(const ATime_Gauge& _Other)					 = delete;
+	ATime_Gauge(const ATime_Gauge& _Other)						 = delete;
 	ATime_Gauge(ATime_Gauge& _Other) noexcept					 = delete;
-	ATime_Gauge& operator =(const ATime_Gauge& _Other)		 = delete;
+	ATime_Gauge& operator =(const ATime_Gauge& _Other)			 = delete;
 	ATime_Gauge& operator =(ATime_Gauge& _Other) noexcept		 = delete;
 
 	void TimerStart() { Start = true; }
@@ -29,8 +29,8 @@ public :
 	}
 
 protected:
-	UImageRenderer* Renderer = nullptr;
-	FVector Pos = {};
+	UImageRenderer* Renderer		= nullptr;
+	FVector Pos						= {};
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -47,7 +47,7 @@ private:
 	float Time						= TotalTime;
 	float PreveTime					= TotalTime;
 		
-	ANumber* Tens = nullptr;
-	ANumber* Units = nullptr;
+	ANumber* Tens					= nullptr;
+	ANumber* Units					= nullptr;
 };
 

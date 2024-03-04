@@ -15,9 +15,7 @@ void UEndingLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
 
-
 	SpawnActor<AEnding_BackGround>();
-
 }
 
 void UEndingLevel::Tick(float _DeltaTime)

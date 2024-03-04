@@ -77,6 +77,21 @@ void UEngineCore::CoreTick()
 		CurFrameTime = 0.0f;
 	}
 
+	for (size_t i = 0; i < DestroyLevelName.size(); i++)
+	{
+		std::string UpperName = UEngineString::ToUpper(DestroyLevelName[i]);
+
+		ULevel* Level = AllLevel[UpperName];
+		if (nullptr != Level)
+		{
+			delete Level;
+			Level = nullptr;
+		}
+
+		AllLevel.erase(DestroyLevelName[i]);
+	}
+	DestroyLevelName.clear();
+
 
 	if (nullptr == CurLevel)
 	{
@@ -139,6 +154,18 @@ void UEngineCore::Tick(float _DeltaTime)
 
 void UEngineCore::End()
 {
+}
+
+void UEngineCore::DestroyLevel(std::string_view _Name)
+{
+	std::string UpperName = UEngineString::ToUpper(_Name);
+
+	if (false == AllLevel.contains(UpperName))
+	{
+		MsgBoxAssert(std::string(_Name) + "존재하지 않는 레벨을 파괴할수는 없습니다");
+	}
+
+	DestroyLevelName.push_back(UpperName);
 }
 
 void UEngineCore::ChangeLevel(std::string_view _Name)

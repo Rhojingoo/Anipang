@@ -72,8 +72,6 @@ void UEngineSound::ResLoad(std::string_view _Path)
 		MsgBoxAssert("사운드 로드에 실패했습니다." + std::string(_Path));
 		return;
 	}
-
-	// SoundSystem->playSound(SoundHandle, nullptr, false, nullptr);
 }
 
 UEngineSoundPlayer UEngineSound::SoundPlay(std::string_view _Name)

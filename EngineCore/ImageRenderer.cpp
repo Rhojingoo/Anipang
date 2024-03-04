@@ -130,6 +130,17 @@ void UImageRenderer::AnimationReset()
 	CurAnimation = nullptr;
 }
 
+void UImageRenderer::TextCneterOn()
+{
+	TextCenter = true;
+}
+
+void UImageRenderer::TextCneterOff()
+{
+	TextCenter = false;
+}
+
+
 void UImageRenderer::BeginPlay()
 {
 	USceneComponent::BeginPlay();
@@ -208,7 +219,7 @@ void UImageRenderer::TextRender(float _DeltaTime)
 	switch (TextEffect)
 	{
 	case 1:
-		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor, TextColor2);
+		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor, TextColor2, TextCenter);
 		break;
 	case 2:
 		GEngine->MainWindow.GetBackBufferImage()->TextCopyBold(Text, Font, Size, RendererTrans, TextColor);
@@ -251,8 +262,4 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 		MsgBoxAssert("투명처리가 불가능한 이미지 입니다.");
 		break;
 	}
-}
-void UImageRenderer::TextCneterSwitch()
-{
-	GEngine->MainWindow.GetBackBufferImage()->TextCenterSwitch();
 }

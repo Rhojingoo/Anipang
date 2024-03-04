@@ -64,7 +64,7 @@ public:
 
 	void TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color );
 
-	void TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _OutLineColor, Color8Bit _FillColor);
+	void TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _OutLineColor, Color8Bit _FillColor, bool _SetCenter = true);
 
 	void TextCopyBold(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color /*= Color8Bit::Black*/);
 	
@@ -104,7 +104,7 @@ public:
 			SetRotationMaskImage(i, _RotationMaskImage, i);
 		}
 	}
-	void TextCenterSwitch() { TextCenter = !TextCenter; }
+
 
 protected:
 

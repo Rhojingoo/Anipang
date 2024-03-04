@@ -173,7 +173,10 @@ public:
 		TextEffect = _Effect;
 	}
 
-	void TextCneterSwitch();
+	void TextCneterOn();
+
+	void TextCneterOff();
+
 
 
 protected:
@@ -200,8 +203,6 @@ private:
 	Color8Bit TextColor = Color8Bit::NARed;
 	Color8Bit TextColor2 = Color8Bit::NARed; //Ãß°¡
 	int TextEffect = 0;
-
-
-
+	bool TextCenter = true;
 };
 

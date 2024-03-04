@@ -206,6 +206,7 @@ void UPlayLevel::LevelEnd(ULevel* _Level)
     Combo_OBJ->ClearCombo();
     Hint_block = nullptr;
     BackGroundSound = false;
+    HintBlock = false;
 }
 
 void UPlayLevel::OBJPOOLTEST()
@@ -452,6 +453,12 @@ bool UPlayLevel::CheckForMatch(int _col, int _row)
     }
     else
     {
+        //if (Hint_block == nullptr)
+        //{
+        //    HintBlock = false;
+        //    return false;
+        //}
+
         int HIINTCOL = Hint_block->GetBlockLocationCol();
         int HIINTROW = Hint_block->GetBlockLocationRow();
 

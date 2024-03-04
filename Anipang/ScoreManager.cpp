@@ -55,6 +55,8 @@ void ScoreManager::Tick(float _DeltaTime)
 	if (ScoreLevel_Use == true)
 	{
 		SetActorLocation({ 240,200 });
+		Renderer->TextCneterOn();
+		ScoreLevel_Use = false;
 	}
 	Text = std::to_string(Score);
 	Renderer->SetText(Text);

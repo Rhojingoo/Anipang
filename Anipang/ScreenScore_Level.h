@@ -43,24 +43,7 @@ private:
 	UEngineFile NewFile;
 	std::fstream fs;
 	int count = 0;
-	class ANumberFont* font[5];
-
-	std::string TextInput;
+	class ANumberFont* font[5] = {};
 	void SettingScore();
-
-	void ScoreCheck(int _score);
-	bool InputName = false;
-	bool ScoreReset = false;
-
-	class ANumberFont* Input_Font =  nullptr;
-	void ResetScore(int _score);
-
-	void InputCheck();
-	bool Input_Text = false;
-	int Text_MaxCount = 2;
-	int Text_Count = 0;
-	int Score = 0;
-
-
 };
 

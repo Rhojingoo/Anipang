@@ -19,9 +19,19 @@ public :
 		Renderer->SetText(Text);
 		Renderer->SetTextSize(_Size);
 	}
-	void FontCenterSwitch()
+
+	void SetFontColor(Color8Bit _OutLineColor, Color8Bit _FillColor)
 	{
-		Renderer->TextCneterSwitch();
+		Renderer->SetTextColor(_OutLineColor, _FillColor);
+	}
+
+	void FontCenterOn()
+	{
+		Renderer->TextCneterOn();
+	}
+	void FontCenterOff()
+	{
+		Renderer->TextCneterOff();
 	}
 
 protected:

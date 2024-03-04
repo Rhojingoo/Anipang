@@ -266,6 +266,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Rabbit_Block.h" />
+    <ClInclude Include="RecordBoard.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ReStart_UI.h">
       <SubType>
       </SubType>
@@ -429,6 +433,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Rabbit_Block.cpp" />
+    <ClCompile Include="RecordBoard.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ReStart_UI.cpp">
       <SubType>
       </SubType>

@@ -465,8 +465,9 @@ void UWindowImage::PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, i
 	
 }
 
-void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _OutLineColor, Color8Bit _FillColor)
+void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _OutLineColor, Color8Bit _FillColor, bool _SetCenter)
 {
+	TextCenter = _SetCenter;
 	Gdiplus::Graphics graphics(ImageDC);
 	std::wstring WFont = UEngineString::AnsiToUniCode(_Font);
 	Gdiplus::Font fnt(WFont.c_str(), _Size, Gdiplus::FontStyleBold | Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);

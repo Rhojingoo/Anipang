@@ -20,7 +20,8 @@ protected:
 	void LevelEnd(ULevel* _Level) override;
 
 private:
-
+	float Endingtime = 0.f;
+	bool EndWinScreen = false;
 
 };
 

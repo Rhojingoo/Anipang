@@ -1,4 +1,5 @@
 #include "FadeIN_OUT.h"
+#include <EngineCore\EngineCore.h>
 
 AFadeIN_OUT::AFadeIN_OUT()
 {
@@ -21,21 +22,43 @@ void AFadeIN_OUT::BeginPlay()
 }
 
 void AFadeIN_OUT::Tick(float _DeltaTime)
-{	
-	AlphaTime += _DeltaTime;
-	if (1.0f <= AlphaTime)
-	{		
-		AlphaTime = 0.0f;
-	}
-	if (false == Dir)
+{
+	if (WindowEnd == false)
 	{
-		 CheckAlpha -= AlphaTime*0.15f;
-		 Renderer->SetAlpha(CheckAlpha);
-			
-		 if (CheckAlpha < 0.f)
-		 {
-			 Dir = true;
-			 Destroy(0.f);
-		 }
-	}	
+		AlphaTime += _DeltaTime;
+		if (1.0f <= AlphaTime)
+		{
+			AlphaTime = 0.0f;
+		}
+
+		if (false == Dir)
+		{
+			CheckAlpha -= AlphaTime * 0.15f;
+			Renderer->SetAlpha(CheckAlpha);
+
+			if (CheckAlpha < 0.f)
+			{
+				Dir = true;
+				Destroy(0.f);
+			}
+		}
+	}
+	else
+	{
+		AlphaTime += _DeltaTime;
+
+		if (false == Dir)
+		{
+			CheckAlpha += AlphaTime * 0.15f;
+			Renderer->SetAlpha(CheckAlpha);
+
+			if (CheckAlpha > 1.f)
+			{
+				Dir = true;
+				GEngine->MainWindow.Off();
+			}
+		}
+	}
+
+	
 }

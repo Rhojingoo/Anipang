@@ -43,7 +43,7 @@ private:
 
 	float Size						= 458.f;
 	float TotalSize					= 458.f;
-	float TotalTime					= 5.f;
+	float TotalTime					= 10.f;
 	float Time						= TotalTime;
 	float PreveTime					= TotalTime;
 		

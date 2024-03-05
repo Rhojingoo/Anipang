@@ -51,11 +51,10 @@ void UPlayLevel::Tick(float _DeltaTime)
 {
     ULevel::Tick(_DeltaTime);
 
-
+ 
     if (GameStart == false)
     {
         GameStart = Start_Rabbit->IsStart();    
-
     }
     else
     {
@@ -67,74 +66,98 @@ void UPlayLevel::Tick(float _DeltaTime)
         }
 
         Timer->TimerStart();
-        if (Timer->IsFinish() == true)
+        //if (Timer->IsFinish() == true)
+        //{
+        //    if (GameEnd == false)
+        //    {
+        //        if (TestMode == false)
+        //        {
+        //            End_Rabbit = SpawnActor<AGame_End>();
+        //            End_Rabbit->SetActorLocation({ 250,400 });
+        //            Play_Game_Sound.Off();
+        //            UEngineSound::SoundPlay("TimeOver.mp3");
+        //            GameEnd = true;
+        //        }
+        //    }
+        //}
+        //else
         {
-            if (GameEnd == false)
+            if (TestMode == false)
             {
-                End_Rabbit = SpawnActor<AGame_End>();
-                End_Rabbit->SetActorLocation({ 250,400 });
-                Play_Game_Sound.Off();
-                UEngineSound::SoundPlay("TimeOver.mp3");
-                GameEnd = true;
-            }
-        }
-        else
-        {
-            ComboCheck(_DeltaTime);           
-
-            // Before GameStart CanMake3match Checks Logics;
-            if (CheckMatch == true)
-            {
-                CanAMatch = CanMakeAMatch();
-            }
-
-            if (HintBlock == false && ComboTime >= 3.0f)
-            {
-                if (Hint_block == nullptr)
+                if (UEngineInput::IsDown(VK_F9))
+                {
+                    TestMode = true;
                     return;
-                Hint_block->FindBlock();
-                HintBlock = true;
-            }
-
-
-            if (CanAMatch == true)
-            {
-                if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
-                {
-                    BlockClickUpdate(_DeltaTime);
                 }
 
-                if (ClickChangeCheck == true)
-                {
-                    //클릭으로 이동된 블럭 3Match가 되는지 판단하는 검사로직
-                    XlineBlock_Swap_Check(_DeltaTime);
-                    XlineBlock_Swap_Move(_DeltaTime);
-                    ////검사된 블럭의 return 또는 stay를 나타내는 실행로직
-                    YlineBlock_Swap_Check(_DeltaTime);
-                    YlineBlock_Swap_Move(_DeltaTime);
+                ComboCheck(_DeltaTime);
 
-                    //수정블럭이동
-                    BlockDestroyAllow = true;
+                // Before GameStart CanMake3match Checks Logics;
+                if (CheckMatch == true)
+                {
+                    CanAMatch = CanMakeAMatch();
                 }
 
-                if (BlockDestroyAllow == true)
+                if (HintBlock == false && ComboTime >= 3.0f)
                 {
-                    BlockDestroyCheck();
-                    BlockDestroyAllow = false;
+                    if (Hint_block == nullptr)
+                        return;
+                    Hint_block->FindBlock();
+                    HintBlock = true;
                 }
-               
-                BoombBlock_Destrot_Check(); 
-                BlockMove(_DeltaTime);
-                GenerateNewBlocks();
-                BlockMoveCheck();                            
+
+
+                if (CanAMatch == true)
+                {
+                    if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
+                    {
+                        BlockClickUpdate(_DeltaTime);
+                    }
+
+                    if (ClickChangeCheck == true)
+                    {
+                        //클릭으로 이동된 블럭 3Match가 되는지 판단하는 검사로직
+                        XlineBlock_Swap_Check(_DeltaTime);
+                        XlineBlock_Swap_Move(_DeltaTime);
+                        ////검사된 블럭의 return 또는 stay를 나타내는 실행로직
+                        YlineBlock_Swap_Check(_DeltaTime);
+                        YlineBlock_Swap_Move(_DeltaTime);
+
+                        //수정블럭이동
+                        BlockDestroyAllow = true;
+                    }
+
+                    if (BlockDestroyAllow == true)
+                    {
+                        BlockDestroyCheck();
+                        BlockDestroyAllow = false;
+                    }
+
+                    BoombBlock_Destrot_Check();
+                    BlockMove(_DeltaTime);
+                    GenerateNewBlocks();
+                    BlockMoveCheck();
+                }
+                else
+                {
+                    AllDestroyCheck();
+                    if (AllDestroy == true)
+                    {
+                        CreateBlock();
+                        AllDestroy = false;
+                    }
+                }
             }
             else
             {
-                AllDestroyCheck();
-                if (AllDestroy == true)
+                if (UEngineInput::IsDown(VK_F9))
                 {
-                    CreateBlock();
-                    AllDestroy = false;
+                    TestMode = false;
+                }
+
+                if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
+                {
+                    TestClick();
                 }
             }
         }
@@ -199,6 +222,8 @@ void UPlayLevel::LevelEnd(ULevel* _Level)
     BackGroundSound = false;
     HintBlock = false;
 }
+
+
 
 void UPlayLevel::CreateBlock()
 {
@@ -575,7 +600,6 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
                 YSWAPMOVE = true;
             }
         }
-
         else if (clickCol > swapCol)
         {
 
@@ -603,7 +627,6 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
         }
         else if (clickCol < swapCol)
         {
-
             if (Clickpos.X <= TempSwap.X)
             {
                 click_block->AddActorLocation({ FVector::Right * BlockSpeed * _DeltaTime });
@@ -638,10 +661,9 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
             swap_block->SetColumn(clickCol);
             swap_block->SetRow(clickRow);
 
-            AAnimal_Block* XLine_Check_Before = Blocks[clickCol][clickRow];
+            AAnimal_Block* Temp_Block = Blocks[clickCol][clickRow];
             Blocks[clickCol][clickRow] = Blocks[swapCol][swapkRow];
-            Blocks[swapCol][swapkRow] = XLine_Check_Before;
-
+            Blocks[swapCol][swapkRow] = Temp_Block;
 
             AAnimal_Block::SwapREADY = false;
             AAnimal_Block::SwapChange = false;
@@ -726,7 +748,6 @@ bool UPlayLevel::CheckMatchAroundBlock(int col, int row)
     // 수평 및 수직 매치 모두 없으면 false 반환
     return false;
 }
-
 
 
 void UPlayLevel::XlineBlock_Swap_Check(float _DeltaTime)
@@ -1027,7 +1048,7 @@ void UPlayLevel::BoombBlock_Destrot_Check()
 
 void UPlayLevel::BlockDestroyCheck()
 {
-    //콤보가 5이상일
+    //콤보가 5이상 일때
     if (Combo >= ComboBoombCheck)
     {
         // X축 검사
@@ -1198,8 +1219,13 @@ void UPlayLevel::BlockDestroyCheck()
             ComboAdd = false;
         }
     }
-    else
+    else // 콤보가 5미만 일때 
     {
+        std::list<AAnimal_Block*> RowColBlockMatch;
+        int Col_matchCount = 0;
+        int Row_matchCount = 0;
+     
+        //X라인 터트리기           
         for (int row = 0; row < MapSize; row++)
         {
             for (int col = 0; col < MapSize; col++)
@@ -1209,13 +1235,13 @@ void UPlayLevel::BlockDestroyCheck()
                     continue;
 
                 AAnimal_Block* StartBlock = Blocks[col][row];
-                int matchCount = 1;
+                Col_matchCount = 1;
 
                 // 오른쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
                 for (int checkCol = col + 1; checkCol < MapSize; checkCol++) {
                     if (Blocks[checkCol][row] != nullptr && Blocks[checkCol][row]->GetBlockType() == StartBlock->GetBlockType())
                     {
-                        matchCount++;
+                        Col_matchCount++;
                     }
                     else
                     {
@@ -1224,70 +1250,162 @@ void UPlayLevel::BlockDestroyCheck()
                 }
 
                 // 3개 이상 연속일 경우 모든 연속 블록 제거
-                if (matchCount >= 3)
+                if (Col_matchCount >= 3)
                 {
-                    for (int i = 0; i < matchCount; i++)
+                    for (int i = 0; i < Col_matchCount; i++)
                     {
-                        Blocks[col + i][row]->SetBoomb(true);
-                        Blocks[col + i][row] = nullptr;
+                        RowColBlockMatch.push_back(Blocks[col + i][row]);
+                        XLINE_Block_Destroy_Check = true;
+                        //Blocks[col + i][row]->SetBoomb(true);
+                        //Blocks[col + i][row] = nullptr;
                     }
-                    if (Combo == 0)
-                    {
-                        Score += 10 * matchCount; // 점수 증가
-                    }
-                    else
-                    {
-                        Score += 10 * matchCount * Combo;
-                    }
-                    ++Combo;
-                    ComboTimeCheck = false;
-                    col += matchCount - 1; // 이미 검사한 블록은 건너뛰기
+                    //if (Combo == 0)
+                    //{
+                    //    Score += 10 * matchCount; // 점수 증가
+                    //}
+                    //else
+                    //{
+                    //    Score += 10 * matchCount * Combo;
+                    //}
+                    //++Combo;
+                    //ComboTimeCheck = false;
+                    //col += matchCount - 1; // 이미 검사한 블록은 건너뛰기
                 }
             }
+            
+
+            //Y라인 터트리기
+            for (int row = 0; row < MapSize; row++)
+            {
+                for (int col = 0; col < MapSize; col++)
+                {
+                    if (Blocks[col][row] == nullptr) continue;
+
+                    AAnimal_Block* StartBlock = Blocks[col][row];
+                    int Row_matchCount = 1;
+
+                    // 아래쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
+                    for (int checkRow = row + 1; checkRow < MapSize; checkRow++) {
+                        if (Blocks[col][checkRow] != nullptr && Blocks[col][checkRow]->GetBlockType() == StartBlock->GetBlockType())
+                        {
+                            Row_matchCount++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    // 3개 이상 연속일 경우 모든 연속 블록 제거
+                    if (Row_matchCount >= 3)
+                    {
+                        for (int i = 0; i < Row_matchCount; i++)
+                        {
+                            RowColBlockMatch.push_back(Blocks[col][row + i]);
+                            YLINE_Block_Destroy_Check = true;
+                            //Blocks[col][row + i]->SetBoomb(true);
+                            //Blocks[col][row + i] = nullptr;
+                        }
+                        //if (Combo == 0)
+                        //{
+                        //    Score += 10 * matchCount; // 점수 증가
+                        //}
+                        //else
+                        //{
+                        //    Score += 10 * matchCount * Combo;
+                        //}
+                        //++Combo;
+                        //ComboTimeCheck = false;
+                        //row += matchCount - 1; // 이미 검사한 블록은 건너뛰기
+                    }
+                }
+            }
+           
         }
 
-        for (int row = 0; row < MapSize; row++)
+        if (YLINE_Block_Destroy_Check == true && XLINE_Block_Destroy_Check == true)
         {
-            for (int col = 0; col < MapSize; col++)
+            XYLINE_Block_Destroy_Check = true;
+            if (XYLINE_Block_Destroy_Check == true)
             {
-                if (Blocks[col][row] == nullptr) continue;
-
-                AAnimal_Block* StartBlock = Blocks[col][row];
-                int matchCount = 1;
-
-                // 아래쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
-                for (int checkRow = row + 1; checkRow < MapSize; checkRow++) {
-                    if (Blocks[col][checkRow] != nullptr && Blocks[col][checkRow]->GetBlockType() == StartBlock->GetBlockType())
-                    {
-                        matchCount++;
-                    }
-                    else 
-                    {
-                        break;
-                    }
-                }
-
-                // 3개 이상 연속일 경우 모든 연속 블록 제거
-                if (matchCount >= 3)
+                for (AAnimal_Block* Animal : RowColBlockMatch)
                 {
-                    for (int i = 0; i < matchCount; i++)
-                    {         
-                        Blocks[col][row + i]->SetBoomb(true);
-                        Blocks[col][row + i] = nullptr;
-                    }
-                    if (Combo == 0)
+                    if (Blocks[Animal->GetBlockLocationCol()][Animal->GetBlockLocationRow()] == nullptr)
                     {
-                        Score += 10 * matchCount; // 점수 증가
+                        continue;
                     }
-                    else
-                    {
-                        Score += 10 * matchCount * Combo;
-                    }
-                    ++Combo;
-                    ComboTimeCheck = false;
-                    row += matchCount - 1; // 이미 검사한 블록은 건너뛰기
+                    Blocks[Animal->GetBlockLocationCol()][Animal->GetBlockLocationRow()] = nullptr;
+                    Animal->SetBoomb(true);
+                    Animal = nullptr;
                 }
+                if (Combo == 0)
+                {
+                    Score += ((10 * Col_matchCount) + (10 * Row_matchCount)); // 점수 증가
+                }
+                else
+                {
+                    Score += ((10 * Col_matchCount * Combo) + (10 * Row_matchCount * Combo));
+                }
+            }    
+            ++Combo;
+            ComboTimeCheck = false;
+            YLINE_Block_Destroy_Check = false;
+            XLINE_Block_Destroy_Check = false;
+            XYLINE_Block_Destroy_Check = false;
+        }
+        else if (YLINE_Block_Destroy_Check == true)
+        {
+            for (AAnimal_Block* Animal : RowColBlockMatch)
+            {
+                if (Blocks[Animal->GetBlockLocationCol()][Animal->GetBlockLocationRow()] == nullptr)
+                {
+                    continue;
+                }
+                Blocks[Animal->GetBlockLocationCol()][Animal->GetBlockLocationRow()] = nullptr;
+                Animal->SetBoomb(true);
+                Animal = nullptr;
             }
+            if (Combo == 0)
+            {
+                Score += ((10 * Col_matchCount) + (10 * Row_matchCount)); // 점수 증가
+            }
+            else
+            {
+                Score += ((10 * Col_matchCount * Combo) + (10 * Row_matchCount * Combo));
+            }
+            ComboTimeCheck = false;
+            YLINE_Block_Destroy_Check = false;
+            XLINE_Block_Destroy_Check = false;
+            XYLINE_Block_Destroy_Check = false;
+            ++Combo;
+        }
+        else if (XLINE_Block_Destroy_Check == true)
+        {
+            for (AAnimal_Block* Animal : RowColBlockMatch)
+            {
+                if (Blocks[Animal->GetBlockLocationCol()][Animal->GetBlockLocationRow()] == nullptr)
+                {
+                    continue;
+                }
+                Blocks[Animal->GetBlockLocationCol()][Animal->GetBlockLocationRow()] = nullptr;
+                Animal->SetBoomb(true);
+                Animal = nullptr;
+            }
+            if (Combo == 0)
+            {
+                Score += ((10 * Col_matchCount) + (10 * Row_matchCount)); // 점수 증가
+               
+            }
+            else
+            {
+                Score += ((10 * Col_matchCount * Combo) + (10 * Row_matchCount * Combo));
+               
+            }
+            ComboTimeCheck = false;
+            YLINE_Block_Destroy_Check = false;
+            XLINE_Block_Destroy_Check = false;
+            XYLINE_Block_Destroy_Check = false;
+            ++Combo;            
         }
     }
 }
@@ -1438,5 +1556,70 @@ void UPlayLevel::AllDestroyCheck()
     Hint_block = nullptr;
     HintBlock = false;
     AllDestroy = true;
+}
+
+void UPlayLevel::TestClick()
+{
+    if (AAnimal_Block::SwapREADY == false)
+    {
+        for (int row = 0; row < MapSize; row++)
+        {
+            for (int col = 0; col < MapSize; col++)
+            {
+                if (Blocks[col][row] == nullptr)
+                {
+                    continue;
+                }
+
+                if (Blocks[col][row]->GetFirstPick() == true && AAnimal_Block::GetFirstClick() == true)
+                {
+                    click_block = Blocks[col][row];
+                    Clickpos = click_block->GetActorLocation();
+                }
+
+                if (Blocks[col][row]->GetSecondPick() == true && AAnimal_Block::GetSecondClick() == true)
+                {
+                    swap_block = Blocks[col][row];
+                    Swappos = swap_block->GetActorLocation();
+                }
+            }
+        }
+        TempClick = Clickpos;
+        TempSwap = Swappos;
+        AAnimal_Block::SwapREADY = true;
+    }
+    else
+    {
+        //Clickpos = click_block->GetActorLocation();
+        //Swappos = swap_block->GetActorLocation();
+
+        int clickRow = click_block->GetBlockLocation().Row;
+        int clickCol = click_block->GetBlockLocation().Column;
+        int swapkRow = swap_block->GetBlockLocation().Row;
+        int swapCol = swap_block->GetBlockLocation().Column;
+
+
+        bool _set = false;
+        FVector TempPos = Clickpos;
+        click_block->SetActorLocation(Swappos);
+        swap_block->SetActorLocation(TempPos);
+
+        click_block->SetBlockstate(_set, 1);
+        swap_block->SetBlockstate(_set, 2);
+        click_block->SetColumn(swapCol);
+        click_block->SetRow(swapkRow);
+        swap_block->SetColumn(clickCol);
+        swap_block->SetRow(clickRow);
+
+        AAnimal_Block* Temp_Block = Blocks[clickCol][clickRow];
+        Blocks[clickCol][clickRow] = Blocks[swapCol][swapkRow];
+        Blocks[swapCol][swapkRow] = Temp_Block;
+
+
+        AAnimal_Block::SwapREADY = false;
+        AAnimal_Block::SwapChange = false;
+        AAnimal_Block::ClickChange = false;
+        ClickChangeCheck = true;        
+    }
 }
 

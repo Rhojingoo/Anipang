@@ -31,6 +31,8 @@ protected:
 	void BlockClickUpdate(float _DeltaTime);
 	void Blockreturn(int _clickRow, int _clickCol, int _swapkRow, int _swapCol);
 	bool CheckMatchAroundBlock(int col, int row);
+
+
 	void XlineBlock_Swap_Check(float _DeltaTime);
 	void XlineBlock_Swap_Move(float _DeltaTime);
 	void YlineBlock_Swap_Check(float _DeltaTime);
@@ -87,6 +89,11 @@ private:
 	const int BlockChangeDefault			 = 0;
 	const int BlockChangeSuccess			 = 1;
 	const int BlockChangeFail				 = 2;
+
+	bool XLINE_Block_Destroy_Check = false;
+	bool YLINE_Block_Destroy_Check = false;
+	bool XYLINE_Block_Destroy_Check = false;
+
 	int XLINE_ChageCheck					 = BlockChangeDefault;
 	int YLINE_ChageCheck					 = BlockChangeDefault;
 	bool XlinemoveCheck						 = false;
@@ -115,5 +122,9 @@ private:
 	bool AllDestroy							 = false;
 
 	bool BackGroundSound					 = false;
+
+	bool TestMode							 = false;
+	void TestClick();
+
 };
 

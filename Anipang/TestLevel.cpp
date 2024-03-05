@@ -49,7 +49,7 @@ void TestLevel::BeginPlay()
     ULevel::BeginPlay();
     //SpawnActor<APlay_Frame>();
     Cursor = SpawnActor<ACursor>();
-    //CreateBlock();
+    CreateBlock();
     
 
     //NewDir.Move("Save");
@@ -95,13 +95,13 @@ void TestLevel::Tick(float _DeltaTime)
 {
     ULevel::Tick(_DeltaTime);
 
-    //if (UEngineInput::IsDown(VK_F3))
-    //{
-    //    BGMPlayer.OnOffSwitch();
-    //}
+    if (UEngineInput::IsDown(VK_F3))
+    {
+        BGMPlayer.OnOffSwitch();
+    }
 
 
- /*   {
+    {
         for (int row = 0; row < MapSize; ++row)
         {
             for (int col = 0; col < MapSize; ++col)
@@ -133,7 +133,7 @@ void TestLevel::Tick(float _DeltaTime)
         AllDestroyCheck();
         CreateBlock();
         AllDestroy = false;
-    }*/
+    }
 }
 
 void TestLevel::LevelStart(ULevel* _Level)

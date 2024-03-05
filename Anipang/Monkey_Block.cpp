@@ -89,6 +89,18 @@ void AMonkey_Block::Tick(float _DeltaTime)
 			Blockstatus = Block_Status::Idle;
 			int RenderNumber = 1;
 			Renderer->SetOrder(RenderNumber);
+
+			if (SecondPick == true)
+			{
+				SecondClick = false;
+				SecondPick = false;
+			}
+			if (FirstPick == true)
+			{
+				FirstClick = false;
+				FirstPick = false;
+			}
+
 			return;
 		}
 

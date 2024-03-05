@@ -52,7 +52,7 @@ private:
 
 	void InputCheck();
 	bool Input_Text = false;
-	int Text_MaxCount = 2;
+	int Text_MaxCount = 3;
 	int Text_Count = 0;
 };
 

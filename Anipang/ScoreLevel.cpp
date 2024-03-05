@@ -72,8 +72,6 @@ void UScoreLevel::Tick(float _DeltaTime)
         ScoreMN->SetActorLocation({ 240,250 });
         if (Input_Text == true)
         {
-           
-
             if (!TextInput.empty())
             {
                 Input_Font->SetFont(TextInput, 40.f);
@@ -146,7 +144,7 @@ void UScoreLevel::SettingScore()
         // 읽기 모드로 파일 열기
         fs.open(NewFile.GetFullPath(), std::ios::in);
 
-        // 첫 줄은 헤더이므로 먼저 읽고 버립니다.
+        // 첫 줄은 헤더이므로 먼저 읽고 버리기.
         std::getline(fs, str_buf);
 
         // 파일 끝까지 읽기

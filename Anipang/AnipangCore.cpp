@@ -126,8 +126,8 @@ void UAnipangCore::BeginPlay()
 	CreateLevel<TestLevel>("TestLevel");
 	
 
-	//ChangeLevel("Play");
-	ChangeLevel("Title");
+	ChangeLevel("Play");
+	//ChangeLevel("Title");
 	//ChangeLevel("TestLevel");
 	//Block_Manager::OBJPOOL = &Block_Manager::GetInstance();
 

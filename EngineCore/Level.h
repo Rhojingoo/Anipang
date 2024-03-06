@@ -40,15 +40,11 @@ public :
 		return NewActor;
 	}
 
-
-	//template<typename ActorType>
-	//ActorType* SpawnActor(ActorType* _Ac, int _Order = 0)
-	//{
-	//	ActorType* NewActor = _Ac;
-	//	ActorInit(NewActor);
-	//	AllActor[_Order].push_back(NewActor);
-	//	return NewActor;
-	//}
+	template<typename ActorType, typename EnumType>
+	ActorType* SpawnActor(EnumType _Order)
+	{
+		return SpawnActor<ActorType>(static_cast<int>(_Order));
+	}
 
 	void SetCameraPos(FVector _CameraPos)
 	{

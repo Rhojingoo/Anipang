@@ -15,13 +15,13 @@ void UEngineSerializer::BufferResize(int _Size)
 
 void UEngineSerializer::Write(void* _Data, unsigned int _Size)
 {
-	unsigned int check = Data.size();
-	unsigned int chekcapa = Data.capacity();
+	unsigned int check = static_cast<unsigned int>(Data.size());
+	unsigned int chekcapa = static_cast<unsigned int>(Data.capacity());
 	if (WriteOffset + _Size >= Data.size())
 	{
 		Data.resize(Data.capacity() * 2 + _Size);
 	}
-	check = Data.size();
+	check = static_cast<unsigned int>(Data.size());
 
 	// &Data[WriteOffset] 주속값에
 	// _Size 크기만큼

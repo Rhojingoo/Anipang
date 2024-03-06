@@ -40,6 +40,8 @@ bool UCollision::CollisionCheck(int _Order, std::vector<UCollision*>& _Result)
 		return false;
 	}
 
+	_Result.clear();
+
 	AActor* Owner = GetOwner();
 	ULevel* Level = Owner->GetWorld();
 

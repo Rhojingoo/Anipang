@@ -28,6 +28,12 @@ public :
 		Renderer->ChangeAnimation("Nomarl");
 	}
 
+	void Test_BlockMove_Mode_On() { Test_BlockMove_Mode = true; }
+	void Test_BlockMove_Mode_Off() { Test_BlockMove_Mode = false; }
+	void TimeStopOn() { TimeStop = true; }
+	void TimeStopOff() { TimeStop = false; }
+
+
 protected:
 	UImageRenderer* Renderer		= nullptr;
 	FVector Pos						= {};
@@ -49,5 +55,8 @@ private:
 		
 	ANumber* Tens					= nullptr;
 	ANumber* Units					= nullptr;
+
+	bool Test_BlockMove_Mode		= false;
+	bool TimeStop					= false;
 };
 

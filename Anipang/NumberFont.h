@@ -34,6 +34,11 @@ public :
 		Renderer->TextCneterOff();
 	}
 
+	void FonRenderNumber(int _Num)
+	{
+		Renderer->SetOrder(_Num);
+	}
+
 protected:
 	UImageRenderer* Renderer = nullptr;
 	FVector Pos = {};

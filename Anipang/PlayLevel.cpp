@@ -13,6 +13,8 @@
 #include "Boomb_Block.h"
 #include "Helper.h"
 #include "Combo_OBJ.h"
+#include "NumberFont.h"
+#include "Manual.h"
 
 #include "Block_Manager.h"
 #include "Game_End.h"
@@ -50,7 +52,8 @@ void UPlayLevel::BeginPlay()
 void UPlayLevel::Tick(float _DeltaTime)
 {
     ULevel::Tick(_DeltaTime);
-
+    Manual_Switch();
+    Test_TimeStop_Mode();
  
     if (GameStart == false)
     {
@@ -66,27 +69,25 @@ void UPlayLevel::Tick(float _DeltaTime)
         }
 
         Timer->TimerStart();
-        //if (Timer->IsFinish() == true)
-        //{
-        //    if (GameEnd == false)
-        //    {
-        //        if (TestMode == false)
-        //        {
-        //            End_Rabbit = SpawnActor<AGame_End>();
-        //            End_Rabbit->SetActorLocation({ 250,400 });
-        //            Play_Game_Sound.Off();
-        //            UEngineSound::SoundPlay("TimeOver.mp3");
-        //            GameEnd = true;
-        //        }
-        //    }
-        //}
-        //else
+        if (Timer->IsFinish() == true)
         {
-            if (TestMode == false)
+            if (GameEnd == false)
+            {
+                End_Rabbit = SpawnActor<AGame_End>();
+                End_Rabbit->SetActorLocation({ 250,400 });
+                Play_Game_Sound.Off();
+                UEngineSound::SoundPlay("TimeOver.mp3");
+                GameEnd = true;
+            }
+        }
+        else
+        {
+            if (Test_BlockMove_Mode == false)
             {
                 if (UEngineInput::IsDown(VK_F9))
                 {
-                    TestMode = true;
+                    Test_BlockMove_Mode = true;
+                    Test_BlockMoveMode();
                     return;
                 }
 
@@ -152,7 +153,9 @@ void UPlayLevel::Tick(float _DeltaTime)
             {
                 if (UEngineInput::IsDown(VK_F9))
                 {
-                    TestMode = false;
+                    Test_BlockMove_Mode = false;
+                    Test_BlockMoveMode();
+                    return;
                 }
 
                 if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
@@ -174,6 +177,9 @@ void UPlayLevel::Tick(float _DeltaTime)
             ClearCombotime();
         }  
     }
+
+    InputKey_DestroyBlock();
+
 
     if (UEngineInput::IsDown('N'))
     {
@@ -1620,6 +1626,82 @@ void UPlayLevel::TestClick()
         AAnimal_Block::SwapChange = false;
         AAnimal_Block::ClickChange = false;
         ClickChangeCheck = true;        
+    }
+}
+
+void UPlayLevel::Test_BlockMoveMode()
+{
+    if (Test_BlockMove_Mode == false)
+    {
+        Timer->Test_BlockMove_Mode_Off();
+        BlockMoveMode_Font->Destroy(0.f);
+        BlockMoveMode_Font = nullptr;
+    }
+    else
+    {
+        BlockMoveMode_Font = SpawnActor<ANumberFont>();
+        BlockMoveMode_Font->SetFont("블럭이동 모드", 35);
+        BlockMoveMode_Font->SetFontColor(Color8Bit::Black, Color8Bit::Red);
+        BlockMoveMode_Font->SetActorLocation({ 250,120 });
+        BlockMoveMode_Font->FonRenderNumber(99);
+        Timer->Test_BlockMove_Mode_On();
+    }
+}
+
+void UPlayLevel::Test_TimeStop_Mode()
+{
+    if (UEngineInput::IsDown(VK_F8))
+    {
+        if (Test_TimeStop_Switch == false)
+        {
+            Timer->TimeStopOn();
+            Test_TimeStop_Switch = true;
+            TimeStopMode_Font = SpawnActor<ANumberFont>();
+            TimeStopMode_Font->SetFont("Timer_OFF", 35);
+            TimeStopMode_Font->SetFontColor(Color8Bit::Black, Color8Bit::Red);
+            TimeStopMode_Font->SetActorLocation({ 235,155 });
+            TimeStopMode_Font->FonRenderNumber(99);
+        }
+        else
+        {
+            Timer->TimeStopOff();
+            Test_TimeStop_Switch = false;
+            TimeStopMode_Font->Destroy(0.f);
+            TimeStopMode_Font = nullptr;
+        }
+    }
+}
+
+void UPlayLevel::Manual_Switch()
+{
+    if (UEngineInput::IsDown(VK_F2))
+    {
+        ManualSwitch = !ManualSwitch;
+
+        if (ManualSwitch == true)
+        {
+            Manual = SpawnActor<AManual>();
+            Manual->SetActorLocation({ 235,155 });
+        }
+        else
+        {
+            Manual->Destroy(0.f);
+            Manual = nullptr;
+        }
+    }
+}
+
+void UPlayLevel::InputKey_DestroyBlock()
+{
+    if (true == UEngineInput::IsDown(VK_F7))
+    {
+        AllDestroy = true;
+    }
+    if (AllDestroy == true)
+    {
+        AllDestroyCheck();
+        CreateBlock();
+        AllDestroy = false;
     }
 }
 

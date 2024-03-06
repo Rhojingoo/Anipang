@@ -65,6 +65,12 @@ public:
 		return Position;
 	}
 
+	void AddScale(FVector _Value)
+	{
+		Scale += _Value;
+	}
+
+
 	FVector LeftTop() const
 	{
 		return { Left(), Top() };

@@ -18,9 +18,19 @@ public:
 		Transform.SetPosition(_Value);
 	}
 
+	void AddPosition(const FVector& _Value)
+	{
+		Transform.AddPosition(_Value);
+	}
+
 	void SetScale(const FVector& _Value)
 	{
 		Transform.SetScale(_Value);
+	}
+
+	void AddScale(const FVector& _Value)
+	{
+		Transform.AddScale(_Value);
 	}
 
 	void SetTransform(const FTransform& _Value)
@@ -32,6 +42,7 @@ public:
 	{
 		return Transform;
 	}
+
 
 	FTransform GetActorBaseTransform();
 

@@ -41,38 +41,41 @@ void ATime_Gauge::Tick(float _DeltaTime)
 			NumCreate = true;
 		}
 
-		Time -= _DeltaTime;
-		float checktime = PreveTime - Time;
-		if (checktime >= 1.f)
+		if (Test_BlockMove_Mode == false && TimeStop == false)
 		{
-			PreveTime = Time;
-			float SumTotalSize = (TotalSize - (TotalSize * (Time / TotalTime)));
-			float SumChangeSize = (Size - (TotalSize * (Time / TotalTime)));
-			Size = TotalSize - SumTotalSize;
-			Renderer->SetScale({ Size, 30.f });
-			Pos.X = Pos.X - SumChangeSize / 2;
-			SetActorLocation(Pos);
-		}
-
-		{
-			int Num_Units = static_cast<int>(Time) % 10;			
-			Units->SetNumber(Num_Units);
-			int Num_Tens = static_cast<int>(Time) / 10;
-			Tens->SetNumber(Num_Tens);
-		}
-
-		if (Time < 10.f)
-		{
-			if (Hurry == false)
+			Time -= _DeltaTime;
+			float checktime = PreveTime - Time;
+			if (checktime >= 1.f)
 			{
-				Renderer->ChangeAnimation("Hurry");
-				Hurry = true;
+				PreveTime = Time;
+				float SumTotalSize = (TotalSize - (TotalSize * (Time / TotalTime)));
+				float SumChangeSize = (Size - (TotalSize * (Time / TotalTime)));
+				Size = TotalSize - SumTotalSize;
+				Renderer->SetScale({ Size, 30.f });
+				Pos.X = Pos.X - SumChangeSize / 2;
+				SetActorLocation(Pos);
 			}
-		}
 
-		if (Time <= 0.f)
-		{
-			Finish = true;
+			{
+				int Num_Units = static_cast<int>(Time) % 10;
+				Units->SetNumber(Num_Units);
+				int Num_Tens = static_cast<int>(Time) / 10;
+				Tens->SetNumber(Num_Tens);
+			}
+
+			if (Time < 10.f)
+			{
+				if (Hurry == false)
+				{
+					Renderer->ChangeAnimation("Hurry");
+					Hurry = true;
+				}
+			}
+
+			if (Time <= 0.f)
+			{
+				Finish = true;
+			}
 		}
 	}
 }

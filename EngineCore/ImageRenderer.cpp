@@ -178,6 +178,11 @@ void UImageRenderer::Tick(float _DeltaTime)
 
 int UAnimationInfo::Update(float _DeltaTime)
 {
+	if (false == Loop && true == IsEnd)
+	{
+		return Indexs[CurFrame];
+	}
+
 	IsEnd = false;
 
 	CurTime -= _DeltaTime;
@@ -188,6 +193,11 @@ int UAnimationInfo::Update(float _DeltaTime)
 		++CurFrame;
 
 		if (1 == Indexs.size())
+		{
+			IsEnd = true;
+		}
+
+		if (false == Loop && Indexs.size() <= CurFrame)
 		{
 			IsEnd = true;
 		}
@@ -260,6 +270,23 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 	FTransform RendererTrans = GetRenderTransForm();
 
 	EWIndowImageType ImageType = Image->GetImageType();
+	const UImageInfo& Info = Image->ImageInfo(InfoIndex);
+	
+	switch (SortType)
+	{
+	case EImageSortType::Left:
+	{
+		RendererTrans.AddPosition({ RendererTrans.GetScale().hX() , 0.0f });
+		break;
+	}
+	default:
+		break;
+	}
+
+	if (true == AutoImageScaleValue)
+	{
+		RendererTrans.SetScale(Info.CuttingTrans.GetScale() * AutoImageScaleRatio);
+	}
 
 	switch (ImageType)
 	{

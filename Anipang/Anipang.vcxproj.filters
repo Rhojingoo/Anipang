@@ -139,11 +139,14 @@
     <ClInclude Include="Screen_Score_Board.h">
       <Filter>LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor</Filter>
     </ClInclude>
-    <ClInclude Include="NumberFont.h">
-      <Filter>Public</Filter>
-    </ClInclude>
     <ClInclude Include="RecordBoard.h">
       <Filter>LEVEL &amp; ACTOR\Score_Level\Scor_Level_Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="NumberFont.h">
+      <Filter>Public\UI_OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="Manual.h">
+      <Filter>Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -285,11 +288,14 @@
     <ClCompile Include="Screen_Score_Board.cpp">
       <Filter>LEVEL &amp; ACTOR\ScreenScore_Level\ScreenScore_Level_Actor</Filter>
     </ClCompile>
-    <ClCompile Include="NumberFont.cpp">
-      <Filter>Public</Filter>
-    </ClCompile>
     <ClCompile Include="RecordBoard.cpp">
       <Filter>LEVEL &amp; ACTOR\Score_Level\Scor_Level_Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="NumberFont.cpp">
+      <Filter>Public\UI_OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="Manual.cpp">
+      <Filter>Public</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

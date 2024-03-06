@@ -3,6 +3,8 @@
 #include <List>
 #include <EnginePlatform\EngineSound.h>
 
+class AManual;
+class ANumberFont;
 class ACombo_OBJ;
 class ScoreManager;
 class ATime_Gauge;
@@ -123,8 +125,18 @@ private:
 
 	bool BackGroundSound					 = false;
 
-	bool TestMode							 = false;
-	void TestClick();
 
+	ANumberFont* BlockMoveMode_Font			 = nullptr;
+	ANumberFont* TimeStopMode_Font			 = nullptr;
+	bool Test_BlockMove_Mode				 = false;
+	bool Test_TimeStop_Switch				 = false;
+	void TestClick();
+	void Test_BlockMoveMode();
+	void Test_TimeStop_Mode();
+
+	AManual* Manual							 = nullptr;
+	bool ManualSwitch						 = false;
+	void Manual_Switch();
+	void InputKey_DestroyBlock();
 };
 

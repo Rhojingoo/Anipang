@@ -513,6 +513,11 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
     }
     else
     {
+        if (click_block == nullptr || swap_block == nullptr)
+        {
+            return;
+        }
+
         Clickpos = click_block->GetActorLocation();
         Swappos = swap_block->GetActorLocation();
 

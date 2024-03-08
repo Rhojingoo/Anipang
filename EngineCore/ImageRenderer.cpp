@@ -48,6 +48,13 @@ void UImageRenderer::SetImage(std::string_view _Name, int _InfoIndex)
 	InfoIndex = _InfoIndex;
 }
 
+bool UImageRenderer::IsAnimation(std::string_view _Name)
+{
+	std::string UpperAniName = UEngineString::ToUpper(_Name);
+
+	return AnimationInfos.contains(UpperAniName);
+}
+
 void UImageRenderer::CreateAnimation(std::string_view _AnimationName, std::string_view _ImageName, int _Start, int _End, float _Inter, bool _Loop)
 {
 	std::vector<int> Indexs;
@@ -248,13 +255,13 @@ void UImageRenderer::TextRender(float _DeltaTime)
 	switch (TextEffect)
 	{
 	case 1:
-		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor, TextColor2, TextCenter);
+		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor, TextColor2, TextCenter);		
 		break;
 	case 2:
 		GEngine->MainWindow.GetBackBufferImage()->TextCopyBold(Text, Font, Size, RendererTrans, TextColor);
 		break;
 	default:
-		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor);
+		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, SortOption1, SortOption1, TextColor);
 		break;
 	}	
 }
@@ -279,6 +286,12 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 		RendererTrans.AddPosition({ RendererTrans.GetScale().hX() , 0.0f });
 		break;
 	}
+	case EImageSortType::Right:
+	{
+		RendererTrans.AddPosition({ -RendererTrans.GetScale().hX() , 0.0f });
+		break;
+	}
+
 	default:
 		break;
 	}

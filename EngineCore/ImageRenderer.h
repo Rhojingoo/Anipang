@@ -7,6 +7,7 @@ enum class EImageSortType
 {
 	Center,
 	Left,
+	Right,
 };
 
 class UAnimationInfo
@@ -48,6 +49,8 @@ public:
 	void Render(float _DeltaTime);
 
 	void SetImage(std::string_view _Name, int _InfoIndex = 0);
+
+	bool IsAnimation(std::string_view _Name);
 
 	void SetImageIndex(int _InfoIndex)
 	{
@@ -192,6 +195,12 @@ public:
 		SortType = _SortType;
 	}
 
+	void SetTextSortOption(Gdiplus::StringAlignment _SortOption1, Gdiplus::StringAlignment _SortOption2)
+	{
+		SortOption1 = _SortOption1;
+		SortOption2 = _SortOption2;
+	}
+
 	void AutoImageScale(float _AutoScale = 1.0f)
 	{
 		AutoImageScaleValue = true;
@@ -229,6 +238,11 @@ private:
 	bool AutoImageScaleValue = false;
 	float AutoImageScaleRatio = 1.0f;
 	EImageSortType SortType = EImageSortType::Center;
+	Gdiplus::StringAlignment SortOption1 = Gdiplus::StringAlignment::StringAlignmentCenter;
+	Gdiplus::StringAlignment SortOption2 = Gdiplus::StringAlignment::StringAlignmentCenter;
+
 	bool TextCenter = true;
+
+
 };
 

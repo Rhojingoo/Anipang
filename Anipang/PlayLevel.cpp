@@ -110,6 +110,7 @@ void UPlayLevel::Tick(float _DeltaTime)
 
                 if (CanAMatch == true)
                 {
+                    // 마우스클릭으로블럭을이동시키는로직
                     if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
                     {
                         BlockClickUpdate(_DeltaTime);
@@ -117,27 +118,29 @@ void UPlayLevel::Tick(float _DeltaTime)
 
                     if (ClickChangeCheck == true)
                     {
-                        //클릭으로 이동된 블럭 3Match가 되는지 판단하는 검사로직
+                        //클릭으로이동된블럭3Match가되는지판단하는검사로직
                         XlineBlock_Swap_Check(_DeltaTime);
+                        //검사된블럭의return 또는stay를나타내는실행로직
                         XlineBlock_Swap_Move(_DeltaTime);
-                        ////검사된 블럭의 return 또는 stay를 나타내는 실행로직
+
                         YlineBlock_Swap_Check(_DeltaTime);
                         YlineBlock_Swap_Move(_DeltaTime);
 
-                        //수정블럭이동
-                        BlockDestroyAllow = true;
+                        //stay, return 판별후블럭을터트림로직을승인
+                        BlockDestroyAllow = true
                     }
 
                     if (BlockDestroyAllow == true)
                     {
+                        //Match로블럭을터트리는로직
                         BlockDestroyCheck();
-                        BlockDestroyAllow = false;
+                        BlockDestroyAllow = false
                     }
 
-                    BoombBlock_Destrot_Check();
-                    BlockMove(_DeltaTime);
-                    GenerateNewBlocks();
-                    BlockMoveCheck();
+                    BoombBlock_Destroy_Check();  // 아이템블럭으로인해주변블럭터트리는로직
+                    BlockMove(_DeltaTime);       // 터진블럭이있을때아래로이동하는로직
+                    GenerateNewBlocks();         // 터진블럭이있을때블럭을생성하는로직
+                    BlockMoveCheck();            // 터진블럭으로인해이동해야할블럭여부확인로직           
                 }
                 else
                 {
@@ -1014,7 +1017,7 @@ void UPlayLevel::YlineBlock_Swap_Move(float _DeltaTime)
     }
 }
 
-void UPlayLevel::BoombBlock_Destrot_Check()
+void UPlayLevel::BoombBlock_Destroy_Check()
 {
     for (int row = 0; row < MapSize; ++row)
     {

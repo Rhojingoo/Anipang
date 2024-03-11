@@ -40,7 +40,7 @@ protected:
 	void YlineBlock_Swap_Check(float _DeltaTime);
 	void YlineBlock_Swap_Move(float _DeltaTime);
 
-	void BoombBlock_Destrot_Check();
+	void BoombBlock_Destroy_Check();
 
 	void BlockDestroyCheck();
 	void BlockMove(float _DeltaTime);

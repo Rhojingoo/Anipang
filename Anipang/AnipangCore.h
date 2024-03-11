@@ -12,6 +12,7 @@ public :
 	UAnipangCore& operator =(const 	UAnipangCore& _Other)			 = delete;
 	UAnipangCore& operator =(UAnipangCore& _Other)noexcept			 = delete;
 
+
 protected:
 	void BeginPlay()	override;
 	void Tick(float _DeltaTime)	override;

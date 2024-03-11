@@ -41,6 +41,8 @@ void UAnipangCore::BeginPlay()
 	NewDir.MoveToSearchChild("ContentsResources");
 	NewDir.MoveToSearchChild("Texture");
 
+
+
 	// resource Image의 전체적인 순회
 	std::list<UEngineFile> AllFileList = NewDir.AllFile({ ".png", ".bmp" }, true);
 
@@ -108,6 +110,7 @@ void UAnipangCore::BeginPlay()
 	//NewDir.MoveToSearchChild("Sound");
 	NewDir.MoveToSearchChild("ContentsResources");
 	NewDir.MoveToSearchChild("Sound");
+	UEngineSound::SetGlobalVolume(0.5f);
 
 	{
 		std::list<UEngineFile> NewList = NewDir.AllFile({ ".wav", ".mp3" }, true);
@@ -126,8 +129,8 @@ void UAnipangCore::BeginPlay()
 	CreateLevel<TestLevel>("TestLevel");
 	
 
-	ChangeLevel("Play");
-	//ChangeLevel("Title");
+	//ChangeLevel("Play");
+	ChangeLevel("Title");
 	//ChangeLevel("TestLevel");
 	//Block_Manager::OBJPOOL = &Block_Manager::GetInstance();
 

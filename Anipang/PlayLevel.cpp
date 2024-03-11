@@ -127,14 +127,14 @@ void UPlayLevel::Tick(float _DeltaTime)
                         YlineBlock_Swap_Move(_DeltaTime);
 
                         //stay, return 판별후블럭을터트림로직을승인
-                        BlockDestroyAllow = true
+                        BlockDestroyAllow = true;
                     }
 
                     if (BlockDestroyAllow == true)
                     {
                         //Match로블럭을터트리는로직
                         BlockDestroyCheck();
-                        BlockDestroyAllow = false
+                        BlockDestroyAllow = false;
                     }
 
                     BoombBlock_Destroy_Check();  // 아이템블럭으로인해주변블럭터트리는로직

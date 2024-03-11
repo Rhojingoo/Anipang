@@ -74,12 +74,15 @@ void UEngineWindow::Open(std::string_view _Title)
 	wcex.hIcon = nullptr;  // LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WINDOWSPROJECT1));
 	//wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_icon1));
 	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+	//wcex.hCursor = nullptr;
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	wcex.lpszMenuName = nullptr;
 	wcex.lpszClassName = "DefaultWindow";
 	wcex.hIconSm = nullptr;
 
 	RegisterClassExA(&wcex);
+
+	ShowCursor(FALSE);
 
 	hWnd = CreateWindowA("DefaultWindow", _Title.data(), WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);

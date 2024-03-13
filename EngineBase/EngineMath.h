@@ -344,6 +344,7 @@ public:
 	static const Color8Bit NAWhite;
 	static const Color8Bit NAOrange;
 	static const Color8Bit NAYellow;
+	static const Color8Bit NACyan;
 	
 	union
 	{

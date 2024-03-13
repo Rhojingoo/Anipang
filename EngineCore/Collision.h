@@ -16,9 +16,9 @@ public :
 	void SetOrder(int _Order) override;
 
 	template<typename EnumType>
-	bool CollisionCheck(EnumType _Order, std::vector<UCollision*>& _Result)
+	bool CollisionCheck(EnumType _Order, std::vector<UCollision*>& _Resul, FVector _NextPos = FVector::Zero)
 	{
-		return CollisionCheck(static_cast<int>(_Order), _Result);
+		return CollisionCheck(static_cast<int>(_Order), _NextPos);
 	}
 
 	void SetColType(ECollisionType _Type)
@@ -26,7 +26,7 @@ public :
 		ColType = _Type;
 	}
 
-	bool CollisionCheck(int _Order, std::vector<UCollision*>& _Result);
+	bool CollisionCheck(int _Order, std::vector<UCollision*>& _Result, FVector _NextPos = FVector::Zero);
 	void DebugRender(FVector _CameraPos);
 
 protected:

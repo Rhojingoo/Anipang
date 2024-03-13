@@ -28,7 +28,7 @@ const Color8Bit Color8Bit::NAYellow = { 255, 255, 0, 0 };
 const Color8Bit Color8Bit::NAMagenta = { 255, 0, 255, 0 };
 const Color8Bit Color8Bit::NAWhite = { 255, 255, 255, 0 };
 const Color8Bit Color8Bit::NAOrange = { 255, 170, 46, 0 };
-
+const Color8Bit Color8Bit::NACyan = { 0, 255, 255, 0 };
 
 UEngineMath::UEngineMath()
 {

@@ -47,6 +47,25 @@ UWindowImage* UEngineResourcesManager::LoadImg(std::string_view _Path, std::stri
 	return nullptr;
 }
 
+void UEngineResourcesManager::UnloadImg(std::string_view _Name)
+{
+	std::string UpperName = UEngineString::ToUpper(_Name);
+	if (false == Images.contains(UpperName))
+	{
+		MsgBoxAssert("이미지명 : " + std::string(_Name) + "존재하지 않는 이미지를 언로드하려고 했습니다");
+		return;
+	}
+	UWindowImage* Image = Images[UpperName];
+	Images.erase(UpperName);
+	delete Image;
+}
+
+bool UEngineResourcesManager::IsImage(std::string_view _Name)
+{
+	std::string UpperName = UEngineString::ToUpper(_Name);
+	return Images.contains(UpperName);
+}
+
 UWindowImage* UEngineResourcesManager::FindImg(std::string_view _Name)
 {
 	std::string UpperName = UEngineString::ToUpper(_Name);

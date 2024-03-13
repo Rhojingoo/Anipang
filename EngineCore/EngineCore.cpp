@@ -38,8 +38,6 @@ void UEngineCore::CoreTick()
 	float DeltaTime = MainTimer.TimeCheck();
 	double dDeltaTime = MainTimer.GetDeltaTime();
 
-
-
 	if (1 <= Frame)
 	{
 		CurFrameTime += DeltaTime;
@@ -59,6 +57,29 @@ void UEngineCore::CoreTick()
 	UEngineSound::Update();
 	UEngineInput::KeyCheckTick(DeltaTime);
 
+	for (size_t i = 0; i < DestroyLevelName.size(); i++)
+	{
+		std::string UpperName = UEngineString::ToUpper(DestroyLevelName[i]);
+
+		ULevel* Level = AllLevel[UpperName];
+
+		AllLevel.erase(DestroyLevelName[i]);
+
+		if (Level == CurLevel)
+		{
+			CurLevel = nullptr;
+		}
+		Level->End();
+
+		if (nullptr != Level)
+		{
+			delete Level;
+			Level = nullptr;
+		}
+	}
+	DestroyLevelName.clear();
+
+
 	if (nullptr != NextLevel)
 	{
 		// 최초에는 현재 레벨이 존재하지 않을 것이다.
@@ -76,22 +97,6 @@ void UEngineCore::CoreTick()
 		DeltaTime = MainTimer.TimeCheck();
 		CurFrameTime = 0.0f;
 	}
-
-	for (size_t i = 0; i < DestroyLevelName.size(); i++)
-	{
-		std::string UpperName = UEngineString::ToUpper(DestroyLevelName[i]);
-
-		ULevel* Level = AllLevel[UpperName];
-		if (nullptr != Level)
-		{
-			delete Level;
-			Level = nullptr;
-		}
-
-		AllLevel.erase(DestroyLevelName[i]);
-	}
-	DestroyLevelName.clear();
-
 
 	if (nullptr == CurLevel)
 	{
@@ -138,10 +143,6 @@ void UEngineCore::CoreInit(HINSTANCE _HINSTANCE)
 	this->AllLevel;
 
 	EngineInit = true;
-}
-
-void UEngineCore::Exit()
-{
 }
 
 void UEngineCore::BeginPlay()

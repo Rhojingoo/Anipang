@@ -111,7 +111,7 @@ public:
 
 	virtual void BeginPlay();
 	virtual void Tick(float _DeltaTime);
-
+	virtual void End();
 
 	void DebugCheckOn()
 	{

@@ -25,7 +25,6 @@ public :
 
 	void EngineStart(HINSTANCE _hInstance);
 	void CoreInit(HINSTANCE _Init);
-	void Exit();
 
 	virtual void BeginPlay();
 	virtual void Tick(float _DeltaTime);

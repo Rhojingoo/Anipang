@@ -16,7 +16,7 @@ public :
 protected:
 	void BeginPlay()	override;
 	void Tick(float _DeltaTime)	override;
-
+	void WindowOpen(std::string& _OutWindowTitle, std::string& _SmallIconPath) override;
 
 private:
 };

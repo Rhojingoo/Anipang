@@ -138,7 +138,9 @@ void UEngineCore::CoreInit(HINSTANCE _HINSTANCE)
 	}
 
 	UEngineWindow::Init(_HINSTANCE);
-	MainWindow.Open("ANIPANG");
+	//MainWindow.Open("ANIPANG");
+	WindowOpen(WindowTitle, WindowIconPath);
+	MainWindow.Open("ANIPANG", WindowIconPath);
 
 	this->AllLevel;
 

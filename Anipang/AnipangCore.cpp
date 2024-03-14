@@ -31,6 +31,7 @@ void UAnipangCore::BeginPlay()
 	//MainWindow.SetWindowPosition({500, 100});
 	//MainWindow.SetWindowScale({ 1024, 570 });	
 	MainWindow.SetWindowScale({ 480,800 });
+	MainWindow.CursorOff();
 
 	SetFrame(60);
 
@@ -139,6 +140,17 @@ void UAnipangCore::BeginPlay()
 void UAnipangCore::Tick(float _DeltaTime)
 {
 	UEngineCore::Tick(_DeltaTime);
+}
+
+void UAnipangCore::WindowOpen(std::string& _OutWindowTitle, std::string& _SmallIconPath)
+{
+	UEngineDirectory NewDir;
+	NewDir.MoveToSearchChild("ContentsResources");
+
+	_OutWindowTitle = "Anipang";
+
+	std::string IconPath = NewDir.AppendPath("Icon.ico");
+	_SmallIconPath = IconPath;
 }
 
 

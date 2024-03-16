@@ -156,6 +156,11 @@ public:
 	{
 		return Image;
 	}
+
+	int GetImageIndex()
+	{
+		return InfoIndex;
+	}
 		
 	void TextRender(float _DeltaTime);
 	void ImageRender(float _DeltaTime);

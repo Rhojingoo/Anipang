@@ -105,6 +105,7 @@ UEngineSoundPlayer UEngineSound::SoundPlay(std::string_view _Name)
 	UEngineSoundPlayer Result;
 	SoundSystem->playSound(FindSound->SoundHandle, nullptr, false, &Result.Control);
 	Result.Control->setLoopCount(0);
+	Result.SetVolume(1.0f);
 
 	if (nullptr == Result.Control)
 	{

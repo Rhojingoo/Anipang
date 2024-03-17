@@ -31,7 +31,8 @@ void UImageRenderer::Render(float _DeltaTime)
 	{
 		TextRender(_DeltaTime);
 	}
-	else {
+	else 
+	{
 		ImageRender(_DeltaTime);
 	}
 }

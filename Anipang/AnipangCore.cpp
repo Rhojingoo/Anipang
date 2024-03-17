@@ -111,8 +111,8 @@ void UAnipangCore::BeginPlay()
 	//NewDir.MoveToSearchChild("Sound");
 	NewDir.MoveToSearchChild("ContentsResources");
 	NewDir.MoveToSearchChild("Sound");
-	UEngineSound::SetGlobalVolume(0.5f);
 
+	UEngineSound::SetGlobalVolume(0.15f);
 	{
 		std::list<UEngineFile> NewList = NewDir.AllFile({ ".wav", ".mp3" }, true);
 		// 엔진만의 규칙을 정할거냐.
@@ -121,6 +121,8 @@ void UAnipangCore::BeginPlay()
 			UEngineSound::Load(File.GetFullPath());
 		}
 	}
+	
+
 
 	CreateLevel<UTitleLevel>("Title");
 	CreateLevel<UScoreLevel>("GetScore");
@@ -128,7 +130,7 @@ void UAnipangCore::BeginPlay()
 	CreateLevel<UPlayLevel>("Play");
 	CreateLevel<UEndingLevel>("Ending");
 	CreateLevel<TestLevel>("TestLevel");
-	
+
 
 	//ChangeLevel("Play");
 	ChangeLevel("Title");

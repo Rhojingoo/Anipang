@@ -63,6 +63,7 @@ void UTitleLevel::Tick(float _DeltaTime)
 		if (SoundSwitch == false)
 		{
 			BGMPlayer.On();	
+			//BGMPlayer.SetVolume(0.3f);
 			SoundSwitch = true;
 		}
 

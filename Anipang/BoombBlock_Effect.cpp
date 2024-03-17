@@ -40,7 +40,7 @@ void ABoombBlock_Effect::Tick(float _DeltaTime)
 
 	if (GetActorLocation().Y >= 685.f)
 	{
-		Destroy(0.f);		
+		Destroy();		
 	}
 
 

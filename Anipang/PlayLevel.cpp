@@ -199,6 +199,7 @@ void UPlayLevel::LevelStart(ULevel* _Level)
     Start_Rabbit->SetActorLocation({ 235,400 });
     UEngineSound::SoundPlay("Ready_Go.mp3");
 
+
     Combo_OBJ->ClearCombo();
     Combo = 0;
     PreveCombo = 0;

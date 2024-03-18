@@ -6,7 +6,8 @@
 
 // Debug 일때는
 #ifdef _DEBUG
-#pragma comment(lib, "ThirdParty\\FMOD\\inc\\fmodL_vc.lib")
+#pragma comment(lib, "fmodL_vc.lib")
+//#pragma comment(lib, "ThirdParty\\FMOD\\inc\\fmodL_vc.lib")
 #else// Release 일때는 
 #pragma comment(lib, "fmodL_vc.lib")
 #endif

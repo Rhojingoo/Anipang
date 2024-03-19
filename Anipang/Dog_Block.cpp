@@ -11,14 +11,14 @@ ADog_Block::~ADog_Block()
 
 void ADog_Block::BeginPlay()
 {
-	AAnimal_Block::BeginPlay();
+	ABase_Block::BeginPlay();
 	Renderer = CreateImageRenderer(1);
 	Renderer->SetImage("Dog");
 	Renderer->SetTransform({ {0,0}, {75, 75} });
 	Renderer->SetImageCuttingTransform({ {0,0}, {133, 139} });
 	Renderer->CreateAnimation("Idle", "Dog", 0, 0, 1.1f, true);
 	Renderer->CreateAnimation("Click", "Dog", 1, 1, 1.1f, true);
-	Renderer->CreateAnimation("Boomb", "Dog", 0, 2, 0.1f, false);
+	Renderer->CreateAnimation("Bomb", "Dog", 0, 2, 0.1f, false);
 	Renderer->ChangeAnimation("Idle");
 	Blocktype = Block_Type::Dog;
 }
@@ -26,7 +26,7 @@ void ADog_Block::BeginPlay()
 void ADog_Block::Tick(float _DeltaTime)
 
 {
-	AAnimal_Block::Tick(_DeltaTime);
+	ABase_Block::Tick(_DeltaTime);
 	FVector RenderCurpos = Renderer->GetTransform().GetPosition();
 	FVector Curpos = GetTransform().GetPosition();
 	Pos = RenderCurpos + Curpos;
@@ -34,7 +34,7 @@ void ADog_Block::Tick(float _DeltaTime)
 
 	switch (Blockstatus)
 	{
-	case AAnimal_Block::Block_Status::Idle:
+	case ABase_Block::Block_Status::Idle:
 	{
 		if (BlockClick == true)
 		{
@@ -49,8 +49,8 @@ void ADog_Block::Tick(float _DeltaTime)
 		{
 			CreateBlockEffect();
 			UEngineSound::SoundPlay("Block_BOOM.mp3");
-			Renderer->ChangeAnimation("Boomb");
-			Blockstatus = Block_Status::Boomb;
+			Renderer->ChangeAnimation("Bomb");
+			Blockstatus = Block_Status::Bomb;
 			FindEnd = true;
 			return;
 		}
@@ -68,7 +68,7 @@ void ADog_Block::Tick(float _DeltaTime)
 		}
 	}
 	break;
-	case AAnimal_Block::Block_Status::Move:
+	case ABase_Block::Block_Status::Move:
 	{
 		if (Pos.Y >= UnderPos.Y)
 		{
@@ -80,7 +80,7 @@ void ADog_Block::Tick(float _DeltaTime)
 		AddActorLocation({ FVector::Down * DownSpeed * _DeltaTime });
 	}
 	break;
-	case AAnimal_Block::Block_Status::Click:
+	case ABase_Block::Block_Status::Click:
 	{
 
 		if (BlockClick == false)
@@ -108,14 +108,14 @@ void ADog_Block::Tick(float _DeltaTime)
 		{
 			CreateBlockEffect();
 			UEngineSound::SoundPlay("Block_BOOM.mp3");
-			Renderer->ChangeAnimation("Boomb");
-			Blockstatus = Block_Status::Boomb;
+			Renderer->ChangeAnimation("Bomb");
+			Blockstatus = Block_Status::Bomb;
 			FindEnd = true;
 			return;
 		}
 	}
 	break;
-	case AAnimal_Block::Block_Status::Boomb:
+	case ABase_Block::Block_Status::Bomb:
 	{
 
 		bool AnimationEnd = Renderer->IsCurAnimationEnd();
@@ -128,7 +128,7 @@ void ADog_Block::Tick(float _DeltaTime)
 	}
 	break;
 
-	case AAnimal_Block::Block_Status::Find:
+	case ABase_Block::Block_Status::Find:
 	{
 		FindTime += _DeltaTime;
 		if (1.f <= FindTime)
@@ -168,8 +168,8 @@ void ADog_Block::Tick(float _DeltaTime)
 		{
 			CreateBlockEffect();
 			UEngineSound::SoundPlay("Block_BOOM.mp3");
-			Renderer->ChangeAnimation("Boomb");
-			Blockstatus = Block_Status::Boomb;
+			Renderer->ChangeAnimation("Bomb");
+			Blockstatus = Block_Status::Bomb;
 			Renderer->SetAlpha(1.0f);
 			FindEnd = true;
 			return;
@@ -186,7 +186,7 @@ void ADog_Block::Tick(float _DeltaTime)
 	}
 	break;
 
-	case AAnimal_Block::Block_Status::End:
+	case ABase_Block::Block_Status::End:
 		break;
 	default:
 		break;

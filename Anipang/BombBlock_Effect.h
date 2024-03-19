@@ -1,16 +1,16 @@
 #pragma once
 #include <EngineCore\Actor.h>
 
-class ABoombBlock_Effect : public AActor
+class ABombBlock_Effect : public AActor
 {
 public : 
-	ABoombBlock_Effect();
-	~ABoombBlock_Effect();
+	ABombBlock_Effect();
+	~ABombBlock_Effect();
 
-	ABoombBlock_Effect(const ABoombBlock_Effect& _Other)							 = delete;
-	ABoombBlock_Effect(ABoombBlock_Effect& _Other) noexcept							 = delete;
-	ABoombBlock_Effect& operator =(const ABoombBlock_Effect& _Other)				 = delete;
-	ABoombBlock_Effect& operator =(ABoombBlock_Effect& _Other) noexcept				 = delete;
+	ABombBlock_Effect(const ABombBlock_Effect& _Other)							 = delete;
+	ABombBlock_Effect(ABombBlock_Effect& _Other) noexcept							 = delete;
+	ABombBlock_Effect& operator =(const ABombBlock_Effect& _Other)				 = delete;
+	ABombBlock_Effect& operator =(ABombBlock_Effect& _Other) noexcept				 = delete;
 
 
 	void SetDir(const FVector& _Dir)

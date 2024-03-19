@@ -1,18 +1,18 @@
-#include "Boomb_Block.h"
-#include "BoombBlock_Effect.h"
+#include "Bomb_Block.h"
+#include "BombBlock_Effect.h"
 
 
-ABoomb_Block::ABoomb_Block()
+ABomb_Block::ABomb_Block()
 {
 }
 
-ABoomb_Block::~ABoomb_Block()
+ABomb_Block::~ABomb_Block()
 {
 }
 
-void ABoomb_Block::BeginPlay()
+void ABomb_Block::BeginPlay()
 {
-	AAnimal_Block::BeginPlay();
+	ABase_Block::BeginPlay();
 	Renderer = CreateImageRenderer(1);
 	Renderer->SetImage("boom.png");
 	Renderer->SetTransform({ {0,0}, {55, 55} });
@@ -21,12 +21,12 @@ void ABoomb_Block::BeginPlay()
 	//Renderer->CreateAnimation("Click", "Cat", 1, 1, 1.1f, true);
 	//Renderer->CreateAnimation("Boomb", "Cat", 0, 2, 0.1f, false);
 	//Renderer->ChangeAnimation("Idle");
-	Blocktype = Block_Type::Boomb;
+	Blocktype = Block_Type::Bomb;
 }
 
-void ABoomb_Block::Tick(float _DeltaTime)
+void ABomb_Block::Tick(float _DeltaTime)
 {
-	AAnimal_Block::Tick(_DeltaTime);
+	ABase_Block::Tick(_DeltaTime);
 	FVector RenderCurpos = Renderer->GetTransform().GetPosition();
 	FVector Curpos = GetTransform().GetPosition();
 	Pos = RenderCurpos + Curpos;
@@ -38,7 +38,7 @@ void ABoomb_Block::Tick(float _DeltaTime)
 
 	switch (Blockstatus)
 	{
-	case AAnimal_Block::Block_Status::Idle:
+	case ABase_Block::Block_Status::Idle:
 	{
 		if (BlockClick == true)
 		{
@@ -63,7 +63,7 @@ void ABoomb_Block::Tick(float _DeltaTime)
 
 		if (BoombBlock == true)
 		{
-			Blockstatus = Block_Status::Boomb;
+			Blockstatus = Block_Status::Bomb;
 			return;
 		}
 
@@ -74,7 +74,7 @@ void ABoomb_Block::Tick(float _DeltaTime)
 		}
 	}
 		break;
-	case AAnimal_Block::Block_Status::Move:
+	case ABase_Block::Block_Status::Move:
 	{
 		if (Pos.Y >= UnderPos.Y)
 		{
@@ -86,16 +86,16 @@ void ABoomb_Block::Tick(float _DeltaTime)
 		AddActorLocation({ FVector::Down * DownSpeed * _DeltaTime });
 	}
 	break;
-	case AAnimal_Block::Block_Status::Click:
+	case ABase_Block::Block_Status::Click:
 	{
 		if (BoombBlock == true)
 		{
-			Blockstatus = Block_Status::Boomb;
+			Blockstatus = Block_Status::Bomb;
 			return;
 		}
 	}
 	break;
-	case AAnimal_Block::Block_Status::Boomb:
+	case ABase_Block::Block_Status::Bomb:
 	{
 		// 붐블럭이 죽을때는 이펙트 만났을대만이다.
 		// 붐블럭이 플레이레벨에서 Destroycheck시 터지는 상황이 없도록 예외 처리 할것!
@@ -104,7 +104,7 @@ void ABoomb_Block::Tick(float _DeltaTime)
 		return;
 	}
 	break;
-	case AAnimal_Block::Block_Status::End:
+	case ABase_Block::Block_Status::End:
 		break;
 	default:
 		break;
@@ -114,9 +114,9 @@ void ABoomb_Block::Tick(float _DeltaTime)
 	
 }
 
-void ABoomb_Block::Create_First_Effect()
+void ABomb_Block::Create_First_Effect()
 {
-	BoombBlock_First_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+	BoombBlock_First_Effect = GetWorld()->SpawnActor<ABombBlock_Effect>();
 	int col = GetBlockLocationCol();
 	int row = 0;
 	FVector SetPos = GetBlockFVector(col, row);
@@ -129,7 +129,7 @@ void ABoomb_Block::Create_First_Effect()
 }
 
 
-void ABoomb_Block::CollCheck_First_Effect()
+void ABomb_Block::CollCheck_First_Effect()
 {
 	if (BoombBlock_FirstEffect_Create == true)
 	{
@@ -155,7 +155,7 @@ void ABoomb_Block::CollCheck_First_Effect()
 
 				if (Col == 0 && Row == 6)
 				{
-					BoombBlock_Right_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+					BoombBlock_Right_Effect = GetWorld()->SpawnActor<ABombBlock_Effect>();
 					BoombBlock_Right_Effect_Pos = GetActorLocation();
 					BoombBlock_Right_Effect->SetActorLocation(BoombBlock_Right_Effect_Pos);
 					BoombBlock_Right_Effect->SetDir(FVector::Right);
@@ -164,7 +164,7 @@ void ABoomb_Block::CollCheck_First_Effect()
 				}
 				else if (Row == 6 && Col == 6)
 				{
-					BoombBlock_Left_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+					BoombBlock_Left_Effect = GetWorld()->SpawnActor<ABombBlock_Effect>();
 					BoombBlock_Left_Effect_Pos = GetActorLocation();
 					BoombBlock_Left_Effect->SetActorLocation(BoombBlock_Left_Effect_Pos);
 					BoombBlock_Left_Effect->SetDir(FVector::Left);
@@ -174,7 +174,7 @@ void ABoomb_Block::CollCheck_First_Effect()
 				else if (Col == 0)
 				{
 					{
-						BoombBlock_Right_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Right_Effect = GetWorld()->SpawnActor<ABombBlock_Effect>();
 						BoombBlock_Right_Effect_Pos = GetActorLocation();
 						BoombBlock_Right_Effect->SetActorLocation(BoombBlock_Right_Effect_Pos);
 						BoombBlock_Right_Effect->SetDir(FVector::Right);
@@ -182,7 +182,7 @@ void ABoomb_Block::CollCheck_First_Effect()
 					}
 
 					{
-						BoombBlock_Down_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Down_Effect = GetWorld()->SpawnActor<ABombBlock_Effect>();
 						BoombBlock_Down_Effect_Pos = GetActorLocation();
 						BoombBlock_Down_Effect->SetActorLocation(BoombBlock_Down_Effect_Pos);
 						BoombBlock_Down_Effect->SetDir(FVector::Down);
@@ -192,14 +192,14 @@ void ABoomb_Block::CollCheck_First_Effect()
 				else if (Col == 6)
 				{
 					{
-						BoombBlock_Left_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Left_Effect = GetWorld()->SpawnActor<ABombBlock_Effect>();
 						BoombBlock_Left_Effect_Pos = GetActorLocation();
 						BoombBlock_Left_Effect->SetActorLocation(BoombBlock_Left_Effect_Pos);
 						BoombBlock_Left_Effect->SetDir(FVector::Left);
 						BoombBlock_Left_Effect->SetSideReder();
 					}
 					{
-						BoombBlock_Down_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Down_Effect = GetWorld()->SpawnActor<ABombBlock_Effect>();
 						BoombBlock_Down_Effect_Pos = GetActorLocation();
 						BoombBlock_Down_Effect->SetActorLocation(BoombBlock_Down_Effect_Pos);
 						BoombBlock_Down_Effect->SetDir(FVector::Down);
@@ -209,7 +209,7 @@ void ABoomb_Block::CollCheck_First_Effect()
 				else if (Row == 6)
 				{
 					{
-						BoombBlock_Left_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Left_Effect = GetWorld()->SpawnActor<ABombBlock_Effect>();
 						BoombBlock_Left_Effect_Pos = GetActorLocation();
 						BoombBlock_Left_Effect->SetActorLocation(BoombBlock_Left_Effect_Pos);
 						BoombBlock_Left_Effect->SetDir(FVector::Left);
@@ -217,7 +217,7 @@ void ABoomb_Block::CollCheck_First_Effect()
 					}
 
 					{
-						BoombBlock_Right_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Right_Effect = GetWorld()->SpawnActor<ABombBlock_Effect>();
 						BoombBlock_Right_Effect_Pos = GetActorLocation();
 						BoombBlock_Right_Effect->SetActorLocation(BoombBlock_Right_Effect_Pos);
 						BoombBlock_Right_Effect->SetDir(FVector::Right);
@@ -229,7 +229,7 @@ void ABoomb_Block::CollCheck_First_Effect()
 				else
 				{
 					{
-						BoombBlock_Right_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Right_Effect = GetWorld()->SpawnActor<ABombBlock_Effect>();
 						BoombBlock_Right_Effect_Pos = GetActorLocation();
 						BoombBlock_Right_Effect->SetActorLocation(BoombBlock_Right_Effect_Pos);
 						BoombBlock_Right_Effect->SetDir(FVector::Right);
@@ -237,7 +237,7 @@ void ABoomb_Block::CollCheck_First_Effect()
 					}
 
 					{
-						BoombBlock_Left_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Left_Effect = GetWorld()->SpawnActor<ABombBlock_Effect>();
 						BoombBlock_Left_Effect_Pos = GetActorLocation();
 						BoombBlock_Left_Effect->SetActorLocation(BoombBlock_Left_Effect_Pos);
 						BoombBlock_Left_Effect->SetDir(FVector::Left);
@@ -245,7 +245,7 @@ void ABoomb_Block::CollCheck_First_Effect()
 					}
 
 					{
-						BoombBlock_Down_Effect = GetWorld()->SpawnActor<ABoombBlock_Effect>();
+						BoombBlock_Down_Effect = GetWorld()->SpawnActor<ABombBlock_Effect>();
 						BoombBlock_Down_Effect_Pos = GetActorLocation();
 						BoombBlock_Down_Effect->SetActorLocation(BoombBlock_Down_Effect_Pos);
 						BoombBlock_Down_Effect->SetDir(FVector::Down);
@@ -262,7 +262,7 @@ void ABoomb_Block::CollCheck_First_Effect()
 	}
 }
 
-void ABoomb_Block::Check_Second_Destroy()
+void ABomb_Block::Check_Second_Destroy()
 {
 	if (BoombBlock_Left_Effect != nullptr)
 	{

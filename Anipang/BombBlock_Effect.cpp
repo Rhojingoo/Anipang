@@ -1,16 +1,16 @@
-#include "BoombBlock_Effect.h"
+#include "BombBlock_Effect.h"
 #include <Windows.h>
 #include <EngineCore\EngineCore.h>
 
-ABoombBlock_Effect::ABoombBlock_Effect()
+ABombBlock_Effect::ABombBlock_Effect()
 {
 }
 
-ABoombBlock_Effect::~ABoombBlock_Effect()
+ABombBlock_Effect::~ABombBlock_Effect()
 {
 }
 
-void ABoombBlock_Effect::BeginPlay()
+void ABombBlock_Effect::BeginPlay()
 {
 	AActor::BeginPlay();
 
@@ -34,7 +34,7 @@ void ABoombBlock_Effect::BeginPlay()
 
 }
 
-void ABoombBlock_Effect::Tick(float _DeltaTime)
+void ABombBlock_Effect::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 

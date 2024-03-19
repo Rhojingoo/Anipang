@@ -107,6 +107,9 @@ protected:
 
 private:
 	std::map<int, std::list<AActor*>> AllActor;
+	std::map<int, std::list<UImageRenderer*>> Renderers;
+	std::map<int, std::list<UCollision*>> Collisions;
+	std::map<int, float> TimeScale;
 
 	void ActorInit(AActor* _NewActor);
 	void LevelTick(float _DeltaTime);
@@ -114,9 +117,8 @@ private:
 	void LevelRelease(float _DeltaTime);
 
 
-	std::map<int, float> TimeScale;
-	std::map<int, std::list<UImageRenderer*>> Renderers;
-	std::map<int, std::list<UCollision*>> Collisions;
+
+
 
 	FVector CameraPos = FVector::Zero;
 };

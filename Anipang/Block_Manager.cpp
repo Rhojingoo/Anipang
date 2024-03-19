@@ -17,8 +17,8 @@ Block_Manager::~Block_Manager()
 {
 	for (auto& blockPair : Blocks)
 	{
-		std::vector<AAnimal_Block*>& blockVector = blockPair.second;
-		for (AAnimal_Block* block : blockVector)
+		std::vector<ABase_Block*>& blockVector = blockPair.second;
+		for (ABase_Block* block : blockVector)
 		{
 			delete block;
 		}
@@ -40,12 +40,12 @@ void Block_Manager::BeginPlay()
 
 void Block_Manager::CreateAnimalBlock(int count, eBlock blockType)
 {
-	std::vector<AAnimal_Block*> blockVector;
+	std::vector<ABase_Block*> blockVector;
 	blockVector.resize(20);
 
 	for (int i = 0; i < count; ++i)
 	{
-		AAnimal_Block* NewBlock = nullptr;
+		ABase_Block* NewBlock = nullptr;
 		switch (blockType)
 		{
 		case eBlock::Cat_Block:

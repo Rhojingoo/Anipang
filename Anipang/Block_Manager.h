@@ -1,5 +1,5 @@
 #pragma once
-#include "Animal_Block.h"
+#include "Base_Block.h"
 #include <vector>
 #include <map>
 
@@ -40,15 +40,15 @@ public :
 
 	void BeginPlay();
 
-	AAnimal_Block* GetNextAnimalBlock(eBlock blockType)
+	ABase_Block* GetNextAnimalBlock(eBlock blockType)
 	{
 		// 맵에서 해당 유형의 벡터를 가져옴
-		std::vector<AAnimal_Block*>& blockVector = Blocks[blockType];
+		std::vector<ABase_Block*>& blockVector = Blocks[blockType];
 
 		// 벡터에서 한 개의 동물 블록을 가져옴
 		if (!blockVector.empty())
 		{
-			AAnimal_Block* block = blockVector.back(); // 벡터의 마지막 요소 가져옴
+			ABase_Block* block = blockVector.back(); // 벡터의 마지막 요소 가져옴
 			blockVector.pop_back(); // 벡터에서 마지막 요소 제거
 
 			switch (blockType)
@@ -96,7 +96,7 @@ protected:
 
 private:
 	Block_Manager();
-	std::map<eBlock, std::vector<AAnimal_Block*>>			Blocks;
+	std::map<eBlock, std::vector<ABase_Block*>>			Blocks;
 
 
 	const int MaxBlock		= 15;
@@ -116,15 +116,15 @@ private:
 
 
 //public:
-//std::map<eBlock, AAnimal_Block*> GetCatBlock();
-//std::map<eBlock, AAnimal_Block*> GetCheckinBlock();
-//std::map<eBlock, AAnimal_Block*> GetDogBlock();
-//std::map<eBlock, AAnimal_Block*> GetMonkeyBlock();
-//std::map<eBlock, AAnimal_Block*> GetMouseBlock();
-//std::map<eBlock, AAnimal_Block*> GetPigBlock();
-//std::map<eBlock, AAnimal_Block*> GetRabbtBlock();
+//std::map<eBlock, ABase_Block*> GetCatBlock();
+//std::map<eBlock, ABase_Block*> GetCheckinBlock();
+//std::map<eBlock, ABase_Block*> GetDogBlock();
+//std::map<eBlock, ABase_Block*> GetMonkeyBlock();
+//std::map<eBlock, ABase_Block*> GetMouseBlock();
+//std::map<eBlock, ABase_Block*> GetPigBlock();
+//std::map<eBlock, ABase_Block*> GetRabbtBlock();
 //private:
-//AAnimal_Block								Blocks[105];	
+//ABase_Block								Blocks[105];	
 //std::vector< ACat_Block>					CatBlocks;
 //std::vector< ACheckin_Block>				CheckinBlocks;
 //std::vector< ADog_Block>					DogBlocks;

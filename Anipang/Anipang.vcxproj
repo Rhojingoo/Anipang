@@ -170,6 +170,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animal_Block.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="BlockBoomb_Effect.h">
       <SubType>
       </SubType>
@@ -178,7 +182,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Boomb_Block.h">
+    <ClInclude Include="Bomb_Block.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -199,7 +203,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Animal_Block.h">
+    <ClInclude Include="Base_Block.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -298,7 +302,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="BoombBlock_Effect.h">
+    <ClInclude Include="BombBlock_Effect.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -341,6 +345,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animal_Block.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BlockBoomb_Effect.cpp">
       <SubType>
       </SubType>
@@ -349,7 +357,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Boomb_Block.cpp">
+    <ClCompile Include="Bomb_Block.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -370,7 +378,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Animal_Block.cpp">
+    <ClCompile Include="Base_Block.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -469,7 +477,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="BoombBlock_Effect.cpp">
+    <ClCompile Include="BombBlock_Effect.cpp">
       <SubType>
       </SubType>
     </ClCompile>

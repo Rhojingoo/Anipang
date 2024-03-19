@@ -9,9 +9,9 @@
 #include "Monkey_Block.h"
 #include "Pig_Block.h"
 #include "Rabbit_Block.h"
-#include "Boomb_Block.h"
+#include "Bomb_Block.h"
 
-#include "BoombBlock_Effect.h"
+#include "BombBlock_Effect.h"
 #include "Boomb_Block_Effect.h"
 #include "Helper.h"
 
@@ -109,7 +109,7 @@ void TestLevel::Tick(float _DeltaTime)
                 if (Blocks[col][row] == nullptr)
                     continue;
 
-                if (Blocks[col][row]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                if (Blocks[col][row]->GetBlockType() == ABase_Block::Block_Type::Bomb)
                     continue;
 
 
@@ -156,7 +156,7 @@ void TestLevel::CreateBlock()
                 (col == MapSize - 1 && row == MapSize - 1)||
                 (row == 3 && col == 3))
             {
-                Blocks[col][row] = SpawnActor<ABoomb_Block>();              
+                Blocks[col][row] = SpawnActor<ABomb_Block>();              
             }           
             else
             {

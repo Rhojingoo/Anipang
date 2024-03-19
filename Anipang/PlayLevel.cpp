@@ -3,6 +3,8 @@
 #include "Cursor.h"
 #include "FadeIN_OUT.h"
 #include "Play_Frame.h"
+#include "Base_Block.h"
+#include "Animal_Block.h"
 #include "Cat_Block.h"
 #include "Checkin_Block.h"
 #include "Dog_Block.h"
@@ -10,7 +12,7 @@
 #include "Monkey_Block.h"
 #include "Pig_Block.h"
 #include "Rabbit_Block.h"
-#include "Boomb_Block.h"
+#include "Bomb_Block.h"
 #include "Helper.h"
 #include "Combo_OBJ.h"
 #include "NumberFont.h"
@@ -111,7 +113,7 @@ void UPlayLevel::Tick(float _DeltaTime)
                 if (CanAMatch == true)
                 {
                     // 마우스클릭으로블럭을이동시키는로직
-                    if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
+                    if (ABase_Block::GetFirstClick() == true && ABase_Block::GetSecondClick() == true)
                     {
                         BlockClickUpdate(_DeltaTime);
                     }
@@ -161,7 +163,7 @@ void UPlayLevel::Tick(float _DeltaTime)
                     return;
                 }
 
-                if (AAnimal_Block::GetFirstClick() == true && AAnimal_Block::GetSecondClick() == true)
+                if (ABase_Block::GetFirstClick() == true && ABase_Block::GetSecondClick() == true)
                 {
                     TestClick();
                 }
@@ -246,31 +248,45 @@ void UPlayLevel::CreateBlock()
             random = UHelper::Random(0, 6);
             if (random == 0)
             {
-                Blocks[col][row] = SpawnActor<ACat_Block>();
+                //Blocks[col][row] = SpawnActor<ACat_Block>();
+                Blocks[col][row] = SpawnActor<AAnimal_Block>();
+                Blocks[col][row]->SetBlockType(0);
             }
             else if (random == 1)
             {
-                Blocks[col][row] = SpawnActor<ACheckin_Block>();
+               // Blocks[col][row] = SpawnActor<ACheckin_Block>();
+                Blocks[col][row] = SpawnActor<AAnimal_Block>();
+                Blocks[col][row]->SetBlockType(1);
             }
             else if (random == 2)
             {
-                Blocks[col][row] = SpawnActor<ADog_Block>();
+                //Blocks[col][row] = SpawnActor<ADog_Block>();
+                Blocks[col][row] = SpawnActor<AAnimal_Block>();
+                Blocks[col][row]->SetBlockType(2);
             }
             else if (random == 3)
             {
-                Blocks[col][row] = SpawnActor<AMonkey_Block>();
+                //Blocks[col][row] = SpawnActor<AMonkey_Block>();
+                Blocks[col][row] = SpawnActor<AAnimal_Block>();
+                Blocks[col][row]->SetBlockType(3);
             }
             else if (random == 4)
             {
-                Blocks[col][row] = SpawnActor<AMouse_Block>();
+                //Blocks[col][row] = SpawnActor<AMouse_Block>();
+                Blocks[col][row] = SpawnActor<AAnimal_Block>();
+                Blocks[col][row]->SetBlockType(4);
             }
             else if (random == 5)
             {
-                Blocks[col][row] = SpawnActor<APig_Block>();
+                //Blocks[col][row] = SpawnActor<APig_Block>();
+                Blocks[col][row] = SpawnActor<AAnimal_Block>();
+                Blocks[col][row]->SetBlockType(5);
             }
             else if (random == 6)
             {
-                Blocks[col][row] = SpawnActor<ARabbit_Block>();
+                //Blocks[col][row] = SpawnActor<ARabbit_Block>();
+                Blocks[col][row] = SpawnActor<AAnimal_Block>();
+                Blocks[col][row]->SetBlockType(6);
             }
 
             FVector BlockLocation;     // 동물 블록 위치 설정
@@ -337,7 +353,7 @@ bool UPlayLevel::CanMakeAMatch()
                 if (newRow < MapSize && newCol < MapSize && Blocks[newCol][newRow] != nullptr)
                 {
                     // 블록을 스왑
-                    AAnimal_Block* temp = Blocks[col][row];
+                    ABase_Block* temp = Blocks[col][row];
                     Blocks[col][row] = Blocks[newCol][newRow];
                     Blocks[newCol][newRow] = temp;
 
@@ -367,7 +383,7 @@ bool UPlayLevel::CheckForMatch(int _col, int _row)
         if (Blocks[_col][_row] == nullptr)
             return false;
 
-        AAnimal_Block::Block_Type CheckBL = Blocks[_col][_row]->GetBlockType();
+        ABase_Block::Block_Type CheckBL = Blocks[_col][_row]->GetBlockType();
         int matchCount = 1; // 시작 블록을 포함하여 카운트 시작
 
         // 수평 방향 검사 (왼쪽)
@@ -438,7 +454,7 @@ bool UPlayLevel::CheckForMatch(int _col, int _row)
         if (Blocks[HIINTCOL][HIINTROW] == nullptr)
             return false;
 
-        AAnimal_Block::Block_Type CheckBL = Blocks[HIINTCOL][HIINTROW]->GetBlockType();
+        ABase_Block::Block_Type CheckBL = Blocks[HIINTCOL][HIINTROW]->GetBlockType();
         int matchCount = 1; // 시작 블록을 포함하여 카운트 시작
 
         // 수평 방향 검사 (왼쪽)
@@ -487,7 +503,7 @@ bool UPlayLevel::CheckForMatch(int _col, int _row)
 
 void UPlayLevel::BlockClickUpdate(float _DeltaTime)
 {
-    if (AAnimal_Block::SwapREADY == false)
+    if (ABase_Block::SwapREADY == false)
     {
         for (int row = 0; row < MapSize; row++)
         {
@@ -498,13 +514,13 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
                     continue;
                 }
 
-                if (Blocks[col][row]->GetFirstPick() == true && AAnimal_Block::GetFirstClick() ==true)
+                if (Blocks[col][row]->GetFirstPick() == true && ABase_Block::GetFirstClick() ==true)
                 {
                     click_block = Blocks[col][row];
                     Clickpos = click_block->GetActorLocation();
                 }
 
-                if (Blocks[col][row]->GetSecondPick() == true && AAnimal_Block::GetSecondClick() == true)
+                if (Blocks[col][row]->GetSecondPick() == true && ABase_Block::GetSecondClick() == true)
                 {
                     swap_block = Blocks[col][row];
                     Swappos = swap_block->GetActorLocation();
@@ -513,7 +529,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
         }
         TempClick = Clickpos;
         TempSwap = Swappos;
-        AAnimal_Block::SwapREADY = true;
+        ABase_Block::SwapREADY = true;
     }
     else
     {
@@ -575,7 +591,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
             else
             {
                 click_block->SetActorLocation({ TempSwap });
-                AAnimal_Block::ClickChange = true;
+                ABase_Block::ClickChange = true;
                 YCLICKMOVE = true;
             }
 
@@ -586,7 +602,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
             else
             {
                 swap_block->SetActorLocation({ TempClick });
-                AAnimal_Block::SwapChange = true;
+                ABase_Block::SwapChange = true;
                 YSWAPMOVE = true;
             }
 
@@ -600,7 +616,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
             else
             {
                 click_block->SetActorLocation({ TempSwap });
-                AAnimal_Block::ClickChange = true;
+                ABase_Block::ClickChange = true;
                 YCLICKMOVE = true;
             }
 
@@ -611,7 +627,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
             else
             {
                 swap_block->SetActorLocation({ TempClick });
-                AAnimal_Block::SwapChange = true;
+                ABase_Block::SwapChange = true;
                 YSWAPMOVE = true;
             }
         }
@@ -625,7 +641,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
             else
             {
                 click_block->SetActorLocation({ TempSwap });
-                AAnimal_Block::ClickChange = true;
+                ABase_Block::ClickChange = true;
                 XCLICKMOVE = true;
             }
 
@@ -636,7 +652,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
             else
             {
                 swap_block->SetActorLocation({ TempClick });
-                AAnimal_Block::SwapChange = true;
+                ABase_Block::SwapChange = true;
                 XSWAPMOVE = true;
             }
         }
@@ -649,7 +665,7 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
             else
             {
                 click_block->SetActorLocation({ TempSwap });
-                AAnimal_Block::ClickChange = true;
+                ABase_Block::ClickChange = true;
                 XCLICKMOVE = true;
             }
 
@@ -660,13 +676,13 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
             else
             {
                 swap_block->SetActorLocation({ TempClick });
-                AAnimal_Block::SwapChange = true;
+                ABase_Block::SwapChange = true;
                 XSWAPMOVE = true;
             }
         }
 
 
-        if (AAnimal_Block::SwapChange == true && AAnimal_Block::ClickChange == true)
+        if (ABase_Block::SwapChange == true && ABase_Block::ClickChange == true)
         {
             bool _set = false;
             click_block->SetBlockstate(_set, 1);
@@ -676,13 +692,13 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
             swap_block->SetColumn(clickCol);
             swap_block->SetRow(clickRow);
 
-            AAnimal_Block* Temp_Block = Blocks[clickCol][clickRow];
+            ABase_Block* Temp_Block = Blocks[clickCol][clickRow];
             Blocks[clickCol][clickRow] = Blocks[swapCol][swapkRow];
             Blocks[swapCol][swapkRow] = Temp_Block;
 
-            AAnimal_Block::SwapREADY = false;
-            AAnimal_Block::SwapChange = false;
-            AAnimal_Block::ClickChange = false;
+            ABase_Block::SwapREADY = false;
+            ABase_Block::SwapChange = false;
+            ABase_Block::ClickChange = false;
             ClickChangeCheck = true;
         }
     }
@@ -690,15 +706,15 @@ void UPlayLevel::BlockClickUpdate(float _DeltaTime)
 
 void UPlayLevel::Blockreturn(int _clickRow, int _clickCol, int _swapkRow, int _swapCol)
 {
-    if (AAnimal_Block::SwapChange == false && AAnimal_Block::ClickChange == false)
+    if (ABase_Block::SwapChange == false && ABase_Block::ClickChange == false)
     {
         bool _set = false;
         click_block->SetBlockstate(_set, 1);
         swap_block->SetBlockstate(_set, 2);
 
-        AAnimal_Block::SwapREADY = false;
-        AAnimal_Block::SwapChange = false;
-        AAnimal_Block::ClickChange = false;
+        ABase_Block::SwapREADY = false;
+        ABase_Block::SwapChange = false;
+        ABase_Block::ClickChange = false;
     }
 }
 
@@ -709,7 +725,7 @@ bool UPlayLevel::CheckMatchAroundBlock(int col, int row)
     {
         return false;
     }
-    AAnimal_Block::Block_Type currentType = Blocks[col][row]->GetBlockType();
+    ABase_Block::Block_Type currentType = Blocks[col][row]->GetBlockType();
 
     // 수평 방향 매치 검사
     int horizontalMatchCount = 1; // 현재 블록 포함
@@ -871,7 +887,7 @@ void UPlayLevel::XlineBlock_Swap_Move(float _DeltaTime)
             swap_block->SetColumn(clickCol);
             swap_block->SetRow(clickRow);
 
-            AAnimal_Block* XLine_Temp = Blocks[clickCol][clickRow];
+            ABase_Block* XLine_Temp = Blocks[clickCol][clickRow];
             Blocks[clickCol][clickRow] = Blocks[swapCol][swapkRow];
             Blocks[swapCol][swapkRow] = XLine_Temp;
             XlinemoveCheck = false;
@@ -997,7 +1013,7 @@ void UPlayLevel::YlineBlock_Swap_Move(float _DeltaTime)
             swap_block->SetColumn(clickCol);
             swap_block->SetRow(clickRow);
 
-            AAnimal_Block* XLine_Temp = Blocks[clickCol][clickRow];
+            ABase_Block* XLine_Temp = Blocks[clickCol][clickRow];
             Blocks[clickCol][clickRow] = Blocks[swapCol][swapkRow];
             Blocks[swapCol][swapkRow] = XLine_Temp;
             YlinemoveCheck = false;
@@ -1027,7 +1043,7 @@ void UPlayLevel::BoombBlock_Destroy_Check()
             if (Blocks[col][row] == nullptr)
                 continue;
 
-            if (Blocks[col][row]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+            if (Blocks[col][row]->GetBlockType() == ABase_Block::Block_Type::Bomb)
             {
                 if (Blocks[col][row] != nullptr)
                 {
@@ -1074,7 +1090,7 @@ void UPlayLevel::BlockDestroyCheck()
                 if (Blocks[col][row] == nullptr)
                     continue;
 
-                AAnimal_Block* StartBlock = Blocks[col][row];
+                ABase_Block* StartBlock = Blocks[col][row];
                 int matchCount = 1;
 
                 // 오른쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
@@ -1105,7 +1121,7 @@ void UPlayLevel::BlockDestroyCheck()
                             // 기본 폭발 로직
                             if (Blocks[col + X][row + Y] != nullptr)
                             {
-                                if (Blocks[col + X][row + Y]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                                if (Blocks[col + X][row + Y]->GetBlockType() == ABase_Block::Block_Type::Bomb)
                                     continue;
 
                                 Blocks[col + X][row + Y]->SetBoomb(true);
@@ -1123,7 +1139,7 @@ void UPlayLevel::BlockDestroyCheck()
                         // 왼쪽 추가 폭발
                         if (col > 0 && Blocks[col - 1][row] != nullptr)
                         {
-                            if (Blocks[col - 1][row]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                            if (Blocks[col - 1][row]->GetBlockType() == ABase_Block::Block_Type::Bomb)
                                 continue;
 
                             Blocks[col - 1][row]->SetBoomb(true);
@@ -1133,7 +1149,7 @@ void UPlayLevel::BlockDestroyCheck()
                         // 오른쪽 추가 폭발
                         if (col + matchCount < MapSize && Blocks[col + matchCount][row] != nullptr)
                         {
-                            if (Blocks[col + matchCount][row]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                            if (Blocks[col + matchCount][row]->GetBlockType() == ABase_Block::Block_Type::Bomb)
                                 continue;
 
                             Blocks[col + matchCount][row]->SetBoomb(true);
@@ -1159,7 +1175,7 @@ void UPlayLevel::BlockDestroyCheck()
             {
                 if (Blocks[col][row] == nullptr) continue;
 
-                AAnimal_Block* StartBlock = Blocks[col][row];
+                ABase_Block* StartBlock = Blocks[col][row];
                 int matchCount = 1;
 
                 // 아래쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
@@ -1188,7 +1204,7 @@ void UPlayLevel::BlockDestroyCheck()
                             // 기본 폭발 로직
                             if (Blocks[col + X][row + Y] != nullptr)
                             {
-                                if (Blocks[col + X][row + Y]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                                if (Blocks[col + X][row + Y]->GetBlockType() == ABase_Block::Block_Type::Bomb)
                                     continue;
 
                                 Blocks[col + X][row + Y]->SetBoomb(true);
@@ -1206,7 +1222,7 @@ void UPlayLevel::BlockDestroyCheck()
                         // 위쪽 추가 폭발
                         if (row > 0 && Blocks[col][row - 1] != nullptr)
                         {
-                            if (Blocks[col][row - 1]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                            if (Blocks[col][row - 1]->GetBlockType() == ABase_Block::Block_Type::Bomb)
                                 continue;
 
                             Blocks[col][row - 1]->SetBoomb(true);
@@ -1216,7 +1232,7 @@ void UPlayLevel::BlockDestroyCheck()
                         // 아래쪽 추가 폭발
                         if (row + matchCount < MapSize && Blocks[col][row + matchCount] != nullptr)
                         {
-                            if (Blocks[col][row + matchCount]->GetBlockType() == AAnimal_Block::Block_Type::Boomb)
+                            if (Blocks[col][row + matchCount]->GetBlockType() == ABase_Block::Block_Type::Bomb)
                                 continue;
 
                             Blocks[col][row + matchCount]->SetBoomb(true);
@@ -1236,7 +1252,7 @@ void UPlayLevel::BlockDestroyCheck()
     }
     else // 콤보가 5미만 일때 
     {
-        std::list<AAnimal_Block*> RowColBlockMatch;
+        std::list<ABase_Block*> RowColBlockMatch;
         int Col_matchCount = 0;
         int Row_matchCount = 0;
      
@@ -1249,7 +1265,7 @@ void UPlayLevel::BlockDestroyCheck()
                 if (Blocks[col][row] == nullptr)
                     continue;
 
-                AAnimal_Block* StartBlock = Blocks[col][row];
+                ABase_Block* StartBlock = Blocks[col][row];
                 Col_matchCount = 1;
 
                 // 오른쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
@@ -1296,7 +1312,7 @@ void UPlayLevel::BlockDestroyCheck()
                 {
                     if (Blocks[col][row] == nullptr) continue;
 
-                    AAnimal_Block* StartBlock = Blocks[col][row];
+                    ABase_Block* StartBlock = Blocks[col][row];
                     int Row_matchCount = 1;
 
                     // 아래쪽 블록을 확인하여 같은 타입의 블록이 몇 개 있는지 세기
@@ -1343,7 +1359,7 @@ void UPlayLevel::BlockDestroyCheck()
             XYLINE_Block_Destroy_Check = true;
             if (XYLINE_Block_Destroy_Check == true)
             {
-                for (AAnimal_Block* Animal : RowColBlockMatch)
+                for (ABase_Block* Animal : RowColBlockMatch)
                 {
                     if (Blocks[Animal->GetBlockLocationCol()][Animal->GetBlockLocationRow()] == nullptr)
                     {
@@ -1370,7 +1386,7 @@ void UPlayLevel::BlockDestroyCheck()
         }
         else if (YLINE_Block_Destroy_Check == true)
         {
-            for (AAnimal_Block* Animal : RowColBlockMatch)
+            for (ABase_Block* Animal : RowColBlockMatch)
             {
                 if (Blocks[Animal->GetBlockLocationCol()][Animal->GetBlockLocationRow()] == nullptr)
                 {
@@ -1396,7 +1412,7 @@ void UPlayLevel::BlockDestroyCheck()
         }
         else if (XLINE_Block_Destroy_Check == true)
         {
-            for (AAnimal_Block* Animal : RowColBlockMatch)
+            for (ABase_Block* Animal : RowColBlockMatch)
             {
                 if (Blocks[Animal->GetBlockLocationCol()][Animal->GetBlockLocationRow()] == nullptr)
                 {
@@ -1465,40 +1481,55 @@ void UPlayLevel::GenerateNewBlocks()
             int CheckCombo = Combo - ComboTens;
             if (CheckCombo >= 10)
             {
-                Blocks[col][0] = SpawnActor<ABoomb_Block>();
+                Blocks[col][0] = SpawnActor<ABomb_Block>();
                 ComboTens=  Combo;
             }
             else
             {
                 int random = 0;
                 random = UHelper::Random(0, 6);
+
                 if (random == 0)
                 {
-                    Blocks[col][0] = SpawnActor<ACat_Block>();
+                    //Blocks[col][0] = SpawnActor<ACat_Block>();
+                    Blocks[col][0] = SpawnActor<AAnimal_Block>();
+                    Blocks[col][0]->SetBlockType(0);
                 }
                 else if (random == 1)
                 {
-                    Blocks[col][0] = SpawnActor<ACheckin_Block>();
+                    // Blocks[col][0] = SpawnActor<ACheckin_Block>();
+                    Blocks[col][0] = SpawnActor<AAnimal_Block>();
+                    Blocks[col][0]->SetBlockType(1);
                 }
                 else if (random == 2)
                 {
-                    Blocks[col][0] = SpawnActor<ADog_Block>();
+                    //Blocks[col][0] = SpawnActor<ADog_Block>();
+                    Blocks[col][0] = SpawnActor<AAnimal_Block>();
+                    Blocks[col][0]->SetBlockType(2);
                 }
                 else if (random == 3)
                 {
-                    Blocks[col][0] = SpawnActor<AMonkey_Block>();
+                    //Blocks[col][0] = SpawnActor<AMonkey_Block>();
+                    Blocks[col][0] = SpawnActor<AAnimal_Block>();
+                    Blocks[col][0]->SetBlockType(3);
                 }
                 else if (random == 4)
                 {
-                    Blocks[col][0] = SpawnActor<AMouse_Block>();
+                    //Blocks[col][0] = SpawnActor<AMouse_Block>();
+                    Blocks[col][0] = SpawnActor<AAnimal_Block>();
+                    Blocks[col][0]->SetBlockType(4);
                 }
                 else if (random == 5)
                 {
-                    Blocks[col][0] = SpawnActor<APig_Block>();
+                    //Blocks[col][0] = SpawnActor<APig_Block>();
+                    Blocks[col][0] = SpawnActor<AAnimal_Block>();
+                    Blocks[col][0]->SetBlockType(5);
                 }
                 else if (random == 6)
                 {
-                    Blocks[col][0] = SpawnActor<ARabbit_Block>();
+                    //Blocks[col][0] = SpawnActor<ARabbit_Block>();
+                    Blocks[col][0] = SpawnActor<AAnimal_Block>();
+                    Blocks[col][0]->SetBlockType(6);
                 }
             }
 
@@ -1575,7 +1606,7 @@ void UPlayLevel::AllDestroyCheck()
 
 void UPlayLevel::TestClick()
 {
-    if (AAnimal_Block::SwapREADY == false)
+    if (ABase_Block::SwapREADY == false)
     {
         for (int row = 0; row < MapSize; row++)
         {
@@ -1586,13 +1617,13 @@ void UPlayLevel::TestClick()
                     continue;
                 }
 
-                if (Blocks[col][row]->GetFirstPick() == true && AAnimal_Block::GetFirstClick() == true)
+                if (Blocks[col][row]->GetFirstPick() == true && ABase_Block::GetFirstClick() == true)
                 {
                     click_block = Blocks[col][row];
                     Clickpos = click_block->GetActorLocation();
                 }
 
-                if (Blocks[col][row]->GetSecondPick() == true && AAnimal_Block::GetSecondClick() == true)
+                if (Blocks[col][row]->GetSecondPick() == true && ABase_Block::GetSecondClick() == true)
                 {
                     swap_block = Blocks[col][row];
                     Swappos = swap_block->GetActorLocation();
@@ -1601,7 +1632,7 @@ void UPlayLevel::TestClick()
         }
         TempClick = Clickpos;
         TempSwap = Swappos;
-        AAnimal_Block::SwapREADY = true;
+        ABase_Block::SwapREADY = true;
     }
     else
     {
@@ -1626,14 +1657,14 @@ void UPlayLevel::TestClick()
         swap_block->SetColumn(clickCol);
         swap_block->SetRow(clickRow);
 
-        AAnimal_Block* Temp_Block = Blocks[clickCol][clickRow];
+        ABase_Block* Temp_Block = Blocks[clickCol][clickRow];
         Blocks[clickCol][clickRow] = Blocks[swapCol][swapkRow];
         Blocks[swapCol][swapkRow] = Temp_Block;
 
 
-        AAnimal_Block::SwapREADY = false;
-        AAnimal_Block::SwapChange = false;
-        AAnimal_Block::ClickChange = false;
+        ABase_Block::SwapREADY = false;
+        ABase_Block::SwapChange = false;
+        ABase_Block::ClickChange = false;
         ClickChangeCheck = true;        
     }
 }

@@ -22,7 +22,7 @@
 
 
 class ACursor;
-class AAnimal_Block;
+class ABase_Block;
 class TestLevel : public ULevel
 {
 public:
@@ -48,9 +48,9 @@ private:
 	UEngineSoundPlayer BGMPlayer;
 
 	ACursor* Cursor						 = nullptr;
-	AAnimal_Block* Blocks[7][7]			 = {};
-	AAnimal_Block* click_block			 = nullptr;
-	AAnimal_Block* swap_block			 = nullptr;
+	ABase_Block* Blocks[7][7]			 = {};
+	ABase_Block* click_block			 = nullptr;
+	ABase_Block* swap_block			 = nullptr;
 
 	const int MapSize					 = 7;
 	const int TotalBlocks				 = MapSize * MapSize;

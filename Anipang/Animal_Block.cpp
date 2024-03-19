@@ -1,34 +1,4 @@
 #include "Animal_Block.h"
-#include <EngineCore\EngineCore.h>
-#include <EnginePlatform\EngineInput.h>
-#include "BoombBlock_Effect.h"
-#include "BlockBoomb_Effect.h"
-#include <EngineBase\EngineTime.h>
-#include <vector>
-#include <list>
-
-
-
-bool AAnimal_Block::FirstClick = false;
-bool AAnimal_Block::SecondClick = false;
-bool AAnimal_Block::SwapREADY = false;
-bool AAnimal_Block::ClickChange = false;
-bool AAnimal_Block::SwapChange = false;
-
-ABoombBlock_Effect* AAnimal_Block::BoombBlock_First_Effect = nullptr;
-ABoombBlock_Effect* AAnimal_Block::BoombBlock_Left_Effect = nullptr;
-ABoombBlock_Effect* AAnimal_Block::BoombBlock_Right_Effect = nullptr;
-ABoombBlock_Effect* AAnimal_Block::BoombBlock_Down_Effect = nullptr;
-
-
-bool AAnimal_Block::BoombBlock_FirstEffect_Create = false;
-bool AAnimal_Block::BoombBlock_SecondEffect_Create = false;
-FVector AAnimal_Block::BoombBlock_First_Effect_Pos = {};
-FVector AAnimal_Block::BoombBlock_Right_Effect_Pos = {};
-FVector AAnimal_Block::BoombBlock_Left_Effect_Pos = {};
-FVector AAnimal_Block::BoombBlock_Down_Effect_Pos = {};
-
-
 
 AAnimal_Block::AAnimal_Block()
 {
@@ -40,170 +10,418 @@ AAnimal_Block::~AAnimal_Block()
 
 void AAnimal_Block::BeginPlay()
 {
-	AActor::BeginPlay();
+	ABase_Block::BeginPlay();
+
+	{
+		Renderer = CreateImageRenderer(1);
+		Renderer->SetTransform({ {0,0}, {75, 75} });
+		Renderer->SetImageCuttingTransform({ {0,0}, {133, 139} });
+
+		//Renderer->SetImage("Cat");
+		Renderer->CreateAnimation("Cat_Idle", "Cat", 0, 0, 1.1f, true);
+		Renderer->CreateAnimation("Cat_Click", "Cat", 1, 1, 1.1f, true);
+		Renderer->CreateAnimation("Cat_Bomb", "Cat", 0, 2, 0.1f, false);
+
+
+		//Renderer->SetImage("Checkin");
+		Renderer->CreateAnimation("Checkin_Idle", "Checkin", 0, 0, 1.1f, true);
+		Renderer->CreateAnimation("Checkin_Click", "Checkin", 1, 1, 1.1f, true);
+		Renderer->CreateAnimation("Checkin_Bomb", "Checkin", 0, 2, 0.1f, false);
+		
+		//Renderer->SetImage("Dog");
+		Renderer->CreateAnimation("Dog_Idle", "Dog", 0, 0, 1.1f, true);
+		Renderer->CreateAnimation("Dog_Click", "Dog", 1, 1, 1.1f, true);
+		Renderer->CreateAnimation("Dog_Bomb", "Dog", 0, 2, 0.1f, false);
+
+		//Renderer->SetImage("Monkey");
+		Renderer->CreateAnimation("Monkey_Idle", "Monkey", 0, 0, 1.1f, true);
+		Renderer->CreateAnimation("Monkey_Click", "Monkey", 1, 1, 1.1f, true);
+		Renderer->CreateAnimation("Monkey_Bomb", "Monkey", 0, 2, 0.1f, false);
+
+		//Renderer->SetImage("Mouse");
+		Renderer->CreateAnimation("Mouse_Idle", "Mouse", 0, 0, 1.1f, true);
+		Renderer->CreateAnimation("Mouse_Click", "Mouse", 1, 1, 1.1f, true);
+		Renderer->CreateAnimation("Mouse_Bomb", "Mouse", 0, 2, 0.1f, false);
+
+		//Renderer->SetImage("Pig");
+		Renderer->CreateAnimation("Pig_Idle", "Pig", 0, 0, 1.1f, true);
+		Renderer->CreateAnimation("Pig_Click", "Pig", 1, 1, 1.1f, true);
+		Renderer->CreateAnimation("Pig_Bomb", "Pig", 0, 2, 0.1f, false);
+
+		//Renderer->SetImage("Rabbit");
+		Renderer->CreateAnimation("Rabbit_Idle", "Rabbit", 0, 0, 1.1f, true);
+		Renderer->CreateAnimation("Rabbit_Click", "Rabbit", 1, 1, 1.1f, true);
+		Renderer->CreateAnimation("Rabbit_Bomb", "Rabbit", 0, 2, 0.1f, false);
+	}
+	Renderer->ChangeAnimation("Cat_Idle");	
 }
 
 void AAnimal_Block::Tick(float _DeltaTime)
 {
-	AActor::Tick(_DeltaTime);
+	ABase_Block::Tick(_DeltaTime);	
 
-	PickingCheck();
-	CheckBoombBlockEffect();
-}
+	FVector RenderCurpos = Renderer->GetTransform().GetPosition();
+	FVector Curpos = GetTransform().GetPosition();
+	Pos = RenderCurpos + Curpos;
+	Size = Renderer->GetTransform().GetScale();
 
-void AAnimal_Block::CreateBlockEffect()
-{	
-	Block_Destroy_Effect = GetWorld()->SpawnActor<ABlockBoomb_Effect>();
-	Block_Destroy_Effect->SetActorLocation(GetActorLocation());
-}
-
-void AAnimal_Block::PickingCheck()
-{
-	FVector Curpos = Cursor->GetPos();
-	
-	float MinX = Pos.X - Size.X / 2;
-	float MinY = Pos.Y - Size.Y / 2;
-	float MaxX = Pos.X + Size.X / 2;
-	float MaxY = Pos.Y + Size.Y / 2;
-
-	if (Curpos.X >= MinX && Curpos.X <= MaxX && Curpos.Y >= MinY && Curpos.Y <= MaxY)
+	if (FirstImageSelect == false)
 	{
-		if (true == UEngineInput::IsDown(VK_LBUTTON))
+		if (Blocktype == Block_Type::Cat)
 		{
-			if (Blocktype == Block_Type::Boomb)
+			Renderer->ChangeAnimation("Cat_Idle");
+		}
+		else if (Blocktype == Block_Type::Checkin)
+		{
+			Renderer->ChangeAnimation("Checkin_Idle");
+		}
+		else if (Blocktype == Block_Type::Dog)
+		{
+			Renderer->ChangeAnimation("Dog_Idle");
+		}
+		else if (Blocktype == Block_Type::Monkey)
+		{
+			Renderer->ChangeAnimation("Monkey_Idle");
+		}
+		else if (Blocktype == Block_Type::Mouse)
+		{
+			Renderer->ChangeAnimation("Mouse_Idle");
+		}
+		else if (Blocktype == Block_Type::Pig)
+		{
+			Renderer->ChangeAnimation("Pig_Idle");
+		}
+		else if (Blocktype == Block_Type::Rabbit)
+		{
+			Renderer->ChangeAnimation("Rabbit_Idle");
+		}
+		FirstImageSelect = true;
+	}
+
+
+	switch (Blockstatus)
+	{
+	case ABase_Block::Block_Status::Idle:
+	{
+		if (BlockClick == true)
+		{
+			if (Blocktype == Block_Type::Cat)
 			{
-				if (BlockClick == false)
-				{
-					BlockClick = true;
-				}				
-				return;
+				Renderer->ChangeAnimation("Cat_Click");
+			}
+			else if (Blocktype == Block_Type::Checkin)
+			{
+				Renderer->ChangeAnimation("Checkin_Click");
+			}
+			else if (Blocktype == Block_Type::Dog)
+			{
+				Renderer->ChangeAnimation("Dog_Click");
+			}
+			else if (Blocktype == Block_Type::Monkey)
+			{
+				Renderer->ChangeAnimation("Monkey_Click");
+			}
+			else if (Blocktype == Block_Type::Mouse)
+			{
+				Renderer->ChangeAnimation("Mouse_Click");
+			}
+			else if (Blocktype == Block_Type::Pig)
+			{
+				Renderer->ChangeAnimation("Pig_Click");
+			}
+			else if (Blocktype == Block_Type::Rabbit)
+			{
+				Renderer->ChangeAnimation("Rabbit_Click");
 			}
 
-			if (FirstClick == false && FirstPick == false)
-			{
-				if (SecondPick == true)
-				{
-					return;
-				}		
-				BlockClick = true;
-				FirstClick = true;
-				FirstPick = true;				
-			}
-			else if (SecondClick == false && SecondPick == false)
-			{
-				if (FirstPick == true)
-				{
-					return;
-				}		
-				BlockClick = true;
-				SecondClick = true;
-				SecondPick = true;
-			}
-			//else if (FirstClick == true && SecondClick == true)
-			//{
-			//	if (FirstPick == true)
-			//	{
-			//		BlockClick = false;
-			//		FirstClick = false;
-			//		FirstPick = false;
-			//	}
-			//	else if (SecondPick == true)
-			//	{
-			//		BlockClick = false;
-			//		SecondClick = false;
-			//		SecondPick = false;
-			//	}
-			//}
+			
+			Blockstatus = Block_Status::Click;
+			int RenderNumber = 2;
+			Renderer->SetOrder(RenderNumber);
+			return;
+		}
 
-			else if (FirstClick == true && FirstPick == true)
-			{				
-				if (SecondPick == true)
-				{
-					return;
-				}
-				BlockClick = false;
-				FirstClick = false;
-				FirstPick = false;
-				
-			}
-			else if (SecondClick == true && SecondPick == true)
+		if (BoombBlock == true)
+		{
+			CreateBlockEffect();
+			UEngineSound::SoundPlay("Block_BOOM.mp3");
+
+			if (Blocktype == Block_Type::Cat)
 			{
-				if (FirstPick == true)
-				{
-					return;
-				}
-				BlockClick = false;
+				Renderer->ChangeAnimation("Cat_Bomb");
+			}
+			else if (Blocktype == Block_Type::Checkin)
+			{
+				Renderer->ChangeAnimation("Checkin_Bomb");
+			}
+			else if (Blocktype == Block_Type::Dog)
+			{
+				Renderer->ChangeAnimation("Dog_Bomb");
+			}
+			else if (Blocktype == Block_Type::Monkey)
+			{
+				Renderer->ChangeAnimation("Monkey_Bomb");
+			}
+			else if (Blocktype == Block_Type::Mouse)
+			{
+				Renderer->ChangeAnimation("Mouse_Bomb");
+			}
+			else if (Blocktype == Block_Type::Pig)
+			{
+				Renderer->ChangeAnimation("Pig_Bomb");
+			}
+			else if (Blocktype == Block_Type::Rabbit)
+			{
+				Renderer->ChangeAnimation("Rabbit_Bomb");
+			}
+	
+			Blockstatus = Block_Status::Bomb;
+			FindEnd = true;
+			return;
+		}
+
+		if (UnderBlockBoomb == true)
+		{
+			Blockstatus = Block_Status::Move;
+			return;
+		}
+
+		if (LetsFind == true)
+		{
+			Blockstatus = Block_Status::Find;
+			return;
+		}
+	}
+	break;
+	case ABase_Block::Block_Status::Move:
+	{
+		if (Pos.Y >= UnderPos.Y)
+		{
+			SetUnderBoomb(false);
+			Pos.Y = UnderPos.Y;
+			Blockstatus = Block_Status::Idle;
+			return;
+		}
+		AddActorLocation({ FVector::Down * DownSpeed * _DeltaTime });
+	}
+	break;
+	case ABase_Block::Block_Status::Click:
+	{
+
+		if (BlockClick == false)
+		{	
+			if (Blocktype == Block_Type::Cat)
+			{
+				Renderer->ChangeAnimation("Cat_Idle");
+			}
+			else if (Blocktype == Block_Type::Checkin)
+			{
+				Renderer->ChangeAnimation("Checkin_Idle");
+			}
+			else if (Blocktype == Block_Type::Dog)
+			{
+				Renderer->ChangeAnimation("Dog_Idle");
+			}
+			else if (Blocktype == Block_Type::Monkey)
+			{
+				Renderer->ChangeAnimation("Monkey_Idle");
+			}
+			else if (Blocktype == Block_Type::Mouse)
+			{
+				Renderer->ChangeAnimation("Mouse_Idle");
+			}
+			else if (Blocktype == Block_Type::Pig)
+			{
+				Renderer->ChangeAnimation("Pig_Idle");
+			}
+			else if (Blocktype == Block_Type::Rabbit)
+			{
+				Renderer->ChangeAnimation("Rabbit_Idle");
+			}
+			Blockstatus = Block_Status::Idle;
+			int RenderNumber = 1;
+			Renderer->SetOrder(RenderNumber);
+
+			if (SecondPick == true)
+			{
 				SecondClick = false;
 				SecondPick = false;
-				
 			}
+			if (FirstPick == true)
+			{
+				FirstClick = false;
+				FirstPick = false;
+			}
+
+			return;
+		}
+
+		if (BoombBlock == true)
+		{
+			CreateBlockEffect();
+			UEngineSound::SoundPlay("Block_BOOM.mp3");
+			if (Blocktype == Block_Type::Cat)
+			{
+				Renderer->ChangeAnimation("Cat_Bomb");
+			}
+			else if (Blocktype == Block_Type::Checkin)
+			{
+				Renderer->ChangeAnimation("Checkin_Bomb");
+			}
+			else if (Blocktype == Block_Type::Dog)
+			{
+				Renderer->ChangeAnimation("Dog_Bomb");
+			}
+			else if (Blocktype == Block_Type::Monkey)
+			{
+				Renderer->ChangeAnimation("Monkey_Bomb");
+			}
+			else if (Blocktype == Block_Type::Mouse)
+			{
+				Renderer->ChangeAnimation("Mouse_Bomb");
+			}
+			else if (Blocktype == Block_Type::Pig)
+			{
+				Renderer->ChangeAnimation("Pig_Bomb");
+			}
+			else if (Blocktype == Block_Type::Rabbit)
+			{
+				Renderer->ChangeAnimation("Rabbit_Bomb");
+			}
+			Blockstatus = Block_Status::Bomb;
+			FindEnd = true;
+			return;
 		}
 	}
-	else
+	break;
+	case ABase_Block::Block_Status::Bomb:
 	{
-		int a = 0;
-	}
-}
 
-void AAnimal_Block::CheckBoombBlockEffect()
-{
-	if (BoombBlock_FirstEffect_Create == true)
-	{
-		BoombBlock_First_Effect_Pos = BoombBlock_First_Effect->GetActorLocation();
-
-		float MinX = Pos.X - Size.X / 2;
-		float MinY = Pos.Y - Size.Y / 2;
-		float MaxX = Pos.X + Size.X / 2;
-		float MaxY = Pos.Y + Size.Y / 2;
-		int a = 0;
-		if (BoombBlock_First_Effect_Pos.X >= MinX && BoombBlock_First_Effect_Pos.X <= MaxX && BoombBlock_First_Effect_Pos.Y - 75.f >= MinY && BoombBlock_First_Effect_Pos.Y - 75.f <= MaxY)
+		bool AnimationEnd = Renderer->IsCurAnimationEnd();
+		if (AnimationEnd == true)
 		{
-			// 콜리전 체크 하면서 현재블럭의 row와 col을 받아서 조건을 달것.
-			// row와 col의 위치에따라 left인지 right인지, down인지 정해서 만들어 보내줄것.
-
-			int Row = GetBlockLocationRow();
-			int Col = GetBlockLocationCol();
-
-			int a = 0;		
-
-			BoombBlock_First_Effect_Toutch = true;
+			/*CreateBlockEffect();*/
+			FindEnd = true;
+			Destroy(0.f);
 		}
 	}
-	else if (BoombBlock_SecondEffect_Create == true)
+	break;
+
+	case ABase_Block::Block_Status::Find:
 	{
-		float MinX = Pos.X - Size.X / 2;
-		float MinY = Pos.Y - Size.Y / 2;
-		float MaxX = Pos.X + Size.X / 2;
-		float MaxY = Pos.Y + Size.Y / 2;
-
-		if (BoombBlock_Right_Effect == nullptr && BoombBlock_Left_Effect == nullptr && BoombBlock_Down_Effect == nullptr)
+		FindTime += _DeltaTime;
+		if (1.f <= FindTime)
 		{
-			BoombBlock_SecondEffect_Create = false;
+			AlphaBlend = !AlphaBlend;
+			FindTime = 0.0f;
 		}
-		if (BoombBlock_Right_Effect != nullptr)
+		if (true == AlphaBlend)
 		{
-			BoombBlock_Right_Effect_Pos = BoombBlock_Right_Effect->GetActorLocation();
-			if (BoombBlock_Right_Effect_Pos.X >= MinX && BoombBlock_Right_Effect_Pos.X <= MaxX && BoombBlock_Right_Effect_Pos.Y >= MinY && BoombBlock_Right_Effect_Pos.Y <= MaxY)
-			{
-				BoombBlock_First_Effect_Toutch = true;
-			}
+			Renderer->SetAlpha(FindTime * 0.45f);
 		}
-		if (BoombBlock_Left_Effect != nullptr)
+		else
 		{
-			BoombBlock_Left_Effect_Pos = BoombBlock_Left_Effect->GetActorLocation();
-			if (BoombBlock_Left_Effect_Pos.X >= MinX && BoombBlock_Left_Effect_Pos.X <= MaxX && BoombBlock_Left_Effect_Pos.Y >= MinY && BoombBlock_Left_Effect_Pos.Y <= MaxY)
-			{
-				BoombBlock_First_Effect_Toutch = true;
-			}
-		}
-		if (BoombBlock_Down_Effect != nullptr)
-		{
-			BoombBlock_Down_Effect_Pos = BoombBlock_Down_Effect->GetActorLocation();
-			if (BoombBlock_Down_Effect_Pos.X >= MinX && BoombBlock_Down_Effect_Pos.X <= MaxX && BoombBlock_Down_Effect_Pos.Y - 75.f >= MinY && BoombBlock_Down_Effect_Pos.Y - 75.f <= MaxY)
-			{
-				BoombBlock_First_Effect_Toutch = true;
-			}
+			Renderer->SetAlpha(1.0f - FindTime);
 		}
 
+		if (LetsFind == false)
+		{
+			Blockstatus = Block_Status::Idle;
+			Renderer->SetAlpha(1.0f);
+			return;
+		}
+
+		if (BlockClick == true)
+		{
+			if (Blocktype == Block_Type::Cat)
+			{
+				Renderer->ChangeAnimation("Cat_Click");
+			}
+			else if (Blocktype == Block_Type::Checkin)
+			{
+				Renderer->ChangeAnimation("Checkin_Click");
+			}
+			else if (Blocktype == Block_Type::Dog)
+			{
+				Renderer->ChangeAnimation("Dog_Click");
+			}
+			else if (Blocktype == Block_Type::Monkey)
+			{
+				Renderer->ChangeAnimation("Monkey_Click");
+			}
+			else if (Blocktype == Block_Type::Mouse)
+			{
+				Renderer->ChangeAnimation("Mouse_Click");
+			}
+			else if (Blocktype == Block_Type::Pig)
+			{
+				Renderer->ChangeAnimation("Pig_Click");
+			}
+			else if (Blocktype == Block_Type::Rabbit)
+			{
+				Renderer->ChangeAnimation("Rabbit_Click");
+			}
+			Blockstatus = Block_Status::Click;
+			int RenderNumber = 2;
+			Renderer->SetOrder(RenderNumber);
+			Renderer->SetAlpha(1.0f);
+			FindEnd = true;
+			LetsFind = false;
+			return;
+		}
+
+		if (BoombBlock == true)
+		{
+			CreateBlockEffect();
+			UEngineSound::SoundPlay("Block_BOOM.mp3");
+			if (Blocktype == Block_Type::Cat)
+			{
+				Renderer->ChangeAnimation("Cat_Bomb");
+			}
+			else if (Blocktype == Block_Type::Checkin)
+			{
+				Renderer->ChangeAnimation("Checkin_Bomb");
+			}
+			else if (Blocktype == Block_Type::Dog)
+			{
+				Renderer->ChangeAnimation("Dog_Bomb");
+			}
+			else if (Blocktype == Block_Type::Monkey)
+			{
+				Renderer->ChangeAnimation("Monkey_Bomb");
+			}
+			else if (Blocktype == Block_Type::Mouse)
+			{
+				Renderer->ChangeAnimation("Mouse_Bomb");
+			}
+			else if (Blocktype == Block_Type::Pig)
+			{
+				Renderer->ChangeAnimation("Pig_Bomb");
+			}
+			else if (Blocktype == Block_Type::Rabbit)
+			{
+				Renderer->ChangeAnimation("Rabbit_Bomb");
+			}
+			Blockstatus = Block_Status::Bomb;
+			Renderer->SetAlpha(1.0f);
+			FindEnd = true;
+			return;
+		}
+
+		if (UnderBlockBoomb == true)
+		{
+			Blockstatus = Block_Status::Move;
+			Renderer->SetAlpha(1.0f);
+			FindEnd = true;
+			LetsFind = false;
+			return;
+		}
+	}
+	break;
+
+	case ABase_Block::Block_Status::End:
+		break;
+	default:
+		break;
 	}
 }

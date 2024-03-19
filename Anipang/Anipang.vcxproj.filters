@@ -1,25 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Animal_Block.h">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClInclude>
-    <ClInclude Include="Rabbit_Block.h">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClInclude>
-    <ClInclude Include="Cat_Block.h">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClInclude>
-    <ClInclude Include="Checkin_Block.h">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClInclude>
-    <ClInclude Include="Dog_Block.h">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClInclude>
-    <ClInclude Include="Mouse_Block.h">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClInclude>
-    <ClInclude Include="Pig_Block.h">
+    <ClInclude Include="Base_Block.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
     <ClInclude Include="PlayLevel.h">
@@ -45,9 +27,6 @@
     </ClInclude>
     <ClInclude Include="Play_Frame.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="Monkey_Block.h">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Block_Manager.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_Manager</Filter>
@@ -121,16 +100,13 @@
     <ClInclude Include="Boomb_Block_Effect.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\BoombBlockEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Block_Location.h">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClInclude>
     <ClInclude Include="TestLevel.h">
       <Filter>LEVEL &amp; ACTOR\TestLevel</Filter>
     </ClInclude>
-    <ClInclude Include="Boomb_Block.h">
+    <ClInclude Include="Bomb_Block.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
     </ClInclude>
-    <ClInclude Include="BoombBlock_Effect.h">
+    <ClInclude Include="BombBlock_Effect.h">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
     </ClInclude>
     <ClInclude Include="Combo_OBJ.h">
@@ -148,27 +124,36 @@
     <ClInclude Include="Manual.h">
       <Filter>Public</Filter>
     </ClInclude>
+    <ClInclude Include="Block_Location.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="Animal_Block.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Cat_Block.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
+    </ClInclude>
+    <ClInclude Include="Checkin_Block.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
+    </ClInclude>
+    <ClInclude Include="Dog_Block.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
+    </ClInclude>
+    <ClInclude Include="Monkey_Block.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse_Block.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
+    </ClInclude>
+    <ClInclude Include="Pig_Block.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
+    </ClInclude>
+    <ClInclude Include="Rabbit_Block.h">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animal_Block.cpp">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClCompile>
-    <ClCompile Include="Cat_Block.cpp">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClCompile>
-    <ClCompile Include="Checkin_Block.cpp">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClCompile>
-    <ClCompile Include="Dog_Block.cpp">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClCompile>
-    <ClCompile Include="Mouse_Block.cpp">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClCompile>
-    <ClCompile Include="Pig_Block.cpp">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClCompile>
-    <ClCompile Include="Rabbit_Block.cpp">
+    <ClCompile Include="Base_Block.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
@@ -194,9 +179,6 @@
     </ClCompile>
     <ClCompile Include="Play_Frame.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="Monkey_Block.cpp">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Block_Manager.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_Manager</Filter>
@@ -270,16 +252,13 @@
     <ClCompile Include="Boomb_Block_Effect.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\BoombBlockEffect</Filter>
     </ClCompile>
-    <ClCompile Include="Block_Location.cpp">
-      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
-    </ClCompile>
     <ClCompile Include="TestLevel.cpp">
       <Filter>LEVEL &amp; ACTOR\TestLevel</Filter>
     </ClCompile>
-    <ClCompile Include="Boomb_Block.cpp">
+    <ClCompile Include="Bomb_Block.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
     </ClCompile>
-    <ClCompile Include="BoombBlock_Effect.cpp">
+    <ClCompile Include="BombBlock_Effect.cpp">
       <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Boomb_Block</Filter>
     </ClCompile>
     <ClCompile Include="Combo_OBJ.cpp">
@@ -296,6 +275,33 @@
     </ClCompile>
     <ClCompile Include="Manual.cpp">
       <Filter>Public</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_Location.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="Animal_Block.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Cat_Block.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
+    </ClCompile>
+    <ClCompile Include="Checkin_Block.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
+    </ClCompile>
+    <ClCompile Include="Dog_Block.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
+    </ClCompile>
+    <ClCompile Include="Monkey_Block.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse_Block.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
+    </ClCompile>
+    <ClCompile Include="Pig_Block.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
+    </ClCompile>
+    <ClCompile Include="Rabbit_Block.cpp">
+      <Filter>LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -385,6 +391,12 @@
     </Filter>
     <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Combo_OBJ">
       <UniqueIdentifier>{0711d81e-0917-41a4-86b9-f924d4bad2dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block">
+      <UniqueIdentifier>{369cb08b-1955-4cd3-8685-03f84f427c12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LEVEL &amp; ACTOR\Play_Level\Play_Level_Actor\Block_OBJ\Animal_Block\AnimalType">
+      <UniqueIdentifier>{3d8f6c2b-1f7a-4c1d-97aa-abb5095d031b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

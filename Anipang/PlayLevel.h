@@ -10,7 +10,7 @@ class ScoreManager;
 class ATime_Gauge;
 class AGame_End;
 class AGame_Start;
-class AAnimal_Block;
+class ABase_Block;
 class ACursor;
 class UPlayLevel : public ULevel
 {
@@ -51,10 +51,10 @@ protected:
 
 private:
 	ACursor* Cursor							 = nullptr;
-	AAnimal_Block* Blocks[7][7]				 = {};
-	AAnimal_Block* click_block				 = nullptr;
-	AAnimal_Block* swap_block				 = nullptr;
-	AAnimal_Block* Hint_block				 = nullptr;
+	ABase_Block* Blocks[7][7]				 = {};
+	ABase_Block* click_block				 = nullptr;
+	ABase_Block* swap_block				 = nullptr;
+	ABase_Block* Hint_block				 = nullptr;
 	AGame_Start* Start_Rabbit				 = nullptr;
 	AGame_End* End_Rabbit					 = nullptr;
 	ATime_Gauge* Timer						 = nullptr;

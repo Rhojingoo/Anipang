@@ -1,7 +1,7 @@
 #pragma once
-#include "Animal_Block.h"
+#include "Base_Block.h"
 
-class ADog_Block : public AAnimal_Block
+class ADog_Block : public ABase_Block
 {
 public:
 	ADog_Block();

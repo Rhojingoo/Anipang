@@ -4,12 +4,13 @@
 <div align="center">
   <img src="https://github.com/Rhojingoo/Anipang/assets/125935035/a1f4a052-afd7-4c0c-8022-0ed8e1a438a2" height="400px" width="850px"/>
 </div>
+
 <div align="center">
-  <img src="https://github.com/Rhojingoo/Sonic3_jk/assets/125935035/6df5fba8-ee68-4947-8f99-0e75472ac48b" height="150px" width="150px"/>
+  <img src="https://github.com/Rhojingoo/Anipang/assets/125935035/6063646d-8836-428e-99c9-ea7bb773e021" height="150px" width="150px"/>
 </div>  
 <div align="center">
 [PLAY영상 바로가기]<br>
-  (https://youtu.be/rUIf6ITWalU/)
+  (https://youtu.be/efO76nM0c6Q)
 </div>
 <br>
 <br>

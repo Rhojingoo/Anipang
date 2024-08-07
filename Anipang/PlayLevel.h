@@ -34,7 +34,7 @@ protected:
 	void Blockreturn(int _clickRow, int _clickCol, int _swapkRow, int _swapCol);
 	bool CheckMatchAroundBlock(int col, int row);
 
-
+	void Check_Match(float _DeltaTime);
 	void XlineBlock_Swap_Check(float _DeltaTime);
 	void XlineBlock_Swap_Move(float _DeltaTime);
 	void YlineBlock_Swap_Check(float _DeltaTime);
@@ -86,7 +86,7 @@ private:
 
 	bool HintBlock							 = false;
 	bool CheckMatch							 = true;
-	bool CanAMatch							 = false;
+	bool CanMatch							 = false;
 	bool ClickChangeCheck					 = false;
 	const int BlockChangeDefault			 = 0;
 	const int BlockChangeSuccess			 = 1;

@@ -98,7 +98,7 @@ void UPlayLevel::Tick(float _DeltaTime)
                 // Before GameStart CanMake3match Checks Logics;
                 if (CheckMatch == true)
                 {
-                    CanAMatch = CanMakeAMatch();
+                    CanMatch = CanMakeAMatch();
                 }
 
                 if (HintBlock == false && ComboTime >= 3.0f)
@@ -110,7 +110,7 @@ void UPlayLevel::Tick(float _DeltaTime)
                 }
 
 
-                if (CanAMatch == true)
+                if (CanMatch == true)
                 {
                     // 마우스클릭으로블럭을이동시키는로직
                     if (ABase_Block::GetFirstClick() == true && ABase_Block::GetSecondClick() == true)
@@ -120,13 +120,7 @@ void UPlayLevel::Tick(float _DeltaTime)
 
                     if (ClickChangeCheck == true)
                     {
-                        //클릭으로이동된블럭3Match가되는지판단하는검사로직
-                        XlineBlock_Swap_Check(_DeltaTime);
-                        //검사된블럭의return 또는stay를나타내는실행로직
-                        XlineBlock_Swap_Move(_DeltaTime);
-
-                        YlineBlock_Swap_Check(_DeltaTime);
-                        YlineBlock_Swap_Move(_DeltaTime);
+                        Check_Match(_DeltaTime);                       
 
                         //stay, return 판별후블럭을터트림로직을승인
                         BlockDestroyAllow = true;
@@ -780,6 +774,17 @@ bool UPlayLevel::CheckMatchAroundBlock(int col, int row)
     return false;
 }
 
+
+void UPlayLevel::Check_Match(float _DeltaTime)
+{
+    //클릭으로이동된블럭3Match가되는지판단하는검사로직
+    XlineBlock_Swap_Check(_DeltaTime);
+    //검사된블럭의return 또는stay를나타내는실행로직
+    XlineBlock_Swap_Move(_DeltaTime);
+
+    YlineBlock_Swap_Check(_DeltaTime);
+    YlineBlock_Swap_Move(_DeltaTime);
+}
 
 void UPlayLevel::XlineBlock_Swap_Check(float _DeltaTime)
 {

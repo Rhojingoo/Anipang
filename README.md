@@ -20,30 +20,6 @@
 
 
 ## 게임 개발시 주요내용
-
-<div align="center">
-  <img src="https://github.com/Rhojingoo/Anipang/assets/125935035/d6069aa6-1ba1-4fbc-b74b-e7187abccbe5" height="300px" width="500px"/>
-</div>
-<br>
-<div align="center">
-  GameEngine FrameWork
-</div>
-<br>
-<br>
-<br>
-<div align="center">
-  <img src="https://github.com/Rhojingoo/Anipang/assets/125935035/fa356f16-cfe8-483a-9925-04d75db7f3dd" height="300px" width="500px"/>
-</div>
-<br>
-<div align="center">
-  GameEngine Level FrameWork 
-</div>
-<br>
-<br>
-<br>
-
-
-
 <div align="center">
   <img src="https://github.com/Rhojingoo/Anipang/assets/125935035/cc9ade88-395d-4c21-bb68-4127246f8e64" height="300px" width="500px"/>
 </div>
@@ -51,23 +27,14 @@
 <br>
 <br>
 <div align="center">
-  <img src="https://github.com/Rhojingoo/Anipang/assets/125935035/059eebb5-76dd-41b8-b892-fa3fff7e7715" height="300px" width="500px"/>
+  <img src="https://github.com/user-attachments/assets/ff2e70f6-b8e4-4370-a83c-6a5080fd4408" height="300px" width="500px"/>
 </div>
 <br>
 <br>
 <br>
-<div align="center">
-  <img src="https://github.com/Rhojingoo/Anipang/assets/125935035/c7f1e52e-09c5-447a-900b-da95ad6b263d" height="300px" width="500px"/>
-</div>
-<br>
-<br>
-<br>
-<div align="center">
-  <img src="https://github.com/Rhojingoo/Anipang/assets/125935035/91a34791-4c91-4b74-8ac6-74bbf6314cab" height="300px" width="500px"/>
-</div>
-<br>
-<br>
-<br>
+
+
+
 <div align="center">
   <img src="https://github.com/Rhojingoo/Anipang/assets/125935035/77b0d5d2-038e-448c-bf14-769b444088da" height="300px" width="500px"/>
 </div>
@@ -81,11 +48,26 @@
 <br>
 <br>
 <div align="center">
-  <img src="https://github.com/Rhojingoo/Anipang/assets/125935035/30bb87f8-3367-46fb-a16c-08419b546b01" height="300px" width="500px"/>
+  <img src="https://github.com/Rhojingoo/Anipang/assets/125935035/91a34791-4c91-4b74-8ac6-74bbf6314cab" height="300px" width="500px"/>
 </div>
 <br>
 <br>
 <br>
+
+<div align="center">
+  <img src="https://github.com/Rhojingoo/Anipang/assets/125935035/c7f1e52e-09c5-447a-900b-da95ad6b263d" height="300px" width="500px"/>
+</div>
+<br>
+<br>
+<br>
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/41d54e38-02ad-4294-abec-878943724bd3" height="300px" width="500px"/>
+</div>
+<br>
+<br>
+<br>
+
 <div align="center">
   <img src="https://github.com/Rhojingoo/Anipang/assets/125935035/44f7a171-a3a6-46c5-98e1-f2a8fa03da0f" height="300px" width="500px"/>
 </div>
